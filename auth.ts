@@ -5,6 +5,7 @@ import Google from "next-auth/providers/google";
 import Github from "next-auth/providers/github";
 
 const config = {
+  secret: process.env.AUTH_SECRET,
   providers: [Google, Github],
   pages: {
     signIn: "/auth/login",
