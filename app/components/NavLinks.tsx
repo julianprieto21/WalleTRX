@@ -29,7 +29,7 @@ const links = [
   { name: `${"Settings"}`, href: "/settings", icon: Cog6ToothIcon },
 ];
 
-export default function NavLinks() {
+export default function NavLinks({ isLogIn }: { isLogIn: boolean }) {
   const pathName = usePathname();
   return (
     <>
@@ -37,14 +37,13 @@ export default function NavLinks() {
         const LinkIcon = link.icon;
         return (
           <Link
-            aria-invalid={true}
             key={link.name}
             href={link.href}
-            className={`flex h-[3rem] grow items-center justify-center gap-2 rounded-md text-neutral-800 bg-neutral-100 p-3 text-md font-medium hover:bg-sky-100 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3 
-                ${pathName === link.href ? "bg-sky-100 text-blue-600" : ""}`}
+            className={`flex h-[3rem] grow items-center justify-start gap-2 rounded-md text-neutral-800 bg-neutral-100 p-3 text-md font-medium hover:bg-sky-100 hover:text-blue-600 sm:flex-none sm:justify-center lg:justify-start md:p-2 md:px-3 
+                ${pathName === link.href ? "bg-sky-100 text-blue-600" : ""} ${isLogIn ? 'cursor-pointer' : ' cursor-not-allowed'}`}
           >
             <LinkIcon className="w-6" />
-            <p className="hidden md:block">{link.name}</p>
+            <p className="block sm:hidden lg:block">{link.name}</p>
           </Link>
         );
       })}

@@ -15,7 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
+      <body className="flex flex-col sm:flex-row w-full h-full">
         <Providers>
           <SideNav />
           {children}

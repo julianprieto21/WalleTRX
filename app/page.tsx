@@ -16,18 +16,19 @@ export default async function HomePage() {
     const { accounts, transactions } = await fetchData(session.user.email);
     const userName = session.user.name ? session.user.name : "";
     return (
-      <main className="bg-neutral-200 w-[80%] h-screen flex flex-col justify-start items-center px-16 py-14">
+      <main className="bg-neutral-200 w-full sm:w-[80%] h-screen flex flex-col justify-start items-center px-4 py-10 sm:px-16 sm:pb-6 sm:pt-10">
         <Suspense>
-          {/* <section className="flex flex-col w-full justify-around"> */}
-          <WalletInfo
-            userName={userName}
-            accounts={accounts}
-            transactions={transactions}
-          />
-          <WalletActions transactions={transactions} />
-          {/* </section> */}
+          <section className="w-full flex flex-col justify-center items-center">
+            <WalletInfo
+              userName={userName}
+              accounts={accounts}
+              transactions={transactions}
+            />
+            <HLine width={100} color="neutral" margin={2} />
+            <WalletActions transactions={transactions} />
+          </section>
         </Suspense>
-        <section className="flex flex-col justify-center items-center w-[100%] gap-1 my-10">
+        <section className="flex flex-col justify-center items-center w-[100%] gap-1 my-4 sm:my-4 md:my-8">
           <HLine width={100} color="neutral" margin={0} />
           <HLine width={100} color="neutral" margin={0} />
         </section>

@@ -34,8 +34,8 @@ function LogInButton({ provider }: { provider: string }) {
 
 export default function LoginForm() {
   return (
-    <section className="w-96 bg-neutral-100 rounded-lg flex flex-col justify-center items-center shadow-xl border border-neutral-400">
-      <h1 className="font-semibold text-6xl text-neutral-700 my-2">LOGIN</h1>
+    <section className="w-50 sm:w-96 bg-neutral-100 rounded-lg flex flex-col justify-center items-center shadow-xl border border-neutral-400">
+      <h1 className="font-semibold text-4xl sm:text-6xl text-neutral-700 my-2">LOGIN</h1>
       <HLine
         width={80}
         color="neutral"

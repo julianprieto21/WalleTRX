@@ -41,12 +41,13 @@ export function CreateTransaction() {
   return (
     <Link
       href={`/transactions/create`}
-      className="rounded-lg relative w-[12rem] flex items-center border border-green-500 bg-green-500 group hover:bg-green-500 active:bg-green-500 active:border-green-500"
+      className="rounded-lg relative md:w-[16rem] flex items-center border border-green-500 bg-green-500 group hover:bg-green-500 active:bg-green-500 active:border-green-500"
     >
-      <span className="text-neutral-50 font-semibold text-left pl-2 hover:hidden">
+      <PlusIcon className="block md:hidden size-10 text-white"/>
+      <p className="text-neutral-50 font-semibold text-left pl-4 hover:hidden hidden md:block md:text-sm lg:text-md xl:text-lg">
         {lang.addTransactionText}
-      </span>
-      <span className="absolute right-0 h-full w-10 rounded-lg bg-green-500 flex items-center justify-center transform group-hover:translate-x-0 group-hover:w-full transition-all duration-200">
+      </p>
+      <span className="hidden absolute right-0 h-full w-10 rounded-lg bg-green-500 sm:flex items-center justify-center transform group-hover:translate-x-0 group-hover:w-full transition-all duration-200">
         <PlusIcon width={40} height={40} className="svg w-8 text-white" />
       </span>
     </Link>
