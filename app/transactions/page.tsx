@@ -13,7 +13,7 @@ export default async function TransactionsPage() {
   } else {
     const { accounts, transactions } = await fetchData(session.user.email);
     return (
-      <main className="bg-neutral-200 w-full sm:w-[80%] h-screen flex flex-col justify-start items-start px-4 py-10 sm:px-16 sm:py-6">
+      <main className="bg-neutral-200 w-full sm:w-[80%] h-full flex flex-col justify-start items-start px-4 py-10 sm:px-16 sm:py-6">
         <Breadcrumbs
           breadcrumbs={[
             { label: "Home", href: "/" },

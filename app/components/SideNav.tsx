@@ -28,7 +28,7 @@ export default async function SideNav() {
   const session = await auth();
   return (
     <div className="w-full sm:w-[20%] flex flex-col items-center justify-center text-neutral-800 bg-neutral-600 h-auto py-2">
-      <section className="w-4/5 flex flex-row justify-between sm:justify-center xl:justify-between items-center gap-6 text-neutral-200">
+      <section className="w-full flex flex-row justify-around sm:justify-center xl:justify-around items-center text-neutral-200">
         {session && session.user?.image ? (
           <img
             src={session.user.image}
@@ -38,8 +38,10 @@ export default async function SideNav() {
         ) : (
           <UserIcon className="rounded-full size-14 bg-neutral-100 py-1 text-neutral-800" />
         )}
-        <h1 className="text-2xl block sm:hidden xl:block lg:text-lg xl:text-2xl 2xl:text-4xl font-bold ">{lang.appNameText.toLocaleUpperCase()}</h1>
-        <Bars3Icon className="sm:hidden size-12"/>
+        <h1 className="text-2xl block sm:hidden xl:block lg:text-2xl font-bold ">
+          {lang.appNameText.toLocaleUpperCase()}
+        </h1>
+        <Bars3Icon className="sm:hidden size-12" />
       </section>
       <div className="hidden sm:flex flex-col gap-4 w-[90%] h-[90%]">
         <HLine width={100} color="neutral" margin={2} />
