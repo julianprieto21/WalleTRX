@@ -35,7 +35,9 @@ function LogInButton({ provider }: { provider: string }) {
 export default function LoginForm() {
   return (
     <section className="w-50 sm:w-96 bg-neutral-100 rounded-lg flex flex-col justify-center items-center shadow-xl border border-neutral-400">
-      <h1 className="font-semibold text-4xl sm:text-6xl text-neutral-700 my-2">LOGIN</h1>
+      <h1 className="font-semibold text-4xl sm:text-6xl text-neutral-700 my-2">
+        LOGIN
+      </h1>
       <HLine
         width={80}
         color="neutral"
@@ -44,7 +46,7 @@ export default function LoginForm() {
       />
       <main className="w-[100%] h-[100%] mb-4 flex flex-row justify-end items-center">
         <LogInButton provider="google" />
-        <LogInButton provider="github" />
+        {/* <LogInButton provider="github" /> */}
       </main>
     </section>
   );

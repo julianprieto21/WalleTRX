@@ -25,7 +25,12 @@ function LogOutButton() {
 }
 
 export default async function SideNav() {
-  const session = await auth();
+  let session;
+  try {
+    session = await auth();
+  } catch (error) {
+    console.log(error);
+  }
   return (
     <div className="w-full sm:w-[20%] flex flex-col items-center justify-center text-neutral-800 bg-neutral-600 h-auto py-2">
       <section className="w-full flex flex-row justify-around sm:justify-center xl:justify-around items-center text-neutral-200">

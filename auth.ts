@@ -1,12 +1,11 @@
-//@ts-ignore
 import type { NextAuthConfig } from "next-auth";
 import nextAuth from "next-auth";
 import Google from "next-auth/providers/google";
-import Github from "next-auth/providers/github";
+// import Github from "next-auth/providers/github";
 
 const config = {
-  secret: process.env.AUTH_SECRET,
-  providers: [Google, Github],
+  // secret: process.env.AUTH_SECRET,
+  providers: [Google],
   pages: {
     signIn: "/auth/login",
   },
