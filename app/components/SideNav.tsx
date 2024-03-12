@@ -48,9 +48,9 @@ export default async function SideNav() {
         <NavLinks isLogIn={session ? true : false} />
         {session ? <LogOutButton /> : null}
       </div>
-      <footer className="w-[90%] hidden sm:flex  flex-col justify-center items-center">
+      <footer className="w-full hidden sm:flex  flex-col justify-center items-center">
         <HLine width={90} color="neutral" margin={2} />
-        <h1 className="text-sm font-light text-neutral-400">
+        <h1 className="text-xs md:text-sm text-center font-light text-neutral-400">
           {lang.footerText}
         </h1>
       </footer>
