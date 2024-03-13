@@ -43,7 +43,7 @@ export function CreateTransaction() {
       href={`/transactions/create`}
       className="rounded-lg relative md:w-[16rem] flex items-center border border-green-500 bg-green-500 group hover:bg-green-500 active:bg-green-500 active:border-green-500"
     >
-      <PlusIcon className="block md:hidden size-10 text-white"/>
+      <PlusIcon className="block md:hidden size-10 text-white" />
       <p className="text-neutral-50 font-semibold text-left pl-4 hover:hidden hidden md:block md:text-sm lg:text-md xl:text-lg">
         {lang.addTransactionText}
       </p>
@@ -62,7 +62,7 @@ export function DeleteTransaction({ id }: { id: string }) {
       className="flex justify-center items-center border border-neutral-200 rounded shadow hover:shadow-none text-neutral-500 hover:text-neutral-700"
     >
       <button type="submit" title="Delete Transaction">
-        <TrashIcon width={40} height={40} className="px-2" />
+        <TrashIcon className="size-8 sm:size-10 2xl:size-12 px-2" />
       </button>
     </form>
   );
@@ -74,7 +74,7 @@ export function EditTransaction({ id }: { id: string }) {
       href={`/transactions/${id}/edit`}
       className="flex justify-center items-center border border-neutral-200 rounded shadow hover:shadow-none text-neutral-500 hover:text-neutral-700"
     >
-      <PencilIcon width={40} height={40} className="px-2" />
+      <PencilIcon className="size-8 sm:size-10 2xl:size-12 px-2" />
     </Link>
   );
 }

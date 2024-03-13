@@ -43,7 +43,7 @@ export default async function SideNav() {
         ) : (
           <UserIcon className="rounded-full size-14 bg-neutral-100 py-1 text-neutral-800" />
         )}
-        <h1 className="text-2xl block sm:hidden xl:block lg:text-2xl font-bold ">
+        <h1 className="text-2xl block sm:hidden xl:block lg:text-2xl 2xl:text-3xl font-bold ">
           {lang.appNameText.toLocaleUpperCase()}
         </h1>
         <Bars3Icon className="sm:hidden size-12" />

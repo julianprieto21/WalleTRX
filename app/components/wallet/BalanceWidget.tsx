@@ -7,7 +7,7 @@ export default function BalanceWidget({ balance }: { balance: number }) {
       <button
         title="Balance Widget"
         type="button"
-        className="text-4xl sm:text-5xl w-[100%] text-neutral-700"
+        className="text-5xl sm:text-5xl w-[100%] text-neutral-700"
       >
         {formattedBalance}
       </button>

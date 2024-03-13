@@ -16,7 +16,7 @@ export const lang = {
   allText: "All",
   lastTransacionsText: "Last Transactions",
   topCategoriesText: "Top Most Expensive Categories",
-  monthChartText: "Balace - Last 30 days -",
+  monthChartText: "Last 30 days Balance",
   descriptionTableText: "Description",
   categoryTableText: "Category",
   dateTableText: "Date",
