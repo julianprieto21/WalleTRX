@@ -33,7 +33,7 @@ export default async function SideNav() {
   }
   return (
     <div className="w-full sm:w-[20%] flex flex-col items-center justify-center text-neutral-800 bg-neutral-600 h-auto py-2">
-      <section className="w-full flex flex-row justify-around sm:justify-center xl:justify-around items-center text-neutral-200">
+      <section className="w-full flex flex-row justify-around sm:justify-center xl:justify-around items-center text-neutral-200 sm:pb-2">
         {session && session.user?.image ? (
           <img
             src={session.user.image}
@@ -49,13 +49,13 @@ export default async function SideNav() {
         <Bars3Icon className="sm:hidden size-12" />
       </section>
       <div className="hidden sm:flex flex-col gap-4 w-[90%] h-[90%]">
-        <HLine width={100} color="neutral" margin={2} />
+        <HLine width={100} color="neutral" />
         <NavLinks isLogIn={session ? true : false} />
         {session ? <LogOutButton /> : null}
       </div>
       <footer className="w-full hidden sm:flex  flex-col justify-center items-center">
-        <HLine width={90} color="neutral" margin={2} />
-        <h1 className="text-xs md:text-sm text-center font-light text-neutral-400">
+        <HLine width={90} color="neutral" />
+        <h1 className="text-xs md:text-sm text-center font-light text-neutral-400 pt-2">
           {lang.footerText}
         </h1>
       </footer>
