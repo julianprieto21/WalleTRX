@@ -22,7 +22,7 @@ export function AccountSelector({ accounts }: { accounts: Account[] }) {
   return (
     <select
       title="Account Selector"
-      className="text-neutral-700 w-2/4 sm:w-[12rem] text-center bg-neutral-200 border-b border-neutral-400"
+      className="text-neutral-700 w-3/4 sm:w-[12rem] text-center bg-neutral-200 border-b border-neutral-400"
       onChange={(e) => handleChange(e.target.value)}
       defaultValue={searchParams.get("account") || ""}
     >

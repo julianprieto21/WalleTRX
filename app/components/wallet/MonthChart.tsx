@@ -42,7 +42,7 @@ export default function MonthChart({
   };
 
   return (
-    <main className="w-full h-full text-center">
+    <main className="w-full h-2/5 lg-3/5 text-center">
       <h1 className="sm:text-2xl font-semibold">{lang.monthChartText}</h1>
       <ResponsiveContainer width="100%" height="80%">
         <LineChart

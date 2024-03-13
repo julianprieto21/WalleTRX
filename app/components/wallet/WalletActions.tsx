@@ -19,7 +19,7 @@ function TransferButton() {
         href={"transactions/create"} //?type=transfer"}
         className="flex rounded-3xl justify-center items-center bg-neutral-100 border hover:bg-violet-600 text-violet-700 hover:text-neutral-100 transition ease-in-out delay-10 p-2"
       >
-        <ArrowsRightLeftIcon className="size-12 sm:size-12" />
+        <ArrowsRightLeftIcon className="size-16 sm:size-12 lg:size-14" />
       </Link>
     </>
   );
@@ -30,7 +30,7 @@ function IncomeButton({ income }: { income: number }) {
   return (
     <>
       <div className="w-full sm:w-[90%] flex rounded-3xl justify-between items-center bg-neutral-100">
-        <div className="hidden sm:w-[76%] justify-center sm:flex">
+        <div className="hidden justify-center sm:flex">
           <p className="sm:text-xl md:text-2xl xl:text-3xl font text-neutral-700 antialiased sm:px-4">
             {formattedIncome}
           </p>
@@ -41,7 +41,7 @@ function IncomeButton({ income }: { income: number }) {
           href={`/transactions/create`} //?type=income`}
           className="pr-2 sm:pr-4 pl-2 h-[100%] flex justify-center items-center py-2 rounded-e-3xl text-green-600 hover:bg-green-600/80 hover:text-neutral-200 transition ease-in-out delay-10"
         >
-          <ArrowDownTrayIcon className="size-12 sm:size-12" />
+          <ArrowDownTrayIcon className="size-16 sm:size-12 lg:size-14" />
         </Link>
       </div>
     </>
@@ -58,11 +58,11 @@ function ExpenseButton({ expense }: { expense: number }) {
           href={`/transactions/create`} //?type=expense`}
           className="pl-2 sm:pl-4 pr-2 h-[100%] flex justify-center items-center py-2 rounded-s-3xl text-red-500 hover:bg-red-600/90 hover:text-neutral-200 transition ease-in-out delay-10"
         >
-          <ArrowUpTrayIcon className="size-12 sm:size-12" />
+          <ArrowUpTrayIcon className="size-16 sm:size-12 lg:size-14" />
         </Link>
 
-        <div className="hidden sm:w-[76%] justify-center sm:flex">
-          <p className="sm:text-xl md:text-2xl xl:text-3xl font text-neutral-700 antialiased md:px-4">
+        <div className="hidden justify-center sm:flex">
+          <p className="sm:text-xl md:text-2xl xl:text-3xl font text-neutral-700 antialiased sm:px-4">
             {expenseFormatted}
           </p>
         </div>
@@ -87,16 +87,16 @@ export default function WalletActions({ transactions }: Props) {
   const { income, expense } = getBalanceFromTransactions(filteredTransactions);
   const balance = income - expense;
   return (
-    <div className="w-[100%] flex flex-col items-center justify-center gap-2 sm:gap-4">
+    <div className="w-[100%] flex flex-col items-center justify-center gap-6 lg:gap-2 pt-8">
       {/* <HLine width={100} color="neutral" margin={2} /> */}
-      <div className="flex flex-row justify-center gap-4">
+      <div className="flex flex-row justify-center gap-6 sm:gap-6 lg:gap-2">
         <IncomeButton income={income} />
         <ExpenseButton expense={expense} />
       </div>
-      <div className="flex flex-row items-center gap-8 w-4/5">
-        <HLine width={100} color="neutral" margin={2} />
+      <div className="flex flex-row items-center w-[90%] gap-4">
+        <HLine width={100} color="neutral" />
         <TransferButton />
-        <HLine width={100} color="neutral" margin={2} />
+        <HLine width={100} color="neutral" />
       </div>
     </div>
   );

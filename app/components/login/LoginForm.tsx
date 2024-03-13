@@ -38,13 +38,8 @@ export default function LoginForm() {
       <h1 className="font-semibold text-4xl sm:text-6xl text-neutral-700 my-2">
         LOGIN
       </h1>
-      <HLine
-        width={80}
-        color="neutral"
-        text="Log with Social Accounts"
-        margin={2}
-      />
-      <main className="w-[100%] h-[100%] mb-4 flex flex-row justify-end items-center">
+      <HLine width={80} color="neutral" text="Log with Social Accounts" />
+      <main className="w-[80%] h-[100%] my-4 gap-4 flex flex-col justify-end items-center">
         <LogInButton provider="google" />
         {/* <LogInButton provider="github" /> */}
       </main>
