@@ -10,6 +10,28 @@ import {
   LineChart,
 } from "recharts";
 import { lang } from "@/app/lib/const/string-en";
+import { useSearchParams } from "next/navigation";
+
+const CustomTooltip = ({
+  active,
+  payload,
+  label,
+}: {
+  active: boolean;
+  payload: any;
+  label: string;
+}) => {
+  if (active && payload && payload.length) {
+    return (
+      <div className="custom-tooltip">
+        <strong className="label">{formatDate(label)}</strong>
+        <p className="desc">{formatBalance(payload[0].value)}</p>
+      </div>
+    );
+  }
+
+  return null;
+};
 
 export default function MonthChart({
   transactions,
@@ -18,28 +40,19 @@ export default function MonthChart({
 }) {
   const month = new Date().getMonth() + 1;
   const year = new Date().getFullYear();
-  const groupedTransactions = getBalanceByDay(transactions, month, year);
-
-  const CustomTooltip = ({
-    active,
-    payload,
-    label,
-  }: {
-    active: boolean;
-    payload: any;
-    label: string;
-  }) => {
-    if (active && payload && payload.length) {
-      return (
-        <div className="custom-tooltip">
-          <strong className="label">{formatDate(label)}</strong>
-          <p className="desc">{formatBalance(payload[0].value)}</p>
-        </div>
-      );
-    }
-
-    return null;
-  };
+  const searchParams = useSearchParams();
+  const accountId = searchParams.get("account");
+  let filteredTransactions = transactions;
+  if (accountId) {
+    filteredTransactions = filteredTransactions.filter(
+      (t) => t.account_id === accountId
+    );
+  }
+  const groupedTransactions = getBalanceByDay(
+    filteredTransactions,
+    month,
+    year
+  );
 
   return (
     <main className="hidden sm:block w-full h-2/5 lg-3/5 text-center">
