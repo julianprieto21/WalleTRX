@@ -1,7 +1,8 @@
 import NavLinks from "./NavLinks";
 import { lang } from "@/app/lib/const/string-en";
-import { Bars3Icon, PowerIcon, UserIcon } from "@heroicons/react/24/outline";
+import { PowerIcon, UserIcon, WalletIcon } from "@heroicons/react/24/outline";
 import { auth, signOut } from "@/auth";
+import { MenuButtonBigScreen, MenuButtonSmallScreen } from "./MenuButton";
 import HLine from "./HLine";
 
 function LogOutButton() {
@@ -15,7 +16,7 @@ function LogOutButton() {
       <button
         title="Log Out"
         type="submit"
-        className="flex w-full h-[3rem] grow items-start sm:justify-center lg:justify-start justify-start gap-2 rounded-md text-neutral-800 bg-neutral-100 p-3 text-md font-medium hover:text-red-500 hover:bg-red-100"
+        className="flex h-[3rem] w-full grow items-center justify-start gap-2 text-neutral-400 text-md font-normal hover:bg-neutral-700 hover:text-red-500 sm:flex-none sm:justify-center lg:justify-start md:p-2 md:px-3"
       >
         <PowerIcon className="size-6" />
         <p className="block sm:hidden lg:block">Logout</p>
@@ -32,30 +33,35 @@ export default async function SideNav() {
     console.log(error);
   }
   return (
-    <div className="w-full sm:w-[20%] flex flex-col items-center justify-center text-neutral-800 bg-neutral-600 h-auto py-2">
-      <section className="w-full flex flex-row justify-around sm:justify-center xl:justify-around items-center text-neutral-200 sm:pb-2">
-        {session && session.user?.image ? (
-          <img
-            src={session.user.image}
-            alt="Foto de perfil de usuario"
-            className="rounded-full size-14"
-          ></img>
-        ) : (
-          <UserIcon className="rounded-full size-14 bg-neutral-100 py-1 text-neutral-800" />
-        )}
-        <h1 className="text-2xl block sm:hidden xl:block lg:text-2xl 2xl:text-3xl font-bold ">
-          {lang.appNameText.toLocaleUpperCase()}
-        </h1>
-        <Bars3Icon className="sm:hidden size-12" />
+    <div className="w-full sm:w-[20%] flex flex-col items-center justify-center bg-neutral-900 h-auto sm:pb-2">
+      <section className="w-full flex flex-col text-neutral-200 bg-gray-800 py-4 sm:pb-2 lg:py-4 border-b border-gray-700">
+        <div className="flex justify-center">
+          <WalletIcon className="hidden md:block md:size-36 lg:size-52 antialiased" />
+        </div>
+        <section className="flex flex-row sm:flex-col lg:flex-row justify-between items-center px-6 sm:gap-2 lg:px-6 lg:gap-0">
+          {session && session.user?.image ? (
+            <img
+              src={session.user.image}
+              alt="Foto de perfil de usuario"
+              className="rounded-full size-14"
+            ></img>
+          ) : (
+            <UserIcon className="rounded-full size-14 bg-neutral-100 py-1 text-neutral-800" />
+          )}
+
+          <div className="w-[50px] flex justify-center items-center">
+            <MenuButtonBigScreen />
+            <MenuButtonSmallScreen />
+          </div>
+        </section>
       </section>
-      <div className="hidden sm:flex flex-col gap-4 w-[90%] h-[90%]">
-        <HLine width={100} color="neutral" />
+      <div className="hidden sm:flex flex-col gap-2 w-full h-[90%] pt-6">
         <NavLinks isLogIn={session ? true : false} />
         {session ? <LogOutButton /> : null}
       </div>
       <footer className="w-full hidden sm:flex  flex-col justify-center items-center">
-        <HLine width={90} color="neutral" />
-        <h1 className="text-xs md:text-sm text-center font-light text-neutral-400 pt-2">
+        {/* <HLine width={90} color="neutral" /> */}
+        <h1 className="text-xs md:text-sm text-center font-light text-neutral-500 pt-2">
           {lang.footerText}
         </h1>
       </footer>
