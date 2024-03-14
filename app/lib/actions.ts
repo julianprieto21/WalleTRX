@@ -7,11 +7,11 @@ import { redirect } from "next/navigation";
 
 export async function createUser(
   client: any,
-  user: { email: string; name: string; image: string }
+  user: { email: string; name: string }
 ) {
   try {
-    const { email, name, image } = user;
-    const query = client.sql`INSERT INTO users(name, email, image) VALUES (${name}, ${email}, ${image})`;
+    const { email, name } = user;
+    const query = client.sql`INSERT INTO users(name, email) VALUES (${name}, ${email})`;
     return query;
   } catch (error) {
     console.error(error);
