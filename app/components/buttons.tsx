@@ -15,10 +15,12 @@ export function CloseButton() {
       <Link
         href={"/"}
         title="Close"
-        className="transition duration-75 rounded-full shadow-sm border hover:border-red-500 text-neutral-600 hover:bg-red-500 flex justify-center items-center hover:text-neutral-100 px-2"
+        className="transition duration-75 rounded-full sm:shadow-sm sm:border hover:border-red-500 text-neutral-600 hover:bg-red-500 flex justify-center items-center hover:text-neutral-100 p-1 sm:px-2"
       >
-        <XMarkIcon width={40} height={40} className="pr-2 border-r" />
-        <span className="px-2 text-xl font-semibold">{lang.cancel}</span>
+        <XMarkIcon className="size-10 sm:pr-2 sm:border-r" />
+        <span className="hidden sm:block px-2 text-xl font-semibold">
+          {lang.cancel}
+        </span>
       </Link>
     </>
   );
@@ -29,10 +31,12 @@ export function SubmitButton() {
     <button
       title="Submit"
       type="submit"
-      className="transition duration-75 rounded-full shadow-sm border hover:border-green-500 text-neutral-600 hover:bg-green-500 flex justify-center items-center hover:text-neutral-100 px-2"
+      className="transition duration-75 rounded-full sm:shadow-sm sm:border hover:border-green-500  text-neutral-600 hover:bg-green-500 flex justify-center items-center hover:text-neutral-100 p-1 sm:px-2"
     >
-      <CheckIcon width={40} height={40} className="pr-2 border-r" />
-      <span className="px-2 text-xl font-semibold">{lang.acceptText}</span>
+      <CheckIcon className="size-10 sm:pr-2 sm:border-r" />
+      <span className="hidden sm:block px-2 text-xl font-semibold">
+        {lang.acceptText}
+      </span>
     </button>
   );
 }

@@ -20,7 +20,7 @@ function FormSchema({ accounts, transaction, categories }: Props) {
   const amountInCents = transaction?.amount;
   const amount = amountInCents ? Math.abs(amountInCents / 100) : "";
   return (
-    <main className="flex flex-col gap-4 px-4 py-6">
+    <main className="flex flex-col gap-6 px-2 py-4 md:gap-4 md:px-4 lg:gap-6">
       <TypeInput type={transaction?.type} />
       <input
         name="description"
@@ -30,9 +30,12 @@ function FormSchema({ accounts, transaction, categories }: Props) {
         defaultValue={transaction?.description}
         required
       ></input>
-      <section className="flex flex-row gap-6">
-        <AccountSelector accounts={accounts} transaction={transaction} />
-        <CategorySelector categories={categories} transaction={transaction} />
+      <section className="flex flex-col sm:flex-row gap-2 sm:gap-6">
+        <div className="flex flex-row gap-2">
+          <AccountSelector accounts={accounts} transaction={transaction} />
+          <CategorySelector categories={categories} transaction={transaction} />
+        </div>
+
         {/* {transaction?.type === "transfer" ? (
           <>
             <ArrowLongRightIcon className="size-8 stroke-gray-300" />
@@ -68,9 +71,9 @@ function FormSchema({ accounts, transaction, categories }: Props) {
           </label>
         </div>
       </section>
-      <section className="flex flex-row gap-6 items-center">
+      <section className="flex flex-row w-full lg:w-3/5 gap-2 items-center">
         <input
-          className="w-60 pl-2 h-12 rounded border border-neutral-200 text-center"
+          className="w-2/5 sm:w-3/5 sm:pl-2 h-12 rounded border border-neutral-200 text-center"
           name="amount"
           title="Amount"
           type="text"
@@ -79,7 +82,7 @@ function FormSchema({ accounts, transaction, categories }: Props) {
           required
         ></input>
         <input
-          className="w-34 h-12 rounded border border-neutral-200 flex justify-center px-2"
+          className="w-3/5 sm:w-2/5 h-12 rounded border border-neutral-200 flex justify-center px-2"
           name="date"
           type="date"
           title="Date"
@@ -87,7 +90,7 @@ function FormSchema({ accounts, transaction, categories }: Props) {
           required
         ></input>
       </section>
-      <footer className="flex flex-row justify-end gap-4">
+      <footer className="flex flex-row justify-between sm:justify-end gap-4 px-2">
         <CloseButton />
         <SubmitButton />
       </footer>

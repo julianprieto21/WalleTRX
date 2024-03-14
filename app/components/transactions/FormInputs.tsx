@@ -7,43 +7,61 @@ export function TypeInput({ type }: { type?: string | null }) {
   const transferSelected = type === "transfer" ? true : false;
 
   return (
-    <section className="flex flex-row gap-4">
-      <input
-        name="type"
-        id="income"
-        title="Income"
-        type="radio"
-        value="income"
-        defaultChecked={incomeSelected}
-        required
-      ></input>
-      <label htmlFor="income" className="cursor-pointer">
+    <section className="flex w-full flex-row justify-evenly sm:justify-start sm:gap-4">
+      <label
+        htmlFor="income"
+        className={`cursor-pointer p-2 lg:p-3 lg:text-lg rounded-lg hover:bg-green-200 hover:text-green-500 ${
+          incomeSelected ? "bg-green-500 text-green-500" : ""
+        }`}
+      >
+        <input
+          name="type"
+          id="income"
+          title="Income"
+          type="radio"
+          value="income"
+          defaultChecked={incomeSelected}
+          required
+          className="appearance-none"
+        ></input>
         Income
       </label>
 
-      <input
-        name="type"
-        id="expense"
-        title="Expense"
-        type="radio"
-        value="expense"
-        defaultChecked={expenseSelected}
-        required
-      ></input>
-      <label htmlFor="expense" className="cursor-pointer">
+      <label
+        htmlFor="expense"
+        className={`cursor-pointer p-2 lg:p-3 lg:text-lg rounded-lg hover:bg-red-200 hover:text-red-500 ${
+          incomeSelected ? "bg-red-500 text-red-500" : ""
+        }`}
+      >
+        <input
+          name="type"
+          id="expense"
+          title="Expense"
+          type="radio"
+          value="expense"
+          defaultChecked={expenseSelected}
+          required
+          className="appearance-none"
+        ></input>
         Expense
       </label>
 
-      <input
-        name="type"
-        id="transfer"
-        title="Transfer"
-        type="radio"
-        value="transfer"
-        defaultChecked={transferSelected}
-        required
-      ></input>
-      <label htmlFor="transfer" className="cursor-pointer">
+      <label
+        htmlFor="transfer"
+        className={`cursor-pointer p-2 lg:p-3 lg:text-lg rounded-lg hover:bg-violet-200 hover:text-violet-500 ${
+          incomeSelected ? "bg-violet-500 text-violet-500" : ""
+        }`}
+      >
+        <input
+          name="type"
+          id="transfer"
+          title="Transfer"
+          type="radio"
+          value="transfer"
+          defaultChecked={transferSelected}
+          required
+          className="appearance-none"
+        ></input>
         Transfer
       </label>
     </section>
@@ -59,7 +77,7 @@ export function AccountSelector({
 }) {
   return (
     <select
-      className="w-60 pl-1 h-8 rounded border border-neutral-200"
+      className="w-1/2 pl-1 h-8 rounded border border-neutral-200"
       name="account"
       title="Account"
       defaultValue={transaction?.account_id + "&" + transaction?.wallet_id}
@@ -89,7 +107,7 @@ export function CategorySelector({
 }) {
   return (
     <select
-      className="w-60 pl-1 h-8 rounded border border-neutral-200"
+      className="w-1/2 pl-1 h-8 rounded border border-neutral-200"
       name="category"
       title="Category"
       defaultValue={transaction?.category}
