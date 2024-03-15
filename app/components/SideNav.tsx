@@ -49,7 +49,7 @@ export default async function SideNav() {
             </>
           ) : (
             <>
-              <UserIcon className="hidden sm:block md:hidden rounded-full size-14 bg-neutral-100 py-1 text-neutral-800" />
+              <UserIcon className="hidden sm:block md:hidden rounded-full size-14 bg-neutral-300 py-1 text-neutral-50" />
               <TopNav />
             </>
           )}

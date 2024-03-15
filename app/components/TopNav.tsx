@@ -29,7 +29,7 @@ export function TopNav({ imageUrl }: Props) {
             className="rounded-full size-14 md:hidden"
           ></img>
         ) : (
-          <UserIcon className="block sm:hidden rounded-full size-14 bg-neutral-100 py-1 text-neutral-800" />
+          <UserIcon className="block sm:hidden rounded-full size-14 py-1 bg-neutral-300 py-1 text-neutral-50" />
         )}
         <Bars3Icon className="size-12" onClick={handleClick} />
       </section>
