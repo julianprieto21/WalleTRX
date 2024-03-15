@@ -1,12 +1,11 @@
-'use client';
+"use client";
 
-import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
+import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 
 export default function SearchBar({ placeholder }: { placeholder: string }) {
-
   const handleChange = (value: string) => {
     console.log(value);
-  }
+  };
 
   return (
     <div className="relative flex w-[100%]">

@@ -1,9 +1,10 @@
 "use server";
 import { sql } from "@vercel/postgres";
-import { Account, Wallet } from "./types";
+import { Wallet } from "./types";
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { signOut } from "@/auth";
 
 export async function createUser(
   client: any,
@@ -95,4 +96,8 @@ export async function deleteTransaction(id: string) {
   await sql`
     DELETE FROM transactions WHERE transaction_id = ${id}`;
   revalidatePath("/transactions");
+}
+
+export async function LogOut() {
+  await signOut();
 }

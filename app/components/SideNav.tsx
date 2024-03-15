@@ -2,21 +2,17 @@ import NavLinks from "./NavLinks";
 import { lang } from "@/app/lib/const/string-en";
 import { PowerIcon, UserIcon, WalletIcon } from "@heroicons/react/24/outline";
 import { auth, signOut } from "@/auth";
-import { MenuButtonSmallScreen } from "./MenuButton";
+import { TopNav } from "./TopNav";
 import HLine from "./HLine";
+import { LogOut } from "../lib/actions";
 
-function LogOutButton() {
+export function LogOutButton() {
   return (
-    <form
-      action={async () => {
-        "use server";
-        await signOut();
-      }}
-    >
+    <form action={LogOut}>
       <button
         title="Log Out"
         type="submit"
-        className="flex h-[3rem] w-full grow items-center justify-start gap-2 text-neutral-400 text-md font-normal hover:bg-neutral-700 hover:text-red-500 sm:flex-none sm:justify-center lg:justify-start md:p-2 md:px-3"
+        className="flex h-[3rem] w-full grow items-center justify-start gap-2 text-neutral-400 text-md font-normal hover:bg-neutral-700 hover:text-red-500 sm:flex-none sm:justify-center lg:justify-start p-4 md:p-2 md:px-3"
       >
         <PowerIcon className="size-6" />
         <p className="block sm:hidden lg:block">Logout</p>
@@ -34,27 +30,32 @@ export default async function SideNav() {
   }
   return (
     <div className="w-full sm:w-[20%] flex flex-col items-center justify-center bg-neutral-900 h-auto sm:pb-2">
-      <section className="w-full flex flex-col text-neutral-200 bg-gray-800 py-4 sm:pb-2 lg:py-4 border-b border-gray-700">
+      <section className="w-full flex flex-col text-neutral-200 bg-gray-800 sm:py-4 sm:pb-2 lg:py-4 border-b border-gray-700">
         <div className="flex justify-center">
-          <WalletIcon className="hidden md:block md:size-36 lg:size-52 antialiased" />
+          <WalletIcon className="hidden md:block md:size-36 lg:size-42 xl:size-48 antialiased" />
         </div>
-        <section className="flex flex-row sm:flex-col lg:flex-row justify-between lg:justify-center items-center px-4 md:px-2 xl:px-1 sm:gap-2 lg:gap-0">
+        <section className="flex flex-row sm:flex-col lg:flex-row justify-between lg:justify-center items-center sm:px-4 md:px-2 xl:px-1 sm:gap-2 lg:gap-0">
           <h1 className="hidden font-semibold md:block md:text-xl lg:text-3xl xl:text-4xl 2xl:text-5xl">
             WALLET APP
           </h1>
           {session && session.user?.image ? (
-            <img
-              src={session.user.image}
-              alt="Foto de perfil de usuario"
-              className="rounded-full size-14 md:hidden"
-            ></img>
+            <>
+              <img
+                src={session.user.image}
+                alt="Foto de perfil de usuario"
+                className="hidden sm:block rounded-full size-14 md:hidden"
+              ></img>
+              <TopNav imageUrl={session.user.image} />
+            </>
           ) : (
-            <UserIcon className="rounded-full size-14 bg-neutral-100 py-1 text-neutral-800" />
+            <>
+              <UserIcon className="hidden sm:block md:hidden rounded-full size-14 bg-neutral-100 py-1 text-neutral-800" />
+              <TopNav />
+            </>
           )}
-          <MenuButtonSmallScreen />
         </section>
       </section>
-      <div className="hidden sm:flex flex-col gap-2 w-full h-[90%] pt-6">
+      <div className="hidden sm:flex flex-col w-full h-[90%] justify-around">
         <NavLinks isLogIn={session ? true : false} />
         {session ? <LogOutButton /> : null}
       </div>
