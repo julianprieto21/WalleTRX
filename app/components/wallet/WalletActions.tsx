@@ -39,7 +39,7 @@ function IncomeButton({ income }: { income: number }) {
         <Link
           title={lang.incomeText}
           href={`/transactions/create`} //?type=income`}
-          className="pr-2 sm:pr-4 pl-2 h-[100%] flex justify-center items-center py-2 rounded-e-3xl text-green-600 hover:bg-green-600/80 hover:text-neutral-200 transition ease-in-out delay-10"
+          className="pr-2 sm:pr-4 pl-2 h-[100%] flex justify-center items-center py-2 rounded-3xl sm:rounded-e-3xl text-green-600 hover:bg-green-600/80 hover:text-neutral-200 transition ease-in-out delay-10"
         >
           <ArrowDownTrayIcon className="size-16 sm:size-12 lg:size-14" />
         </Link>
@@ -56,7 +56,7 @@ function ExpenseButton({ expense }: { expense: number }) {
         <Link
           title={lang.expenseText}
           href={`/transactions/create`} //?type=expense`}
-          className="pl-2 sm:pl-4 pr-2 h-[100%] flex justify-center items-center py-2 rounded-s-3xl text-red-500 hover:bg-red-600/90 hover:text-neutral-200 transition ease-in-out delay-10"
+          className="pl-2 sm:pl-4 pr-2 h-[100%] flex justify-center items-center py-2 rounded-3xl sm:rounded-s-3xl text-red-500 hover:bg-red-600/90 hover:text-neutral-200 transition ease-in-out delay-10"
         >
           <ArrowUpTrayIcon className="size-16 sm:size-12 lg:size-14" />
         </Link>
