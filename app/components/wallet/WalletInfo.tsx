@@ -11,7 +11,7 @@ function MainTitle({ userName }: { userName: string }) {
     <div className="hidden sm:block w-1/2 pl-4 sm:pl-0">
       <div className="flex flex-col justify-center items-center text-left">
         <h1 className="text-5xl sm:text-7xl font-semibold m-0 p-0">
-          <h1 className="text-5xl sm:text-7xl font-thin">{lang.hiText},</h1>
+          <p className="text-5xl sm:text-7xl font-thin">{lang.hiText},</p>
           {userName.split(" ")[0]}
         </h1>
       </div>
