@@ -33,7 +33,7 @@ export function TypeInput({ type }: { type?: string | null }) {
     <section className="flex w-full xl:w-3/5 3xl:w-1/2 flex-row justify-evenly lg:justify-start sm:gap-4 lg:gap-8">
       <label
         htmlFor="income"
-        className={`cursor-pointer w-1/5 text-center p-2 lg:p-3 lg:text-lg rounded-lg hover:bg-green-200 hover:text-green-500 ${
+        className={`cursor-pointer transition ease-linear w-1/5 text-center p-2 lg:p-3 lg:text-lg rounded-lg hover:bg-green-200 hover:text-green-500 ${
           incomeSelected ? "bg-green-200 text-green-500" : ""
         }`}
       >
@@ -53,7 +53,7 @@ export function TypeInput({ type }: { type?: string | null }) {
 
       <label
         htmlFor="expense"
-        className={`cursor-pointer w-1/5 text-center p-2 lg:p-3 lg:text-lg rounded-lg hover:bg-red-200 hover:text-red-500 ${
+        className={`cursor-pointer transition ease-linear w-1/5 text-center p-2 lg:p-3 lg:text-lg rounded-lg hover:bg-red-200 hover:text-red-500 ${
           expenseSelected ? "bg-red-200 text-red-500" : ""
         }`}
       >
@@ -73,7 +73,7 @@ export function TypeInput({ type }: { type?: string | null }) {
 
       <label
         htmlFor="transfer"
-        className={`cursor-pointer w-1/5 text-center p-2 lg:p-3 lg:text-lg rounded-lg hover:bg-violet-200 hover:text-violet-500 ${
+        className={`cursor-pointer transition ease-linear w-1/5 text-center p-2 lg:p-3 lg:text-lg rounded-lg hover:bg-violet-200 hover:text-violet-500 ${
           transferSelected ? "bg-violet-200 text-violet-500" : ""
         }`}
       >
