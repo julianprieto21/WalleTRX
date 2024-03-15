@@ -1,17 +1,40 @@
+"use client";
 import { lang } from "@/app/lib/const/string-en";
 import { Transaction, Account } from "@/app/lib/types";
 
 export function TypeInput({ type }: { type?: string | null }) {
-  const incomeSelected = type === "income" ? true : false;
-  const expenseSelected = type === "expense" ? true : false;
-  const transferSelected = type === "transfer" ? true : false;
+  let incomeSelected = false; // type === "income" ? true : false;
+  let expenseSelected = false; //type === "expense" ? true : false;
+  let transferSelected = false; //type === "transfer" ? true : false;
+  // const handleClick = (type: string) => {
+  //   console.log(type);
+  //   switch (type) {
+  //     case "income":
+  //       incomeSelected = !incomeSelected;
+  //       expenseSelected = false;
+  //       transferSelected = false;
+  //       break;
+  //     case "expense":
+  //       incomeSelected = false;
+  //       expenseSelected = !expenseSelected;
+  //       transferSelected = false;
+  //       break;
+  //     case "transfer":
+  //       incomeSelected = false;
+  //       expenseSelected = false;
+  //       transferSelected = !transferSelected;
+  //       break;
+  //     default:
+  //       break;
+  //   }
+  // };
 
   return (
-    <section className="flex w-full flex-row justify-evenly sm:justify-start sm:gap-4">
+    <section className="flex w-full xl:w-3/5 3xl:w-1/2 flex-row justify-evenly lg:justify-start sm:gap-4 lg:gap-8">
       <label
         htmlFor="income"
-        className={`cursor-pointer p-2 lg:p-3 lg:text-lg rounded-lg hover:bg-green-200 hover:text-green-500 ${
-          incomeSelected ? "bg-green-500 text-green-500" : ""
+        className={`cursor-pointer w-1/5 text-center p-2 lg:p-3 lg:text-lg rounded-lg hover:bg-green-200 hover:text-green-500 ${
+          incomeSelected ? "bg-green-200 text-green-500" : ""
         }`}
       >
         <input
@@ -20,17 +43,18 @@ export function TypeInput({ type }: { type?: string | null }) {
           title="Income"
           type="radio"
           value="income"
-          defaultChecked={incomeSelected}
+          // defaultChecked={incomeSelected}
+          // onChange={() => handleClick("income")}
           required
-          className="appearance-none"
+          className="appearance-auto"
         ></input>
         Income
       </label>
 
       <label
         htmlFor="expense"
-        className={`cursor-pointer p-2 lg:p-3 lg:text-lg rounded-lg hover:bg-red-200 hover:text-red-500 ${
-          incomeSelected ? "bg-red-500 text-red-500" : ""
+        className={`cursor-pointer w-1/5 text-center p-2 lg:p-3 lg:text-lg rounded-lg hover:bg-red-200 hover:text-red-500 ${
+          expenseSelected ? "bg-red-200 text-red-500" : ""
         }`}
       >
         <input
@@ -39,17 +63,18 @@ export function TypeInput({ type }: { type?: string | null }) {
           title="Expense"
           type="radio"
           value="expense"
-          defaultChecked={expenseSelected}
+          // defaultChecked={expenseSelected}
+          // onChange={() => handleClick("expense")}
           required
-          className="appearance-none"
+          className="appearance-auto"
         ></input>
         Expense
       </label>
 
       <label
         htmlFor="transfer"
-        className={`cursor-pointer p-2 lg:p-3 lg:text-lg rounded-lg hover:bg-violet-200 hover:text-violet-500 ${
-          incomeSelected ? "bg-violet-500 text-violet-500" : ""
+        className={`cursor-pointer w-1/5 text-center p-2 lg:p-3 lg:text-lg rounded-lg hover:bg-violet-200 hover:text-violet-500 ${
+          transferSelected ? "bg-violet-200 text-violet-500" : ""
         }`}
       >
         <input
@@ -58,9 +83,10 @@ export function TypeInput({ type }: { type?: string | null }) {
           title="Transfer"
           type="radio"
           value="transfer"
-          defaultChecked={transferSelected}
+          // defaultChecked={transferSelected}
+          // onChange={() => handleClick("transfer")}
           required
-          className="appearance-none"
+          className="appearance-auto"
         ></input>
         Transfer
       </label>

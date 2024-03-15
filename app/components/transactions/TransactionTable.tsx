@@ -23,7 +23,7 @@ export default function TransactionTable({ accounts, transactions }: Props) {
   };
   const screenHeight = window.innerHeight;
   const tableLenght = round(screenHeight / 120);
-  console.log(tableLenght);
+  // console.log(tableLenght);
   return (
     <div className="mt-6 w-full flex flex-col justify-center">
       <div className="rounded-lg bg-neutral-300 p-2">
