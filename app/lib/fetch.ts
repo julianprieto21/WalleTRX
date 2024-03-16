@@ -95,14 +95,12 @@ export async function fetchTransactionFromId(
 export async function fetchData(userEmail: string) {
   const client: VercelPoolClient = await db.connect();
   const user: User = await fetchUser(client, userEmail);
+  console.log(user);
   const wallet: Wallet = await fetchWalletFromUser(client, user.user_id);
-  const accounts: Account[] = await fetchAccountsFromWallet(
-    client,
-    wallet.wallet_id
-  );
+  const accounts: Account[] = await fetchAccountsFromWallet(client, wallet.id);
   const transactions: Transaction[] = await fetchTransactionsFromWallet(
     client,
-    wallet.wallet_id
+    wallet.id
   );
   return { accounts, transactions };
 }

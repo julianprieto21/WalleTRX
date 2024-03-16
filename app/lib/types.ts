@@ -4,12 +4,12 @@ export type User = {
   email: string;
 };
 export type Wallet = {
-  wallet_id: string;
+  id: string;
   user_id: string;
   created_at: Date;
 };
 export type Account = {
-  account_id: string;
+  id: string;
   wallet_id: string;
   name: string;
   currency: string;
@@ -18,10 +18,10 @@ export type Account = {
   updated_at: Date;
 };
 export type Transaction = {
-  transaction_id: string;
-  wallet_id: string,
+  id: string;
+  wallet_id: string;
   account_id: string;
-  type: "income" | "expense" | 'transfer';
+  type: "income" | "expense" | "transfer";
   amount: number;
   description: string;
   created_at: Date;

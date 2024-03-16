@@ -30,7 +30,7 @@ export function AccountSelector({ accounts }: { accounts: Account[] }) {
         {lang.allText}
       </option>
       {accounts.map((account: Account, index: number) => (
-        <option key={index + 1} value={account.account_id}>
+        <option key={index + 1} value={account.id}>
           {account.name}
         </option>
       ))}
