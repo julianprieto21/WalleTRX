@@ -1,7 +1,6 @@
 "use server";
 import { VercelPoolClient, db } from "@vercel/postgres";
 import { Account, Transaction, User, Wallet } from "./types";
-import { createUser, createWallet } from "./actions";
 
 export async function fetchAllUsers(client: VercelPoolClient) {
   try {
@@ -64,11 +63,11 @@ export async function fetchAccountsFromWallet(
 
 export async function fetchTransactionsFromWallet(
   client: VercelPoolClient,
-  wallet_id: string
+  walletId: string
 ) {
   try {
     const data =
-      await client.sql<Transaction>`SELECT t.* FROM transactions AS t WHERE wallet_id = ${wallet_id}`;
+      await client.sql<Transaction>`SELECT t.* FROM transactions AS t WHERE wallet_id = ${walletId}`;
     return data.rows;
   } catch (error) {
     console.error(error);
@@ -78,11 +77,11 @@ export async function fetchTransactionsFromWallet(
 
 export async function fetchTransactionFromId(
   client: VercelPoolClient,
-  id: string
+  transactionId: string
 ) {
   try {
     const data =
-      await client.sql<Transaction>`SELECT t.* FROM transactions AS t WHERE transaction_id = ${id}`;
+      await client.sql<Transaction>`SELECT t.* FROM transactions AS t WHERE id = ${transactionId}`;
     return data.rows[0];
   } catch (error) {
     console.error(error);
@@ -95,8 +94,7 @@ export async function fetchTransactionFromId(
 export async function fetchData(userEmail: string) {
   const client: VercelPoolClient = await db.connect();
   const user: User = await fetchUser(client, userEmail);
-  console.log(user);
-  const wallet: Wallet = await fetchWalletFromUser(client, user.user_id);
+  const wallet: Wallet = await fetchWalletFromUser(client, user.id);
   const accounts: Account[] = await fetchAccountsFromWallet(client, wallet.id);
   const transactions: Transaction[] = await fetchTransactionsFromWallet(
     client,
