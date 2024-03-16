@@ -55,9 +55,9 @@ export default function MonthChart({
   );
 
   return (
-    <main className="hidden sm:block w-full h-2/5 lg-3/5 text-center">
+    <main className="hidden sm:flex flex-col w-full h-2/5 lg-3/5 text-center justify-center items-center">
       <h1 className="sm:text-2xl font-semibold">{lang.monthChartText}</h1>
-      <ResponsiveContainer width="100%" height="80%">
+      <ResponsiveContainer width="90%" height="80%">
         <LineChart
           width={500}
           height={300}

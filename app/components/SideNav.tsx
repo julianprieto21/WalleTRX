@@ -55,7 +55,7 @@ export default async function SideNav() {
           )}
         </section>
       </section>
-      <div className="hidden sm:flex flex-col w-full h-[90%] justify-around lg:justify-start lg:gap-2 3xl:gap-4">
+      <div className="hidden sm:flex flex-col w-full h-[90%] justify-around lg:justify-start lg:gap-2 3xl:gap-4 py-4">
         <NavLinks isLogIn={session ? true : false} />
         {session ? <LogOutButton /> : null}
       </div>
