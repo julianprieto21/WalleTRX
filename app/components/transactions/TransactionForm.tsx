@@ -2,14 +2,15 @@
 import { createTransaction, editTransaction } from "@/app/lib/actions";
 import { lang } from "@/app/lib/const/string-en";
 import { Account, Transaction } from "@/app/lib/types";
-import { AccountSelector, CategorySelector, TypeInput } from "./FormInputs";
+import { Selector, TypeInput } from "./FormInputs";
 import { CloseButton, SubmitButton } from "../buttons";
+import _ from "lodash";
 
 interface Props {
   action?: "create" | "edit";
   accounts: Account[];
   transaction?: Transaction;
-  categories: string[];
+  categories: any;
 }
 
 function FormSchema({ accounts, transaction, categories }: Props) {
@@ -19,6 +20,7 @@ function FormSchema({ accounts, transaction, categories }: Props) {
   const formattedDate = defaultDate.toISOString().split("T")[0];
   const amountInCents = transaction?.amount;
   const amount = amountInCents ? Math.abs(amountInCents / 100) : "";
+  const account = accounts.find((acc) => acc.id === transaction?.account_id);
   return (
     <main className="flex flex-col gap-6 px-2 py-4 md:gap-4 md:px-4 lg:gap-6">
       <TypeInput type={transaction?.type} />
@@ -30,43 +32,30 @@ function FormSchema({ accounts, transaction, categories }: Props) {
         defaultValue={transaction?.description}
         required
       ></input>
-      <section className="flex flex-col sm:flex-row gap-2 sm:gap-6">
-        <div className="flex flex-row gap-2">
-          <AccountSelector accounts={accounts} transaction={transaction} />
-          <CategorySelector categories={categories} transaction={transaction} />
-        </div>
-
-        {/* {transaction?.type === "transfer" ? (
-          <>
-            <ArrowLongRightIcon className="size-8 stroke-gray-300" />
-            <AccountSelector accounts={accounts} />
-          </>
-        ) : transaction?.type === "income" ||
-          transaction?.type === "expense" ? (
-          <>
-            <ArrowDownTrayIcon className="size-8 stroke-gray-300" />
-            <CategorySelector
-              categories={categories}
-              transaction={transaction}
-            />
-          </>
-        ) : (
-          <>
-            <ArrowUpTrayIcon className="size-8 stroke-gray-300" />
-            <CategorySelector
-              categories={categories}
-              transaction={transaction}
-            />
-          </>
-        )} */}
-
-        <div className="flex justify-center items-center gap-2">
+      <section className="flex flex-col w-3/5 sm:flex-row gap-2 sm:gap-6">
+        <Selector
+          list={accounts}
+          transaction={transaction}
+          inputId="account"
+          text="Select an account"
+        />
+        <Selector
+          list={categories}
+          transaction={transaction}
+          inputId="category"
+          text="Select a category"
+        />
+        <div className="flex justify-center items-center gap-2 select-none">
           <input
             id="recurrent"
             title="Recurrent Payment"
             type="checkbox"
+            className="hidden peer"
           ></input>
-          <label htmlFor="recurrent" className="cursor-pointer">
+          <label
+            htmlFor="recurrent"
+            className="cursor-pointer border px-2 py-1 rounded-md text-neutral-300 peer-checked:text-sky-500 peer-checked:border-sky-400 peer-checked:bg-sky-200"
+          >
             {lang.recurrent}
           </label>
         </div>
@@ -116,10 +105,7 @@ export default function TransactionForm({
       );
     case "edit":
       if (!transaction) return null;
-      const editTransactionWithId = editTransaction.bind(
-        null,
-        transaction.transaction_id
-      );
+      const editTransactionWithId = editTransaction.bind(null, transaction.id);
       return (
         <form
           action={editTransactionWithId}

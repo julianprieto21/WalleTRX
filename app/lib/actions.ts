@@ -64,7 +64,7 @@ export async function createTransaction(formData: FormData) {
     INSERT INTO transactions (wallet_id, account_id, type, description, category, amount, created_at)
     VALUES (${wallet_id}, ${account_id}, ${type}, ${description}, ${category}, ${
     realAmount * 100
-  }, ${created_at}) 
+  }, ${created_at})
   `;
   revalidatePath("/");
   redirect("/");
@@ -86,7 +86,7 @@ export async function editTransaction(id: string, formData: FormData) {
     UPDATE transactions SET wallet_id = ${wallet_id}, account_id = ${account_id}, type = ${type}, description = ${description}, category = ${category}, amount = ${
     realAmount * 100
   }, created_at = ${created_at}
-  WHERE transaction_id = ${id}
+  WHERE id = ${id}
   `;
   revalidatePath("/");
   redirect("/");
@@ -94,7 +94,7 @@ export async function editTransaction(id: string, formData: FormData) {
 
 export async function deleteTransaction(id: string) {
   await sql`
-    DELETE FROM transactions WHERE transaction_id = ${id}`;
+    DELETE FROM transactions WHERE id = ${id}`;
   revalidatePath("/transactions");
 }
 
