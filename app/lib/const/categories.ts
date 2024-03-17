@@ -1,4 +1,6 @@
-export const CATEGORIES = [
+import { Category } from "../types";
+
+export const CATEGORIES: Category[] = [
   {
     name: "Comidas/Bebidas",
     id: "comidas-bebidas",

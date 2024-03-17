@@ -150,7 +150,7 @@ export function Selector({
                 required
               ></input>
               <label
-                className="pl-4 py-1 flex peer-checked:bg-neutral-800 peer-checked:text-neutral-50 hover:bg-neutral-800 hover:text-neutral-50"
+                className="pl-4 py-1 flex items-center gap-2 peer-checked:bg-neutral-800 peer-checked:text-neutral-50 hover:bg-neutral-800 hover:text-neutral-50"
                 htmlFor={obj.id}
                 onClick={() =>
                   handleInputClick(
@@ -159,6 +159,10 @@ export function Selector({
                   )
                 }
               >
+                <span
+                  className={`w-4 h-4 rounded-full`}
+                  style={{ backgroundColor: obj.color }}
+                ></span>
                 {obj.name}
               </label>
             </li>

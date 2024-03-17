@@ -16,6 +16,7 @@ export type Account = {
   type: "normal" | "cripto";
   created_at: Date;
   updated_at: Date;
+  color: string;
 };
 export type Transaction = {
   id: string;
@@ -26,4 +27,9 @@ export type Transaction = {
   description: string;
   created_at: Date;
   category: string;
+};
+export type Category = {
+  id: string;
+  name: string;
+  color: string;
 };
