@@ -26,7 +26,7 @@ function TransferButton() {
 }
 
 function IncomeButton({ income }: { income: number }) {
-  const formattedIncome = formatBalance(income / 100);
+  const formattedIncome = formatBalance(income / 100, "never");
   return (
     <>
       <div className="w-full sm:w-[90%] flex rounded-3xl justify-between items-center bg-neutral-100">
@@ -49,7 +49,7 @@ function IncomeButton({ income }: { income: number }) {
 }
 
 function ExpenseButton({ expense }: { expense: number }) {
-  const expenseFormatted = formatBalance(expense / 100);
+  const expenseFormatted = formatBalance(expense / 100, "never");
   return (
     <>
       <div className="w-full sm:w-[90%] flex rounded-3xl justify-between items-center bg-neutral-100">

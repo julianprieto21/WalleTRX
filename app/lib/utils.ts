@@ -1,10 +1,14 @@
 import { Transaction } from "./types";
 
-export function formatBalance(amount: number) {
+export function formatBalance(
+  amount: number,
+  signDisplay: "never" | "always" | "auto" = "auto"
+) {
   const formatter = new Intl.NumberFormat("es-AR", {
     style: "currency",
     currency: "ARS",
     minimumFractionDigits: 2,
+    signDisplay: signDisplay,
   });
   return formatter.format(amount);
 }

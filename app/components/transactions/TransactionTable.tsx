@@ -83,7 +83,7 @@ export default function TransactionTable({ accounts, transactions }: Props) {
                   {formatDate(transaction.created_at.toDateString())}
                 </td>
                 <td className="hidden sm:table-cell whitespace-nowrap px-3 py-2 sm:text-md 2xl:text-lg">
-                  {formatBalance(transaction.amount / 100)}
+                  {formatBalance(transaction.amount / 100, "always")}
                 </td>
                 <td className="py-2 pr-4 gap-6">
                   <div className="flex justify-end gap-3">

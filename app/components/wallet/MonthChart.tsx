@@ -25,7 +25,7 @@ const CustomTooltip = ({
     return (
       <div className="custom-tooltip">
         <strong className="label">{formatDate(label)}</strong>
-        <p className="desc">{formatBalance(payload[0].value)}</p>
+        <p className="desc">{formatBalance(payload[0].value, "auto")}</p>
       </div>
     );
   }

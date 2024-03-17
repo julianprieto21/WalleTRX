@@ -1,7 +1,7 @@
 import { formatBalance } from "../../lib/utils";
 
 export default function BalanceWidget({ balance }: { balance: number }) {
-  const formattedBalance = formatBalance(balance / 100);
+  const formattedBalance = formatBalance(balance / 100, "auto");
   return (
     <>
       <button
