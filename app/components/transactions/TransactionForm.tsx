@@ -32,7 +32,7 @@ function FormSchema({ accounts, transaction, categories }: Props) {
         defaultValue={transaction?.description}
         required
       ></input>
-      <section className="flex flex-col w-3/5 sm:flex-row gap-2 sm:gap-6">
+      <section className="flex flex-col w-full lg:w-4/5 md:flex-row gap-2 md:gap-6 justify-center items-center">
         <Selector
           list={accounts}
           transaction={transaction}
@@ -45,7 +45,7 @@ function FormSchema({ accounts, transaction, categories }: Props) {
           inputId="category"
           text="Select a category"
         />
-        <div className="flex justify-center items-center gap-2 select-none">
+        <div className="w-2/5 md:w-auto flex justify-center items-center gap-2 select-none">
           <input
             id="recurrent"
             title="Recurrent Payment"
@@ -54,7 +54,7 @@ function FormSchema({ accounts, transaction, categories }: Props) {
           ></input>
           <label
             htmlFor="recurrent"
-            className="cursor-pointer border px-2 py-1 rounded-md text-neutral-300 peer-checked:text-sky-500 peer-checked:border-sky-400 peer-checked:bg-sky-200"
+            className="w-full md:w-auto text-center cursor-pointer border px-2 py-1 rounded-md text-neutral-300 peer-checked:text-sky-500 peer-checked:border-sky-400 peer-checked:bg-sky-200"
           >
             {lang.recurrent}
           </label>

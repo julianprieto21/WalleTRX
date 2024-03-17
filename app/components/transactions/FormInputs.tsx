@@ -1,6 +1,11 @@
 "use client";
 import { Transaction } from "@/app/lib/types";
-import { ChevronDownIcon } from "@heroicons/react/24/outline";
+import {
+  ArrowDownTrayIcon,
+  ArrowUpTrayIcon,
+  ArrowsRightLeftIcon,
+  ChevronDownIcon,
+} from "@heroicons/react/24/outline";
 import _ from "lodash";
 import { useEffect, useState } from "react";
 
@@ -23,9 +28,10 @@ export function TypeInput({ type }: { type?: string | null }) {
       ></input>
       <label
         htmlFor="income"
-        className="text-neutral-300 peer-checked/income:font-medium peer-checked/income:bg-green-200 peer-checked/income:text-green-500 peer-checked/income:border-green-300 cursor-pointer w-1/5 text-center p-2 lg:p-3 lg:text-lg rounded-lg border"
+        className="flex flex-col lg:flex-row lg:gap-2 justify-center items-center text-neutral-300 peer-checked/income:font-medium peer-checked/income:bg-green-200 peer-checked/income:text-green-500 peer-checked/income:border-green-300 cursor-pointer w-1/5 text-center p-2 lg:p-3 lg:text-lg rounded-lg border"
       >
-        Income
+        <ArrowDownTrayIcon className="size-8" />
+        <h1 className="hidden md:block">Income</h1>
       </label>
 
       <input
@@ -40,9 +46,10 @@ export function TypeInput({ type }: { type?: string | null }) {
       ></input>
       <label
         htmlFor="expense"
-        className="text-neutral-300 peer-checked/expense:font-medium peer-checked/expense:bg-red-200 peer-checked/expense:text-red-500 peer-checked/expense:border-red-300 cursor-pointer w-1/5 text-center p-2 lg:p-3 lg:text-lg rounded-lg border"
+        className="flex flex-col lg:flex-row lg:gap-2 justify-center items-center text-neutral-300 peer-checked/expense:font-medium peer-checked/expense:bg-red-200 peer-checked/expense:text-red-500 peer-checked/expense:border-red-300 cursor-pointer w-1/5 text-center p-2 lg:p-3 lg:text-lg rounded-lg border"
       >
-        Expense
+        <ArrowUpTrayIcon className="size-8" />
+        <h1 className="hidden md:block">Expense</h1>
       </label>
 
       <input
@@ -57,9 +64,10 @@ export function TypeInput({ type }: { type?: string | null }) {
       ></input>
       <label
         htmlFor="transfer"
-        className="text-neutral-300 peer-checked/transfer:font-medium peer-checked/transfer:bg-violet-200 peer-checked/transfer:text-violet-500 peer-checked/transfer:border-violet-300 cursor-pointer w-1/5 text-center p-2 lg:p-3 lg:text-lg rounded-lg border"
+        className="flex flex-col lg:flex-row lg:gap-2 justify-center items-center text-neutral-300 peer-checked/transfer:font-medium peer-checked/transfer:bg-violet-200 peer-checked/transfer:text-violet-500 peer-checked/transfer:border-violet-300 cursor-pointer w-1/5 text-center p-2 lg:p-3 lg:text-lg rounded-lg border"
       >
-        Transfer
+        <ArrowsRightLeftIcon className="size-8" />
+        <h1 className="hidden md:block">Transfer</h1>
       </label>
     </fieldset>
   );
@@ -113,7 +121,7 @@ export function Selector({
     }
   }, [transaction, inputId, list]);
   return (
-    <main className="w-2/5 flex flex-col gap-1 relative">
+    <main className="w-4/5 md:w-2/5 flex flex-col gap-1 relative">
       <button
         type="button"
         className={`rounded transition flex flex-row justify-between items-center px-2 border bg-white text-gray-400 
@@ -150,7 +158,7 @@ export function Selector({
                 required
               ></input>
               <label
-                className="pl-4 py-1 flex items-center gap-2 peer-checked:bg-neutral-800 peer-checked:text-neutral-50 hover:bg-neutral-800 hover:text-neutral-50"
+                className="pl-2 py-1 flex items-center gap-2 peer-checked:bg-neutral-800 peer-checked:text-neutral-50 hover:bg-neutral-800 hover:text-neutral-50"
                 htmlFor={obj.id}
                 onClick={() =>
                   handleInputClick(
