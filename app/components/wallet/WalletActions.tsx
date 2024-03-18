@@ -28,46 +28,42 @@ function TransferButton() {
 function IncomeButton({ income }: { income: number }) {
   const formattedIncome = formatBalance(income / 100, "never");
   return (
-    <>
-      <div className="w-full sm:w-[90%] flex rounded-3xl justify-between items-center bg-neutral-100">
-        <div className="hidden justify-center sm:flex">
-          <p className="sm:text-xl md:text-2xl xl:text-3xl font text-neutral-700 antialiased sm:px-4 xl:px-6 2xl:px-10 grow">
-            {formattedIncome}
-          </p>
-        </div>
-
-        <Link
-          title={lang.incomeText}
-          href={`/transactions/create`} //?type=income`}
-          className="px-2 sm:pr-3 h-[100%] flex justify-center items-center py-2 rounded-3xl sm:rounded-s-none text-green-600 hover:bg-green-600/80 hover:text-neutral-200 transition ease-in-out delay-10"
-        >
-          <ArrowDownTrayIcon className="size-16 sm:size-12 lg:size-14" />
-        </Link>
+    <div className="w-full flex rounded-3xl justify-between items-center bg-neutral-100">
+      <div className="hidden justify-center sm:flex w-full">
+        <p className="sm:text-xl md:text-2xl xl:text-3xl font text-neutral-700 antialiased sm:px-4 xl:px-6 2xl:px-10 grow">
+          {formattedIncome}
+        </p>
       </div>
-    </>
+
+      <Link
+        title={lang.incomeText}
+        href={`/transactions/create`} //?type=income`}
+        className="px-2 sm:pr-3 h-[100%] flex justify-center items-center py-2 rounded-3xl sm:rounded-s-none text-green-600 hover:bg-green-600/80 hover:text-neutral-200 transition ease-in-out delay-10"
+      >
+        <ArrowDownTrayIcon className="size-16 sm:size-12 lg:size-14" />
+      </Link>
+    </div>
   );
 }
 
 function ExpenseButton({ expense }: { expense: number }) {
   const expenseFormatted = formatBalance(expense / 100, "never");
   return (
-    <>
-      <div className="w-full sm:w-[90%] flex rounded-3xl justify-between items-center bg-neutral-100">
-        <Link
-          title={lang.expenseText}
-          href={`/transactions/create`} //?type=expense`}
-          className="px-2 sm:pl-3 h-[100%] flex justify-center items-center py-2 rounded-3xl sm:rounded-e-none text-red-500 hover:bg-red-600/90 hover:text-neutral-200 transition ease-in-out delay-10"
-        >
-          <ArrowUpTrayIcon className="size-16 sm:size-12 lg:size-14" />
-        </Link>
+    <div className="w-full flex rounded-3xl justify-between items-center bg-neutral-100">
+      <Link
+        title={lang.expenseText}
+        href={`/transactions/create`} //?type=expense`}
+        className="px-2 sm:pl-3 h-[100%] flex justify-center items-center py-2 rounded-3xl sm:rounded-e-none text-red-500 hover:bg-red-600/90 hover:text-neutral-200 transition ease-in-out delay-10"
+      >
+        <ArrowUpTrayIcon className="size-16 sm:size-12 lg:size-14" />
+      </Link>
 
-        <div className="hidden justify-center sm:flex">
-          <p className="sm:text-xl md:text-2xl xl:text-3xl font text-neutral-700 antialiased sm:px-4 xl:px-6 2xl:px-10 grow">
-            {expenseFormatted}
-          </p>
-        </div>
+      <div className="hidden justify-center sm:flex w-full">
+        <p className="sm:text-xl md:text-2xl xl:text-3xl font text-neutral-700 antialiased sm:px-4 xl:px-6 2xl:px-10 grow">
+          {expenseFormatted}
+        </p>
       </div>
-    </>
+    </div>
   );
 }
 
@@ -88,7 +84,7 @@ export default function WalletActions({ transactions }: Props) {
   const balance = income - expense;
   return (
     <div className="w-[100%] flex flex-col items-center justify-center gap-6 lg:gap-4 xl:gap-6 pt-8">
-      <div className="flex flex-row justify-center gap-6 sm:gap-6 lg:gap-4">
+      <div className="sm:w-3/5 flex flex-row justify-center gap-6 sm:gap-6 lg:gap-4">
         <IncomeButton income={income} />
         <ExpenseButton expense={expense} />
       </div>
