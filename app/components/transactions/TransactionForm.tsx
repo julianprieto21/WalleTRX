@@ -32,7 +32,7 @@ function FormSchema({ accounts, transaction, categories }: Props) {
         defaultValue={transaction?.description}
         required
       ></input>
-      <section className="flex flex-col w-full lg:w-4/5 md:flex-row gap-2 md:gap-6 justify-center items-center">
+      <section className="flex flex-col w-full lg:w-4/5 md:flex-row gap-2 md:gap-6 justify-center md:justify-start items-center">
         <Selector
           list={accounts}
           transaction={transaction}
