@@ -7,6 +7,7 @@ import WalletActions from "@/app/components/wallet/WalletActions";
 import WalletInfo from "@/app/components/wallet/WalletInfo";
 import MonthChart from "./components/wallet/MonthChart";
 import HLine from "./components/HLine";
+import Card from "./components/Card";
 
 export default async function HomePage() {
   const session = await auth();
@@ -34,10 +35,14 @@ export default async function HomePage() {
           <HLine width={100} color="neutral" />
           <HLine width={100} color="neutral" />
         </section>
-
-        <Suspense>
-          <MonthChart transactions={transactions} />
-        </Suspense>
+        <section className="w-full h-2/5 flex flex-row justify-evenly px-6">
+          <Card>
+            <MonthChart transactions={transactions} />
+          </Card>
+          {/* <Card>
+            <AccountSummary />
+          </Card> */}
+        </section>
       </main>
     );
   }
