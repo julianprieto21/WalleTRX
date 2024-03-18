@@ -28,6 +28,7 @@ export default async function SideNav() {
   } catch (error) {
     console.log(error);
   }
+  const title = lang.appNameText.split("&");
   return (
     <div className="w-full sm:w-[20%] flex flex-col items-center justify-center bg-neutral-900 h-auto sm:pb-2">
       <section className="w-full flex flex-col text-neutral-200 bg-gray-800 sm:py-4 sm:pb-2 lg:py-4 border-b border-gray-700">
@@ -35,8 +36,9 @@ export default async function SideNav() {
           <WalletIcon className="hidden md:block md:size-36 lg:size-42 xl:size-48 antialiased" />
         </div>
         <section className="flex flex-row sm:flex-col lg:flex-row justify-between lg:justify-center items-center sm:px-4 md:px-2 xl:px-1 sm:gap-2 lg:gap-0">
-          <h1 className="hidden font-semibold md:block md:text-xl lg:text-3xl xl:text-4xl 2xl:text-5xl">
-            WALLET APP
+          <h1 className="hidden font-thin md:block md:text-xl lg:text-3xl xl:text-4xl 2xl:text-5xl">
+            {title[0]}
+            <span className="font-semibold ">{title[1]}</span>
           </h1>
           {session && session.user?.image ? (
             <>

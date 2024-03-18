@@ -1,5 +1,5 @@
 export const lang = {
-  appNameText: "Wallet App",
+  appNameText: "WALLE&TRX",
   homeText: "Home",
   transactionsText: "Transactions",
   investmentsText: "Investments",

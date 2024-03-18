@@ -3,6 +3,7 @@ import { Bars3Icon, UserIcon } from "@heroicons/react/24/outline";
 import { Suspense, useEffect, useState } from "react";
 import NavLinks from "./NavLinks";
 import { LogOutButton } from "./SideNav";
+import { lang } from "../lib/const/string-en";
 
 interface Props {
   imageUrl?: string;
@@ -19,6 +20,7 @@ export function TopNav({ imageUrl }: Props) {
     const screenHeight = window.innerHeight;
     setMaxHeight(screenHeight - navbarHeight);
   });
+  const title = lang.appNameText.split("&");
   return (
     <nav id="top-nav" className="top-nav sm:hidden w-full flex flex-col">
       <section className="w-full flex flex-row justify-between items-center p-3">
@@ -31,6 +33,10 @@ export function TopNav({ imageUrl }: Props) {
         ) : (
           <UserIcon className="block sm:hidden rounded-full size-14 py-1 bg-neutral-300 py-1 text-neutral-50" />
         )}
+        <h1 className="font-thin text-3xl">
+          {title[0]}
+          <span className="font-semibold ">{title[1]}</span>
+        </h1>
         <Bars3Icon className="size-12" onClick={handleClick} />
       </section>
 
