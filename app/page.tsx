@@ -2,12 +2,11 @@
 import React, { Suspense } from "react";
 import { fetchData } from "./lib/fetch";
 import { auth } from "@/auth";
-import { getBalanceFromTransactions } from "@/app/lib/utils";
 import WalletActions from "@/app/components/wallet/WalletActions";
 import WalletInfo from "@/app/components/wallet/WalletInfo";
-import MonthChart from "./components/wallet/MonthChart";
-import HLine from "./components/HLine";
-import Card from "./components/Card";
+import MonthChart from "@/app/components/cards/MonthChart";
+import HLine from "@/app/components/HLine";
+import AccountSummary from "@/app/components/cards/AccountSummary";
 
 export default async function HomePage() {
   const session = await auth();
@@ -35,13 +34,9 @@ export default async function HomePage() {
           <HLine width={100} color="neutral" />
           <HLine width={100} color="neutral" />
         </section>
-        <section className="w-full h-2/5 flex flex-row justify-evenly px-6">
-          <Card>
-            <MonthChart transactions={transactions} />
-          </Card>
-          {/* <Card>
-            <AccountSummary />
-          </Card> */}
+        <section className="w-full h-2/5  lg:flex flex-row justify-evenly px-6">
+          <MonthChart transactions={transactions} />
+          <AccountSummary accounts={accounts} transactions={transactions} />
         </section>
       </main>
     );

@@ -26,4 +26,5 @@ export const lang = {
   recurrent: "Recurrent",
   acceptText: "Accept",
   footerText: "Application made by Julian Prieto",
+  accountSummaryText: "Account Summary",
 };

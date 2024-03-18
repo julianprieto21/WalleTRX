@@ -11,6 +11,7 @@ import {
 } from "recharts";
 import { lang } from "@/app/lib/const/string-en";
 import { useSearchParams } from "next/navigation";
+import Card from "../Card";
 
 const CustomTooltip = ({
   active,
@@ -55,17 +56,16 @@ export default function MonthChart({
   );
 
   return (
-    <>
-      <h1 className="sm:text-2xl font-semibold">{lang.monthChartText}</h1>
-      <ResponsiveContainer width="100%" height="100%">
+    <Card title={lang.monthChartText}>
+      <ResponsiveContainer width="100%">
         <LineChart
           width={500}
           height={300}
           data={groupedTransactions}
           margin={{
             top: 5,
-            right: 60,
-            left: 60,
+            right: 5,
+            left: 5,
             bottom: 5,
           }}
         >
@@ -79,9 +79,10 @@ export default function MonthChart({
             dataKey="balance"
             stroke="#8884d8"
             activeDot={{ r: 6 }}
+            dot={false}
           />
         </LineChart>
       </ResponsiveContainer>
-    </>
+    </Card>
   );
 }
