@@ -1,9 +1,9 @@
-import Breadcrumbs from "../components/Breadcrumbs";
-import SearchBar from "../components/Searchbar";
-import { CreateTransaction } from "../components/buttons";
-import TransactionTable from "../components/transactions/TransactionTable";
-import { lang } from "../lib/const/string-en";
-import { fetchData } from "../lib/fetch";
+import Breadcrumbs from "@/app/components/Breadcrumbs";
+import SearchBar from "@/app/components/Searchbar";
+import { CreateTransaction } from "@/app/components/buttons";
+import TransactionTable from "@/app/components/transactions/TransactionTable";
+import { lang } from "@/app/lib/const/string-en";
+import { fetchData } from "@/app/lib/fetch";
 import { auth } from "@/auth";
 
 export default async function TransactionsPage() {

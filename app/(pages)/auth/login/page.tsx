@@ -1,5 +1,5 @@
-import Separator from "../../components/HLine";
-import LoginForm from "../../components/login/LoginForm";
+import Separator from "@/app/components/HLine";
+import LoginForm from "@/app/components/login/LoginForm";
 
 export default function LoginPage() {
   return (
