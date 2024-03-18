@@ -4,6 +4,7 @@ import { Transaction, Account } from "@/app/lib/types";
 import { formatDate, formatBalance } from "@/app/lib/utils";
 import { DeleteTransaction, EditTransaction } from "../buttons";
 import { round } from "lodash";
+import { useSearchParams } from "next/navigation";
 
 interface Props {
   accounts: Account[];
@@ -21,9 +22,13 @@ export default function TransactionTable({ accounts, transactions }: Props) {
       return "-";
     }
   };
-  const screenHeight = window.innerHeight;
-  const tableLenght = round(screenHeight / 120);
-  // console.log(tableLenght);
+  const searchParams = useSearchParams();
+  const query = searchParams.get("query");
+  const filteredTransactions = query
+    ? orderedTransactions.filter((transaction) =>
+        transaction.description.toLowerCase().includes(query.toLowerCase())
+      )
+    : orderedTransactions;
   return (
     <div className="mt-6 w-full flex flex-col justify-center">
       <div className="rounded-lg bg-neutral-300 p-2">
@@ -63,7 +68,7 @@ export default function TransactionTable({ accounts, transactions }: Props) {
             </tr>
           </thead>
           <tbody className="bg-neutral-100 w-full">
-            {orderedTransactions.slice(0, tableLenght)?.map((transaction) => (
+            {filteredTransactions.map((transaction) => (
               <tr
                 key={transaction.id}
                 className="w-full border-b py-3 text-md last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg"
