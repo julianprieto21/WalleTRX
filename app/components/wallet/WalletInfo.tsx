@@ -15,7 +15,7 @@ function MainTitle({
 }) {
   return (
     <div className="hidden sm:block w-1/2 pl-4 sm:pl-0">
-      <div className="flex flex-row justify-center items-center text-left gap-4">
+      <div className="flex flex-row justify-evenly items-center text-left">
         <img
           src={userImageUrl}
           alt="Imagen de perfil del usuario"
