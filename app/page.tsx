@@ -34,7 +34,7 @@ export default async function HomePage() {
           <HLine width={100} color="neutral" />
           <HLine width={100} color="neutral" />
         </section>
-        <section className="w-full h-2/5  lg:flex flex-row justify-evenly px-6">
+        <section className="w-full lg:h-2/5 hidden lg:flex flex-col lg:flex-row lg:justify-evenly px-6">
           <MonthChart transactions={transactions} />
           <AccountSummary accounts={accounts} transactions={transactions} />
         </section>
