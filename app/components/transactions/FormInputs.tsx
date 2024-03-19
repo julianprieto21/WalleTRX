@@ -125,12 +125,13 @@ export function Selector({
       <button
         type="button"
         className={`rounded transition flex flex-row justify-between items-center px-2 border bg-white text-gray-400 
-        ${open ? "bg-neutral-800 text-neutral-100 font-semibold" : ""}
-        ${textButton ? "" : ""}
+        ${open ? "text-neutral-100 bg-zinc-800 font-semibold" : ""}
       }`}
         onClick={() => setOpen(!open)}
       >
-        <h1>{textButton ? textButton : text}</h1>
+        <h1 className={`${textButton ? "text-neutral-700 font-normal" : ""}`}>
+          {textButton ? textButton : text}
+        </h1>
         <ChevronDownIcon
           className={`${open ? "rotate-180" : ""} transition size-8`}
         />

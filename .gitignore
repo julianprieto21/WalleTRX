@@ -21,6 +21,7 @@
 *.pem
 .vscode
 package-lock.json
+.hintrc
 
 # debug
 npm-debug.log*

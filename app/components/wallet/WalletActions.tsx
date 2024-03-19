@@ -30,7 +30,7 @@ function IncomeButton({ income }: { income: number }) {
   return (
     <div className="w-full flex rounded-3xl justify-between items-center bg-neutral-100">
       <div className="hidden justify-center sm:flex w-full">
-        <p className="sm:text-xl md:text-2xl xl:text-3xl font text-neutral-700 antialiased sm:px-4 xl:px-6 2xl:px-10 grow">
+        <p className="text-center sm:text-xl md:text-2xl xl:text-3xl font text-neutral-700 antialiased sm:px-4 xl:px-6 2xl:px-10 grow">
           {formattedIncome}
         </p>
       </div>
@@ -59,7 +59,7 @@ function ExpenseButton({ expense }: { expense: number }) {
       </Link>
 
       <div className="hidden justify-center sm:flex w-full">
-        <p className="sm:text-xl md:text-2xl xl:text-3xl font text-neutral-700 antialiased sm:px-4 xl:px-6 2xl:px-10 grow">
+        <p className="text-center sm:text-xl md:text-2xl xl:text-3xl font text-neutral-700 antialiased sm:px-4 xl:px-6 2xl:px-10 grow">
           {expenseFormatted}
         </p>
       </div>
