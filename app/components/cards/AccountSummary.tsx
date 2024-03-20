@@ -60,18 +60,20 @@ export default function AccountSummary({
               <label
                 htmlFor={acc.account.id}
                 onClick={(e) => handleClick(acc.account.id, e)}
-                className="cursor-pointer w-full flex flex-row justify-between items-center p-4 border rounded-lg hover:font-semibold transition delay-75 peer-checked:font-bold peer-checked:bg-neutral-700 peer-checked:text-neutral-50"
+                className="cursor-pointer w-full flex flex-row justify-between items-center p-3 border rounded-lg hover:font-semibold transition delay-75 peer-checked:font-bold peer-checked:bg-neutral-700 peer-checked:text-neutral-50"
               >
                 <div className="flex flex-row gap-2 justify-center items-center">
                   <span
                     className="w-5 h-5 rounded-full"
                     style={{ backgroundColor: acc.account.color }}
                   ></span>
-                  <h1 className="text-md">{acc.account.name}</h1>
+                  <h1 className="text-xl">{acc.account.name}</h1>
                 </div>
 
                 <div className="flex flex-row justify-center items-center gap-4">
-                  <p>{formatBalance(acc.balance, "auto")}</p>
+                  <p className="text-xl">
+                    {formatBalance(acc.balance, "auto")}
+                  </p>
                 </div>
               </label>
               <Link

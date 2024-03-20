@@ -81,18 +81,17 @@ export default function WalletActions({ transactions }: Props) {
     );
   }
   const { income, expense } = getBalanceFromTransactions(filteredTransactions);
-  const balance = income - expense;
   return (
-    <div className="w-[100%] flex flex-col items-center justify-center gap-6 lg:gap-4 xl:gap-6 pt-8">
+    <main className="w-4/5 flex flex-col items-center justify-center gap-6 lg:gap-4 xl:gap-6">
       <div className="sm:w-3/5 flex flex-row justify-center gap-6 sm:gap-6 lg:gap-4">
         <IncomeButton income={income} />
         <ExpenseButton expense={expense} />
       </div>
       <div className="flex flex-row items-center w-[90%] gap-4">
-        <HLine width={100} color="neutral" />
+        <HLine width={80} color="neutral" />
         <TransferButton />
-        <HLine width={100} color="neutral" />
+        <HLine width={80} color="neutral" />
       </div>
-    </div>
+    </main>
   );
 }

@@ -1,12 +1,12 @@
 "use server";
-import React, { Suspense } from "react";
+import React from "react";
 import { fetchData } from "./lib/fetch";
 import { auth } from "@/auth";
 import WalletActions from "@/app/components/wallet/WalletActions";
-import WalletInfo from "@/app/components/wallet/WalletInfo";
 import MonthChart from "@/app/components/cards/MonthChart";
-import HLine from "@/app/components/HLine";
 import AccountSummary from "@/app/components/cards/AccountSummary";
+import BalanceWidget from "./components/wallet/BalanceWidget";
+import MainTitle from "@/app/components/wallet/MainTitle";
 
 export default async function HomePage() {
   const session = await auth();
@@ -17,24 +17,15 @@ export default async function HomePage() {
     const userName = session.user.name ? session.user.name : "";
     const userImageUrl = session.user.image ? session.user.image : "";
     return (
-      <main className="bg-neutral-200 h-screen sm:w-[80%] flex flex-col justify-start sm:justify-center items-center sm:gap-6 lg:gap-8">
-        <Suspense>
-          <section className="w-full h-3/5 sm:h-2/5 lg:h-2/5 flex flex-col justify-center items-center">
-            <WalletInfo
-              userName={userName}
-              userImageUrl={userImageUrl}
-              accounts={accounts}
-              transactions={transactions}
-            />
-            <HLine width={90} color="neutral" />
-            <WalletActions transactions={transactions} />
-          </section>
-        </Suspense>
-        <section className="hidden sm:flex flex-col justify-center items-center w-[100%] lg:gap-2">
-          <HLine width={100} color="neutral" />
-          <HLine width={100} color="neutral" />
+      <main className="bg-neutral-200 h-screen w-[80%] flex flex-col justify-start items-center pb-10">
+        <section className="select-none w-full flex flex-row items-center justify-center border-b pt-16 border-neutral-400 pb-4">
+          <MainTitle userName={userName} userImageUrl={userImageUrl} />
+          <BalanceWidget transactions={transactions} />
         </section>
-        <section className="w-full lg:h-2/5 hidden lg:flex flex-col lg:flex-row lg:justify-evenly px-6">
+        <section className="w-full flex justify-center pt-8 pb-4">
+          <WalletActions transactions={transactions} />
+        </section>
+        <section className="w-full h-1/2 lg:flex flex-col lg:flex-row lg:justify-evenly py-8">
           <MonthChart transactions={transactions} />
           <AccountSummary accounts={accounts} transactions={transactions} />
         </section>

@@ -30,7 +30,7 @@ export default async function SideNav() {
   }
   const title = lang.appNameText.split("&");
   return (
-    <div className="w-full sm:w-[20%] flex flex-col items-center justify-center bg-neutral-900 h-auto sm:pb-2">
+    <aside className="w-[20%] flex flex-col items-center justify-center bg-neutral-900 h-auto sm:pb-2">
       <section className="w-full flex flex-col text-neutral-200 bg-gray-800 sm:py-4 sm:pb-2 lg:py-4 border-b border-gray-700">
         <div className="flex justify-center">
           <WalletIcon className="hidden md:block md:size-36 lg:size-42 xl:size-48 antialiased" />
@@ -67,6 +67,6 @@ export default async function SideNav() {
           {lang.footerText}
         </h1>
       </footer>
-    </div>
+    </aside>
   );
 }

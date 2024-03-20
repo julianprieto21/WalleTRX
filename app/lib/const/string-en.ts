@@ -27,4 +27,5 @@ export const lang = {
   acceptText: "Accept",
   footerText: "Application made by Julian Prieto",
   accountSummaryText: "Account Summary",
+  balanceText: "Balance",
 };

@@ -57,7 +57,7 @@ export default function MonthChart({
 
   return (
     <Card title={lang.monthChartText}>
-      <ResponsiveContainer width="100%">
+      <ResponsiveContainer width="100%" height="90%">
         <LineChart
           width={500}
           height={300}
