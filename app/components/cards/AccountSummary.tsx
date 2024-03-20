@@ -46,9 +46,12 @@ export default function AccountSummary({
   return (
     <Card title={lang.accountSummaryText}>
       <ul className="w-full h-full flex flex-col gap-2">
-        {balanceByAccount.map((acc) => {
+        {balanceByAccount.map((acc, index) => {
           return (
-            <li className="flex flex-row w-full justify-between items-center">
+            <li
+              className="flex flex-row w-full justify-between items-center"
+              key={index}
+            >
               <input
                 id={acc.account.id}
                 title="Account Input"
