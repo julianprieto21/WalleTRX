@@ -33,3 +33,8 @@ export type Category = {
   name: string;
   color: string;
 };
+export type UserConfig = {
+  user_id: string;
+  defaultCurrency: string;
+  locale: string;
+};
