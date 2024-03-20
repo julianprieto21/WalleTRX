@@ -9,9 +9,7 @@ import {
   Line,
   LineChart,
 } from "recharts";
-import { lang } from "@/app/lib/const/string-en";
 import { useSearchParams } from "next/navigation";
-import Card from "../Card";
 
 const CustomTooltip = ({
   active,
@@ -56,33 +54,31 @@ export default function MonthChart({
   );
 
   return (
-    <Card title={lang.monthChartText}>
-      <ResponsiveContainer width="100%" height="90%">
-        <LineChart
-          width={500}
-          height={300}
-          data={groupedTransactions}
-          margin={{
-            top: 5,
-            right: 5,
-            left: 5,
-            bottom: 5,
-          }}
-        >
-          <Tooltip
-            content={<CustomTooltip active={true} payload={0} label="" />}
-          />
-          {/* <YAxis /> */}
-          <XAxis dataKey="date" tick={false} />
-          <Line
-            type="monotone"
-            dataKey="balance"
-            stroke="#8884d8"
-            activeDot={{ r: 6 }}
-            dot={false}
-          />
-        </LineChart>
-      </ResponsiveContainer>
-    </Card>
+    <ResponsiveContainer width="100%" height="90%">
+      <LineChart
+        width={500}
+        height={300}
+        data={groupedTransactions}
+        margin={{
+          top: 5,
+          right: 5,
+          left: 5,
+          bottom: 5,
+        }}
+      >
+        <Tooltip
+          content={<CustomTooltip active={true} payload={0} label="" />}
+        />
+        {/* <YAxis /> */}
+        <XAxis dataKey="date" tick={false} />
+        <Line
+          type="monotone"
+          dataKey="balance"
+          stroke="#8884d8"
+          activeDot={{ r: 6 }}
+          dot={false}
+        />
+      </LineChart>
+    </ResponsiveContainer>
   );
 }

@@ -7,6 +7,8 @@ import MonthChart from "@/app/components/cards/MonthChart";
 import AccountSummary from "@/app/components/cards/AccountSummary";
 import BalanceWidget from "./components/wallet/BalanceWidget";
 import MainTitle from "@/app/components/wallet/MainTitle";
+import Card from "./components/Card";
+import { lang } from "./lib/const/string-en";
 
 export default async function HomePage() {
   const session = await auth();
@@ -26,8 +28,12 @@ export default async function HomePage() {
           <WalletActions transactions={transactions} />
         </section>
         <section className="w-full h-1/2 lg:flex flex-col lg:flex-row lg:justify-evenly py-8">
-          <MonthChart transactions={transactions} />
-          <AccountSummary accounts={accounts} transactions={transactions} />
+          <Card title={lang.accountSummaryText}>
+            <MonthChart transactions={transactions} />
+          </Card>
+          <Card title={lang.monthChartText}>
+            <AccountSummary accounts={accounts} transactions={transactions} />
+          </Card>
         </section>
       </main>
     );
