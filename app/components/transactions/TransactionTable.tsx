@@ -5,6 +5,7 @@ import { formatDate, formatBalance } from "@/app/lib/utils";
 import { DeleteTransaction, EditTransaction } from "../buttons";
 import { round } from "lodash";
 import { useSearchParams } from "next/navigation";
+import Item from "./Item";
 
 interface Props {
   accounts: Account[];
@@ -30,6 +31,12 @@ export default function TransactionTable({ accounts, transactions }: Props) {
       )
     : orderedTransactions;
   return (
+    //   <div className="sm:mt-14 w-full flex flex-col items-center">
+    //     {filteredTransactions.map((transaction) => (
+    //       <Item transaction={transaction}></Item>
+    //     ))}
+    //   </div>
+    // );
     <div className="mt-6 w-full flex flex-col justify-center">
       <div className="rounded-lg bg-neutral-300 p-2">
         <table className="w-full">
