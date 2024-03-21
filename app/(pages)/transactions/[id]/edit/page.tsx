@@ -19,7 +19,7 @@ export default async function EditPage({ params }: Props) {
   const transaction = await fetchTransactionFromId(client, transactionID);
   const accounts = await fetchAccountsFromWallet(client, transaction.wallet_id);
   return (
-    <main className="bg-neutral-200 w-full sm:w-[80%] h-full flex flex-col justify-start items-start px-6 py-10 sm:px-16 sm:py-14">
+    <main className="mt-20 sm:mt-0 bg-neutral-200 flex flex-col justify-start items-start px-4 sm:px-12 py-10 sm:pb-10 sm:pt-16 overflow-auto flex-1">
       <Breadcrumbs
         breadcrumbs={[
           { label: "Home", href: "/" },
