@@ -5,8 +5,8 @@ import SideNav from "./components/SideNav";
 import { TopNav } from "./components/TopNav";
 
 export const metadata: Metadata = {
-  title: "Wallet App",
-  description: "Created by Julian Prieto",
+  title: "WalleTRX",
+  description: "Web application for keep track of personal finances. Created by Julian Prieto",
 };
 
 export default function RootLayout({
