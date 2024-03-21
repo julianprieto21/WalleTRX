@@ -3,8 +3,8 @@ import React from "react";
 import { fetchData } from "./lib/fetch";
 import { auth } from "@/auth";
 import WalletActions from "@/app/components/wallet/WalletActions";
-import MonthChart from "@/app/components/cards/MonthChart";
-import AccountSummary from "@/app/components/cards/AccountSummary";
+import MonthChart from "@/app/components/wallet/MonthChart";
+import AccountSummary from "@/app/components/wallet/AccountSummary";
 import BalanceWidget from "./components/wallet/BalanceWidget";
 import MainTitle from "@/app/components/wallet/MainTitle";
 import Card from "./components/Card";
@@ -19,20 +19,20 @@ export default async function HomePage() {
     const userName = session.user.name ? session.user.name : "";
     const userImageUrl = session.user.image ? session.user.image : "";
     return (
-      <main className="bg-neutral-200 h-screen w-[80%] flex flex-col justify-start items-center pb-10">
-        <section className="select-none w-full flex flex-row items-center justify-center border-b pt-16 border-neutral-400 pb-4">
+      <main className="mt-20 sm:mt-0 bg-neutral-200 flex flex-col justify-start items-center pb-10 sm:pb-0 overflow-auto flex-1">
+        <section className="select-none w-full flex flex-row-reverse sm:flex-row items-center justify-center border-b pt-8 sm:pt-16 border-neutral-400 pb-4 px-4 sm:px-0">
           <MainTitle userName={userName} userImageUrl={userImageUrl} />
           <BalanceWidget transactions={transactions} />
         </section>
         <section className="w-full flex justify-center pt-8 pb-4">
           <WalletActions transactions={transactions} />
         </section>
-        <section className="w-full h-1/2 lg:flex flex-col lg:flex-row lg:justify-evenly py-8">
+        <section className="w-full h-auto flex flex-col lg:flex-row items-center lg:justify-evenly py-8 gap-10 sm:gap-0 px-4 sm:px-0">
           <Card title={lang.accountSummaryText}>
-            <MonthChart transactions={transactions} />
+            <AccountSummary accounts={accounts} transactions={transactions} />
           </Card>
           <Card title={lang.monthChartText}>
-            <AccountSummary accounts={accounts} transactions={transactions} />
+            <MonthChart transactions={transactions} />
           </Card>
         </section>
       </main>

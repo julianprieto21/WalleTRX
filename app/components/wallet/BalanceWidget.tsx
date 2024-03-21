@@ -25,25 +25,11 @@ export default function BalanceWidget({
   const formattedBalance = formatBalance(balance / 100, "auto");
   const currency = "ARS";
   return (
-    <main className="w-1/2 text-neutral-800 flex h-full items-start flex-col justify-end">
-      <div className="flex flex-row gap-2 items-end pl-2">
-        <button
-          title="Hide Balances"
-          type="button"
-          onClick={() => setHide(!hide)}
-        >
-          {hide ? (
-            <EyeSlashIcon className="size-10 cursor-pointer" />
-          ) : (
-            <EyeIcon className="size-10 cursor-pointer" />
-          )}
-        </button>
-        <p className="text-5xl font-light">{lang.balanceText}:</p>
-      </div>
-
-      <h1 className="text-8xl font-normal flex flex-row items-end gap-4">
+    <main className="w-full sm:w-1/2 text-neutral-800 flex h-full items-start flex-col justify-end">
+      <p className="text-xl sm:text-5xl font-light">{lang.balanceText}:</p>
+      <h1 className="text-4xl sm:text-8xl font-normal flex flex-row items-end gap-2 sm:gap-4">
         {hide ? "..." : formattedBalance}
-        <p className="text-7xl font-light ">{currency}</p>
+        <p className="text-3xl sm:text-7xl font-light ">{currency}</p>
       </h1>
     </main>
   );

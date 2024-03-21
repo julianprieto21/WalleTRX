@@ -54,31 +54,31 @@ export default function MonthChart({
   );
 
   return (
-    <ResponsiveContainer width="100%" height="90%">
-      <LineChart
-        width={500}
-        height={300}
-        data={groupedTransactions}
-        margin={{
-          top: 5,
-          right: 5,
-          left: 5,
-          bottom: 5,
-        }}
-      >
-        <Tooltip
-          content={<CustomTooltip active={true} payload={0} label="" />}
-        />
-        {/* <YAxis /> */}
-        <XAxis dataKey="date" tick={false} />
-        <Line
-          type="monotone"
-          dataKey="balance"
-          stroke="#8884d8"
-          activeDot={{ r: 6 }}
-          dot={false}
-        />
-      </LineChart>
-    </ResponsiveContainer>
+    <div className="size-full">
+      <ResponsiveContainer>
+        <LineChart
+          data={groupedTransactions}
+          margin={{
+            top: 5,
+            right: 5,
+            left: 5,
+            bottom: 5,
+          }}
+        >
+          <Tooltip
+            content={<CustomTooltip active={true} payload={0} label="" />}
+          />
+          {/* <YAxis /> */}
+          <XAxis dataKey="date" tick={false} />
+          <Line
+            type="monotone"
+            dataKey="balance"
+            stroke="#8884d8"
+            activeDot={{ r: 6 }}
+            dot={false}
+          />
+        </LineChart>
+      </ResponsiveContainer>
+    </div>
   );
 }

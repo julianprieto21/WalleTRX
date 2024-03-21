@@ -1,10 +1,10 @@
 import NavLinks from "./NavLinks";
 import { lang } from "@/app/lib/const/string-en";
-import { PowerIcon, UserIcon, WalletIcon } from "@heroicons/react/24/outline";
-import { auth, signOut } from "@/auth";
-import { TopNav } from "./TopNav";
+import { PowerIcon, WalletIcon } from "@heroicons/react/24/outline";
+import { auth } from "@/auth";
 import HLine from "./HLine";
 import { LogOut } from "../lib/actions";
+import AppLogo from "@/public/app-logo-white.svg";
 
 export function LogOutButton() {
   return (
@@ -30,36 +30,21 @@ export default async function SideNav() {
   }
   const title = lang.appNameText.split("&");
   return (
-    <aside className="w-[20%] flex flex-col items-center justify-center bg-neutral-900 h-auto sm:pb-2">
-      <section className="w-full flex flex-col text-neutral-200 bg-gray-800 sm:py-4 sm:pb-2 lg:py-4 border-b border-gray-700">
-        <div className="flex justify-center">
-          <WalletIcon className="hidden md:block md:size-36 lg:size-42 xl:size-48 antialiased" />
-        </div>
-        <section className="flex flex-row sm:flex-col lg:flex-row justify-between lg:justify-center items-center sm:px-4 md:px-2 xl:px-1 sm:gap-2 lg:gap-0">
-          <h1 className="hidden font-thin md:block md:text-xl lg:text-3xl xl:text-4xl 2xl:text-5xl">
-            {title[0]}
-            <span className="font-semibold ">{title[1]}</span>
-          </h1>
-          {session && session.user?.image ? (
-            <>
-              <img
-                src={session.user.image}
-                alt="Foto de perfil de usuario"
-                className="hidden sm:block rounded-full size-14 md:hidden"
-              ></img>
-              <TopNav imageUrl={session.user.image} />
-            </>
-          ) : (
-            <>
-              <UserIcon className="hidden sm:block md:hidden rounded-full size-14 bg-neutral-300 py-1 text-neutral-50" />
-              <TopNav />
-            </>
-          )}
-        </section>
+    <aside className="hidden sm:flex w-1/5 flex-col items-center justify-center bg-neutral-900 h-screen sm:pb-2">
+      <section className="w-full flex flex-col items-center text-neutral-200 bg-gray-800 sm:py-4 sm:pb-2 lg:py-4 border-b border-gray-700">
+        {/* <WalletIcon className="hidden md:size-36 lg:size-42 xl:size-48 antialiased sm:block" /> */}
+        <img
+          src={AppLogo.src}
+          alt="Logo de la aplicación"
+          className="size-48"
+        ></img>
+        <h1 className="flex flex-row justify-center font-thin sm:text-5xl">
+          {title[0]}
+          <strong className="font-semibold ">{title[1]}</strong>
+        </h1>
       </section>
       <div className="hidden sm:flex flex-col w-full h-[90%] justify-around lg:justify-start lg:gap-2 3xl:gap-4 py-4">
         <NavLinks isLogIn={session ? true : false} />
-        {session ? <LogOutButton /> : null}
       </div>
       <footer className="w-full hidden sm:flex  flex-col justify-center items-center">
         <HLine width={90} color="neutral" />

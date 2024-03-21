@@ -41,7 +41,7 @@ export default function AccountSummary({
     }
   };
   return (
-    <ul className="w-full h-full flex flex-col gap-2">
+    <ul className="w-full h-full flex flex-col gap-2 overflow-auto">
       {balanceByAccount.map((acc, index) => {
         return (
           <li
@@ -63,14 +63,16 @@ export default function AccountSummary({
             >
               <div className="flex flex-row gap-2 justify-center items-center">
                 <span
-                  className="w-5 h-5 rounded-full"
+                  className="size-3 sm:size-5 rounded-full"
                   style={{ backgroundColor: acc.account.color }}
                 ></span>
-                <h1 className="text-xl">{acc.account.name}</h1>
+                <h1 className="text-md sm:text-xl">{acc.account.name}</h1>
               </div>
 
               <div className="flex flex-row justify-center items-center gap-4">
-                <p className="text-xl">{formatBalance(acc.balance, "auto")}</p>
+                <p className="text-md sm:text-xl">
+                  {formatBalance(acc.balance, "auto")}
+                </p>
               </div>
             </label>
             <Link
