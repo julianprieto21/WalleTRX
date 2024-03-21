@@ -28,10 +28,16 @@ export default async function HomePage() {
           <WalletActions transactions={transactions} />
         </section>
         <section className="w-full h-auto flex flex-col lg:flex-row items-center lg:justify-evenly py-8 gap-10 sm:gap-0 px-4 sm:px-0">
-          <Card title={lang.accountSummaryText}>
+          <Card
+            title={lang.accountSummaryText}
+            style="w-full h-64 sm:h-96 lg:w-2/5"
+          >
             <AccountSummary accounts={accounts} transactions={transactions} />
           </Card>
-          <Card title={lang.monthChartText}>
+          <Card
+            title={lang.monthChartText}
+            style="w-full h-64 sm:h-96 lg:w-2/5"
+          >
             <MonthChart transactions={transactions} />
           </Card>
         </section>
