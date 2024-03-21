@@ -20,9 +20,9 @@ export function TopNav() {
   return (
     <nav
       id="top-nav"
-      className="fixed sm:hidden h-20 w-full flex flex-col bg-gray-800 text-neutral-50"
+      className="fixed sm:hidden z-10 h-20 w-full flex flex-col bg-gray-800 text-neutral-50"
     >
-      <section className="z-20 w-full flex flex-row justify-between items-center px-3 py-4">
+      <section className="w-full flex flex-row justify-between items-center px-3 py-4">
         <div className="flex flex-row gap-2 items-center">
           <img
             src={AppLogo.src}
@@ -39,7 +39,7 @@ export function TopNav() {
       </section>
 
       <section
-        className={`mt-20 z-10 absolute overflow-clip ${
+        className={`mt-20 absolute overflow-clip ${
           open ? "h-screen py-4" : "h-0 py-0"
         } flex flex-col w-full bg-neutral-900 gap-4`}
         onClick={handleClick}
