@@ -54,15 +54,15 @@ export default function MonthChart({
   );
 
   return (
-    <div className="size-full">
+    <div className="flex size-full">
       <ResponsiveContainer>
         <LineChart
           data={groupedTransactions}
           margin={{
-            top: 5,
+            top: 0,
             right: 5,
             left: 5,
-            bottom: 5,
+            bottom: 0,
           }}
         >
           <Tooltip

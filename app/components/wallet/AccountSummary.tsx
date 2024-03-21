@@ -41,7 +41,7 @@ export default function AccountSummary({
     }
   };
   return (
-    <ul className="w-full h-full flex flex-col gap-2 overflow-auto">
+    <ul className="w-full h-full flex flex-col gap-2 overflow-y-auto overflow-x-clip">
       {balanceByAccount.map((acc, index) => {
         return (
           <li
@@ -59,18 +59,18 @@ export default function AccountSummary({
             <label
               htmlFor={acc.account.id}
               onClick={(e) => handleClick(acc.account.id, e)}
-              className="cursor-pointer w-full flex flex-row justify-between items-center p-3 border rounded-lg hover:font-semibold transition delay-75 peer-checked:font-bold peer-checked:bg-neutral-700 peer-checked:text-neutral-50"
+              className="cursor-pointer w-full flex flex-row justify-between items-center p-3 xl:p-2 2xl:p-3 border rounded-lg hover:font-semibold transition delay-75 peer-checked:font-bold peer-checked:bg-neutral-700 peer-checked:text-neutral-50"
             >
               <div className="flex flex-row gap-2 justify-center items-center">
                 <span
                   className="size-3 sm:size-5 rounded-full"
                   style={{ backgroundColor: acc.account.color }}
                 ></span>
-                <h1 className="text-md sm:text-xl">{acc.account.name}</h1>
+                <h1 className="text-md xl:text-lg 2xl:text-xl">{acc.account.name}</h1>
               </div>
 
               <div className="flex flex-row justify-center items-center gap-4">
-                <p className="text-md sm:text-xl">
+                <p className="text-md xl:text-lg 2xl:text-xl text-neutral-500">
                   {formatBalance(acc.balance, "auto")}
                 </p>
               </div>

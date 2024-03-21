@@ -20,23 +20,23 @@ export default async function HomePage() {
     const userImageUrl = session.user.image ? session.user.image : "";
     return (
       <main className="mt-20 sm:mt-0 bg-neutral-200 flex flex-col justify-start items-center pb-10 sm:pb-0 overflow-auto flex-1">
-        <section className="select-none w-full flex flex-row-reverse sm:flex-row items-center justify-center border-b pt-8 sm:pt-16 border-neutral-400 pb-4 px-4 sm:px-0">
+        <section className="select-none w-full flex flex-row-reverse sm:flex-row items-center justify-center border-b pt-8 xl:pt-10 2xl:pt-16 border-neutral-400 pb-4 px-4 sm:px-0">
           <MainTitle userName={userName} userImageUrl={userImageUrl} />
           <BalanceWidget transactions={transactions} />
         </section>
-        <section className="w-full flex justify-center pt-8 pb-4">
+        <section className="w-full flex justify-center pt-8 xl:pt-6 2xl:pt-8 pb-4 xl:pb-0 2xl:pb-4">
           <WalletActions transactions={transactions} />
         </section>
-        <section className="w-full h-auto flex flex-col lg:flex-row items-center lg:justify-evenly py-8 gap-10 sm:gap-0 px-4 sm:px-0">
+        <section className="w-full h-full flex flex-col lg:flex-row items-center lg:justify-evenly xl:py-0 2xl:py-8 gap-10 px-4">
           <Card
             title={lang.accountSummaryText}
-            style="w-full h-64 sm:h-96 lg:w-2/5"
+            style="w-full h-64 xl:h-60 2xl:h-96 lg:w-2/5"
           >
             <AccountSummary accounts={accounts} transactions={transactions} />
           </Card>
           <Card
             title={lang.monthChartText}
-            style="w-full h-64 sm:h-96 lg:w-2/5"
+            style="w-full h-60 xl:h-78 2xl:h-96 lg:w-2/5"
           >
             <MonthChart transactions={transactions} />
           </Card>

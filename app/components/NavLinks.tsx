@@ -45,8 +45,8 @@ export default function NavLinks({ isLogIn }: { isLogIn: boolean }) {
                   pathName === link.href ? "bg-neutral-700 text-neutral-50" : ""
                 } ${isLogIn ? "cursor-pointer" : " cursor-not-allowed"}`}
           >
-            <LinkIcon className="size-10 sm:size-7" />
-            <p className="block text-xl sm:text-base sm:block">{link.name}</p>
+            <LinkIcon className="size-10 xl:size-6 2xl:size-7" />
+            <p className="block text-xl xl:text-sm 2xl:text-base sm:block">{link.name}</p>
           </Link>
         );
       })}

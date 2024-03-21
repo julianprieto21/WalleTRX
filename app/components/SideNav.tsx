@@ -30,15 +30,15 @@ export default async function SideNav() {
   }
   const title = lang.appNameText.split("&");
   return (
-    <aside className="hidden sm:flex w-1/5 flex-col items-center justify-center bg-neutral-900 h-screen sm:pb-2">
+    <aside className="hidden sm:flex w-1/5 flex-col items-center justify-center bg-neutral-900 h-screen sm:pb-2 overflow-auto">
       <section className="w-full flex flex-col items-center text-neutral-200 bg-gray-800 sm:py-4 sm:pb-2 lg:py-4 border-b border-gray-700">
         {/* <WalletIcon className="hidden md:size-36 lg:size-42 xl:size-48 antialiased sm:block" /> */}
         <img
           src={AppLogo.src}
           alt="Logo de la aplicación"
-          className="size-48"
+          className="xl:size-36 2xl:size-48"
         ></img>
-        <h1 className="flex flex-row justify-center font-thin sm:text-5xl">
+        <h1 className="flex flex-row justify-center font-thin xl:text-4xl 2xl:text-5xl">
           {title[0]}
           <strong className="font-semibold ">{title[1]}</strong>
         </h1>
