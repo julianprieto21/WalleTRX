@@ -44,12 +44,19 @@ export function filterTransactionsByMonth(transactions: Transaction[]) {
   );
 }
 
-export const formatDate = (dateStr: string, locale: string = "en-US") => {
+interface DateProps {
+  dateStr: string;
+  locale?: string;
+  day?: "numeric" | "2-digit" | 'undefined';
+  month?: "numeric" | "2-digit" | "long" | "short" | "narrow" | 'undefined',
+  year?: "numeric" | "2-digit" | 'undefined';
+}
+export const formatDate = ({dateStr, locale = 'en-US', day, month, year}: DateProps) => {
   const date = new Date(dateStr);
   const options: Intl.DateTimeFormatOptions = {
-    day: "numeric",
-    month: "short",
-    year: "numeric",
+    day: day === 'undefined' ? undefined : 'numeric',
+    month: month === 'undefined' ? undefined : 'short',
+    year: year === 'undefined' ? undefined : 'numeric',
   };
   const formatter = new Intl.DateTimeFormat(locale, options);
   return formatter.format(date);

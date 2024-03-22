@@ -23,7 +23,7 @@ const CustomTooltip = ({
   if (active && payload && payload.length) {
     return (
       <div className="custom-tooltip">
-        <strong className="label">{formatDate(label)}</strong>
+        <strong className="label">{formatDate({dateStr: label})}</strong>
         <p className="desc">{formatBalance(payload[0].value, "auto")}</p>
       </div>
     );

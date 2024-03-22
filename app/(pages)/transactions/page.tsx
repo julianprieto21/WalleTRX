@@ -1,6 +1,7 @@
 import Breadcrumbs from "@/app/components/Breadcrumbs";
 import SearchBar from "@/app/components/Searchbar";
 import { CreateTransaction } from "@/app/components/buttons";
+import Filters from "@/app/components/transactions/Filters";
 import TransactionTable from "@/app/components/transactions/TransactionTable";
 import { lang } from "@/app/lib/const/string-en";
 import { fetchData } from "@/app/lib/fetch";
@@ -24,6 +25,7 @@ export default async function TransactionsPage() {
           <SearchBar placeholder={lang.searchTransactionText} />
           <CreateTransaction />
         </section>
+        <Filters accounts={accounts} transactions={transactions} />
         <TransactionTable accounts={accounts} transactions={transactions} />
       </main>
     );
