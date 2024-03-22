@@ -8,11 +8,12 @@ import {
 import { DeleteTransaction, EditTransaction } from "../buttons";
 
 interface Props {
+  key: number;
   transaction: Transaction;
   account?: Account;
 }
 
-export default function Item({ transaction, account }: Props) {
+export default function Item({ key, transaction, account }: Props) {
   const category = CATEGORIES.find(
     (category) => category.id === transaction.category
   );
@@ -24,7 +25,7 @@ export default function Item({ transaction, account }: Props) {
     );
   const bgColor = transaction.type === "income" ? "bg-green-500" : "bg-red-500";
   return (
-    <main className="mx-auto justify-between w-full flex flex-row px-4 py-4 bg-neutral-100 rounded-3xl shadow-sm">
+  <main key={key} className="mx-auto justify-between w-full flex flex-row px-4 py-4 bg-neutral-100 rounded-3xl shadow-sm">
       <section className="flex flex-col gap-3">
         <section className="flex flex-row gap-4 justify-start text-neutral-50 text-sm">
           <div className="px-3 py-1 font-normal rounded-2xl bg-neutral-800">

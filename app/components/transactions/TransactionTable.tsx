@@ -32,8 +32,9 @@ export default function TransactionTable({ accounts, transactions }: Props) {
     : orderedTransactions;
   return (
     <div className="mt-6 2xl:mt-14 w-full flex flex-col items-center gap-4">
-      {filteredTransactions.map((transaction) => (
+      {filteredTransactions.map((transaction, index) => (
         <Item
+          key={index}
           transaction={transaction}
           account={getAccount(transaction.account_id)}
         ></Item>
