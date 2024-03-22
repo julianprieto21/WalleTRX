@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import NavLinks from "./NavLinks";
 import { lang } from "../lib/const/string-en";
 import AppLogo from "@/public/app-logo-white.svg";
+import Link from "next/link";
 
 export function TopNav() {
   const [open, setOpen] = useState<boolean>(false);
@@ -24,11 +25,14 @@ export function TopNav() {
     >
       <section className="w-full flex flex-row justify-between items-center px-3 py-4">
         <div className="flex flex-row gap-2 items-center">
-          <img
-            src={AppLogo.src}
-            alt="Logo de la aplicación"
-            className="size-12"
-          ></img>
+          <Link href={"/"}>
+            <img
+              src={AppLogo.src}
+              alt="Logo de la aplicación"
+              className="size-12"
+            ></img>
+          </Link>
+          
           <h1 className="font-thin text-3xl">
             {title[0]}
             <span className="font-semibold ">{title[1]}</span>
