@@ -63,10 +63,10 @@ export function DeleteTransaction({ id }: { id: string }) {
   return (
     <form
       action={deleteTransactionWithId}
-      className="flex justify-center items-center border border-neutral-200 rounded shadow hover:shadow-none text-neutral-500 hover:text-neutral-700"
+      className="flex justify-center items-center text-neutral-300 hover:text-neutral-500"
     >
       <button type="submit" title="Delete Transaction">
-        <TrashIcon className="size-8 sm:size-10 2xl:size-12 px-2" />
+        <TrashIcon className="size-8 sm:size-10 2xl:size-12" />
       </button>
     </form>
   );
@@ -75,10 +75,10 @@ export function DeleteTransaction({ id }: { id: string }) {
 export function EditTransaction({ id }: { id: string }) {
   return (
     <Link
-      href={`/transactions/${id}/edit`}
-      className="flex justify-center items-center border border-neutral-200 rounded shadow hover:shadow-none text-neutral-500 hover:text-neutral-700"
+      href={`/transactions/edit/${id}`}
+      className="flex justify-center items-cente text-neutral-300 hover:text-neutral-5s00"
     >
-      <PencilIcon className="size-8 sm:size-10 2xl:size-12 px-2" />
+      <PencilIcon className="size-8 sm:size-10 2xl:size-12" />
     </Link>
   );
 }
