@@ -23,7 +23,7 @@ const CustomTooltip = ({
   if (active && payload && payload.length) {
     return (
       <div className="custom-tooltip">
-        <strong className="label">{formatDate({dateStr: label})}</strong>
+        <strong className="label">{formatDate({ dateStr: label })}</strong>
         <p className="desc">{formatBalance(payload[0].value, "auto")}</p>
       </div>
     );
@@ -37,8 +37,6 @@ export default function MonthChart({
 }: {
   transactions: Transaction[];
 }) {
-  const month = new Date().getMonth() + 1;
-  const year = new Date().getFullYear();
   const searchParams = useSearchParams();
   const accountId = searchParams.get("account");
   let filteredTransactions = transactions;
@@ -47,11 +45,7 @@ export default function MonthChart({
       (t) => t.account_id === accountId
     );
   }
-  const groupedTransactions = getBalanceByDay(
-    filteredTransactions,
-    month,
-    year
-  );
+  const groupedTransactions = getBalanceByDay(filteredTransactions);
 
   return (
     <div className="flex size-full">

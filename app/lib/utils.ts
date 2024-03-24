@@ -1,4 +1,4 @@
-import { Transaction } from "./types";
+import { Account, Transaction } from "./types";
 
 export function formatBalance(
   amount: number,
@@ -47,16 +47,22 @@ export function filterTransactionsByMonth(transactions: Transaction[]) {
 interface DateProps {
   dateStr: string;
   locale?: string;
-  day?: "numeric" | "2-digit" | 'undefined';
-  month?: "numeric" | "2-digit" | "long" | "short" | "narrow" | 'undefined',
-  year?: "numeric" | "2-digit" | 'undefined';
+  day?: "numeric" | "2-digit" | "undefined";
+  month?: "numeric" | "2-digit" | "long" | "short" | "narrow" | "undefined";
+  year?: "numeric" | "2-digit" | "undefined";
 }
-export const formatDate = ({dateStr, locale = 'en-US', day, month, year}: DateProps) => {
+export const formatDate = ({
+  dateStr,
+  locale = "en-US",
+  day,
+  month,
+  year,
+}: DateProps) => {
   const date = new Date(dateStr);
   const options: Intl.DateTimeFormatOptions = {
-    day: day === 'undefined' ? undefined : 'numeric',
-    month: month === 'undefined' ? undefined : 'short',
-    year: year === 'undefined' ? undefined : 'numeric',
+    day: day === "undefined" ? undefined : "numeric",
+    month: month === "undefined" ? undefined : "short",
+    year: year === "undefined" ? undefined : "numeric",
   };
   const formatter = new Intl.DateTimeFormat(locale, options);
   return formatter.format(date);
@@ -107,13 +113,8 @@ export function groupByMonth(transactions: Transaction[]) {
   return array;
 }
 
-export function getBalanceByDay(
-  transactions: Transaction[],
-  month: number,
-  year: number
-) {
+export function getBalanceByDay(transactions: Transaction[]) {
   let balance = 0;
-  const dayOfMonth = new Date(year, month, 0).getDate();
   const maxDays = 30;
   const dates = [];
   for (let i = maxDays - 1; i >= 0; i--) {
@@ -133,4 +134,24 @@ export function getBalanceByDay(
     };
   });
   return array;
+}
+
+export function groupByAccount(
+  accounts: Account[],
+  transactions: Transaction[]
+) {
+  const balanceByAccount = accounts.map((acc) => {
+    const registros = transactions.filter((t) => t.account_id === acc.id);
+    const incomeRegs = registros.filter((t) => t.type === "income");
+    const expenseRegs = registros.filter((t) => t.type === "expense");
+    const income = incomeRegs.reduce((acc, t) => acc + t.amount, 0);
+    const expense = expenseRegs.reduce((acc, t) => acc + t.amount, 0);
+    return {
+      account: acc,
+      income: income / 100,
+      expense: expense / 100,
+      history: registros,
+    };
+  });
+  return balanceByAccount;
 }

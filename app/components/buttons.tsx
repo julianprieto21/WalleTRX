@@ -82,3 +82,19 @@ export function EditTransaction({ id }: { id: string }) {
     </Link>
   );
 }
+
+export function CreateAccount() {
+  return (
+    <Link
+      href={`/accounts/create`}
+      className="rounded-lg relative w-full xl:w-1/4 h-10 flex items-center border border-green-500 bg-green-500 group hover:bg-green-500 active:bg-green-500 active:border-green-500"
+    >
+      <p className="text-neutral-50 font-semibold text-left pl-4 hover:hidden md:block md:text-sm lg:text-md xl:text-lg">
+        {lang.addAccountText}
+      </p>
+      <span className="absolute right-0 h-full w-10 rounded-lg bg-green-500 flex items-center justify-center transform group-hover:translate-x-0 group-hover:w-full transition-all duration-200">
+        <PlusIcon width={40} height={40} className="svg w-8 text-white" />
+      </span>
+    </Link>
+  );
+}

@@ -28,4 +28,5 @@ export const lang = {
   footerText: "Application made by Julian Prieto",
   accountSummaryText: "Accounts",
   balanceText: "Balance",
+  addAccountText: "Add Account"
 };
