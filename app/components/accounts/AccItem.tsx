@@ -28,7 +28,7 @@ export default function AccountItem({ account }: Props) {
               {account.account.name}
             </h1>
             <p className="w-full font-light text-neutral-500 text-md">
-              {formatBalance(account.income)}
+              {formatBalance(account.income + account.expense)}
             </p>
             <p className="w-full font-medium text-neutral-500">
               {account.account.currency}
