@@ -5,6 +5,7 @@ import { lang } from "@/app/lib/const/string-en";
 import { useState } from "react";
 import _ from "lodash";
 import { formatDate } from "@/app/lib/utils";
+import { Filter as FilterIcon, FilterSolid } from "iconoir-react";
 
 interface FilterProps {
   name: string;
@@ -27,21 +28,23 @@ function Filter({ name, options }: FilterProps) {
   };
   const handleChange = (value: string) => {};
   return (
-    <main className="mt-4">
+    <main className="relative mt-4">
       <button
         onClick={handleClick}
-        className={`w-48 px-4 py-1 rounded-xl border transition  ${
+        className={`relative w-48 px-4 py-1 rounded-xl border transition ${
           open
             ? "bg-yellow-100 text-yellow-400 border-yellow-300 font-medium"
             : "border-neutral-300 text-neutral-400 font-light"
         }`}
       >
+        <FilterIcon className={`absolute ${open ? "hidden" : "block"}`} />
+        <FilterSolid className={`absolute ${open ? "block" : "hidden"}`} />
         {_.capitalize(name)}
       </button>
       <div
         className={`${
           open ? "h-48" : "h-0"
-        }  w-48 transition-all mt-2 rounded bg-neutral-900 text-neutral-300 overflow-auto max-h-36`}
+        }  absolute w-48 transition-all mt-2 rounded bg-neutral-900 text-neutral-300 overflow-auto`}
       >
         <ul className="px-3 py-1 flex flex-col gap-1">
           <li key={0} className="flex flex-row gap-2">
