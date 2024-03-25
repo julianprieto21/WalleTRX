@@ -41,7 +41,7 @@ export default function AccountSummary({
       replace(`${pathName}?${params.toString()}`);
     }
   };
-  if (length === 0) {
+  if (balanceByAccount.length === 0) {
     return (
       <div className="size-full flex justify-center items-center text-neutral-500 text-center text-lg">
         <p>
