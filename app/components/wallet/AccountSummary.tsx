@@ -4,6 +4,7 @@ import { formatBalance } from "@/app/lib/utils";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { NavArrowRight } from "iconoir-react";
+import { lang } from "@/app/lib/const/string-en";
 
 export default function AccountSummary({
   accounts,
@@ -40,6 +41,18 @@ export default function AccountSummary({
       replace(`${pathName}?${params.toString()}`);
     }
   };
+  if (length === 0) {
+    return (
+      <div className="size-full flex justify-center items-center text-neutral-500 text-center text-lg">
+        <p>
+          {lang.noAccountMessage}
+          <Link href={"/accounts"} className="font-bold ">
+            {lang.accountsText}
+          </Link>
+        </p>
+      </div>
+    );
+  }
   return (
     <ul className="w-full h-full flex flex-col gap-2 overflow-y-auto overflow-x-clip">
       {balanceByAccount.map((acc, index) => {

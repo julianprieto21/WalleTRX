@@ -4,6 +4,8 @@ export const lang = {
   transactionsText: "Transactions",
   investmentsText: "Investments",
   dashboardText: "Dashboard",
+  accountsText: "Accounts",
+  settingsText: "Settings",
   hiText: "Hi",
   addTransactionText: "Add Transaction",
   editTransactionText: "Edit Transaction",
@@ -28,5 +30,6 @@ export const lang = {
   footerText: "Application made by Julian Prieto",
   accountSummaryText: "Accounts",
   balanceText: "Balance",
-  addAccountText: "Add Account"
+  addAccountText: "Add Account",
+  noAccountMessage: "You don't have any account yet, create one in ",
 };

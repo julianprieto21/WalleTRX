@@ -24,8 +24,8 @@ const mainLinks = [
     icon: GraphUp,
   },
   { name: `${lang.dashboardText}`, href: "/dashboard", icon: Reports },
-  { name: `${"Accounts"}`, href: "/accounts", icon: AppleWallet },
-  { name: `${"Settings"}`, href: "/settings", icon: Settings },
+  { name: `${lang.accountsText}`, href: "/accounts", icon: AppleWallet },
+  { name: `${lang.settingsText}`, href: "/settings", icon: Settings },
 ];
 
 export default function NavLinks({ isLogIn }: { isLogIn: boolean }) {
