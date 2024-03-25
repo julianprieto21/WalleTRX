@@ -1,11 +1,11 @@
 "use client";
 import { Transaction } from "@/app/lib/types";
 import {
-  ArrowDownTrayIcon,
-  ArrowUpTrayIcon,
-  ArrowsRightLeftIcon,
-  ChevronDownIcon,
-} from "@heroicons/react/24/outline";
+  DataTransferBoth,
+  Download,
+  NavArrowDown,
+  Upload,
+} from "iconoir-react";
 import _ from "lodash";
 import { useEffect, useState } from "react";
 
@@ -30,7 +30,7 @@ export function TypeInput({ type }: { type?: string | null }) {
         htmlFor="income"
         className="flex flex-col lg:flex-row lg:gap-2 justify-center items-center text-neutral-300 peer-checked/income:font-medium peer-checked/income:bg-green-200 peer-checked/income:text-green-500 peer-checked/income:border-green-300 cursor-pointer w-1/5 text-center p-2 lg:p-3 lg:text-lg rounded-lg border"
       >
-        <ArrowDownTrayIcon className="size-8" />
+        <Download className="size-8" />
         <h1 className="hidden md:block">Income</h1>
       </label>
 
@@ -48,7 +48,7 @@ export function TypeInput({ type }: { type?: string | null }) {
         htmlFor="expense"
         className="flex flex-col lg:flex-row lg:gap-2 justify-center items-center text-neutral-300 peer-checked/expense:font-medium peer-checked/expense:bg-red-200 peer-checked/expense:text-red-500 peer-checked/expense:border-red-300 cursor-pointer w-1/5 text-center p-2 lg:p-3 lg:text-lg rounded-lg border"
       >
-        <ArrowUpTrayIcon className="size-8" />
+        <Upload className="size-8" />
         <h1 className="hidden md:block">Expense</h1>
       </label>
 
@@ -66,7 +66,7 @@ export function TypeInput({ type }: { type?: string | null }) {
         htmlFor="transfer"
         className="flex flex-col lg:flex-row lg:gap-2 justify-center items-center text-neutral-300 peer-checked/transfer:font-medium peer-checked/transfer:bg-violet-200 peer-checked/transfer:text-violet-500 peer-checked/transfer:border-violet-300 cursor-pointer w-1/5 text-center p-2 lg:p-3 lg:text-lg rounded-lg border"
       >
-        <ArrowsRightLeftIcon className="size-8" />
+        <DataTransferBoth className="rotate-90 size-8" />
         <h1 className="hidden md:block">Transfer</h1>
       </label>
     </fieldset>
@@ -132,7 +132,7 @@ export function Selector({
         <h1 className={`${textButton ? "text-neutral-700 font-normal" : ""}`}>
           {textButton ? textButton : text}
         </h1>
-        <ChevronDownIcon
+        <NavArrowDown
           className={`${open ? "rotate-180" : ""} transition size-8`}
         />
       </button>

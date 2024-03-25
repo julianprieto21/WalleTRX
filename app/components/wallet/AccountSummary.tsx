@@ -2,8 +2,8 @@
 import { Account, Transaction } from "@/app/lib/types";
 import { formatBalance } from "@/app/lib/utils";
 import Link from "next/link";
-import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { NavArrowRight } from "iconoir-react";
 
 export default function AccountSummary({
   accounts,
@@ -66,7 +66,9 @@ export default function AccountSummary({
                   className="size-3 sm:size-5 rounded-full"
                   style={{ backgroundColor: acc.account.color }}
                 ></span>
-                <h1 className="text-md xl:text-lg 2xl:text-xl">{acc.account.name}</h1>
+                <h1 className="text-md xl:text-lg 2xl:text-xl">
+                  {acc.account.name}
+                </h1>
               </div>
 
               <div className="flex flex-row justify-center items-center gap-4">
@@ -79,7 +81,7 @@ export default function AccountSummary({
               href={`/accounts/${acc.account.id}`}
               className="w-[66px] h-full flex justify-center items-center text-neutral-400 hover:translate-x-1 transition hover:text-neutral-800"
             >
-              <ChevronRightIcon className="size-8" />
+              <NavArrowRight className="size-8" />
             </Link>
           </li>
         );

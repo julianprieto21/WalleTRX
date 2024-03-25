@@ -1,13 +1,7 @@
-import {
-  XMarkIcon,
-  CheckIcon,
-  PencilIcon,
-  PlusIcon,
-  TrashIcon,
-} from "@heroicons/react/24/outline";
 import { lang } from "@/app/lib/const/string-en";
 import { deleteTransaction } from "@/app/lib/actions";
 import Link from "next/link";
+import { Check, EditPencil, Plus, Trash, Xmark } from "iconoir-react";
 
 export function CloseButton() {
   return (
@@ -17,7 +11,7 @@ export function CloseButton() {
         title="Close"
         className="transition duration-75 rounded-full sm:shadow-sm sm:border hover:border-red-500 text-neutral-600 hover:bg-red-500 flex justify-center items-center hover:text-neutral-100 p-1 sm:px-2"
       >
-        <XMarkIcon className="size-10 sm:pr-2 sm:border-r" />
+        <Xmark className="size-10 sm:pr-2 sm:border-r" />
         <span className="hidden sm:block px-2 text-xl font-semibold">
           {lang.cancel}
         </span>
@@ -33,7 +27,7 @@ export function SubmitButton() {
       type="submit"
       className="transition duration-75 rounded-full sm:shadow-sm sm:border hover:border-green-500  text-neutral-600 hover:bg-green-500 flex justify-center items-center hover:text-neutral-100 p-1 sm:px-2"
     >
-      <CheckIcon className="size-10 sm:pr-2 sm:border-r" />
+      <Check className="size-10 sm:pr-2 sm:border-r" />
       <span className="hidden sm:block px-2 text-xl font-semibold">
         {lang.acceptText}
       </span>
@@ -47,12 +41,12 @@ export function CreateTransaction() {
       href={`/transactions/create`}
       className="rounded-lg relative md:w-[16rem] flex items-center border border-green-500 bg-green-500 group hover:bg-green-500 active:bg-green-500 active:border-green-500"
     >
-      <PlusIcon className="block md:hidden size-10 text-white" />
+      <Plus className="block md:hidden size-10 text-white" />
       <p className="text-neutral-50 font-semibold text-left pl-4 hover:hidden hidden md:block md:text-sm lg:text-md xl:text-lg">
         {lang.addTransactionText}
       </p>
       <span className="hidden absolute right-0 h-full w-10 rounded-lg bg-green-500 sm:flex items-center justify-center transform group-hover:translate-x-0 group-hover:w-full transition-all duration-200">
-        <PlusIcon width={40} height={40} className="svg w-8 text-white" />
+        <Plus width={40} height={40} className="svg w-8 text-white" />
       </span>
     </Link>
   );
@@ -66,7 +60,7 @@ export function DeleteTransaction({ id }: { id: string }) {
       className="flex justify-center items-center text-neutral-300 hover:text-neutral-500"
     >
       <button type="submit" title="Delete Transaction">
-        <TrashIcon className="size-8" />
+        <Trash className="size-8" />
       </button>
     </form>
   );
@@ -78,7 +72,7 @@ export function EditTransaction({ id }: { id: string }) {
       href={`/transactions/edit/${id}`}
       className="flex justify-center items-cente text-neutral-300 hover:text-neutral-500"
     >
-      <PencilIcon className="size-8" />
+      <EditPencil className="size-8" />
     </Link>
   );
 }
@@ -93,7 +87,7 @@ export function CreateAccount() {
         {lang.addAccountText}
       </p>
       <span className="absolute right-0 h-full w-10 rounded-lg bg-green-500 flex items-center justify-center transform group-hover:translate-x-0 group-hover:w-full transition-all duration-200">
-        <PlusIcon width={40} height={40} className="svg w-8 text-white" />
+        <Plus width={40} height={40} className="svg w-8 text-white" />
       </span>
     </Link>
   );

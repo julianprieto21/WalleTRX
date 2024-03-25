@@ -1,11 +1,8 @@
 import { Account, Transaction } from "@/app/lib/types";
 import { formatBalance } from "@/app/lib/utils";
 import { CATEGORIES } from "@/app/lib/const/categories";
-import {
-  ArrowDownTrayIcon,
-  ArrowUpTrayIcon,
-} from "@heroicons/react/24/outline";
 import { DeleteTransaction, EditTransaction } from "../buttons";
+import { Download, Upload } from "iconoir-react";
 
 interface Props {
   transaction: Transaction;
@@ -18,13 +15,13 @@ export default function Item({ transaction, account }: Props) {
   );
   const icon =
     transaction.type === "income" ? (
-      <ArrowDownTrayIcon className="size-5 text-neutral-50" />
+      <Download className="size-5 text-neutral-50" />
     ) : (
-      <ArrowUpTrayIcon className="size-5 text-neutral-50" />
+      <Upload className="size-5 text-neutral-50" />
     );
   const bgColor = transaction.type === "income" ? "bg-green-500" : "bg-red-500";
   return (
-  <main className="mx-auto justify-between w-full flex flex-row px-4 py-4 bg-neutral-100 rounded-3xl shadow-sm">
+    <main className="mx-auto justify-between w-full flex flex-row px-4 py-4 bg-neutral-100 rounded-3xl shadow-sm">
       <section className="flex flex-col gap-3">
         <section className="flex flex-row gap-4 justify-start text-neutral-50 text-sm">
           <div className="px-3 py-1 font-normal rounded-2xl bg-neutral-800">

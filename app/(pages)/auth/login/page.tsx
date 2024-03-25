@@ -1,4 +1,3 @@
-import Separator from "@/app/components/HLine";
 import LoginForm from "@/app/components/login/LoginForm";
 
 export default function LoginPage() {

@@ -4,8 +4,6 @@ import { CATEGORIES } from "@/app/lib/const/categories";
 import { lang } from "@/app/lib/const/string-en";
 import { useState } from "react";
 import _ from "lodash";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { isDate } from "util/types";
 import { formatDate } from "@/app/lib/utils";
 
 interface FilterProps {

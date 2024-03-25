@@ -1,6 +1,5 @@
 "use client";
-
-import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import { Search } from "iconoir-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useDebouncedCallback } from "use-debounce";
 
@@ -27,7 +26,7 @@ export default function SearchBar({ placeholder }: { placeholder: string }) {
         placeholder={placeholder}
         onChange={(e) => handleSearch(e.target.value)}
       />
-      <MagnifyingGlassIcon className="absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
+      <Search className="absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
     </div>
   );
 }

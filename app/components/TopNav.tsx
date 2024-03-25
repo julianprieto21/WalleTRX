@@ -1,10 +1,9 @@
 "use client";
-import { Bars3Icon } from "@heroicons/react/24/outline";
 import { useEffect, useState } from "react";
 import NavLinks from "./NavLinks";
 import { lang } from "../lib/const/string-en";
-import AppLogo from "@/public/app-logo-white.svg";
 import Link from "next/link";
+import { Menu, WalletSolid } from "iconoir-react";
 
 export function TopNav() {
   const [open, setOpen] = useState<boolean>(false);
@@ -26,20 +25,16 @@ export function TopNav() {
       <section className="w-full flex flex-row justify-between items-center px-3 py-4">
         <div className="flex flex-row gap-2 items-center">
           <Link href={"/"}>
-            <img
-              src={AppLogo.src}
-              alt="Logo de la aplicación"
-              className="size-12"
-            ></img>
+            <WalletSolid className="size-12" />
           </Link>
-          
+
           <h1 className="font-thin text-3xl">
             {title[0]}
             <span className="font-semibold ">{title[1]}</span>
           </h1>
         </div>
 
-        <Bars3Icon className="size-12" onClick={handleClick} />
+        <Menu className="size-12" onClick={handleClick} />
       </section>
 
       <section

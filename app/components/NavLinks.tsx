@@ -1,33 +1,31 @@
 "use client";
-
-import {
-  WalletIcon,
-  BanknotesIcon,
-  ChartBarIcon,
-  ArrowTrendingUpIcon,
-  Cog6ToothIcon,
-  RectangleStackIcon,
-} from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { lang } from "@/app/lib/const/string-en";
-import HLine from "./HLine";
+import {
+  AppleWallet,
+  GraphUp,
+  Home,
+  Notes,
+  Reports,
+  Settings,
+} from "iconoir-react";
 
 const mainLinks = [
-  { name: `${lang.homeText}`, href: "/", icon: WalletIcon },
+  { name: `${lang.homeText}`, href: "/", icon: Home },
   {
     name: `${lang.transactionsText}`,
     href: "/transactions",
-    icon: BanknotesIcon,
+    icon: Notes,
   },
   {
     name: `${lang.investmentsText}`,
     href: "/investments",
-    icon: ArrowTrendingUpIcon,
+    icon: GraphUp,
   },
-  { name: `${lang.dashboardText}`, href: "/dashboard", icon: ChartBarIcon },
-  { name: `${"Accounts"}`, href: "/accounts", icon: RectangleStackIcon },
-  { name: `${"Settings"}`, href: "/settings", icon: Cog6ToothIcon },
+  { name: `${lang.dashboardText}`, href: "/dashboard", icon: Reports },
+  { name: `${"Accounts"}`, href: "/accounts", icon: AppleWallet },
+  { name: `${"Settings"}`, href: "/settings", icon: Settings },
 ];
 
 export default function NavLinks({ isLogIn }: { isLogIn: boolean }) {
@@ -46,7 +44,9 @@ export default function NavLinks({ isLogIn }: { isLogIn: boolean }) {
                 } ${isLogIn ? "cursor-pointer" : " cursor-not-allowed"}`}
           >
             <LinkIcon className="size-10 xl:size-6 2xl:size-7" />
-            <p className="block text-xl xl:text-sm 2xl:text-base sm:block">{link.name}</p>
+            <p className="block text-xl xl:text-sm 2xl:text-base sm:block">
+              {link.name}
+            </p>
           </Link>
         );
       })}
