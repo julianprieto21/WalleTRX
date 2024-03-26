@@ -20,7 +20,7 @@ interface Props {
 function Filter({ name, options }: FilterProps) {
   const [open, setOpen] = useState<boolean>(false);
   const [all, setAll] = useState<boolean>(true);
-  const handleClick = () => {
+  const handleMenu = () => {
     setOpen(!open);
   };
   const handleAllClick = () => {
@@ -30,7 +30,7 @@ function Filter({ name, options }: FilterProps) {
   return (
     <main className="relative mt-4">
       <button
-        onClick={handleClick}
+        onClick={handleMenu}
         className={`relative w-48 px-4 py-1 rounded-xl border transition ${
           open
             ? "bg-yellow-100 text-yellow-400 border-yellow-300 font-medium"
@@ -42,6 +42,7 @@ function Filter({ name, options }: FilterProps) {
         {_.capitalize(name)}
       </button>
       <div
+        onMouseLeave={handleMenu}
         className={`${
           open ? "h-48" : "h-0"
         }  absolute w-48 transition-all mt-2 rounded bg-neutral-900 text-neutral-300 overflow-auto`}
