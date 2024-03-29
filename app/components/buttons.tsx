@@ -1,6 +1,8 @@
 import { deleteTransaction } from "@/app/lib/actions";
 import Link from "next/link";
 import { Check, EditPencil, Plus, Trash, Xmark } from "iconoir-react";
+import { LogOut } from "../lib/actions";
+import { LogOut as LogOutIcon } from "iconoir-react";
 
 export function CloseButton({ text }: { text: string }) {
   return (
@@ -86,5 +88,20 @@ export function CreateAccount({ text }: { text: string }) {
         <Plus width={40} height={40} className="svg w-8 text-white" />
       </span>
     </Link>
+  );
+}
+
+export function LogOutButton({ text }: { text: string }) {
+  return (
+    <form action={LogOut}>
+      <button
+        title="Log Out"
+        type="submit"
+        className="flex h-[3rem] w-full grow items-center justify-start gap-2 text-neutral-400 text-md font-normal hover:bg-neutral-700 hover:text-red-500 sm:flex-none sm:justify-center lg:justify-start p-4 md:p-2 md:px-3"
+      >
+        <LogOutIcon className="size-6" />
+        <p className="block sm:hidden lg:block">{text}</p>
+      </button>
+    </form>
   );
 }

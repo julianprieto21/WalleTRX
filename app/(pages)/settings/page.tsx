@@ -1,4 +1,4 @@
-import { LogOutButton } from "@/app/components/SideNav";
+import { LogOutButton } from "@/app/components/buttons";
 import { getDictionary } from "@/app/lib/dictionaries";
 
 export default async function SettingsPage() {
