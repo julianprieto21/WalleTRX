@@ -22,7 +22,7 @@ export default async function AccountsPage() {
             { label: dict.menu.accounts, href: "/accounts", active: true },
           ]}
         />
-        <CreateAccount />
+        <CreateAccount text={dict.buttons.createAcc} />
         <section className="flex w-full flex-col justify-center xl:justify-start gap-4 mt-6">
           {balanceByAccounts.map((acc, index) => (
             <AccountItem key={index} account={acc} />
