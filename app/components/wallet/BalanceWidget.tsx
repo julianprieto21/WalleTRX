@@ -2,15 +2,14 @@
 import { Transaction } from "@/app/lib/types";
 import { formatBalance, getBalanceFromTransactions } from "../../lib/utils";
 import { useSearchParams } from "next/navigation";
-import { lang } from "@/app/lib/const/string-en";
-import { useState } from "react";
 
 export default function BalanceWidget({
   transactions,
+  dict,
 }: {
   transactions: Transaction[];
+  dict: any;
 }) {
-  const [hide, setHide] = useState<boolean>(false);
   const searchParams = useSearchParams();
   const accountId = searchParams.get("account");
   let filteredTransactions = transactions;
@@ -25,10 +24,14 @@ export default function BalanceWidget({
   const currency = "ARS";
   return (
     <main className="w-full sm:w-1/2 text-neutral-800 flex h-full items-start flex-col justify-end">
-      <p className="text-xl xl:text-4xl 2xl:text-5xl font-light">{lang.balanceText}:</p>
+      <p className="text-xl xl:text-4xl 2xl:text-5xl font-light">
+        {dict.balance}:
+      </p>
       <h1 className="text-4xl xl:text-7xl 2xl:text-8xl font-normal flex flex-row items-end gap-2 sm:gap-4">
-        {hide ? "..." : formattedBalance}
-        <p className="text-3xl xl:text-6xl 2xl:text-7xl font-light ">{currency}</p>
+        {formattedBalance}
+        <p className="text-3xl xl:text-6xl 2xl:text-7xl font-light ">
+          {currency}
+        </p>
       </h1>
     </main>
   );

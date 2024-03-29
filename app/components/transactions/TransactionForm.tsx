@@ -1,6 +1,5 @@
 // "use client";
 import { createTransaction, editTransaction } from "@/app/lib/actions";
-import { lang } from "@/app/lib/const/string-en";
 import { Account, Transaction } from "@/app/lib/types";
 import { Selector, TypeInput } from "./FormInputs";
 import { CloseButton, SubmitButton } from "../buttons";
@@ -11,9 +10,10 @@ interface Props {
   accounts: Account[];
   transaction?: Transaction;
   categories: any;
+  dict: any;
 }
 
-function FormSchema({ accounts, transaction, categories }: Props) {
+function FormSchema({ accounts, transaction, categories, dict }: Props) {
   const defaultDate = transaction
     ? new Date(transaction.created_at)
     : new Date();
@@ -23,7 +23,7 @@ function FormSchema({ accounts, transaction, categories }: Props) {
   const account = accounts.find((acc) => acc.id === transaction?.account_id);
   return (
     <main className="flex flex-col gap-6 px-2 py-4 md:gap-4 md:px-4 lg:gap-6">
-      <TypeInput type={transaction?.type} />
+      <TypeInput type={transaction?.type} dict={dict} />
       <input
         name="description"
         type="text"
@@ -37,13 +37,13 @@ function FormSchema({ accounts, transaction, categories }: Props) {
           list={accounts}
           transaction={transaction}
           inputId="account"
-          text="Select an account"
+          text={dict.input.selector.account}
         />
         <Selector
           list={categories}
           transaction={transaction}
           inputId="category"
-          text="Select a category"
+          text={dict.input.selector.category}
         />
         <div className="w-2/5 md:w-auto flex justify-center items-center gap-2 select-none">
           <input
@@ -56,7 +56,7 @@ function FormSchema({ accounts, transaction, categories }: Props) {
             htmlFor="recurrent"
             className="w-full md:w-auto text-center cursor-pointer border px-2 py-1 rounded-md text-neutral-300 peer-checked:text-sky-500 peer-checked:border-sky-400 peer-checked:bg-sky-200"
           >
-            {lang.recurrent}
+            {dict.input.recurrent}
           </label>
         </div>
       </section>
@@ -66,7 +66,7 @@ function FormSchema({ accounts, transaction, categories }: Props) {
           name="amount"
           title="Amount"
           type="text"
-          placeholder="Amount"
+          placeholder={dict.input.amount}
           defaultValue={amount}
           required
         ></input>
@@ -80,8 +80,8 @@ function FormSchema({ accounts, transaction, categories }: Props) {
         ></input>
       </section>
       <footer className="flex flex-row justify-between sm:justify-end gap-4 px-2">
-        <CloseButton />
-        <SubmitButton />
+        <CloseButton text={dict.buttons.cancel} />
+        <SubmitButton text={dict.buttons.confirm} />
       </footer>
     </main>
   );
@@ -92,6 +92,7 @@ export default function TransactionForm({
   accounts,
   transaction,
   categories,
+  dict,
 }: Props) {
   switch (action) {
     case "create":
@@ -100,7 +101,7 @@ export default function TransactionForm({
           action={createTransaction}
           className="w-full bg-neutral-100 rounded-lg shadow-md"
         >
-          <FormSchema accounts={accounts} categories={categories} />
+          <FormSchema accounts={accounts} categories={categories} dict={dict} />
         </form>
       );
     case "edit":
@@ -115,6 +116,7 @@ export default function TransactionForm({
             transaction={transaction}
             accounts={accounts}
             categories={categories}
+            dict={dict}
           />
         </form>
       );

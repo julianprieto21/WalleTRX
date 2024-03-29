@@ -1,0 +1,57 @@
+{
+  "menu": {
+    "home": "Inicio",
+    "transactions": "Transacciones",
+    "investments": "Inversiones",
+    "dashboard": "Tablero",
+    "accounts": "Cuentas",
+    "settings": "Ajustes"
+  },
+  "actions": {
+    "create": "Crear",
+    "edit": "Editar",
+    "delete": "Borrar"
+  },
+  "auth": {
+    "login": "Iniciar sesión",
+    "secondaryLogin": "Log with social accounts",
+    "logout": "Cerrar sesión"
+  },
+  "filters": {
+    "account": "Cuenta",
+    "category": "Categoría",
+    "date": "Fecha",
+    "month": "Mes"
+  },
+  "income": "Ingreso",
+  "expense": "Gasto",
+  "transfer": "Transferencia",
+  "input": {
+    "selector": {
+      "all": "Todo",
+      "account": "Seleccionar cuenta",
+      "category": "Seleccionar categoría"
+    },
+    "amount": "Monto",
+    "description": "Descripción",
+    "recurrent": "Recurrente"
+  },
+  "messages": {
+    "noAccounts": "Aun no existen cuentas. Crea un en "
+  },
+  "balance": "Saldo",
+  "mainTitle": "Hola",
+  "buttons": {
+    "cancel": "Cancelar",
+    "confirm": "Confirmar",
+    "createTrx": "Crear transacción",
+    "createAcc": "Crear cuenta",
+    "searchTrx": "Buscar transacciones..."
+  },
+  "cards": {
+    "accountSummary": "Resumen de cuentas",
+    "monthChart": "Gráfico mensual"
+  },
+  "app": "WALLE&TRX",
+  "footer": "Aplicación creada por Julian Prieto"
+}

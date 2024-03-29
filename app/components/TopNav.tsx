@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
 import NavLinks from "./NavLinks";
-import { lang } from "../lib/const/string-en";
 import Link from "next/link";
 import { Menu, WalletSolid } from "iconoir-react";
 
@@ -16,7 +15,7 @@ export function TopNav() {
     const screenHeight = window.innerHeight;
     setMaxHeight(screenHeight - navbarHeight);
   });
-  const title = lang.appNameText.split("&");
+  const title = "WALLE&TRX".split("&");
   return (
     <nav
       id="top-nav"
@@ -44,7 +43,19 @@ export function TopNav() {
         onClick={handleClick}
         style={{ maxHeight: `${maxHeight}px` }}
       >
-        <NavLinks isLogIn={false} />
+        <NavLinks
+          isLogIn={false}
+          dict={{
+            menu: {
+              home: "Inicio",
+              transactions: "Transacciones",
+              investments: "Inversiones",
+              dashboard: "Tablero",
+              accounts: "Cuentas",
+              settings: "Ajustes",
+            },
+          }}
+        />
       </section>
     </nav>
   );

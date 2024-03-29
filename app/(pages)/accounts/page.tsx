@@ -1,12 +1,14 @@
 import Breadcrumbs from "@/app/components/Breadcrumbs";
 import AccountItem from "@/app/components/accounts/AccItem";
 import { CreateAccount } from "@/app/components/buttons";
+import { getDictionary } from "@/app/lib/dictionaries";
 import { fetchData } from "@/app/lib/fetch";
 import { groupByAccount } from "@/app/lib/utils";
 import { auth } from "@/auth";
 
 export default async function AccountsPage() {
   const session = await auth();
+  const dict = await getDictionary("es");
   if (!session?.user?.email) {
     return new Error("No se pudo recuperar los datos de sesion");
   } else {
@@ -16,8 +18,8 @@ export default async function AccountsPage() {
       <main className="mt-20 sm:mt-0 bg-neutral-200 flex flex-col justify-start items-start px-4 sm:px-12 py-10 sm:pb-10 sm:pt-16 overflow-auto flex-1">
         <Breadcrumbs
           breadcrumbs={[
-            { label: "Home", href: "/" },
-            { label: "Accounts", href: "/accounts", active: true },
+            { label: dict.menu.home, href: "/" },
+            { label: dict.menu.accounts, href: "/accounts", active: true },
           ]}
         />
         <CreateAccount />

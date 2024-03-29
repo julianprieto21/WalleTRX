@@ -1,6 +1,7 @@
 import Breadcrumbs from "@/app/components/Breadcrumbs";
 import TransactionForm from "@/app/components/transactions/TransactionForm";
 import { CATEGORIES } from "@/app/lib/const/categories";
+import { getDictionary } from "@/app/lib/dictionaries";
 import {
   fetchTransactionFromId,
   fetchAccountsFromWallet,
@@ -14,6 +15,7 @@ interface Props {
 }
 
 export default async function EditPage({ params }: Props) {
+  const dict = await getDictionary("es");
   const transactionID = params.id;
   const client = await db.connect();
   const transaction = await fetchTransactionFromId(client, transactionID);
@@ -22,10 +24,10 @@ export default async function EditPage({ params }: Props) {
     <main className="mt-20 sm:mt-0 bg-neutral-200 flex flex-col justify-start items-start px-4 sm:px-12 py-10 sm:pb-10 sm:pt-16 overflow-auto flex-1">
       <Breadcrumbs
         breadcrumbs={[
-          { label: "Home", href: "/" },
-          { label: "Transactions", href: "/transactions" },
+          { label: dict.menu.home, href: "/" },
+          { label: dict.menu.transactions, href: "/transactions" },
           {
-            label: "Edit",
+            label: dict.actions.edit,
             href: `/transactions/${transactionID}edit`,
             active: true,
           },
@@ -36,6 +38,7 @@ export default async function EditPage({ params }: Props) {
         transaction={transaction}
         accounts={accounts}
         categories={CATEGORIES}
+        dict={dict}
       />
     </main>
   );

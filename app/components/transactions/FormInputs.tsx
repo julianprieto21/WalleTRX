@@ -9,7 +9,7 @@ import {
 import _ from "lodash";
 import { useEffect, useState } from "react";
 
-export function TypeInput({ type }: { type?: string | null }) {
+export function TypeInput({ type, dict }: { type?: string | null; dict: any }) {
   let incomeSelected = type === "income" ? true : false;
   let expenseSelected = type === "expense" ? true : false;
   let transferSelected = type === "transfer" ? true : false;
@@ -31,7 +31,7 @@ export function TypeInput({ type }: { type?: string | null }) {
         className="flex flex-col lg:flex-row lg:gap-2 justify-center items-center text-neutral-300 peer-checked/income:font-medium peer-checked/income:bg-green-200 peer-checked/income:text-green-500 peer-checked/income:border-green-300 cursor-pointer w-1/5 text-center p-2 lg:p-3 lg:text-lg rounded-lg border"
       >
         <Download className="size-8" />
-        <h1 className="hidden md:block">Income</h1>
+        <h1 className="hidden md:block">{dict.income}</h1>
       </label>
 
       <input
@@ -49,7 +49,7 @@ export function TypeInput({ type }: { type?: string | null }) {
         className="flex flex-col lg:flex-row lg:gap-2 justify-center items-center text-neutral-300 peer-checked/expense:font-medium peer-checked/expense:bg-red-200 peer-checked/expense:text-red-500 peer-checked/expense:border-red-300 cursor-pointer w-1/5 text-center p-2 lg:p-3 lg:text-lg rounded-lg border"
       >
         <Upload className="size-8" />
-        <h1 className="hidden md:block">Expense</h1>
+        <h1 className="hidden md:block">{dict.expense}</h1>
       </label>
 
       <input
@@ -67,7 +67,7 @@ export function TypeInput({ type }: { type?: string | null }) {
         className="flex flex-col lg:flex-row lg:gap-2 justify-center items-center text-neutral-300 peer-checked/transfer:font-medium peer-checked/transfer:bg-violet-200 peer-checked/transfer:text-violet-500 peer-checked/transfer:border-violet-300 cursor-pointer w-1/5 text-center p-2 lg:p-3 lg:text-lg rounded-lg border"
       >
         <DataTransferBoth className="rotate-90 size-8" />
-        <h1 className="hidden md:block">Transfer</h1>
+        <h1 className="hidden md:block">{dict.transfer}</h1>
       </label>
     </fieldset>
   );

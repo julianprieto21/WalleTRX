@@ -1,5 +1,4 @@
 "use client";
-import { lang } from "@/app/lib/const/string-en";
 import { Transaction } from "@/app/lib/types";
 import { formatBalance, getBalanceFromTransactions } from "@/app/lib/utils";
 import Link from "next/link";
@@ -11,7 +10,6 @@ function TransferButton() {
   return (
     <>
       <Link
-        title={lang.transferText}
         href={"transactions/create"} //?type=transfer"}
         className="flex rounded-3xl justify-center items-center bg-neutral-100 border hover:bg-violet-600 text-violet-700 hover:text-neutral-100 transition ease-in-out delay-10 p-2"
       >
@@ -32,7 +30,6 @@ function IncomeButton({ income }: { income: number }) {
       </div>
 
       <Link
-        title={lang.incomeText}
         href={`/transactions/create`} //?type=income`}
         className="px-2 sm:pr-3 h-[100%] flex justify-center items-center py-2 rounded-3xl sm:rounded-s-none text-green-600 hover:bg-green-600/80 hover:text-neutral-200 transition ease-in-out delay-10"
       >
@@ -47,7 +44,6 @@ function ExpenseButton({ expense }: { expense: number }) {
   return (
     <div className="xl:w-2/6 2xl:w-2/5 flex rounded-3xl justify-between items-center bg-neutral-100">
       <Link
-        title={lang.expenseText}
         href={`/transactions/create`} //?type=expense`}
         className="px-2 sm:pl-3 h-[100%] flex justify-center items-center py-2 rounded-3xl sm:rounded-e-none text-red-500 hover:bg-red-600/90 hover:text-neutral-200 transition ease-in-out delay-10"
       >

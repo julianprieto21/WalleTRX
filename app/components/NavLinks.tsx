@@ -1,7 +1,6 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { lang } from "@/app/lib/const/string-en";
 import {
   AppleWallet,
   GraphUp,
@@ -11,25 +10,30 @@ import {
   Settings,
 } from "iconoir-react";
 
-const mainLinks = [
-  { name: `${lang.homeText}`, href: "/", icon: Home },
-  {
-    name: `${lang.transactionsText}`,
-    href: "/transactions",
-    icon: Notes,
-  },
-  {
-    name: `${lang.investmentsText}`,
-    href: "/investments",
-    icon: GraphUp,
-  },
-  { name: `${lang.dashboardText}`, href: "/dashboard", icon: Reports },
-  { name: `${lang.accountsText}`, href: "/accounts", icon: AppleWallet },
-  { name: `${lang.settingsText}`, href: "/settings", icon: Settings },
-];
-
-export default function NavLinks({ isLogIn }: { isLogIn: boolean }) {
+export default function NavLinks({
+  isLogIn,
+  dict,
+}: {
+  isLogIn: boolean;
+  dict: any;
+}) {
   const pathName = usePathname();
+  const mainLinks = [
+    { name: dict.menu.home, href: "/", icon: Home },
+    {
+      name: dict.menu.transactions,
+      href: "/transactions",
+      icon: Notes,
+    },
+    {
+      name: dict.menu.investments,
+      href: "/investments",
+      icon: GraphUp,
+    },
+    { name: dict.menu.dashboard, href: "/dashboard", icon: Reports },
+    { name: dict.menu.accounts, href: "/accounts", icon: AppleWallet },
+    { name: dict.menu.settings, href: "/settings", icon: Settings },
+  ];
   return (
     <>
       {mainLinks.map((link) => {

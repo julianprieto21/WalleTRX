@@ -1,7 +1,6 @@
 "use client";
 import { Account, Transaction } from "@/app/lib/types";
 import { CATEGORIES } from "@/app/lib/const/categories";
-import { lang } from "@/app/lib/const/string-en";
 import { useState } from "react";
 import _ from "lodash";
 import { formatDate } from "@/app/lib/utils";
@@ -10,14 +9,16 @@ import { Filter as FilterIcon, FilterSolid } from "iconoir-react";
 interface FilterProps {
   name: string;
   options: any[];
+  allText: string;
 }
 
 interface Props {
   accounts: Account[];
   transactions: Transaction[];
+  dict: any;
 }
 
-function Filter({ name, options }: FilterProps) {
+function Filter({ name, options, allText }: FilterProps) {
   const [open, setOpen] = useState<boolean>(false);
   const [all, setAll] = useState<boolean>(true);
   const handleMenu = () => {
@@ -56,7 +57,7 @@ function Filter({ name, options }: FilterProps) {
               onChange={handleAllClick}
               defaultChecked
             ></input>
-            <label htmlFor="all">{lang.allText}</label>
+            <label htmlFor="all">{allText}</label>
           </li>
           {options.map((option, index) => (
             <li key={index} className="flex flex-row gap-2">
@@ -76,7 +77,7 @@ function Filter({ name, options }: FilterProps) {
   );
 }
 
-export default function Filters({ accounts, transactions }: Props) {
+export default function Filters({ accounts, transactions, dict }: Props) {
   const dates = _.uniq(
     transactions
       .map((transaction) =>
@@ -100,10 +101,26 @@ export default function Filters({ accounts, transactions }: Props) {
   });
   return (
     <main className="hidden xl:flex flex-row gap-4 justify-start items-start w-full">
-      <Filter name="account" options={accounts} />
-      <Filter name="category" options={CATEGORIES} />
-      <Filter name="date" options={dates} />
-      <Filter name="month" options={months} />
+      <Filter
+        name={dict.filters.account}
+        options={accounts}
+        allText={dict.input.selector.all}
+      />
+      <Filter
+        name={dict.filters.category}
+        options={CATEGORIES}
+        allText={dict.input.selector.all}
+      />
+      <Filter
+        name={dict.filters.date}
+        options={dates}
+        allText={dict.input.selector.all}
+      />
+      <Filter
+        name={dict.filters.month}
+        options={months}
+        allText={dict.input.selector.all}
+      />
     </main>
   );
 }

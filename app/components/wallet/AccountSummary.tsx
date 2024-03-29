@@ -4,14 +4,15 @@ import { formatBalance } from "@/app/lib/utils";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { NavArrowRight } from "iconoir-react";
-import { lang } from "@/app/lib/const/string-en";
 
 export default function AccountSummary({
   accounts,
   transactions,
+  dict,
 }: {
   accounts: Account[];
   transactions: Transaction[];
+  dict: any;
 }) {
   const balanceByAccount = accounts.map((acc) => {
     const registros = transactions.filter((t) => t.account_id === acc.id);
@@ -45,9 +46,9 @@ export default function AccountSummary({
     return (
       <div className="size-full flex justify-center items-center text-neutral-500 text-center text-lg">
         <p>
-          {lang.noAccountMessage}
+          {dict.messages.noAccounts}
           <Link href={"/accounts"} className="font-bold ">
-            {lang.accountsText}
+            {dict.menu.accounts}
           </Link>
         </p>
       </div>
@@ -68,6 +69,7 @@ export default function AccountSummary({
               type="radio"
               className="peer hidden"
               checked={acc.account.id === searchParams.get("account")}
+              onChange={() => {}}
             ></input>
             <label
               htmlFor={acc.account.id}
