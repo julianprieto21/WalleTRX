@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Providers } from "./components/Providers";
-import SideNav from "./components/SideNav";
-import { TopNav } from "./components/TopNav";
+import { SideNav, TopNav } from "./components/Nav";
 
 export const metadata: Metadata = {
   title: "WalleTRX",
-  description: "Web application for keep track of personal finances. Created by Julian Prieto",
+  description:
+    "Web application for keep track of personal finances. Created by Julian Prieto",
 };
 
 export default function RootLayout({
