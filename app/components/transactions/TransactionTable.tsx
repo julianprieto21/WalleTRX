@@ -27,7 +27,7 @@ export default function TransactionTable({ accounts, transactions }: Props) {
       )
     : orderedTransactions;
   return (
-    <div className="mt-6 2xl:mt-10 w-full flex flex-col items-center gap-4">
+    <div className="mt-4 2xl:mt-10 w-full flex flex-col items-center gap-4">
       {filteredTransactions.map((transaction) => (
         <Item
           key={transaction.id}

@@ -4,7 +4,7 @@ import { CATEGORIES } from "@/app/lib/const/categories";
 import { useState } from "react";
 import _ from "lodash";
 import { formatDate } from "@/app/lib/utils";
-import { Filter as FilterIcon, FilterSolid } from "iconoir-react";
+import { Filter as FilterIcon, FilterSolid, NavArrowDown } from "iconoir-react";
 
 interface FilterProps {
   name: string;
@@ -27,8 +27,9 @@ function Filter({ name, options, allText }: FilterProps) {
   return (
     <main onMouseEnter={handleMenu} onMouseLeave={handleMenu}>
       <button
+        onClick={handleMenu}
         type="button"
-        className={`relative w-48 px-4 py-1 rounded-xl border transition ${
+        className={`relative w-40 sm:w-48 px-4 py-1 rounded-xl border transition ${
           open
             ? "bg-palette-500 text-palette-300 border-palette-400 font-medium"
             : "border-palette-250 text-palette-200 font-light"
@@ -41,7 +42,7 @@ function Filter({ name, options, allText }: FilterProps) {
       <div
         className={`${
           open ? "h-48" : "h-0"
-        }  absolute w-48 transition-all mt-2 rounded bg-neutral-900 text-neutral-300 overflow-auto`}
+        }  z-10 absolute w-40 sm:w-48 transition-all mt-2 rounded bg-neutral-900 text-neutral-300 overflow-auto`}
       >
         <ul className="px-3 py-1 flex flex-col gap-1">
           {options.map((option, index) => (
@@ -86,29 +87,43 @@ export default function Filters({ accounts, transactions, dict }: Props) {
     return new Date(b).getTime() - new Date(a).getTime();
   });
   return (
-    <main
-      className={`mt-4 hidden xl:flex flex-row gap-4 justify-center items-center w-auto`}
-    >
-      <Filter
-        name={dict.filters.account}
-        options={accounts}
-        allText={dict.input.selector.all}
-      />
-      <Filter
-        name={dict.filters.category}
-        options={CATEGORIES}
-        allText={dict.input.selector.all}
-      />
-      <Filter
-        name={dict.filters.date}
-        options={dates}
-        allText={dict.input.selector.all}
-      />
-      <Filter
-        name={dict.filters.month}
-        options={months}
-        allText={dict.input.selector.all}
-      />
-    </main>
+    <>
+      <main
+        className={`mt-4 grid grid-cols-2 mx-auto sm:mx-0 sm:flex flex-row gap-4 justify-center items-center w-auto ${
+          open ? "grid" : "hidden"
+        }`}
+      >
+        <Filter
+          name={dict.filters.account}
+          options={accounts}
+          allText={dict.input.selector.all}
+        />
+        <Filter
+          name={dict.filters.category}
+          options={CATEGORIES}
+          allText={dict.input.selector.all}
+        />
+        <Filter
+          name={dict.filters.date}
+          options={dates}
+          allText={dict.input.selector.all}
+        />
+        <Filter
+          name={dict.filters.month}
+          options={months}
+          allText={dict.input.selector.all}
+        />
+      </main>
+      <button
+        title="Show filters"
+        type="button"
+        className="mx-auto mt-1 sm:hidden text-palette-100"
+        onClick={() => setOpen(!open)}
+      >
+        <NavArrowDown
+          className={`size-10 transition ${open ? "rotate-180" : ""}`}
+        />
+      </button>
+    </>
   );
 }
