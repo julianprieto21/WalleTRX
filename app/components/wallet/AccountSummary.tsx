@@ -94,7 +94,7 @@ export default function AccountSummary({
             </label>
             <Link
               href={`/accounts/${acc.account.id}`}
-              className="w-[66px] h-full flex justify-center items-center text-palette-200 hover:translate-x-1 transition hover:text-palette-500"
+              className="h-full flex justify-center items-center text-palette-200 hover:translate-x-1 transition hover:text-palette-500"
             >
               <NavArrowRight className="size-8" />
             </Link>
