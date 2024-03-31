@@ -25,11 +25,15 @@ function Filter({ name, options, allText }: FilterProps) {
   };
   const handleChange = (value: string) => {};
   return (
-    <main onMouseEnter={handleMenu} onMouseLeave={handleMenu}>
+    <main
+      className="relative"
+      onMouseEnter={handleMenu}
+      onMouseLeave={handleMenu}
+    >
       <button
         onClick={handleMenu}
         type="button"
-        className={`relative w-40 sm:w-48 px-4 py-1 rounded-xl border transition ${
+        className={`w-40 sm:w-48 px-4 py-1 rounded-xl border transition ${
           open
             ? "bg-palette-500 text-palette-300 border-palette-400 font-medium"
             : "border-palette-250 text-palette-200 font-light"
