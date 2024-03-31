@@ -20,18 +20,14 @@ interface Props {
 
 function Filter({ name, options, allText }: FilterProps) {
   const [open, setOpen] = useState<boolean>(false);
-  const [all, setAll] = useState<boolean>(true);
   const handleMenu = () => {
     setOpen(!open);
   };
-  const handleAllClick = () => {
-    setAll(!all);
-  };
   const handleChange = (value: string) => {};
   return (
-    <main className="relative mt-4">
+    <main onMouseEnter={handleMenu} onMouseLeave={handleMenu}>
       <button
-        onClick={handleMenu}
+        type="button"
         className={`relative w-48 px-4 py-1 rounded-xl border transition ${
           open
             ? "bg-palette-500 text-palette-300 border-palette-400 font-medium"
@@ -43,22 +39,11 @@ function Filter({ name, options, allText }: FilterProps) {
         {_.capitalize(name)}
       </button>
       <div
-        onMouseLeave={handleMenu}
         className={`${
           open ? "h-48" : "h-0"
         }  absolute w-48 transition-all mt-2 rounded bg-neutral-900 text-neutral-300 overflow-auto`}
       >
         <ul className="px-3 py-1 flex flex-col gap-1">
-          <li key={0} className="flex flex-row gap-2">
-            <input
-              name="all"
-              id={name}
-              type="checkbox"
-              onChange={handleAllClick}
-              defaultChecked
-            ></input>
-            <label htmlFor="all">{allText}</label>
-          </li>
           {options.map((option, index) => (
             <li key={index} className="flex flex-row gap-2">
               <input
@@ -78,6 +63,7 @@ function Filter({ name, options, allText }: FilterProps) {
 }
 
 export default function Filters({ accounts, transactions, dict }: Props) {
+  const [open, setOpen] = useState<boolean>(false);
   const dates = _.uniq(
     transactions
       .map((transaction) =>
@@ -100,7 +86,9 @@ export default function Filters({ accounts, transactions, dict }: Props) {
     return new Date(b).getTime() - new Date(a).getTime();
   });
   return (
-    <main className="hidden xl:flex flex-row gap-4 justify-start items-start w-full">
+    <main
+      className={`mt-4 hidden xl:flex flex-row gap-4 justify-center items-center w-auto`}
+    >
       <Filter
         name={dict.filters.account}
         options={accounts}
