@@ -23,13 +23,13 @@ export default function BalanceWidget({
   const formattedBalance = formatBalance(balance / 100, "auto");
   const currency = "ARS";
   return (
-    <main className="w-full sm:w-1/2 text-neutral-800 flex h-full items-start flex-col justify-end">
-      <p className="text-xl xl:text-4xl 2xl:text-5xl font-light">
+    <main className="w-full sm:w-1/2 text-neutral-100 flex h-full items-start flex-col justify-end">
+      <p className="text-xl xl:text-4xl 2xl:text-5xl font-light ">
         {dict.balance}:
       </p>
-      <h1 className="text-4xl xl:text-7xl 2xl:text-8xl font-normal flex flex-row items-end gap-2 sm:gap-4">
+      <h1 className="text-4xl xl:text-7xl 2xl:text-8xl font-light flex flex-row items-end gap-2 sm:gap-4 ">
         {formattedBalance}
-        <p className="text-3xl xl:text-6xl 2xl:text-7xl font-light ">
+        <p className="text-3xl xl:text-6xl 2xl:text-7xl font-medium text-palette-500">
           {currency}
         </p>
       </h1>

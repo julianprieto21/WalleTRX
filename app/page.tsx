@@ -20,8 +20,8 @@ export default async function HomePage() {
     const userName = session.user.name ? session.user.name : "";
     const userImageUrl = session.user.image ? session.user.image : "";
     return (
-      <main className="bg-neutral-200 flex flex-col justify-start items-center pb-10 sm:pb-0 overflow-auto flex-1">
-        <section className="select-none w-full flex flex-row-reverse sm:flex-row items-center justify-center border-b pt-8 xl:pt-10 2xl:pt-16 border-neutral-400 pb-4 px-4 sm:px-0">
+      <main className="bg-palette-400 flex flex-col justify-start items-center pb-10 sm:pb-0 overflow-auto flex-1">
+        <section className="sm:border-0 border-b border-palette-250 select-none w-full flex flex-row-reverse sm:flex-row items-center justify-center pt-8 xl:pt-10 2xl:pt-16 pb-4 px-4 sm:px-0">
           <MainTitle
             userName={userName}
             userImageUrl={userImageUrl}

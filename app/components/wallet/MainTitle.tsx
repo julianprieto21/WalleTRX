@@ -15,8 +15,8 @@ export default function MainTitle({
           alt="Imagen de perfil del usuario"
           className="block rounded-full size-20 xl:size-32 2xl:size-40"
         ></img>
-        <h1 className="hidden sm:block text-neutral-800 xl:text-7xl 2xl:text-8xl font-normal m-0 p-0">
-          <p className="xl:text-6xl 2xl:text-7xl text-neutral-800 font-thin">
+        <h1 className="hidden sm:block text-palette-500 xl:text-7xl 2xl:text-8xl font-normal m-0 p-0">
+          <p className="xl:text-6xl 2xl:text-7xl text-palette-100 font-thin">
             {dict.mainTitle},
           </p>
           {userName.split(" ")[0]}

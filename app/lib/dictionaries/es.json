@@ -25,7 +25,7 @@
   },
   "income": "Ingreso",
   "expense": "Gasto",
-  "transfer": "Transferencia",
+  "transfer": "Transfer",
   "input": {
     "selector": {
       "all": "Todo",

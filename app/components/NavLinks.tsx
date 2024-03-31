@@ -42,13 +42,15 @@ export default function NavLinks({
           <Link
             key={link.name}
             href={link.href}
-            className={`flex h-20 sm:h-12 grow items-center justify-start gap-2 text-neutral-400 p-4 text-md hover> font-normal hover:bg-neutral-700 hover:text-neutral-50 sm:flex-none sm:justify-center lg:justify-start md:p-2 md:px-3 
+            className={`flex h-20 sm:h-12 grow items-center justify-start gap-2 text-palette-100 p-4 text-md hover> font-normal hover:bg-palette-250 hover:text-palette-500 sm:flex-none sm:justify-center lg:justify-start md:p-2 md:px-3 
                 ${
-                  pathName === link.href ? "bg-neutral-700 text-neutral-50" : ""
+                  pathName === link.href
+                    ? "bg-palette-250 text-palette-500"
+                    : ""
                 } ${isLogIn ? "cursor-pointer" : " cursor-not-allowed"}`}
           >
             <LinkIcon className="size-10 xl:size-6 2xl:size-7" />
-            <p className="block text-xl xl:text-sm 2xl:text-base sm:block">
+            <p className="block text-xl xl:text-sm 2xl:text-base sm:block text-palette-100">
               {link.name}
             </p>
           </Link>

@@ -28,7 +28,7 @@ function FormSchema({ accounts, transaction, categories, dict }: Props) {
         name="description"
         type="text"
         placeholder="Description"
-        className="text-left h-12 rounded-md pl-2 border border-neutral-200"
+        className="text-left h-12 rounded-md pl-2 border border-palette-250 bg-palette-400 text-palette-100 placeholder:text-palette-250"
         defaultValue={transaction?.description}
         required
       ></input>
@@ -54,7 +54,7 @@ function FormSchema({ accounts, transaction, categories, dict }: Props) {
           ></input>
           <label
             htmlFor="recurrent"
-            className="w-full md:w-auto text-center cursor-pointer border px-2 py-1 rounded-md text-neutral-300 peer-checked:text-sky-500 peer-checked:border-sky-400 peer-checked:bg-sky-200"
+            className="w-full md:w-auto text-center cursor-pointer border border-palette-250 text-palette-250 px-2 py-1 rounded-md peer-checked:text-palette-500 peer-checked:border-palette-500 peer-checked:bg-palette-400"
           >
             {dict.input.recurrent}
           </label>
@@ -62,7 +62,7 @@ function FormSchema({ accounts, transaction, categories, dict }: Props) {
       </section>
       <section className="flex flex-row w-full lg:w-3/5 gap-2 items-center">
         <input
-          className="w-2/5 sm:w-3/5 sm:pl-2 h-12 rounded border border-neutral-200 text-center"
+          className="w-2/5 sm:w-3/5 sm:pl-2 h-12 rounded border border-palette-250 text-palette-100 placeholder:text-palette-250 bg-palette-400 text-center"
           name="amount"
           title="Amount"
           type="text"
@@ -71,7 +71,7 @@ function FormSchema({ accounts, transaction, categories, dict }: Props) {
           required
         ></input>
         <input
-          className="w-3/5 sm:w-2/5 h-12 rounded border border-neutral-200 flex justify-center px-2"
+          className="w-3/5 sm:w-2/5 h-12 rounded border border-palette-250 text-palette-100 placeholder:text-palette-250 bg-palette-400 flex justify-center px-2"
           name="date"
           type="date"
           title="Date"
@@ -99,7 +99,7 @@ export default function TransactionForm({
       return (
         <form
           action={createTransaction}
-          className="w-full bg-neutral-100 rounded-lg shadow-md"
+          className="w-full bg-palette-300 rounded-lg shadow-md"
         >
           <FormSchema accounts={accounts} categories={categories} dict={dict} />
         </form>
@@ -110,7 +110,7 @@ export default function TransactionForm({
       return (
         <form
           action={editTransactionWithId}
-          className="w-full bg-neutral-100 rounded-lg shadow-md"
+          className="w-full bg-palette-300 rounded-lg shadow-md"
         >
           <FormSchema
             transaction={transaction}

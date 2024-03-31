@@ -22,9 +22,13 @@ const CustomTooltip = ({
 }) => {
   if (active && payload && payload.length) {
     return (
-      <div className="custom-tooltip">
-        <strong className="label">{formatDate({ dateStr: label })}</strong>
-        <p className="desc">{formatBalance(payload[0].value, "auto")}</p>
+      <div className="custom-tooltip bg-palette-400 p-2 rounded-md shadow-lg">
+        <strong className="label text-palette-100">
+          {formatDate({ dateStr: label })}
+        </strong>
+        <p className="desc text-palette-100">
+          {formatBalance(payload[0].value, "auto")}
+        </p>
       </div>
     );
   }
@@ -65,9 +69,10 @@ export default function MonthChart({
           {/* <YAxis /> */}
           <XAxis dataKey="date" tick={false} />
           <Line
+            className="text-palette-500"
             type="monotone"
             dataKey="balance"
-            stroke="#8884d8"
+            stroke="currentColor"
             activeDot={{ r: 6 }}
             dot={false}
           />

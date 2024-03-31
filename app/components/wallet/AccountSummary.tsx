@@ -44,7 +44,7 @@ export default function AccountSummary({
   };
   if (balanceByAccount.length === 0) {
     return (
-      <div className="size-full flex justify-center items-center text-neutral-500 text-center text-lg">
+      <div className="size-full flex justify-center items-center text-palette-100 text-center text-lg">
         <p>
           {dict.messages.noAccounts}
           <Link href={"/accounts"} className="font-bold ">
@@ -74,27 +74,27 @@ export default function AccountSummary({
             <label
               htmlFor={acc.account.id}
               onClick={(e) => handleClick(acc.account.id, e)}
-              className="cursor-pointer w-full flex flex-row justify-between items-center p-3 xl:p-2 2xl:p-3 border rounded-lg hover:font-semibold transition delay-75 peer-checked:font-bold peer-checked:bg-neutral-700 peer-checked:text-neutral-50"
+              className="cursor-pointer w-full flex flex-row justify-between items-center p-3 xl:p-2 2xl:p-3 border border-palette-250 rounded-md hover:bg-palette-400 transition peer-checked:font-bold peer-checked:bg-palette-400 peer-checked:text-palette-100"
             >
               <div className="flex flex-row gap-2 justify-center items-center">
                 <span
                   className="size-3 sm:size-5 rounded-full"
                   style={{ backgroundColor: acc.account.color }}
                 ></span>
-                <h1 className="text-md xl:text-lg 2xl:text-xl">
+                <h1 className="text-md xl:text-lg 2xl:text-xl text-palette-100">
                   {acc.account.name}
                 </h1>
               </div>
 
               <div className="flex flex-row justify-center items-center gap-4">
-                <p className="text-md xl:text-lg 2xl:text-xl text-neutral-500">
+                <p className="text-md xl:text-lg 2xl:text-xl text-palette-100">
                   {formatBalance(acc.balance, "auto")}
                 </p>
               </div>
             </label>
             <Link
               href={`/accounts/${acc.account.id}`}
-              className="w-[66px] h-full flex justify-center items-center text-neutral-400 hover:translate-x-1 transition hover:text-neutral-800"
+              className="w-[66px] h-full flex justify-center items-center text-palette-200 hover:translate-x-1 transition hover:text-palette-500"
             >
               <NavArrowRight className="size-8" />
             </Link>

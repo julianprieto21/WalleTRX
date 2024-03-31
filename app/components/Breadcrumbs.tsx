@@ -18,8 +18,8 @@ export default function Breadcrumbs({
           <li
             key={breadcrumb.href}
             aria-current={breadcrumb.active}
-            className={`${
-              breadcrumb.active ? "text-gray-900" : "text-gray-500"
+            className={`text-palette-200 ${
+              breadcrumb.active ? "font-semibold" : "font-thin"
             }`}
           >
             <Link
@@ -29,7 +29,7 @@ export default function Breadcrumbs({
               {breadcrumb.label}
             </Link>
             {index < breadcrumbs.length - 1 ? (
-              <span className="mx-3 inline-block">/</span>
+              <span className="mx-3 inline-block text-palette-500">/</span>
             ) : null}
           </li>
         ))}

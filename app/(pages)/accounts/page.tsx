@@ -15,7 +15,7 @@ export default async function AccountsPage() {
     const { accounts, transactions } = await fetchData(session.user.email);
     const balanceByAccounts = groupByAccount(accounts, transactions);
     return (
-      <main className="bg-neutral-200 flex flex-col justify-start items-start px-4 sm:px-12 py-10 sm:pb-10 sm:pt-16 overflow-auto flex-1">
+      <main className="bg-palette-400 flex flex-col justify-start items-start px-4 sm:px-12 py-10 sm:pb-10 sm:pt-16 overflow-auto flex-1">
         <Breadcrumbs
           breadcrumbs={[
             { label: dict.menu.home, href: "/" },

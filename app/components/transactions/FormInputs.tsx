@@ -28,7 +28,7 @@ export function TypeInput({ type, dict }: { type?: string | null; dict: any }) {
       ></input>
       <label
         htmlFor="income"
-        className="flex flex-col lg:flex-row lg:gap-2 justify-center items-center text-neutral-300 peer-checked/income:font-medium peer-checked/income:bg-green-200 peer-checked/income:text-green-500 peer-checked/income:border-green-300 cursor-pointer w-1/5 text-center p-2 lg:p-3 lg:text-lg rounded-lg border"
+        className="flex flex-col lg:flex-row lg:gap-2 justify-center items-center text-palette-250 peer-checked/income:font-medium peer-checked/income:text-income peer-checked/income:border-income cursor-pointer w-1/5 text-center p-2 lg:p-3 lg:text-lg rounded-lg border border-palette-250"
       >
         <Download className="size-8" />
         <h1 className="hidden md:block">{dict.income}</h1>
@@ -46,7 +46,7 @@ export function TypeInput({ type, dict }: { type?: string | null; dict: any }) {
       ></input>
       <label
         htmlFor="expense"
-        className="flex flex-col lg:flex-row lg:gap-2 justify-center items-center text-neutral-300 peer-checked/expense:font-medium peer-checked/expense:bg-red-200 peer-checked/expense:text-red-500 peer-checked/expense:border-red-300 cursor-pointer w-1/5 text-center p-2 lg:p-3 lg:text-lg rounded-lg border"
+        className="flex flex-col lg:flex-row lg:gap-2 justify-center items-center text-palette-250 peer-checked/expense:font-medium peer-checked/expense:text-expense peer-checked/expense:border-expense cursor-pointer w-1/5 text-center p-2 lg:p-3 lg:text-lg rounded-lg border border-palette-250"
       >
         <Upload className="size-8" />
         <h1 className="hidden md:block">{dict.expense}</h1>
@@ -64,7 +64,7 @@ export function TypeInput({ type, dict }: { type?: string | null; dict: any }) {
       ></input>
       <label
         htmlFor="transfer"
-        className="flex flex-col lg:flex-row lg:gap-2 justify-center items-center text-neutral-300 peer-checked/transfer:font-medium peer-checked/transfer:bg-violet-200 peer-checked/transfer:text-violet-500 peer-checked/transfer:border-violet-300 cursor-pointer w-1/5 text-center p-2 lg:p-3 lg:text-lg rounded-lg border"
+        className="flex flex-col lg:flex-row lg:gap-2 justify-center items-center text-palette-250 peer-checked/transfer:font-medium peer-checked/transfer:text-transfer peer-checked/transfer:border-transfer cursor-pointer w-1/5  text-center p-2 lg:p-3 lg:text-lg rounded-lg border border-palette-250"
       >
         <DataTransferBoth className="rotate-90 size-8" />
         <h1 className="hidden md:block">{dict.transfer}</h1>
@@ -124,12 +124,12 @@ export function Selector({
     <main className="w-4/5 md:w-2/5 flex flex-col gap-1 relative">
       <button
         type="button"
-        className={`rounded transition flex flex-row justify-between items-center px-2 border bg-white text-gray-400 
-        ${open ? "text-neutral-100 bg-zinc-800 font-semibold" : ""}
+        className={`rounded transition flex flex-row justify-between font-medium items-center px-2 border border-palette-250 bg-palette-300 text-palette-200 
+        ${open ? "text-palette-400 bg-palette-500" : ""}
       }`}
         onClick={() => setOpen(!open)}
       >
-        <h1 className={`${textButton ? "text-neutral-700 font-normal" : ""}`}>
+        <h1 className={`${textButton ? "text-palette-100 font-normal" : ""}`}>
           {textButton ? textButton : text}
         </h1>
         <NavArrowDown
@@ -140,7 +140,7 @@ export function Selector({
       <div
         className={`${
           open ? "absolute" : "hidden"
-        } transition z-10 rounded bg-neutral-900 text-neutral-300 mt-10 w-full overflow-auto max-h-36`}
+        } transition z-10 rounded bg-palette-400 text-palette-100 mt-10 w-full overflow-auto max-h-36`}
       >
         <ul className="w-full flex-col flex justify-center gap-2 py-2">
           {list.map((obj: any, index: number) => (
@@ -159,7 +159,7 @@ export function Selector({
                 required
               ></input>
               <label
-                className="pl-2 py-1 flex items-center gap-2 peer-checked:bg-neutral-800 peer-checked:text-neutral-50 hover:bg-neutral-800 hover:text-neutral-50"
+                className="pl-2 py-1 flex items-center gap-2 peer-checked:bg-palette-300 peer-checked:text-palette-100 hover:bg-palette-300"
                 htmlFor={obj.id}
                 onClick={() =>
                   handleInputClick(

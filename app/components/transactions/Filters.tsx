@@ -34,8 +34,8 @@ function Filter({ name, options, allText }: FilterProps) {
         onClick={handleMenu}
         className={`relative w-48 px-4 py-1 rounded-xl border transition ${
           open
-            ? "bg-yellow-100 text-yellow-400 border-yellow-300 font-medium"
-            : "border-neutral-300 text-neutral-400 font-light"
+            ? "bg-palette-500 text-palette-300 border-palette-400 font-medium"
+            : "border-palette-250 text-palette-200 font-light"
         }`}
       >
         <FilterIcon className={`absolute ${open ? "hidden" : "block"}`} />
