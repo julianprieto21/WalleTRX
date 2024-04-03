@@ -1,6 +1,7 @@
 "use server";
 import { VercelPoolClient, db } from "@vercel/postgres";
 import { Account, Transaction, User, Wallet } from "./types";
+import { createUser, createWallet } from "./actions";
 
 export async function fetchAllUsers(client: VercelPoolClient) {
   try {
@@ -12,20 +13,20 @@ export async function fetchAllUsers(client: VercelPoolClient) {
   }
 }
 
-export async function fetchUser(client: VercelPoolClient, userEmail: string) {
+export async function fetchUser(client: VercelPoolClient, mail: string, name: string) {
   try {
     const data =
-      await client.sql<User>`SELECT * FROM users WHERE email = ${userEmail}`;
-    // if (data.rows.length === 0) {
-    //   createUser(client, user);
-    //   const data =
-    //     await client.sql<User>`SELECT * FROM users WHERE email = ${user.email}`;
-    //   createWallet(client, {
-    //     created_at: new Date(),
-    //     user_id: data.rows[0].user_id,
-    //   } as Wallet);
-    //   return data.rows[0];
-    // }
+      await client.sql<User>`SELECT * FROM users WHERE email = ${mail}`;
+    if (data.rows.length === 0) {
+      createUser(client, {email: mail, name: name});
+      const data =
+        await client.sql<User>`SELECT * FROM users WHERE email = ${mail}`;
+      createWallet(client, {
+        created_at: new Date(),
+        user_id: data.rows[0].id,
+      } as Wallet);
+      return data.rows[0];
+    }
     return data.rows[0];
   } catch (error) {
     console.error(error);
@@ -91,9 +92,9 @@ export async function fetchTransactionFromId(
   }
 }
 
-export async function fetchData(userEmail: string) {
+export async function fetchData({mail, name}: {mail: string, name: string}) {
   const client: VercelPoolClient = await db.connect();
-  const user: User = await fetchUser(client, userEmail);
+  const user: User = await fetchUser(client, mail, name);
   const wallet: Wallet = await fetchWalletFromUser(client, user.id);
   const accounts: Account[] = await fetchAccountsFromWallet(client, wallet.id);
   const transactions: Transaction[] = await fetchTransactionsFromWallet(
