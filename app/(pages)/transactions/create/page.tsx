@@ -8,10 +8,10 @@ import { getDictionary } from "@/app/lib/dictionaries";
 export default async function CreatePage() {
   const session = await auth();
   const dict = await getDictionary("es");
-  if (!session?.user?.email) {
+  if (!session?.user?.email || !session?.user?.name) {
     return new Error("No se pudo recuperar los datos de sesion");
   } else {
-    const { accounts } = await fetchData(session.user.email);
+    const { accounts } = await fetchData({mail: session.user.email, name: session.user.name});
     return (
       <main className="bg-palette-400 flex flex-col justify-start items-start px-4 sm:px-12 py-10 sm:pb-10 sm:pt-16 overflow-auto flex-1">
         <Breadcrumbs
