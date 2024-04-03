@@ -13,10 +13,10 @@ import { getDictionary } from "./lib/dictionaries";
 export default async function HomePage() {
   const session = await auth();
   const dict = await getDictionary("es");
-  if (!session?.user?.email) {
+  if (!session?.user?.email || !session?.user?.name) {
     return new Error("No se pudo recuperar los datos de sesion");
   } else {
-    const { accounts, transactions } = await fetchData(session.user.email);
+    const { accounts, transactions } = await fetchData({mail: session.user.email, name: session.user.name});
     const userName = session.user.name ? session.user.name : "";
     const userImageUrl = session.user.image ? session.user.image : "";
     return (
