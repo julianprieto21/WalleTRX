@@ -44,10 +44,13 @@ export default function AccountSummary({
   };
   if (balanceByAccount.length === 0) {
     return (
-      <div className="size-full flex justify-center items-center text-palette-100 text-center text-lg">
+      <div className="size-full flex justify-center items-center text-palette-200 text-center text-lg">
         <p>
           {dict.messages.noAccounts}
-          <Link href={"/accounts"} className="font-bold ">
+          <Link
+            href={"/accounts"}
+            className="font-bold hover:underline decoration-1"
+          >
             {dict.menu.accounts}
           </Link>
         </p>
