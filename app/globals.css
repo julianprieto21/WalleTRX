@@ -28,3 +28,17 @@ input:active,
 select:focus {
   outline: none;
 }
+
+@supports selector(::-webkit-scrollbar) {
+  ::-webkit-scrollbar {
+    width: 6px;
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #3b3a36;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--text-dark-color);
+  }
+}
