@@ -18,12 +18,14 @@ export async function fetchUser(user: {
   name: string;
   email: string;
 }) {
-  const { id } = user;
+  const { name, email } = user;
   try {
-    const data = await db.sql<User>`SELECT * FROM users WHERE id = ${id}`;
+    const data =
+      await db.sql<User>`SELECT * FROM users WHERE name = ${name} AND email = ${email}`;
     if (data.rows.length === 0) {
       await createUser(user);
-      const data = await db.sql<User>`SELECT * FROM users WHERE id = ${id}`;
+      const data =
+        await db.sql<User>`SELECT * FROM users WHERE name = ${name} AND email = ${email}`;
       return data.rows[0];
     }
     return data.rows[0];
