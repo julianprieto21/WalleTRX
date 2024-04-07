@@ -13,10 +13,15 @@ import { getDictionary } from "./lib/dictionaries";
 export default async function HomePage() {
   const session = await auth();
   const dict = await getDictionary("es");
-  if (!session?.user?.email || !session?.user?.name) {
+  if (!session?.user?.id || !session?.user?.name || !session?.user?.email) {
     return new Error("No se pudo recuperar los datos de sesion");
   } else {
-    const { accounts, transactions } = await fetchData({mail: session.user.email, name: session.user.name});
+    const user = {
+      id: session.user.id,
+      name: session.user.name,
+      email: session.user.email,
+    };
+    const { accounts, transactions } = await fetchData(user);
     const userName = session.user.name ? session.user.name : "";
     const userImageUrl = session.user.image ? session.user.image : "";
     return (

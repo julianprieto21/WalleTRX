@@ -9,10 +9,15 @@ import { auth } from "@/auth";
 export default async function AccountsPage() {
   const session = await auth();
   const dict = await getDictionary("es");
-  if (!session?.user?.email || !session?.user?.name) {
+  if (!session?.user?.id || !session?.user?.name || !session?.user?.email) {
     return new Error("No se pudo recuperar los datos de sesion");
   } else {
-    const { accounts, transactions } = await fetchData({mail: session.user.email, name: session.user.name});
+    const user = {
+      id: session.user.id,
+      name: session.user.name,
+      email: session.user.email,
+    };
+    const { accounts, transactions } = await fetchData(user);
     const balanceByAccounts = groupByAccount(accounts, transactions);
     return (
       <main className="bg-palette-400 flex flex-col justify-start items-start px-4 sm:px-12 py-10 sm:pb-10 sm:pt-16 overflow-auto flex-1">

@@ -1,40 +1,30 @@
 "use server";
-import { sql } from "@vercel/postgres";
-import { Wallet } from "./types";
+import { sql, db } from "@vercel/postgres";
+import { User } from "./types";
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { signOut } from "@/auth";
 
-export async function createUser(
-  client: any,
-  user: { email: string; name: string }
-) {
+export async function createUser(user: {
+  id: string;
+  name: string;
+  email: string;
+}) {
   try {
-    const { email, name } = user;
-    const query = client.sql`INSERT INTO users(name, email) VALUES (${name}, ${email})`;
-    return query;
+    const { id, name, email } = user;
+    const data =
+      await db.sql<User>`INSERT INTO users(id, name, email) VALUES (${id}, ${name}, ${email})`;
+    return data;
   } catch (error) {
     console.error(error);
     throw new Error("Failed to create user.");
   }
 }
 
-export async function createWallet(client: any, wallet: Wallet) {
-  try {
-    const { user_id, created_at } = wallet;
-    const query = await client.sql`INSERT INTO wallets(user_id, created_at)
-        VALUES (${user_id}, ${created_at})`;
-    return query;
-  } catch (error) {
-    console.error(error);
-    throw new Error("Failed to create wallet.");
-  }
-}
-
 const TransactionSchema = z.object({
   transaction_id: z.string(),
-  type: z.enum(["income", "expense"]),
+  type: z.enum(["income", "expense", "transfer"]),
   description: z.string(),
   account: z.string(),
   category: z.string(),

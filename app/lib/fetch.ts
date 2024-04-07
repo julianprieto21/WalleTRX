@@ -1,7 +1,7 @@
 "use server";
 import { VercelPoolClient, db } from "@vercel/postgres";
-import { Account, Transaction, User, Wallet } from "./types";
-import { createUser, createWallet } from "./actions";
+import { Account, Transaction, User } from "./types";
+import { createUser } from "./actions";
 
 export async function fetchAllUsers(client: VercelPoolClient) {
   try {
@@ -13,18 +13,17 @@ export async function fetchAllUsers(client: VercelPoolClient) {
   }
 }
 
-export async function fetchUser(client: VercelPoolClient, mail: string, name: string) {
+export async function fetchUser(user: {
+  id: string;
+  name: string;
+  email: string;
+}) {
+  const { id } = user;
   try {
-    const data =
-      await client.sql<User>`SELECT * FROM users WHERE email = ${mail}`;
+    const data = await db.sql<User>`SELECT * FROM users WHERE id = ${id}`;
     if (data.rows.length === 0) {
-      createUser(client, {email: mail, name: name});
-      const data =
-        await client.sql<User>`SELECT * FROM users WHERE email = ${mail}`;
-      createWallet(client, {
-        created_at: new Date(),
-        user_id: data.rows[0].id,
-      } as Wallet);
+      await createUser(user);
+      const data = await db.sql<User>`SELECT * FROM users WHERE id = ${id}`;
       return data.rows[0];
     }
     return data.rows[0];
@@ -34,27 +33,10 @@ export async function fetchUser(client: VercelPoolClient, mail: string, name: st
   }
 }
 
-export async function fetchWalletFromUser(
-  client: VercelPoolClient,
-  userId: string
-) {
+export async function fetchAccountsFromUser(userId: string) {
   try {
     const data =
-      await client.sql<Wallet>`SELECT * FROM wallets WHERE user_id = ${userId}`;
-    return data.rows[0];
-  } catch (error) {
-    console.error(error);
-    throw new Error("Failed to fecth wallet data.");
-  }
-}
-
-export async function fetchAccountsFromWallet(
-  client: VercelPoolClient,
-  walletId: string
-) {
-  try {
-    const data =
-      await client.sql<Account>`SELECT a.* FROM accounts AS a WHERE wallet_id = ${walletId}`;
+      await db.sql<Account>`SELECT a.* FROM accounts AS a WHERE user_id = ${userId}`;
     return data.rows;
   } catch (error) {
     console.error(error);
@@ -62,13 +44,10 @@ export async function fetchAccountsFromWallet(
   }
 }
 
-export async function fetchTransactionsFromWallet(
-  client: VercelPoolClient,
-  walletId: string
-) {
+export async function fetchTransactionsFromUser(userId: string) {
   try {
     const data =
-      await client.sql<Transaction>`SELECT t.* FROM transactions AS t WHERE wallet_id = ${walletId}`;
+      await db.sql<Transaction>`SELECT t.* FROM transactions AS t WHERE user_id = ${userId}`;
     return data.rows;
   } catch (error) {
     console.error(error);
@@ -76,30 +55,26 @@ export async function fetchTransactionsFromWallet(
   }
 }
 
-export async function fetchTransactionFromId(
-  client: VercelPoolClient,
-  transactionId: string
-) {
+export async function fetchTransactionFromId(transactionId: string) {
   try {
     const data =
-      await client.sql<Transaction>`SELECT t.* FROM transactions AS t WHERE id = ${transactionId}`;
+      await db.sql<Transaction>`SELECT t.* FROM transactions AS t WHERE id = ${transactionId}`;
     return data.rows[0];
   } catch (error) {
     console.error(error);
     throw new Error("Failed to fecth transactions data.");
-  } finally {
-    client.release();
   }
 }
 
-export async function fetchData({mail, name}: {mail: string, name: string}) {
-  const client: VercelPoolClient = await db.connect();
-  const user: User = await fetchUser(client, mail, name);
-  const wallet: Wallet = await fetchWalletFromUser(client, user.id);
-  const accounts: Account[] = await fetchAccountsFromWallet(client, wallet.id);
-  const transactions: Transaction[] = await fetchTransactionsFromWallet(
-    client,
-    wallet.id
+export async function fetchData(user: {
+  id: string;
+  name: string;
+  email: string;
+}) {
+  const userData: User = await fetchUser(user);
+  const accounts: Account[] = await fetchAccountsFromUser(userData.id);
+  const transactions: Transaction[] = await fetchTransactionsFromUser(
+    userData.id
   );
   return { accounts, transactions };
 }
