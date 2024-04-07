@@ -3,27 +3,28 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --background-dark-color-primary: #252422;
+  --text-dark-color: #f5f3f4;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+body {
+  position: relative;
+  display: flex;
+}
+
+.page {
+  background-color: var(--background-dark-color-primary);
+  display: flex;
+  flex: 1 1 0%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  overflow: auto;
+  color: var(--text-dark-color);
 }
 
 input:focus,
 input:active,
 select:focus {
   outline: none;
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
 }
