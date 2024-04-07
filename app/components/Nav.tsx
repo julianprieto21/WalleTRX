@@ -30,7 +30,7 @@ export async function SideNav() {
         <NavLinks isLogIn={session ? true : false} dict={dict} />
       </div>
       <footer className="w-full hidden sm:flex  flex-col justify-center items-center">
-        <HLine width={90} color="neutral" />
+        <HLine />
         <h1 className="text-xs md:text-sm text-center font-light text-neutral-500 pt-2">
           {dict.footer}
         </h1>

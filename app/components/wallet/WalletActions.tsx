@@ -80,9 +80,9 @@ export default function WalletActions({ transactions }: Props) {
         <ExpenseButton expense={expense} />
       </div>
       <div className="flex flex-row items-center w-[90%] gap-4">
-        <HLine width={80} color="neutral" />
+        <HLine />
         <TransferButton />
-        <HLine width={80} color="neutral" />
+        <HLine />
       </div>
     </main>
   );
