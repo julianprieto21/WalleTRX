@@ -18,7 +18,7 @@ export async function SideNav() {
   const session = await auth();
   const title = dict.app.split("&");
   return (
-    <aside className="hidden sm:flex w-1/5 flex-col items-center justify-center bg-palette-300 h-screen sm:pb-2 overflow-auto">
+    <aside className="hidden sm:flex w-1/5 flex-none flex-col items-center justify-center bg-palette-300 h-screen sm:pb-2 overflow-auto">
       <section className="w-full flex flex-col items-center text-neutral-200 bg-palette-300 sm:py-4 sm:pb-2 lg:py-3 border-b border-palette-250">
         <WalletSolid className="xl:size-36 2xl:size-48 text-palette-100" />
         <h1 className="flex flex-row justify-center font-light xl:text-4xl 2xl:text-5xl text-palette-100">
