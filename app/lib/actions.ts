@@ -12,9 +12,9 @@ export async function createUser(user: {
   email: string;
 }) {
   try {
-    const { id, name, email } = user;
+    const { name, email } = user;
     const data =
-      await db.sql<User>`INSERT INTO users(id, name, email) VALUES (${id}, ${name}, ${email})`;
+      await db.sql<User>`INSERT INTO users(name, email) VALUES (${name}, ${email})`;
     return data;
   } catch (error) {
     console.error(error);
