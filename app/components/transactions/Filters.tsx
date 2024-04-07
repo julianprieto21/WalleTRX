@@ -25,11 +25,7 @@ function Filter({ name, options, allText }: FilterProps) {
   };
   const handleChange = (value: string) => {};
   return (
-    <main
-      className="relative"
-      onMouseEnter={handleMenu}
-      onMouseLeave={handleMenu}
-    >
+    <main className="relative">
       <button
         onClick={handleMenu}
         type="button"
