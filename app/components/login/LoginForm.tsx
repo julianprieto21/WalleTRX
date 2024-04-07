@@ -15,7 +15,7 @@ function LogInButton({ provider }: { provider: string }) {
     >
       <button
         type="submit"
-        className="flex w-[100%] px-2 justify-center items-center bg-neutral-100 h-14 border border-neutral-200 rounded-lg gap-3 shadow-sm"
+        className="flex w-[100%] px-2 justify-center items-center text-palette-400 bg-neutral-100 h-14 border border-neutral-200 rounded-lg gap-3 shadow-sm"
       >
         {
           <img
@@ -34,11 +34,11 @@ function LogInButton({ provider }: { provider: string }) {
 
 export default function LoginForm({ dict }: { dict: any }) {
   return (
-    <section className="w-4/5 gap-2 sm:w-96 bg-neutral-100 rounded-lg flex flex-col justify-center items-center shadow-xl border border-neutral-400">
-      <h1 className="font-semibold text-4xl sm:text-6xl text-neutral-700 my-2">
+    <section className="w-4/5 p-4 gap-2 sm:w-[600px] rounded-lg flex flex-col justify-center items-center shadow-xl border border-palette-250">
+      <h1 className="font-semibold text-4xl sm:text-6xl my-2">
         {dict.auth.login}
       </h1>
-      <HLine width={80} color="neutral" text={dict.auth.secondaryLogin} />
+      <HLine text={dict.auth.secondaryLogin} />
       <main className="w-[80%] h-[100%] my-4 gap-4 flex flex-col justify-end items-center">
         <LogInButton provider="google" />
         {/* <LogInButton provider="github" /> */}
