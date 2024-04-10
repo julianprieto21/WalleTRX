@@ -2,7 +2,6 @@ import { signIn } from "@/auth";
 import _ from "lodash";
 import GoogleLogo from "@/public/google-logo.svg";
 import GithubLogo from "@/public/github-logo.svg";
-import HLine from "../HLine";
 
 function LogInButton({ provider }: { provider: string }) {
   return (
@@ -38,7 +37,13 @@ export default function LoginForm({ dict }: { dict: any }) {
       <h1 className="font-semibold text-4xl sm:text-6xl my-2">
         {dict.auth.login}
       </h1>
-      <HLine text={dict.auth.secondaryLogin} />
+      <div className="flex flex-row items-center w-full">
+        <hr className="border-t border-palette-250 w-4/5 ml-3"></hr>
+        <p className="text-sm font-thin w-full text-center text-palette-250">
+          {dict.auth.secondaryLogin}
+        </p>
+        <hr className="border-t border-palette-250 w-4/5 mr-3"></hr>
+      </div>
       <main className="w-[80%] h-[100%] my-4 gap-4 flex flex-col justify-end items-center">
         <LogInButton provider="google" />
         {/* <LogInButton provider="github" /> */}

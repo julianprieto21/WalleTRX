@@ -1,6 +1,5 @@
 import NavLinks from "./NavLinks";
 import { auth } from "@/auth";
-import HLine from "./HLine";
 import { WalletSolid } from "iconoir-react";
 import { getDictionary } from "../lib/dictionaries";
 import {
@@ -29,8 +28,7 @@ export async function SideNav() {
       <div className="hidden sm:flex flex-col w-full h-[90%] justify-around lg:justify-start lg:gap-2 3xl:gap-4 py-4">
         <NavLinks isLogIn={session ? true : false} dict={dict} />
       </div>
-      <footer className="w-full hidden sm:flex  flex-col justify-center items-center">
-        <HLine />
+      <footer className="w-full hidden sm:flex flex-col justify-center items-center border-t border-palette-250">
         <h1 className="text-xs md:text-sm text-center font-light text-neutral-500 pt-2">
           {dict.footer}
         </h1>

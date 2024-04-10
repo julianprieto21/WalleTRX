@@ -2,7 +2,6 @@
 import { Transaction } from "@/app/lib/types";
 import { formatBalance, getBalanceFromTransactions } from "@/app/lib/utils";
 import Link from "next/link";
-import HLine from "../HLine";
 import { useSearchParams } from "next/navigation";
 import { DataTransferBoth, Download, Upload } from "iconoir-react";
 
@@ -80,9 +79,9 @@ export default function WalletActions({ transactions }: Props) {
         <ExpenseButton expense={expense} />
       </div>
       <div className="flex flex-row items-center w-[90%] gap-4">
-        <HLine />
+        <hr className="border-t border-palette-250 w-full"></hr>
         <TransferButton />
-        <HLine />
+        <hr className="border-t border-palette-250 w-full"></hr>
       </div>
     </main>
   );
