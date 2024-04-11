@@ -6,7 +6,7 @@ import GithubLogo from "@/public/github-logo.svg";
 function LogInButton({ provider }: { provider: string }) {
   return (
     <form
-      className="flex w-full justify-center hover:scale-105 mx-2"
+      className="flex w-64 justify-center hover:scale-105 mx-2 transition-all"
       action={async () => {
         "use server";
         await signIn(provider);
@@ -14,18 +14,15 @@ function LogInButton({ provider }: { provider: string }) {
     >
       <button
         type="submit"
-        className="flex w-[100%] px-2 justify-center items-center text-palette-400 bg-neutral-100 h-14 border border-neutral-200 rounded-lg gap-3 shadow-sm"
+        className="w-[100%] px-2 bg-palette-100 h-14 rounded-md"
       >
-        {
-          <img
-            src={provider === "google" ? GoogleLogo.src : GithubLogo.src}
-            alt={`Logo de ${provider}`}
-            width={140}
-            height={140}
-            className="size-8"
-          ></img>
-        }
-        <h1 className="text-md">{_.capitalize(provider)}</h1>
+        <img
+          src={provider === "google" ? GoogleLogo.src : GithubLogo.src}
+          alt={`Logo de ${provider}`}
+          width={140}
+          height={140}
+          className="size-10 mx-auto"
+        ></img>
       </button>
     </form>
   );
@@ -44,9 +41,9 @@ export default function LoginForm({ dict }: { dict: any }) {
         </p>
         <hr className="border-t border-palette-250 w-4/5 mr-3"></hr>
       </div>
-      <main className="w-[80%] h-[100%] my-4 gap-4 flex flex-col justify-end items-center">
+      <main className="w-[80%] h-[100%] my-4 gap-4 flex justify-end items-center">
         <LogInButton provider="google" />
-        {/* <LogInButton provider="github" /> */}
+        <LogInButton provider="github" />
       </main>
     </section>
   );
