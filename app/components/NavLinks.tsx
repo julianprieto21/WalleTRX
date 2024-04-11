@@ -29,8 +29,14 @@ export default function NavLinks({
       name: dict.menu.investments,
       href: "/investments",
       icon: GraphUp,
+      disabled: true,
     },
-    { name: dict.menu.dashboard, href: "/dashboard", icon: Reports },
+    {
+      name: dict.menu.dashboard,
+      href: "/dashboard",
+      icon: Reports,
+      disabled: true,
+    },
     { name: dict.menu.accounts, href: "/accounts", icon: AppleWallet },
     { name: dict.menu.settings, href: "/settings", icon: Settings },
   ];
@@ -47,12 +53,22 @@ export default function NavLinks({
                   pathName === link.href
                     ? "bg-palette-250 text-palette-500"
                     : ""
-                } ${isLogIn ? "cursor-pointer" : " cursor-not-allowed"}`}
+                } ${isLogIn ? "cursor-pointer" : " cursor-not-allowed"}
+                ${link.disabled ? "pointer-events-none" : ""}`}
           >
             <LinkIcon className="size-10 xl:size-6 2xl:size-7" />
-            <p className="block text-xl xl:text-sm 2xl:text-base sm:block text-palette-100">
+            <h1 className="text-xl xl:text-sm 2xl:text-base text-palette-100 relative">
               {link.name}
-            </p>
+              <p
+                className={`${
+                  link.disabled
+                    ? "text-xs font-thin text-palette-500"
+                    : "hidden"
+                }`}
+              >
+                Proximamente
+              </p>
+            </h1>
           </Link>
         );
       })}

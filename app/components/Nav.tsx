@@ -45,23 +45,35 @@ export async function TopNav() {
     <>
       <header className="relative sm:hidden z-10 h-20 w-full flex flex-row justify-center items-center gap-20 border-b border-palette-300 bg-palette-400 text-palette-500">
         <section className="w-1/2 flex flex-row justify-center items-center gap-6">
-          <Link href={"/transactions"}>
+          <Link
+            href={"/transactions"}
+            className="hover:bg-palette-250 p-1 rounded-xl"
+          >
             <Notes className="size-10" />
           </Link>
-          <Link href={"/investments"}>
+          <Link
+            href={"/investments"}
+            className="pointer-events-none hover:bg-palette-250 p-1 rounded-xl"
+          >
             <GraphUp className="size-10" />
           </Link>
         </section>
-        <main className="absolute mt-10 size-20 flex justify-center items-center rounded-full shadow-md bg-palette-300 text-palette-100">
+        <main className="hover:bg-palette-100 hover:text-palette-250 transition absolute mt-10 size-20 flex justify-center items-center rounded-full shadow-md bg-palette-300 text-palette-100">
           <Link href={"/"}>
             <Home className="size-14" />
           </Link>
         </main>
         <section className="w-1/2 flex flex-row justify-center items-center gap-6">
-          <Link href={"/accounts"}>
+          <Link
+            href={"/accounts"}
+            className="hover:bg-palette-250 p-1 rounded-xl"
+          >
             <AppleWallet className="size-10" />
           </Link>
-          <Link href={"/dashboard"}>
+          <Link
+            href={"/dashboard"}
+            className="pointer-events-none hover:bg-palette-250 p-1 rounded-xl"
+          >
             <Reports className="size-10" />
           </Link>
         </section>
