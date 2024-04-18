@@ -1,5 +1,5 @@
 "use client";
-import { Transaction } from "@/app/lib/types";
+import { Account, Transaction } from "@/app/lib/types";
 import {
   DataTransferBoth,
   Download,
@@ -75,12 +75,12 @@ export function TypeInput({ type, dict }: { type?: string | null; dict: any }) {
 
 export function Selector({
   list,
-  transaction,
+  object,
   inputId,
   text,
 }: {
   list: any[];
-  transaction?: Transaction;
+  object?: Transaction | Account;
   inputId: string;
   text: string;
 }) {
@@ -94,14 +94,14 @@ export function Selector({
     setDefaultValue(value);
   };
   useEffect(() => {
-    if (!transaction) {
+    if (!object) {
       setTextButton("");
       setDefaultValue("");
       return;
     }
     switch (inputId) {
       case "account":
-        const account = list.find((acc) => acc.id === transaction?.account_id);
+        const account = list.find((acc) => acc.id === object?.account_id);
         setTextButton(account ? account.name : "");
         setDefaultValue(
           account
@@ -110,16 +110,19 @@ export function Selector({
         );
         break;
       case "category":
-        const category = list.find((cat) => cat.id === transaction?.category);
-        console.log(category);
+        const category = list.find((cat) => cat.id === object?.category);
         setTextButton(category?.name || "");
         setDefaultValue(category?.id || "");
         break;
+      case "currency":
+        const currency = list.find((curr) => category.id === object?.currency);
+        setTextButton(currency?.name || "");
+        setDefaultValue(currency?.id || "");
       default:
         setTextButton("");
         setDefaultValue("");
     }
-  }, [transaction, inputId, list]);
+  }, [object, inputId, list]);
   return (
     <main className="w-4/5 md:w-2/5 flex flex-col gap-1 relative">
       <button

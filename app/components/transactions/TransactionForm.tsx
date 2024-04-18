@@ -38,7 +38,7 @@ export default function TransactionForm({
         <input
           name="description"
           type="text"
-          placeholder="Description"
+          placeholder={dict.input.description}
           className="text-left h-12 rounded-md pl-2 border border-palette-250 bg-palette-400 text-palette-100 placeholder:text-palette-250"
           defaultValue={transaction?.description}
           required
@@ -46,13 +46,13 @@ export default function TransactionForm({
         <section className="flex flex-col w-full lg:w-4/5 md:flex-row gap-2 md:gap-6 justify-center md:justify-start items-center">
           <Selector
             list={accounts}
-            transaction={transaction}
+            object={transaction}
             inputId="account"
             text={dict.input.selector.account}
           />
           <Selector
             list={categories}
-            transaction={transaction}
+            object={transaction}
             inputId="category"
             text={dict.input.selector.category}
           />
