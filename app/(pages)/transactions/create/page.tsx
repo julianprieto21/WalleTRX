@@ -31,7 +31,6 @@ export default async function CreatePage() {
           ]}
         />
         <TransactionForm
-          action="create"
           accounts={accounts}
           categories={CATEGORIES}
           dict={dict}

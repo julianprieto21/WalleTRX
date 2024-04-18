@@ -3,7 +3,6 @@ import TransactionForm from "@/app/components/transactions/TransactionForm";
 import { CATEGORIES } from "@/app/lib/const/categories";
 import { getDictionary } from "@/app/lib/dictionaries";
 import { fetchAccountsFromUser, fetchTransactionFromId } from "@/app/lib/fetch";
-import { db } from "@vercel/postgres";
 
 interface Props {
   params: {
@@ -30,7 +29,6 @@ export default async function EditPage({ params }: Props) {
         ]}
       />
       <TransactionForm
-        action="edit"
         transaction={transaction}
         accounts={accounts}
         categories={CATEGORIES}
