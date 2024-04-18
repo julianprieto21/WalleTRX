@@ -30,11 +30,14 @@
     "selector": {
       "all": "Todo",
       "account": "Seleccionar cuenta",
-      "category": "Seleccionar categoría"
+      "category": "Seleccionar categoría",
+      "currency": "Seleccionar moneda",
+      "type": "Seleccionar tipo"
     },
     "amount": "Monto",
     "description": "Descripción",
-    "recurrent": "Recurrente"
+    "recurrent": "Recurrente",
+    "name": "Nombre"
   },
   "messages": {
     "noAccounts": "Aun no existen cuentas. Crea una en "

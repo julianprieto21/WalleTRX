@@ -48,7 +48,7 @@ export default function AccountSummary({
         <p>
           {dict.messages.noAccounts}
           <Link
-            href={"/accounts"}
+            href={"/accounts/create"}
             className="font-bold hover:underline decoration-1"
           >
             {dict.menu.accounts}
