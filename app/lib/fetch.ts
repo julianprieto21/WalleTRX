@@ -13,11 +13,7 @@ export async function fetchAllUsers(client: VercelPoolClient) {
   }
 }
 
-export async function fetchUser(user: {
-  id: string;
-  name: string;
-  email: string;
-}) {
+export async function fetchUser(user: { name: string; email: string }) {
   const { email } = user;
   const client = await db.connect();
   try {

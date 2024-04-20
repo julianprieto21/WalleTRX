@@ -23,11 +23,7 @@ const AccountSchema = z.object({
   color: z.string(),
 });
 
-export async function createUser(user: {
-  id: string;
-  name: string;
-  email: string;
-}) {
+export async function createUser(user: { name: string; email: string }) {
   try {
     const { name, email } = user;
     const data =
@@ -44,7 +40,6 @@ export async function createAccount(formData: FormData) {
   if (!session?.user?.email || !session?.user?.id || !session?.user.name)
     return;
   const user = await fetchUser({
-    id: session.user.id,
     name: session.user.name,
     email: session.user.email,
   });
@@ -81,7 +76,6 @@ export async function createTransaction(formData: FormData) {
   if (!session?.user?.email || !session?.user?.id || !session?.user.name)
     return;
   const user = await fetchUser({
-    id: session.user.id,
     name: session.user.name,
     email: session.user.email,
   });
