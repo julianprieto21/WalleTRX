@@ -6,7 +6,7 @@ import { SideNav, TopNav } from "./components/Nav";
 export const metadata: Metadata = {
   title: "WalleTRX",
   description:
-    "Web application for keep track of personal finances. Created by Julian Prieto",
+    "Aplicación web para llevar un seguimiento de las finanzas personales. Creada por Julián Prieto.",
 };
 
 export default function RootLayout({
@@ -15,7 +15,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full">
+    <html lang="es" className="h-full">
       <body className="m-0 p-0 flex flex-col sm:flex-row h-full">
         <Providers>
           <SideNav />
