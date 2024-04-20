@@ -80,7 +80,11 @@ export function Selector({
   text,
 }: {
   list: any[];
-  object?: Transaction | Account;
+  object?: {
+    id: string;
+    category: string;
+    currency: string;
+  };
   inputId: string;
   text: string;
 }) {
@@ -101,21 +105,17 @@ export function Selector({
     }
     switch (inputId) {
       case "account":
-        const account = list.find((acc) => acc.id === object?.account_id);
+        const account = list.find((acc) => acc.id === object.id);
         setTextButton(account ? account.name : "");
-        setDefaultValue(
-          account
-            ? account.id + (account.wallet_id ? `&${account.wallet_id}` : "")
-            : ""
-        );
+        setDefaultValue(account ? account.id : "");
         break;
       case "category":
-        const category = list.find((cat) => cat.id === object?.category);
+        const category = list.find((cat) => cat.id === object.category);
         setTextButton(category?.name || "");
         setDefaultValue(category?.id || "");
         break;
       case "currency":
-        const currency = list.find((curr) => category.id === object?.currency);
+        const currency = list.find((curr) => curr.id === object.currency);
         setTextButton(currency?.name || "");
         setDefaultValue(currency?.id || "");
       default:
@@ -152,11 +152,8 @@ export function Selector({
                 name={inputId}
                 title={obj.name}
                 id={obj.id}
-                value={obj.id + `${obj.wallet_id ? `&${obj.wallet_id}` : ""}`}
-                checked={
-                  defaultValue ===
-                  obj.id + (obj.wallet_id ? `&${obj.wallet_id}` : "")
-                }
+                value={obj.id}
+                checked={defaultValue === obj.id}
                 type="radio"
                 className="hidden peer"
                 required
@@ -164,12 +161,7 @@ export function Selector({
               <label
                 className="pl-2 py-1 flex items-center gap-2 peer-checked:bg-palette-300 peer-checked:text-palette-100 hover:bg-palette-300"
                 htmlFor={obj.id}
-                onClick={() =>
-                  handleInputClick(
-                    obj.name,
-                    obj.id + `${obj.wallet_id ? `&${obj.wallet_id}` : ""}`
-                  )
-                }
+                onClick={() => handleInputClick(obj.name, obj.id)}
               >
                 <span
                   className={`w-4 h-4 rounded-full`}
