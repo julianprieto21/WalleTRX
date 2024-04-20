@@ -80,11 +80,7 @@ export function Selector({
   text,
 }: {
   list: any[];
-  object?: {
-    id: string;
-    category: string;
-    currency: string;
-  };
+  object?: any;
   inputId: string;
   text: string;
 }) {
