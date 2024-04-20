@@ -77,6 +77,14 @@ export async function editAccount(id: string, formData: FormData) {
 }
 
 export async function createTransaction(formData: FormData) {
+  const session = await auth();
+  if (!session?.user?.email || !session?.user?.id || !session?.user.name)
+    return;
+  const user = await fetchUser({
+    id: session.user.id,
+    name: session.user.name,
+    email: session.user.email,
+  });
   const { type, description, account, category, amount, created_at } =
     TransactionSchema.parse({
       type: formData.get("type"),
@@ -86,11 +94,10 @@ export async function createTransaction(formData: FormData) {
       amount: formData.get("amount"),
       created_at: formData.get("date"),
     });
-  const [account_id, wallet_id] = account.split("&");
   const realAmount = type === "income" ? amount : -amount;
   await sql`
-    INSERT INTO transactions (wallet_id, account_id, type, description, category, amount, created_at)
-    VALUES (${wallet_id}, ${account_id}, ${type}, ${description}, ${category}, ${
+    INSERT INTO transactions (user_id, account_id, type, description, category, amount, created_at)
+    VALUES (${user.id}, ${account}, ${type}, ${description}, ${category}, ${
     realAmount * 100
   }, ${created_at})
   `;
@@ -108,10 +115,9 @@ export async function editTransaction(id: string, formData: FormData) {
       amount: formData.get("amount"),
       created_at: formData.get("date"),
     });
-  const [account_id, wallet_id] = account.split("&");
   const realAmount = type === "income" ? amount : -amount;
   await sql`
-    UPDATE transactions SET wallet_id = ${wallet_id}, account_id = ${account_id}, type = ${type}, description = ${description}, category = ${category}, amount = ${
+    UPDATE transactions SET account_id = ${account}, type = ${type}, description = ${description}, category = ${category}, amount = ${
     realAmount * 100
   }, created_at = ${created_at}
   WHERE id = ${id}
