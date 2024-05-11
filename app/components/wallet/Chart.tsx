@@ -1,6 +1,6 @@
 "use client";
 import { Line, LineChart, ResponsiveContainer, Tooltip, XAxis } from "recharts";
-import { formatDate, formatBalance } from "../../../_app/lib/utils";
+import { formatDate, formatBalance } from "@lib/utils";
 
 const CustomTooltip = ({
   active,
@@ -15,7 +15,7 @@ const CustomTooltip = ({
     return (
       <div className="custom-tooltip bg-palette-400 p-2 rounded-md shadow-lg">
         <strong className="label text-palette-100">
-          {formatDate({ dateStr: label })}
+          {formatDate({ date: new Date(label) })}
         </strong>
         <p className="desc text-palette-100">
           {formatBalance(payload[0].value, "auto")}
