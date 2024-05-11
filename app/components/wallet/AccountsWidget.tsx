@@ -1,6 +1,6 @@
 import type { User } from "@lib/types";
 import Link from "next/link";
-import { es as dict } from "@lib/dictionaries";
+import { dict } from "@lib/dictionaries";
 import { formatBalance } from "@lib/utils";
 import { getBalance } from "@lib/db";
 

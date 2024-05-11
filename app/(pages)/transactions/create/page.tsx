@@ -1,4 +1,4 @@
-import { es as dict } from "@lib/dictionaries";
+import { dict } from "@lib/dictionaries";
 import CreateForm from "../components/CreateForm";
 import Breadcrumbs from "@components/Breadcrumbs";
 import { getAccounts } from "@lib/db";

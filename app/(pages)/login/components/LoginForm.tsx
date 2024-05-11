@@ -2,7 +2,7 @@ import { signIn } from "@auth";
 import _ from "lodash";
 import GoogleLogo from "@public/google-logo.svg";
 import GithubLogo from "@public/github-logo.svg";
-import { es } from "@lib/dictionaries";
+import { dict } from "@lib/dictionaries";
 
 function LogInButton({ provider }: { provider: string }) {
   return (
@@ -31,14 +31,14 @@ function LogInButton({ provider }: { provider: string }) {
 
 export default function LoginForm() {
   // const dict = _.get(window, "app.dict", {});
-  const { auth: dict } = es;
+  const { auth: text } = dict;
   return (
     <section className="w-4/5 p-4 gap-2 sm:w-[600px] rounded-lg flex flex-col justify-center items-center shadow-xl border border-palette-250">
-      <h1 className="font-semibold text-4xl sm:text-6xl my-2">{dict.login}</h1>
+      <h1 className="font-semibold text-4xl sm:text-6xl my-2">{text.login}</h1>
       <div className="flex flex-row items-center w-full">
         <hr className="border-t border-palette-250 w-4/5 ml-3"></hr>
         <p className="text-sm font-thin w-full text-center text-palette-250">
-          {dict.secondaryLogin}
+          {text.secondaryLogin}
         </p>
         <hr className="border-t border-palette-250 w-4/5 mr-3"></hr>
       </div>

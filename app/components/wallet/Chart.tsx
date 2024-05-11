@@ -1,5 +1,5 @@
 "use client";
-import { es } from "@lib/dictionaries";
+import { dict } from "@lib/dictionaries";
 import { formatBalance, formatDate } from "@lib/utils";
 import { ApexOptions } from "apexcharts";
 import dynamic from "next/dynamic";
@@ -20,7 +20,7 @@ export function Chart({
   const state = {
     series: [
       {
-        name: es.balance,
+        name: dict.balance,
         data: balanceList,
       },
     ],

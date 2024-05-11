@@ -1,5 +1,5 @@
 "use client";
-import { es as dict } from "@lib/dictionaries";
+import { dict } from "@lib/dictionaries";
 import { DataTransferBoth, Download, Upload } from "iconoir-react";
 import _ from "lodash";
 

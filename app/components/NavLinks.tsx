@@ -10,7 +10,7 @@ import {
   Reports,
   Settings,
 } from "iconoir-react";
-import { es as dict } from "@lib/dictionaries";
+import { dict } from "@lib/dictionaries";
 
 type LinkProps = {
   isLogin: boolean;

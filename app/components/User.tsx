@@ -1,8 +1,8 @@
-import { es } from "@lib/dictionaries";
+import { dict } from "@lib/dictionaries";
 import type { User } from "@lib/types";
 
 export default function User({ user }: { user: User }) {
-  const { mainTitle } = es;
+  const { mainTitle } = dict;
   const { image_url, name } = user;
   return (
     <div className="w-full sm:w-1/2 sm:pl-0">

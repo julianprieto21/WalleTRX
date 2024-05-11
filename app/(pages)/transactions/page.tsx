@@ -1,4 +1,4 @@
-import { es as dict } from "@lib/dictionaries";
+import { dict } from "@lib/dictionaries";
 import Breadcrumbs from "@components/Breadcrumbs";
 import Search from "@components/Search";
 import { Table, TableSkeleton } from "./components/Table";

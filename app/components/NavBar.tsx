@@ -10,7 +10,7 @@ import {
   Settings,
 } from "iconoir-react";
 import Link from "next/link";
-import { es as dict } from "@lib/dictionaries";
+import { dict } from "@lib/dictionaries";
 
 export async function SideNav() {
   const { footer: footerText } = dict.nav;

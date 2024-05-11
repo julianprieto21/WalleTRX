@@ -1,6 +1,6 @@
 import EditForm from "@transactions/components/EditForm";
 import Breadcrumbs from "@components/Breadcrumbs";
-import { es as dict } from "@lib/dictionaries";
+import { dict } from "@lib/dictionaries";
 import { Transaction } from "@lib/types";
 import { getTransaction } from "@lib/db";
 

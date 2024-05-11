@@ -1,4 +1,4 @@
-import { es as dict } from "@lib/dictionaries";
+import { dict } from "@lib/dictionaries";
 import { LogOut } from "iconoir-react";
 import { signOut } from "@auth";
 

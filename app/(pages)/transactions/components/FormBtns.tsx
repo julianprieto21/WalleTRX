@@ -1,5 +1,5 @@
 "use client";
-import { es as dict } from "@lib/dictionaries";
+import { dict } from "@lib/dictionaries";
 import { Xmark, Check } from "iconoir-react";
 import Link from "next/link";
 import { useFormStatus } from "react-dom";

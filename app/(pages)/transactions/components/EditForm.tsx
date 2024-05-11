@@ -1,5 +1,5 @@
 "use client";
-import { es as dict } from "@lib/dictionaries";
+import { dict } from "@lib/dictionaries";
 import { SelectorInput } from "./SelectorInput";
 import { TypeInput } from "./TypeInput";
 import { CancelBtn, SubmitBtn } from "./FormBtns";

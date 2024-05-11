@@ -1,6 +1,6 @@
 import Breadcrumbs from "@components/Breadcrumbs";
 import { getAccount } from "@lib/db";
-import { es as dict } from "@lib/dictionaries";
+import { dict } from "@lib/dictionaries";
 import { Account } from "@lib/types";
 
 type Props = {

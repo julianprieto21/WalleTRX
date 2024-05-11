@@ -4,7 +4,7 @@ import {
 } from "@(pages)/transactions/components/FormBtns";
 import { SelectorInput } from "@(pages)/transactions/components/SelectorInput";
 import { createAccount } from "@lib/actions";
-import { es as dict } from "@lib/dictionaries";
+import { dict } from "@lib/dictionaries";
 
 export default function CreateForm() {
   const { input } = dict;

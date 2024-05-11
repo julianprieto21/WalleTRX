@@ -1,5 +1,5 @@
 import { getBalance, getTransactions } from "@lib/db";
-import { es as dict } from "@lib/dictionaries";
+import { dict } from "@lib/dictionaries";
 import type { User } from "@lib/types";
 import { formatBalance } from "@lib/utils";
 

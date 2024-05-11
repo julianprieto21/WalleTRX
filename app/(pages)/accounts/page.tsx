@@ -1,7 +1,6 @@
 import Breadcrumbs from "@components/Breadcrumbs";
 import { CreateBtn } from "@components/CreateBtn";
-import Search from "@components/Search";
-import { es as dict } from "@lib/dictionaries";
+import { dict } from "@lib/dictionaries";
 
 export default function AccountsPage() {
   const { nav, buttons } = dict;

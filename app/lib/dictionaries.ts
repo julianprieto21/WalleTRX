@@ -1,4 +1,4 @@
-export const es = {
+export const dict = {
   app: "WALLE&TRX",
   nav: {
     home: "Inicio",

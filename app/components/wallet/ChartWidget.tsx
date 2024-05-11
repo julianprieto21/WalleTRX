@@ -1,5 +1,5 @@
 import { getBalance } from "@lib/db";
-import { es as dict } from "@lib/dictionaries";
+import { dict } from "@lib/dictionaries";
 import { formatBalanceForChart } from "@lib/utils";
 import type { User } from "@lib/types";
 import { Chart } from "./Chart";
