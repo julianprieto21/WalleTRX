@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Providers } from "./components/Providers";
-import { SideNav, TopNav } from "./components/Nav";
+import { SessionProvider } from "@components/SessionProvider";
+import { SideNav, TopNav } from "@components/NavBar";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: "WalleTRX",
@@ -17,11 +18,12 @@ export default function RootLayout({
   return (
     <html lang="es" className="h-full">
       <body className="m-0 p-0 flex flex-col sm:flex-row h-full">
-        <Providers>
+        <SessionProvider>
           <SideNav />
           <TopNav />
           {children}
-        </Providers>
+        </SessionProvider>
+        <Toaster />
       </body>
     </html>
   );

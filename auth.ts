@@ -4,10 +4,9 @@ import Google from "next-auth/providers/google";
 import Github from "next-auth/providers/github";
 
 const config = {
-  // secret: process.env.AUTH_SECRET,
   providers: [Google, Github],
   pages: {
-    signIn: "/auth/login",
+    signIn: "/login",
   },
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
@@ -21,13 +20,13 @@ const config = {
       }
       return true;
     },
-    session: ({ session, token }) => ({
-      ...session,
-      user: {
-        ...session.user,
-        id: token.sub,
-      },
-    }),
+    // session: ({ session, token }) => ({
+    //   ...session,
+    //   user: {
+    //     ...session.user,
+    //     id: token.sub,
+    //   },
+    // }),
   },
 } satisfies NextAuthConfig;
 

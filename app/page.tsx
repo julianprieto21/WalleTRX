@@ -1,61 +1,62 @@
-"use server";
-import React from "react";
-import { fetchData } from "./lib/fetch";
-import { auth } from "@/auth";
-import WalletActions from "@/app/components/wallet/WalletActions";
-import MonthChart from "@/app/components/wallet/MonthChart";
-import AccountSummary from "@/app/components/wallet/AccountSummary";
-import BalanceWidget from "./components/wallet/BalanceWidget";
-import MainTitle from "@/app/components/wallet/MainTitle";
-import Card from "./components/Card";
-import { getDictionary } from "./lib/dictionaries";
+import React, { Suspense } from "react";
+import User from "@components/User";
+import {
+  BalanceWidget,
+  BalanceWidgetSkeleton,
+} from "@components/wallet/BalanceWidget";
+import {
+  ExpenseWidget,
+  ExpenseWidgetSkeleton,
+} from "@components/wallet/ExpenseWidget";
+import {
+  IncomeWidget,
+  IncomeWidgetSkeleton,
+} from "@components/wallet/IncomeWidget";
+import TransferWidget from "@components/wallet/TranferWidget";
+import {
+  AccountsWidget,
+  AccountsWidgetSkeleton,
+} from "@components/wallet/AccountsWidget";
+import {
+  ChartWidget,
+  ChartWidgetSkeleton,
+} from "./components/wallet/ChartWidget";
+import { getUser } from "@lib/db";
 
 export default async function HomePage() {
-  const session = await auth();
-  const dict = await getDictionary("es");
-  if (!session?.user?.id || !session?.user?.name || !session?.user?.email) {
-    return new Error("No se pudo recuperar los datos de sesion");
-  } else {
-    const user = {
-      id: session.user.id,
-      name: session.user.name,
-      email: session.user.email,
-    };
-    const { accounts, transactions } = await fetchData(user);
-    const userName = session.user.name ? session.user.name : "";
-    const userImageUrl = session.user.image ? session.user.image : "";
-    return (
-      <main className="page pb-10 sm:pb-0">
-        <section className="sm:border-0 border-b border-palette-250 select-none w-full flex flex-row-reverse sm:flex-row items-center justify-center pt-8 xl:pt-10 2xl:pt-16 pb-4 px-4 sm:px-0">
-          <MainTitle
-            userName={userName}
-            userImageUrl={userImageUrl}
-            dict={dict}
-          />
-          <BalanceWidget transactions={transactions} dict={dict} />
-        </section>
-        <section className="w-full flex justify-center pt-8 xl:pt-6 2xl:pt-8 pb-4 xl:pb-0 2xl:pb-4">
-          <WalletActions transactions={transactions} />
-        </section>
-        <section className="w-full h-full flex flex-col lg:flex-row items-center lg:justify-evenly xl:py-0 2xl:py-8 gap-10 px-4">
-          <Card
-            title={dict.cards.accountSummary}
-            style="w-full h-64 xl:h-60 2xl:h-96 lg:w-2/5"
-          >
-            <AccountSummary
-              accounts={accounts}
-              transactions={transactions}
-              dict={dict}
-            />
-          </Card>
-          <Card
-            title={dict.cards.monthChart}
-            style="w-full h-60 xl:h-78 2xl:h-96 lg:w-2/5"
-          >
-            <MonthChart transactions={transactions} />
-          </Card>
-        </section>
-      </main>
-    );
-  }
+  const user = await getUser();
+  if (!user) return;
+  return (
+    <main className="page items-center pb-10 sm:pb-0">
+      <section className="sm:border-0 border-b border-palette-250 select-none w-full flex flex-row-reverse sm:flex-row items-center justify-center pt-8 xl:pt-10 2xl:pt-16 pb-4 px-4 sm:px-0">
+        <User user={user} />
+        <Suspense fallback={<BalanceWidgetSkeleton />}>
+          <BalanceWidget user={user} />
+        </Suspense>
+      </section>
+      <section className="w-4/5 flex flex-col items-center justify-center pt-8 xl:pt-6 2xl:pt-8 pb-4 xl:pb-0 2xl:pb-4 gap-6 xl:gap-4 2xl:gap-6 ">
+        <div className="w-full flex flex-row justify-center gap-6 sm:gap-6 lg:gap-4">
+          <Suspense fallback={<IncomeWidgetSkeleton />}>
+            <IncomeWidget user={user} />
+          </Suspense>
+          <Suspense fallback={<ExpenseWidgetSkeleton />}>
+            <ExpenseWidget user={user} />
+          </Suspense>
+        </div>
+        <div className="flex flex-row items-center w-[90%] gap-4">
+          <hr className="border-t border-palette-250 w-full"></hr>
+          <TransferWidget />
+          <hr className="border-t border-palette-250 w-full"></hr>
+        </div>
+      </section>
+      <section className="size-full flex flex-col lg:flex-row items-center lg:justify-evenly xl:py-0 2xl:py-6 gap-10 px-4">
+        <Suspense fallback={<AccountsWidgetSkeleton />}>
+          <AccountsWidget user={user} />
+        </Suspense>
+        <Suspense fallback={<ChartWidgetSkeleton />}>
+          <ChartWidget user={user} />
+        </Suspense>
+      </section>
+    </main>
+  );
 }

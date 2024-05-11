@@ -1,0 +1,29 @@
+"use client";
+
+export function SelectorInput({
+  placeHolder,
+  options,
+  id,
+  selected,
+}: {
+  placeHolder: string;
+  options: any[];
+  id: string;
+  selected?: any;
+}) {
+  return (
+    <select
+      required
+      title="Selector"
+      name={id}
+      className="bg-palette-400 border border-palette-250 text-palette-100 rounded focus:border-palette-500 w-full p-2.5 "
+    >
+      <option selected disabled>
+        {placeHolder}
+      </option>
+      {options.map((option) => (
+        <option value={option.id}>{option.name}</option>
+      ))}
+    </select>
+  );
+}

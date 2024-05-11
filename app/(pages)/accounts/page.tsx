@@ -1,39 +1,21 @@
-import Breadcrumbs from "@/app/components/Breadcrumbs";
-import AccountItem from "@/app/components/accounts/AccItem";
-import { CreateAccount } from "@/app/components/buttons";
-import { getDictionary } from "@/app/lib/dictionaries";
-import { fetchData } from "@/app/lib/fetch";
-import { groupByAccount } from "@/app/lib/utils";
-import { auth } from "@/auth";
+import Breadcrumbs from "@components/Breadcrumbs";
+import { CreateBtn } from "@components/CreateBtn";
+import Search from "@components/Search";
+import { es as dict } from "@lib/dictionaries";
 
-export default async function AccountsPage() {
-  const session = await auth();
-  const dict = await getDictionary("es");
-  if (!session?.user?.id || !session?.user?.name || !session?.user?.email) {
-    return new Error("No se pudo recuperar los datos de sesion");
-  } else {
-    const user = {
-      id: session.user.id,
-      name: session.user.name,
-      email: session.user.email,
-    };
-    const { accounts, transactions } = await fetchData(user);
-    const balanceByAccounts = groupByAccount(accounts, transactions);
-    return (
-      <main className="page px-4 sm:px-12 py-10 sm:pb-10 sm:pt-16">
-        <Breadcrumbs
-          breadcrumbs={[
-            { label: dict.menu.home, href: "/" },
-            { label: dict.menu.accounts, href: "/accounts", active: true },
-          ]}
-        />
-        <CreateAccount text={dict.buttons.createAcc} />
-        <section className="flex w-full flex-col justify-center xl:justify-start gap-4 mt-6">
-          {balanceByAccounts.map((acc, index) => (
-            <AccountItem key={index} account={acc} />
-          ))}
-        </section>
-      </main>
-    );
-  }
+export default function AccountsPage() {
+  const { nav, buttons } = dict;
+  return (
+    <main className="page px-4 sm:px-12 py-10 sm:pb-10 sm:pt-16">
+      <Breadcrumbs
+        breadcrumbs={[
+          { label: nav.home, href: "/" },
+          { label: nav.accounts, href: "/accounts", active: true },
+        ]}
+      />
+      <div className="flex w-full h-10">
+        <CreateBtn id="accounts" text={buttons.createAcc} />
+      </div>
+    </main>
+  );
 }

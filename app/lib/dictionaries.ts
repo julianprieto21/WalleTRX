@@ -1,8 +1,68 @@
-import "server-only";
-
-const dictionaries: Record<string, () => Promise<any>> = {
-  es: () => import("./dictionaries/es.json").then((module) => module.default),
-  // en: () => import("./dictionaries/en.json").then((module) => module.default),
+export const es = {
+  app: "WALLE&TRX",
+  nav: {
+    home: "Inicio",
+    transactions: "Transacciones",
+    investments: "Inversiones",
+    dashboard: "Tablero",
+    accounts: "Cuentas",
+    settings: "Ajustes",
+    footer: "Aplicación creada por Julian Prieto",
+  },
+  actions: {
+    create: "Crear",
+    edit: "Editar",
+    delete: "Borrar",
+  },
+  auth: {
+    login: "Iniciar sesión",
+    secondaryLogin: "Log with social accounts",
+    logout: "Cerrar sesión",
+  },
+  filters: {
+    account: "Cuenta",
+    category: "Categoría",
+    date: "Fecha",
+    month: "Mes",
+  },
+  income: "Ingreso",
+  expense: "Gasto",
+  transfer: "Transfer",
+  input: {
+    selector: {
+      all: "Todo",
+      account: "Seleccionar cuenta",
+      category: "Seleccionar categoría",
+      currency: "Seleccionar moneda",
+      type: "Seleccionar tipo",
+    },
+    amount: "Monto",
+    description: "Descripción",
+    recurrent: "Recurrente",
+    name: "Nombre",
+  },
+  messages: {
+    noAccounts: "Aun no existen cuentas. Crea una en ",
+  },
+  balance: "Saldo",
+  mainTitle: "Hola",
+  buttons: {
+    cancel: "Cancelar",
+    confirm: "Confirmar",
+    createTrx: "Crear transacción",
+    createAcc: "Crear cuenta",
+    searchTrx: "Buscar transacciones...",
+  },
+  cards: {
+    accountSummary: "Resumen de cuentas",
+    monthChart: "Gráfico mensual",
+  },
+  toasts: {
+    successCreateTransaction: "Transacción creada con exito!",
+    successEditTransaction: "Transaccion editada con exito!",
+    successDeleteTransaction: "Transaccion eliminada con exito!",
+    errorCreateTransaction: "Error al crear la transaccion.",
+    errorEditTransaction: "Error al editar la transaccion.",
+    errorDeleteTransaction: "Error al eliminar la transaccion.",
+  },
 };
-
-export const getDictionary = async (locale: string) => dictionaries[locale]();
