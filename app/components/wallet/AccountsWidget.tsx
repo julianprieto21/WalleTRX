@@ -26,7 +26,7 @@ const AccountsItem = ({
   account,
 }: {
   account: {
-    account_id: string;
+    id: string;
     name: string;
     color: string;
     currency: string;
@@ -35,7 +35,7 @@ const AccountsItem = ({
 }) => {
   return (
     <Link
-      href={`/accounts/${account.account_id}`}
+      href={`/accounts/${account.id}`}
       className="hover:bg-palette-300 p-4 w-full flex flex-row justify-between items-center rounded-lg"
     >
       <div className="flex flex-row gap-2 justify-center items-center">
@@ -73,7 +73,7 @@ export async function AccountsWidget({ user }: { user: User }) {
     groupBy: "account",
     user: user,
   })) as {
-    account_id: string;
+    id: string;
     name: string;
     color: string;
     currency: string;
