@@ -1,8 +1,8 @@
 import { getBalance } from "@lib/db";
 import { es as dict } from "@lib/dictionaries";
-import Chart from "./Chart";
 import { formatBalanceForChart } from "@lib/utils";
 import type { User } from "@lib/types";
+import { Chart } from "./Chart";
 
 export function ChartWidgetSkeleton() {
   const { monthChart: text } = dict.cards;
