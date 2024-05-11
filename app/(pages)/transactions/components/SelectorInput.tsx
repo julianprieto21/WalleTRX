@@ -21,8 +21,10 @@ export function SelectorInput({
       <option selected disabled>
         {placeHolder}
       </option>
-      {options.map((option) => (
-        <option value={option.id}>{option.name}</option>
+      {options.map((option, index) => (
+        <option key={index} value={option.id}>
+          {option.name}
+        </option>
       ))}
     </select>
   );

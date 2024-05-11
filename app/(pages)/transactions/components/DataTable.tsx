@@ -27,12 +27,15 @@ export default function DataTable({
 
   return (
     <tbody>
-      {filteredTransactions.map((trx) => {
+      {filteredTransactions.map((trx, index) => {
         const acc = accounts.find((acc) => trx.account_id == acc.id) ?? {
           name: "?",
         };
         return (
-          <tr className="bg-palette-300 border-b border-palette-300">
+          <tr
+            key={index}
+            className="bg-palette-300 border-b border-palette-300"
+          >
             <th
               scope="row"
               className="px-6 py-4 text-palette-100 whitespace-nowrap"
