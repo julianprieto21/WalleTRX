@@ -18,7 +18,7 @@ export default async function TransactionPage() {
       />
       <div className="flex gap-4 w-full">
         <Search placeholder={buttons.searchTrx} />
-        <CreateBtn id="transaction" text={buttons.createTrx} />
+        <CreateBtn id="transactions" text={buttons.createTrx} />
       </div>
 
       <Filters />
