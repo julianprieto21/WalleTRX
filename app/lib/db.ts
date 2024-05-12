@@ -129,3 +129,41 @@ export async function getBalance({
     await client.end();
   }
 }
+
+export async function getChartData(chardID: number) {
+  if (chardID < 0 || typeof chardID != "number") return [];
+  const user = (await getUser()) as User;
+  const queries = [
+    {
+      id: 0,
+      query: `select EXTRACT(YEAR FROM created_at) as year, EXTRACT(MONTH FROM created_at) as month, sum(case when type='income' then amount else 0 end) income, sum(case when type='expense' then amount else 0 end) expense from transactions where user_id='${user.id}' group by EXTRACT(YEAR FROM created_at), EXTRACT(MONTH FROM created_at) order by EXTRACT(YEAR FROM created_at), EXTRACT(MONTH FROM created_at)`,
+    },
+    {
+      id: 1,
+      query: `select category, sum(amount) total from transactions where user_id='${user.id}' group by category`,
+    },
+    {
+      id: 2,
+      query: `select created_at, sum(case when type='income' then amount else 0 end) income, sum(case when type='expense' then amount else 0 end) expense from transactions where user_id='${user.id}' group by created_at order by created_at`,
+    },
+    {
+      id: 3,
+      query: `select a.name, a.color, sum(t.amount) total from transactions t join accounts a on t.account_id = a.id where t.user_id='${user.id}' group by a.name, a.color`,
+    },
+  ];
+
+  const client = createClient();
+  const query = queries[chardID].query;
+  try {
+    await client.connect();
+    const data = await client.query({
+      text: `${query}`,
+    });
+    return data.rows ?? [];
+  } catch (error) {
+    console.error(error);
+    return [];
+  } finally {
+    await client.end();
+  }
+}

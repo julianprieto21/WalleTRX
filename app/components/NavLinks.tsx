@@ -71,7 +71,6 @@ export default function NavLinks({ isLogIn }: { isLogIn: boolean }) {
       name: nav.dashboard,
       href: "/dashboard",
       icon: Reports,
-      disabled: true,
     },
     { name: nav.accounts, href: "/accounts", icon: AppleWallet },
     { name: nav.settings, href: "/settings", icon: Settings },
