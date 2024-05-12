@@ -32,6 +32,9 @@ export function Chart({
         zoom: {
           enabled: false,
         },
+        toolbar: {
+          show: false,
+        },
       },
       grid: {
         show: false,
