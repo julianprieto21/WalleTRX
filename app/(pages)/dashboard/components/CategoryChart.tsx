@@ -65,6 +65,9 @@ export default function CategoryChart({ data }: { data: any[] }) {
       },
       dataLabels: {
         enabled: true,
+        style: {
+          fontSize: "26px",
+        },
       },
       theme: {
         mode: "dark",
