@@ -1,5 +1,6 @@
 "use client";
 import { CATEGORIES } from "@lib/consts/categories";
+import { getChartData } from "@lib/db";
 import { dict } from "@lib/dictionaries";
 import { formatBalance } from "@lib/utils";
 import { ApexOptions } from "apexcharts";
@@ -19,7 +20,7 @@ export default function AccountChart({ data }: { data: any[] }) {
     setSeries(data.map((item) => parseInt(item.total)));
     setLabels(data.map((item) => item.name));
     setColors(data.map((item) => item.color));
-  }, [data]);
+  }, []);
   const state = {
     series: series,
     options: {
