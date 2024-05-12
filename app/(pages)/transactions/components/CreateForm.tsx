@@ -8,6 +8,7 @@ import { createTransaction } from "@lib/actions";
 import { CATEGORIES } from "@lib/consts/categories";
 import { Account } from "@lib/types";
 import { toast } from "sonner";
+import { showToast } from "@lib/utils";
 
 export default function CreateForm({ accounts }: { accounts: Account[] }) {
   const searchParams = useSearchParams();
@@ -18,9 +19,9 @@ export default function CreateForm({ accounts }: { accounts: Account[] }) {
       action={async (formData) => {
         try {
           await createTransaction(formData);
-          toast.success(toasts.successCreateTransaction);
+          showToast(toasts.successCreateTransaction, "success");
         } catch (err) {
-          toast.error(toasts.errorCreateTransaction);
+          showToast(toasts.errorCreateTransaction, "error");
           console.error(err);
         }
       }}

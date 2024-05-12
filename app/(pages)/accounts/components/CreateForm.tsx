@@ -5,12 +5,21 @@ import {
 import { SelectorInput } from "@(pages)/transactions/components/SelectorInput";
 import { createAccount } from "@lib/actions";
 import { dict } from "@lib/dictionaries";
+import { showToast } from "@lib/utils";
 
 export default function CreateForm() {
-  const { input } = dict;
+  const { input, toasts } = dict;
   return (
     <form
-      action={createAccount}
+      action={async (formData) => {
+        try {
+          await createAccount(formData);
+          showToast(toasts.successCreateAccount, "success");
+        } catch (err) {
+          showToast(toasts.errorCreateAccount, "error");
+          console.error(err);
+        }
+      }}
       className="w-full bg-palette-300 rounded-lg shadow-md"
     >
       <main className="flex flex-col gap-6 px-2 py-4 md:gap-4 md:px-4 lg:gap-6">

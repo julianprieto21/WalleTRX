@@ -6,6 +6,7 @@ import { CancelBtn, SubmitBtn } from "./FormBtns";
 import { Transaction } from "@lib/types";
 import { editTransaction } from "@lib/actions";
 import { toast } from "sonner";
+import { showToast } from "@lib/utils";
 
 export default function EditForm({
   transaction,
@@ -20,9 +21,9 @@ export default function EditForm({
       action={async (formData) => {
         try {
           await editTransaction(transaction.id, formData);
-          toast.success(toasts.successEditTransaction);
+          showToast(toasts.successEditTransaction, "success");
         } catch (err) {
-          toast.error(toasts.errorEditTransaction);
+          showToast(toasts.errorEditTransaction, "error");
           console.error(err);
         }
       }}

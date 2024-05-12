@@ -64,3 +64,36 @@ export function formatBalanceForChart(
   });
   return array;
 }
+
+export function formatDataForTimeLine({ data }: { data: any[] }) {
+  // creo un array con las fechas de data
+  const dates = data.map((item) => item.created_at);
+  // me quedo con la fecha menor y la fecha actual
+  const minDate = Math.min(...dates);
+  const maxDate = new Date().getTime();
+  // creo un nuevo array de fechas que vaya desde minDate hasta maxDate
+  const datesArray = Array.from(
+    { length: (maxDate - minDate) / 86400000 + 1 },
+    (_, i) => new Date(minDate + i * 86400000)
+  );
+  // ahora le asigno a cada dia su income y expense correspondiente de data
+  const formattedData = datesArray.map((date) => {
+    const income = data
+      .filter((item) => item.created_at.toISOString() == date.toISOString())
+      .reduce((acc, item) => acc + Math.abs(item.income), 0);
+    const expense = data
+      .filter((item) => item.created_at.toISOString() == date.toISOString())
+      .reduce((acc, item) => acc + Math.abs(item.expense), 0);
+    return {
+      date: date,
+      income: income,
+      expense: expense,
+    };
+  });
+
+  return formattedData;
+}
+
+export function showToast(message: string, type: "success" | "error") {
+  toast[type](message);
+}
