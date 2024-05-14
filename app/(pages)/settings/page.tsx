@@ -1,9 +1,12 @@
 import { LogoutBtn } from "@(pages)/login/components/LogoutBtn";
 import { auth } from "@auth";
 import { Session } from "next-auth";
+import ClearHistory from "./components/ClearHistoryBtn";
+import DeleteUser from "./components/DeleteUserBtn";
+import UserInfo from "./components/UserInfo";
 
 const LineH = () => (
-  <div className="w-full h-0 border-t border-palette-250 my-2"></div>
+  <div className="w-full h-0 border-t border-palette-250 my-4"></div>
 );
 
 export default async function SettingsPage() {
@@ -13,17 +16,19 @@ export default async function SettingsPage() {
       <h2 className="font-medium text-palette-200 text-lg mb-2">
         Información de Usuario
       </h2>
-      <img
-        src={user?.image ?? ""}
-        alt="usuario"
-        className="ml-4 mb-1 size-12 rounded-full"
-      />
-      <ul className="ml-2 text-palette-100 text-sm">
-        <li>Nombre: {user?.name}</li>
-        <li>Email: {user?.email}</li>
-      </ul>
+      <UserInfo user={user} />
       <LineH />
-      <LogoutBtn />
+      <h2 className="font-medium text-palette-200 text-lg mb-2">Sesión</h2>
+      <div className="flex flex-col items-start gap-8 w-2/5 p-3 border rounded-md border-palette-200">
+        <LogoutBtn />
+      </div>
+
+      <LineH />
+      <h2 className="font-medium text-palette-200 text-lg mb-2">Danger Zone</h2>
+      <div className="flex flex-col items-start gap-8 w-2/5 p-3 border rounded-md border-red-500">
+        <ClearHistory />
+        <DeleteUser />
+      </div>
     </main>
   );
 }

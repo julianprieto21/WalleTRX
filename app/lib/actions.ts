@@ -1,9 +1,10 @@
 "use server";
 import { AccountSchema, TransactionSchema } from "./schemas";
-import { createClient, db } from "@vercel/postgres";
+import { createClient } from "@vercel/postgres";
 import { redirect } from "next/navigation";
 import { getUser } from "./db";
 import { User } from "./types";
+import { signOut } from "@auth";
 
 export async function createTransaction(formData: FormData) {
   const user = (await getUser()) as User;
@@ -130,5 +131,37 @@ export async function deleteAccount(aid: string) {
   } finally {
     await client.end();
     redirect("/");
+  }
+}
+
+export async function clearHistory() {
+  const user = (await getUser()) as User;
+  if (!user) return;
+  const client = createClient();
+  try {
+    await client.connect();
+    await client.sql`DELETE FROM transactions WHERE user_id=${user.id}`;
+  } catch (err) {
+    console.error(err);
+  } finally {
+    await client.end();
+    redirect("/");
+  }
+}
+
+export async function deleteUser() {
+  const user = (await getUser()) as User;
+  if (!user) return;
+  const client = createClient();
+  await signOut();
+  try {
+    await client.connect();
+    await client.sql`DELETE FROM users WHERE id=${user.id}`;
+    await client.sql`DELETE FROM transactions WHERE user_id=${user.id}`;
+    await client.sql`DELETE FROM accounts WHERE user_id=${user.id}`;
+  } catch (err) {
+    console.error(err);
+  } finally {
+    await client.end();
   }
 }
