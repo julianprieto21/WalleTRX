@@ -1,22 +1,21 @@
 "use client";
 import { dict } from "@lib/dictionaries";
-import { formatBalance, formatDate } from "@lib/utils";
-import { ApexOptions } from "apexcharts";
+import { formatBalance } from "@lib/utils";
 import dynamic from "next/dynamic";
 import React from "react";
 const ReactApexChart = dynamic(() => import("react-apexcharts"), {
   ssr: false,
 });
 
-export function Chart({
+export function LineChart({
   transactions,
 }: {
-  transactions: { date: Date; balance: number }[];
+  transactions: { month: string; total: number }[];
 }) {
-  const datesList = transactions.map((transaction) =>
-    formatDate({ date: transaction.date })
+  const datesList = transactions.map((transaction) => transaction.month);
+  const balanceList = transactions.map(
+    (transaction) => transaction.total / 100
   );
-  const balanceList = transactions.map((transaction) => transaction.balance);
   const state = {
     series: [
       {
@@ -26,9 +25,7 @@ export function Chart({
     ],
     options: {
       chart: {
-        background: "#252422",
-        height: 350,
-        type: "line",
+        background: "#2A2927",
         zoom: {
           enabled: false,
         },
@@ -43,20 +40,26 @@ export function Chart({
         enabled: false,
       },
       stroke: {
-        curve: "straight",
+        curve: "smooth" as "smooth",
         width: 2,
       },
       xaxis: {
         categories: datesList,
         labels: {
-          show: false,
+          show: true,
+          formatter: (val: string) => dict.months[parseInt(val)],
         },
       },
       yaxis: {
-        show: false,
+        show: true,
+        forceNiceScale: true,
+        stepSize: 100000,
+        labels: {
+          formatter: (val: number) => formatBalance(val),
+        },
       },
       theme: {
-        mode: "dark",
+        mode: "dark" as "dark",
       },
       colors: ["#ffd100"],
       tooltip: {
@@ -64,16 +67,16 @@ export function Chart({
           formatter: (val: number) => formatBalance(val),
         },
       },
-    } as ApexOptions,
+    },
   };
   return (
-    <div className="">
+    <div className="w-full px-2 py-1">
       <ReactApexChart
         options={state.options}
         series={state.series}
         type="line"
-        height={337}
         width="100%"
+        height={275}
       />
     </div>
   );

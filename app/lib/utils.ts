@@ -26,40 +26,38 @@ export const formatDate = ({
 export function formatBalance(
   amount: number,
   signDisplay: "never" | "always" | "auto" = "auto",
-  currency: string = "ARS"
+  currency: string = "ARS",
+  notation: "compact" | "standard" | "scientific" | "engineering" = "standard"
 ) {
   const formatter = new Intl.NumberFormat("es-AR", {
     style: "currency",
     currency: currency,
     minimumFractionDigits: 2,
     signDisplay: signDisplay,
+    notation: notation,
   });
   return formatter.format(amount);
 }
 
 export function formatBalanceForChart(
   balanceByDate: {
-    created_at: Date;
-    total: number;
+    month: string;
+    total: string;
   }[]
 ) {
   let balance;
-  const maxDays = 30;
-  const dates = [];
-  for (let i = maxDays - 1; i >= 0; i--) {
-    dates.push(new Date(new Date().setDate(new Date().getDate() - i)));
-  }
+  const dates = balanceByDate.map((item) => item.month).slice(-12);
   const array = dates.map((date) => {
     const transactionsOfDay = balanceByDate.filter(
-      (transaction) => transaction.created_at <= date
+      (transaction) => parseInt(transaction.month) <= parseInt(date)
     );
     balance = transactionsOfDay.reduce(
-      (acc, transaction) => acc + transaction.total / 100,
+      (acc, transaction) => acc + parseInt(transaction.total),
       0
     );
     return {
-      date: date,
-      balance: balance,
+      month: date,
+      total: balance,
     };
   });
   return array;

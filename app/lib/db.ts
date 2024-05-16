@@ -69,7 +69,7 @@ export async function getTransactions() {
   try {
     await client.connect();
     const data =
-      await client.sql<Transaction>`select * from transactions where user_id=${user.id}`;
+      await client.sql<Transaction>`select * from transactions where user_id=${user.id} order by created_at DESC`;
     return data.rows;
   } catch (error) {
     console.error(error);
@@ -118,7 +118,7 @@ export async function getBalance({
         await client.sql`select user_id, sum(amount) total from transactions where user_id=${user.id} group by user_id`;
     } else if (groupBy == "date") {
       data =
-        await client.sql`select created_at, sum(amount) total from transactions where user_id=${user.id} group by created_at`;
+        await client.sql`select EXTRACT(MONTH FROM created_at) as month, sum(amount) total from transactions where user_id=${user.id} group by EXTRACT(MONTH FROM created_at) order by EXTRACT(MONTH FROM created_at)`;
     } else {
       data = { rows: [] };
     }
