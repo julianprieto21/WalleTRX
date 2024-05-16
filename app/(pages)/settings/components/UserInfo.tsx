@@ -3,7 +3,7 @@ import { User } from "next-auth";
 export default function UserInfo({ user }: { user: User | undefined }) {
   if (!user) return <div></div>;
   return (
-    <div className="flex flex-col items-start gap-2 w-2/5 p-3 border rounded-md border-palette-200">
+    <>
       <img
         src={user.image ?? ""}
         alt="usuario"
@@ -35,6 +35,6 @@ export default function UserInfo({ user }: { user: User | undefined }) {
           <p className="block sm:hidden lg:block">Editar email</p>
         </button>
       </div>
-    </div>
+    </>
   );
 }

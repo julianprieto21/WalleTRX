@@ -4,31 +4,48 @@ import { Session } from "next-auth";
 import ClearHistory from "./components/ClearHistoryBtn";
 import DeleteUser from "./components/DeleteUserBtn";
 import UserInfo from "./components/UserInfo";
+import Breadcrumbs from "@components/Breadcrumbs";
+import { dict } from "@lib/dictionaries";
 
 const LineH = () => (
-  <div className="w-full h-0 border-t border-palette-250 my-4"></div>
+  <div className="w-4/5 h-0 border-t border-palette-300 my-4"></div>
 );
 
 export default async function SettingsPage() {
   const { user } = (await auth()) as Session;
+  const { nav: text } = dict;
   return (
     <main className="page px-4 sm:px-12 py-10 sm:pb-10 sm:pt-16">
-      <h2 className="font-medium text-palette-200 text-lg mb-2">
-        Información de Usuario
-      </h2>
-      <UserInfo user={user} />
-      <LineH />
-      <h2 className="font-medium text-palette-200 text-lg mb-2">Sesión</h2>
-      <div className="flex flex-col items-start gap-8 w-2/5 p-3 border rounded-md border-palette-200">
-        <LogoutBtn />
-      </div>
+      <Breadcrumbs
+        breadcrumbs={[
+          { label: text.home, href: "/" },
+          { label: text.settings, href: "/settings", active: true },
+        ]}
+      />
+      <section className="mt-6 flex flex-col items-center">
+        <h2 className="pl-2 font-medium text-palette-200 text-lg mb-2 w-3/5 text-left">
+          Información de Usuario
+        </h2>
+        <div className="flex flex-col items-start gap-2 w-3/5 p-3 border rounded-md border-palette-250">
+          <UserInfo user={user} />
+        </div>
+        <LineH />
+        <h2 className="pl-2 font-medium text-palette-200 text-lg mb-2 w-3/5 text-left">
+          Sesión
+        </h2>
+        <div className="flex flex-col items-start gap-8 w-3/5 p-3 border rounded-md border-palette-250">
+          <LogoutBtn />
+        </div>
 
-      <LineH />
-      <h2 className="font-medium text-palette-200 text-lg mb-2">Danger Zone</h2>
-      <div className="flex flex-col items-start gap-8 w-2/5 p-3 border rounded-md border-red-500">
-        <ClearHistory />
-        <DeleteUser />
-      </div>
+        <LineH />
+        <h2 className="ml-2 font-medium text-palette-200 text-lg mb-2 w-3/5 text-left">
+          Danger Zone
+        </h2>
+        <div className="flex flex-col items-start gap-8 w-3/5 p-3 border rounded-md border-red-500">
+          <ClearHistory />
+          <DeleteUser />
+        </div>
+      </section>
     </main>
   );
 }
