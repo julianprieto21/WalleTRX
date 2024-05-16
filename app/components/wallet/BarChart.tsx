@@ -19,6 +19,9 @@ export function BarChart({ data }: { data: any[] }) {
   const state = {
     series: series,
     options: {
+      legend: {
+        show: false,
+      },
       plotOptions: {
         bar: {
           columnWidth: "100%",
@@ -48,6 +51,9 @@ export function BarChart({ data }: { data: any[] }) {
       xaxis: {
         categories: [`Balance [month]`],
         labels: {
+          show: false,
+        },
+        axisBorder: {
           show: false,
         },
       },
