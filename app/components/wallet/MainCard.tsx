@@ -9,10 +9,10 @@ import Link from "next/link";
 const ActionLinks = () => {
   return (
     <>
-      <Link href={"/transactions/create?t=income"}>
+      <Link href={"/transactions/create?t=expense"}>
         <Upload className="text-expense text-3xl bg-palette-400 rounded-full hover:bg-expense hover:text-palette-100 transition p-2" />
       </Link>
-      <Link href={"/transactions/create?t=expense"}>
+      <Link href={"/transactions/create?t=income"}>
         <Download className="text-income text-3xl bg-palette-400 rounded-full hover:bg-income hover:text-palette-100 transition p-2" />
       </Link>
       <button title="transfer" disabled className="cursor-not-allowed">
