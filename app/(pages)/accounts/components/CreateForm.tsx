@@ -12,6 +12,7 @@ export default function CreateForm() {
   return (
     <form
       action={async (formData) => {
+        "use server";
         try {
           await createAccount(formData);
           showToast(toasts.successCreateAccount, "success");
