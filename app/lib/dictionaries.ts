@@ -44,7 +44,7 @@ export const dict = {
   messages: {
     noAccounts: "Aun no existen cuentas. Crea una en ",
   },
-  balance: "Saldo",
+  balance: "Balance",
   mainTitle: "Hola",
   buttons: {
     cancel: "Cancelar",

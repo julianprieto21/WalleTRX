@@ -1,4 +1,5 @@
 "use client";
+import { dict } from "@lib/dictionaries";
 import { formatBalance } from "@lib/utils";
 import _ from "lodash";
 import dynamic from "next/dynamic";
@@ -8,10 +9,11 @@ const ReactApexChart = dynamic(() => import("react-apexcharts"), {
 });
 
 export function BarChart({ data }: { data: any[] }) {
+  const { expense, income, balance } = dict;
   const series = data.map((item) => {
     const color = item.type == "income" ? "#31C48D" : "#F05252";
     return {
-      name: _.capitalize(item.type),
+      name: item.type == "income" ? income : expense,
       data: [Math.abs(parseInt(item.total))],
       color: color,
     };
@@ -49,7 +51,7 @@ export function BarChart({ data }: { data: any[] }) {
         width: 2,
       },
       xaxis: {
-        categories: [`Balance [month]`],
+        categories: [`${balance} [month]`],
         labels: {
           show: false,
         },

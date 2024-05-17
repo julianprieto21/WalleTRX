@@ -5,6 +5,7 @@ import { getBalance } from "@lib/db";
 import { User } from "@lib/types";
 import { formatBalance } from "@lib/utils";
 import Link from "next/link";
+import { dict } from "@lib/dictionaries";
 
 const ActionLinks = () => {
   return (
@@ -23,6 +24,7 @@ const ActionLinks = () => {
 };
 
 export default async function MainCard({ user }: { user: User }) {
+  const { balance: balanceText } = dict;
   const barChartData =
     (await getBalance({ groupBy: "type", user: user })) ?? [];
   const generalBalance =
@@ -31,7 +33,7 @@ export default async function MainCard({ user }: { user: User }) {
   return (
     <div className="shrink-0 rounded-lg h-96 w-[620px] mt-10 shadow-md bg-palette-300 px-6 py-5 relative">
       <h3 className="text-palette-100 text-4xl">
-        <p className="text-neutral-500 font-bold text-base">Balance:</p>
+        <p className="text-neutral-500 font-bold text-base">{balanceText}:</p>
         {formatBalance(balance / 100)}
       </h3>
       <Link href={"/settings"}>
