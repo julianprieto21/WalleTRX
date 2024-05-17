@@ -1,8 +1,8 @@
 import EditForm from "@transactions/components/EditForm";
 import Breadcrumbs from "@components/Breadcrumbs";
 import { dict } from "@lib/dictionaries";
-import { Transaction } from "@lib/types";
-import { getTransaction } from "@lib/db";
+import { Account, Transaction } from "@lib/types";
+import { getAccounts, getTransaction } from "@lib/db";
 
 type Props = {
   params: {
@@ -14,6 +14,7 @@ export default async function TransactionEditPage({ params }: Props) {
   const { nav, actions } = dict;
   const { tid } = params;
   const transaction = (await getTransaction({ tid: tid })) as Transaction;
+  const accounts = (await getAccounts()) as Account[];
   return (
     <main className="page px-4 sm:px-12 py-10 sm:pb-10 sm:pt-16">
       <Breadcrumbs
@@ -27,7 +28,7 @@ export default async function TransactionEditPage({ params }: Props) {
           },
         ]}
       />
-      <EditForm transaction={transaction} />
+      <EditForm transaction={transaction} accounts={accounts} />
     </main>
   );
 }

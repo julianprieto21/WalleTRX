@@ -3,15 +3,18 @@ import { dict } from "@lib/dictionaries";
 import { SelectorInput } from "./SelectorInput";
 import { TypeInput } from "./TypeInput";
 import { CancelBtn, SubmitBtn } from "./FormBtns";
-import { Transaction } from "@lib/types";
+import { Account, Transaction } from "@lib/types";
 import { editTransaction } from "@lib/actions";
 import { toast } from "sonner";
 import { showToast } from "@lib/utils";
+import { CATEGORIES } from "@lib/consts/categories";
 
 export default function EditForm({
   transaction,
+  accounts,
 }: {
   transaction: Transaction;
+  accounts: Account[];
 }) {
   const type = transaction.type;
   const date = transaction.created_at.toISOString().split("T")[0];
@@ -41,14 +44,16 @@ export default function EditForm({
         ></input>
         <section className="flex flex-col w-full lg:w-4/5 md:flex-row gap-2 md:gap-6 justify-center md:justify-start items-center">
           <SelectorInput
-            options={[]}
+            options={accounts}
             placeHolder={text.selector.account}
             id="account"
+            selected={transaction.account_id}
           />
           <SelectorInput
-            options={[]}
+            options={CATEGORIES}
             placeHolder={text.selector.category}
             id="category"
+            selected={transaction.category}
           />
           <div className="w-2/5 md:w-auto flex justify-center items-center gap-2 select-none">
             <input
