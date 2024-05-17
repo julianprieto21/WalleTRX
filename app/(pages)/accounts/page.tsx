@@ -1,6 +1,8 @@
 import Breadcrumbs from "@components/Breadcrumbs";
 import { CreateBtn } from "@components/CreateBtn";
 import { dict } from "@lib/dictionaries";
+import { Suspense } from "react";
+import Accounts from "./components/Accounts";
 
 export default function AccountsPage() {
   const { nav, buttons } = dict;
@@ -12,9 +14,14 @@ export default function AccountsPage() {
           { label: nav.accounts, href: "/accounts", active: true },
         ]}
       />
-      <div className="flex w-full h-10">
+      {/* <div className="flex w-full h-10">
         <CreateBtn id="accounts" text={buttons.createAcc} />
-      </div>
+      </div> */}
+      <section className="flex flex-col w-full mt-2">
+        <Suspense>
+          <Accounts />
+        </Suspense>
+      </section>
     </main>
   );
 }
