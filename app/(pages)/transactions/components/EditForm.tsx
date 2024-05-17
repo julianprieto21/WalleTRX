@@ -77,7 +77,7 @@ export default function EditForm({
             title="Amount"
             type="text"
             placeholder={text.amount}
-            defaultValue={transaction.amount / 100}
+            defaultValue={Math.abs(transaction.amount) / 100}
             required
           ></input>
           <input
