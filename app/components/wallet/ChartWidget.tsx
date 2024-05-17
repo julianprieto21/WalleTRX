@@ -7,6 +7,7 @@ import { LineChart } from "./LineChart";
 // TODO: tratar de deshacerce de este componente.
 export async function ChartWidget({ user }: { user: User }) {
   const balaceByDate = (await getBalance({ groupBy: "date", user: user })) as {
+    year: string;
     month: string;
     total: string;
   }[];

@@ -10,9 +10,12 @@ const ReactApexChart = dynamic(() => import("react-apexcharts"), {
 export function LineChart({
   transactions,
 }: {
-  transactions: { month: string; total: number }[];
+  transactions: { year: string; month: string; total: number }[];
 }) {
-  const datesList = transactions.map((transaction) => transaction.month);
+  const datesList = transactions.map(
+    (transaction) =>
+      dict.months[parseInt(transaction.month)] + "-" + transaction.year.slice(2)
+  );
   const balanceList = transactions.map(
     (transaction) => transaction.total / 100
   );
@@ -47,13 +50,12 @@ export function LineChart({
         categories: datesList,
         labels: {
           show: true,
-          formatter: (val: string) => dict.months[parseInt(val)],
         },
       },
       yaxis: {
         show: true,
         forceNiceScale: true,
-        stepSize: 100000,
+
         labels: {
           formatter: (val: number) => formatBalance(val),
         },

@@ -118,7 +118,7 @@ export async function getBalance({
         await client.sql`select user_id, sum(amount) total from transactions where user_id=${user.id} group by user_id`;
     } else if (groupBy == "date") {
       data =
-        await client.sql`select EXTRACT(MONTH FROM created_at) as month, sum(amount) total from transactions where user_id=${user.id} group by EXTRACT(MONTH FROM created_at) order by EXTRACT(MONTH FROM created_at)`;
+        await client.sql`select EXTRACT(YEAR FROM created_at) as year, EXTRACT(MONTH FROM created_at) as month, sum(amount) total from transactions where user_id=${user.id} group by EXTRACT(YEAR FROM created_at), EXTRACT(MONTH FROM created_at) order by EXTRACT(YEAR FROM created_at), EXTRACT(MONTH FROM created_at)`;
     } else {
       data = { rows: [] };
     }

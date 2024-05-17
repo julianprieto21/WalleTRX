@@ -41,22 +41,26 @@ export function formatBalance(
 
 export function formatBalanceForChart(
   balanceByDate: {
+    year: string;
     month: string;
     total: string;
   }[]
 ) {
   let balance;
-  const dates = balanceByDate.map((item) => item.month).slice(-12);
+  const dates = balanceByDate.map((item) => [item.year, item.month]).slice(-12);
   const array = dates.map((date) => {
     const transactionsOfDay = balanceByDate.filter(
-      (transaction) => parseInt(transaction.month) <= parseInt(date)
+      (transaction) =>
+        parseInt(transaction.month) <= parseInt(date[1]) &&
+        parseInt(transaction.year) <= parseInt(date[0])
     );
     balance = transactionsOfDay.reduce(
       (acc, transaction) => acc + parseInt(transaction.total),
       0
     );
     return {
-      month: date,
+      year: date[0],
+      month: date[1],
       total: balance,
     };
   });
