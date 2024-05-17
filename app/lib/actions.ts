@@ -60,8 +60,6 @@ export async function editTransaction(tid: string, formData: FormData) {
 }
 
 export async function deleteTransaction(tid: string) {
-  const user = (await getUser()) as User;
-  if (!user) return;
   const client = createClient();
   try {
     await client.connect();
