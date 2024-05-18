@@ -76,6 +76,7 @@ export default function CreateForm({ accounts }: { accounts: Account[] }) {
             name="date"
             type="date"
             title="Date"
+            defaultValue={new Date().toISOString().substring(0, 10)}
             required
           ></input>
         </section>
