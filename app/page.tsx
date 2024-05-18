@@ -4,6 +4,7 @@ import { getUser } from "@lib/db";
 import MainCard from "@components/wallet/MainCard";
 import Last5transactions from "@components/wallet/Last5Transactions";
 import { dict } from "@lib/dictionaries";
+import Accounts from "@(pages)/accounts/components/Accounts";
 
 export default async function HomePage() {
   const { mainTitle } = dict;
@@ -15,6 +16,9 @@ export default async function HomePage() {
         {mainTitle},{" "}
         <span className="text-palette-500">{user.name.split(" ")[0]}</span>!
       </h2>
+      <div className="absolute right-10 top-10">
+        <Accounts />
+      </div>
       <p className="text-palette-200 text-md mt-2">Buenos dias!</p>
       <div className="w-full flex flex-row gap-8">
         <Suspense

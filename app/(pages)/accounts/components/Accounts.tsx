@@ -9,8 +9,8 @@ export default async function Accounts() {
   const data = await getBalance({ groupBy: "account", user: user });
   if (!data) return;
   return (
-    <div className="grid grid-cols-8 gap-y-4 grid-rows-1 w-full">
-      {data.map((a, index) => (
+    <div className="flex flex-row gap-8 w-fit">
+      {data.slice(0, 5).map((a, index) => (
         <Link
           href={`/accounts/${a.id}`}
           key={index}
