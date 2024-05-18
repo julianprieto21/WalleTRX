@@ -117,8 +117,6 @@ export async function EditAccount(aid: string, formData: FormData) {
 }
 
 export async function deleteAccount(aid: string) {
-  const user = (await getUser()) as User;
-  if (!user) return;
   const client = createClient();
   try {
     await client.connect();

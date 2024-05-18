@@ -1,28 +1,18 @@
 import { getBalance, getUser } from "@lib/db";
 import { User } from "@lib/types";
-import { formatBalance } from "@lib/utils";
 import { Plus } from "iconoir-react";
 import Link from "next/link";
+import AccountLink from "./AccountLink";
 
 export default async function Accounts() {
   const user = (await getUser()) as User;
   const data = await getBalance({ groupBy: "account", user: user });
   if (!data) return;
+
   return (
     <div className="flex flex-row gap-8 w-fit">
-      {data.slice(0, 5).map((a, index) => (
-        <Link
-          href={`/accounts/${a.id}`}
-          key={index}
-          className="h-24 w-40 rounded-lg p-2 shadow-md text-palette-100 hover:scale-105 transition bg-palette-300"
-        >
-          <p className="font-bold text-lg">{a.name}</p>
-          <div
-            className="w-4/5 h-0 border-t pb-1"
-            style={{ borderColor: a.color }}
-          ></div>
-          <p className="font-light text-md">{formatBalance(a.total / 100)}</p>
-        </Link>
+      {data.slice(0, 5).map((account) => (
+        <AccountLink a={account} />
       ))}
       <Link
         href={"/accounts/create"}
