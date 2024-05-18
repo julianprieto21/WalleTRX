@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { SessionProvider } from "@components/SessionProvider";
-import { SideNav, TopNav } from "@components/NavBar";
+import { SideNav } from "@components/NavBar";
 import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
@@ -17,10 +17,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" className="h-full">
-      <body className="m-0 p-0 flex flex-col sm:flex-row h-full">
+      <body className="flex m-0 p-0 flex-row h-full">
         <SessionProvider>
           <SideNav />
-          <TopNav />
           {children}
         </SessionProvider>
         <Toaster />

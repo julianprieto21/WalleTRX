@@ -22,6 +22,12 @@ body {
   color: var(--text-dark-color);
 }
 
+@media (max-width: 1536px) {
+  .page {
+    display: none;
+  }
+}
+
 input:focus,
 input:active,
 select:focus {
