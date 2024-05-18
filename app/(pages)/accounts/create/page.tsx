@@ -12,7 +12,7 @@ export default async function AccountCreatePage() {
       <Breadcrumbs
         breadcrumbs={[
           { label: text.home, href: "/" },
-          { label: text.accounts, href: "/account" },
+          { label: text.accounts, href: "/accounts" },
           {
             label: actions.create,
             href: "/accounts/create",
