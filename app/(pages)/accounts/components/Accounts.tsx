@@ -12,7 +12,7 @@ export default async function Accounts() {
   return (
     <div className="flex flex-row gap-8 w-fit">
       {data.slice(0, 5).map((account) => (
-        <AccountLink a={account} />
+        <AccountLink key={account.id} a={account} />
       ))}
       <Link
         href={"/accounts/create"}
