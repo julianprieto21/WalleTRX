@@ -19,7 +19,7 @@ export default function AccountLink({ a }: { a: any }) {
         <p className="font-light text-md">{formatBalance(a.total / 100)}</p>
       </Link>
       <form
-        className="absolute right-2 bottom-2 z-10"
+        className="absolute right-1 bottom-0 z-10"
         action={async () => {
           try {
             await deleteAccount(a.id);
