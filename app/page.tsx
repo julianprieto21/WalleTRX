@@ -39,7 +39,7 @@ export default async function HomePage() {
             <Last5transactions />
           </Suspense>
         </div>
-        <div className="flex-1 h-72 bg-palette-300 rounded-lg shadow-md mt-8">
+        <div className="flex-1 grow-0 bg-palette-300 rounded-lg shadow-md mt-8">
           <ChartWidget user={user} />
         </div>
       </main>

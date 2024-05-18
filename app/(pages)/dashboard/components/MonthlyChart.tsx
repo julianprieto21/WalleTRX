@@ -158,7 +158,7 @@ export default function MonthlyChart({ data }: { data: any[] }) {
   };
 
   return (
-    <div className="max-w-sm w-full bg-palette-300 rounded-lg shadow p-4 md:p-6">
+    <div className="max-w-sm w-full bg-palette-300 rounded-lg shadow p-4 md:p-6 h-fit">
       <div className="flex justify-between border-palette-250 border-b pb-3">
         <dl>
           <dt className="text-base font-normal text-palette-200 pb-1">
