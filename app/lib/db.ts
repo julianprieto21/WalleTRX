@@ -112,7 +112,7 @@ export async function getBalance({
       data =
         await client.sql`select distinct a.*, case when t.total != 0 then t.total else 0 end total from accounts a left join (select account_id, sum(amount) total from transactions group by account_id) t
         on a.id = t.account_id
-        where user_id=${user.id} and type='standard'`;
+        where user_id=${user.id} and type='standard' order by total DESC`;
     } else if (groupBy == "user") {
       data =
         await client.sql`select user_id, sum(amount) total from transactions where user_id=${user.id} group by user_id`;
