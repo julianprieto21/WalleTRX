@@ -90,4 +90,9 @@ export const dict = {
     timeline: "Historial de balances",
     accounts: "Balance en cuentas",
   },
+  greetings: {
+    morning: "Buenos dias!",
+    afternoon: "Buenas tardes!",
+    evening: "Buenas noches!",
+  },
 };

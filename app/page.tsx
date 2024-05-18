@@ -6,10 +6,12 @@ import Last5transactions from "@components/wallet/Last5Transactions";
 import { dict } from "@lib/dictionaries";
 import Accounts from "@(pages)/accounts/components/Accounts";
 import { WalletSolid } from "iconoir-react";
+import { getGreeting } from "@lib/utils";
 
 export default async function HomePage() {
   const { mainTitle } = dict;
   const title = dict.app.split("&");
+  const greeting = getGreeting();
   const user = await getUser();
   if (!user) return;
   return (
@@ -22,7 +24,7 @@ export default async function HomePage() {
         <div className="absolute right-10 top-10">
           <Accounts />
         </div>
-        <p className="text-palette-200 text-md mt-2">Buenos dias!</p>
+        <p className="text-palette-200 text-md mt-2">{greeting}</p>
         <div className="w-full flex flex-row gap-8">
           <Suspense
             fallback={
@@ -39,8 +41,14 @@ export default async function HomePage() {
             <Last5transactions />
           </Suspense>
         </div>
-        <div className="flex-1 grow-0 bg-palette-300 rounded-lg shadow-md mt-8">
-          <ChartWidget user={user} />
+        <div className="w-full h-72 bg-palette-300 rounded-lg shadow-md mt-8">
+          <Suspense
+            fallback={
+              <div className="w-full h-72 bg-palette-300 rounded-lg shadow-md mt-8 grid place-content-center"></div>
+            }
+          >
+            <ChartWidget user={user} />
+          </Suspense>
         </div>
       </main>
       {/* Informacion a mostar en pantallas pequeñas */}

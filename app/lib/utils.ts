@@ -1,4 +1,5 @@
 import { toast } from "sonner";
+import { dict } from "./dictionaries";
 
 interface DateProps {
   date: Date;
@@ -98,4 +99,16 @@ export function formatDataForTimeLine({ data }: { data: any[] }) {
 
 export function showToast(message: string, type: "success" | "error") {
   toast[type](message);
+}
+
+export function getGreeting() {
+  const { greetings } = dict;
+  const hour = new Date().getHours();
+  if (hour < 12) {
+    return greetings.morning;
+  } else if (hour < 18) {
+    return greetings.afternoon;
+  } else {
+    return greetings.evening;
+  }
 }
