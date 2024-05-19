@@ -21,12 +21,13 @@ export async function createTransaction(formData: FormData) {
         account: formData.get("account"),
         category: formData.get("category"),
         amount: formData.get("amount"),
-        created_at: formData.get("date"),
+        created_at: formData.get("datetime"),
       });
     const amountInCents =
       type === "income" ? round(amount * 100, 0) : round(-amount * 100, 0);
+      console.log('actions', created_at)
     await client.sql`INSERT INTO transactions (user_id, account_id, type, description, category, amount, created_at)
-                     VALUES (${user.id}, ${account}, ${type}, ${description}, ${category}, ${amountInCents}, ${created_at})`;
+                     VALUES (${user.id}, ${account}, ${type}, ${description.toLowerCase()}, ${category}, ${amountInCents}, ${created_at})`;
   } catch (err) {
     console.error(err);
   } finally {
@@ -48,7 +49,7 @@ export async function editTransaction(tid: string, formData: FormData) {
         account: formData.get("account"),
         category: formData.get("category"),
         amount: formData.get("amount"),
-        created_at: formData.get("date"),
+        created_at: formData.get("datetime"),
       });
     const amountInCents = type === "income" ? amount * 100 : -amount * 100;
     await client.sql`UPDATE transactions SET account_id = ${account}, type = ${type}, description = ${description}, 

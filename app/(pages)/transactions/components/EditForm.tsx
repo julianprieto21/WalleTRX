@@ -5,7 +5,6 @@ import { TypeInput } from "./TypeInput";
 import { CancelBtn, SubmitBtn } from "./FormBtns";
 import { Account, Transaction } from "@lib/types";
 import { editTransaction } from "@lib/actions";
-import { toast } from "sonner";
 import { showToast } from "@lib/utils";
 import { CATEGORIES } from "@lib/consts/categories";
 
@@ -17,7 +16,8 @@ export default function EditForm({
   accounts: Account[];
 }) {
   const type = transaction.type;
-  const date = transaction.created_at.toISOString().split("T")[0];
+  const timeZoneOffset = new Date().getTimezoneOffset() * 60000
+  const time = new Date(transaction.created_at.getTime() - timeZoneOffset).toISOString().slice(0,16)
   const { input: text, toasts } = dict;
   return (
     <form
@@ -82,10 +82,10 @@ export default function EditForm({
           ></input>
           <input
             className="w-3/5 sm:w-2/5 h-12 rounded border border-palette-250 text-palette-100 placeholder:text-palette-250 bg-palette-400 flex justify-center px-2"
-            name="date"
-            type="date"
-            title="Date"
-            defaultValue={date}
+            name="datetime"
+            type="datetime-local"
+            title="Datetime"
+            defaultValue={time}
             required
           ></input>
         </section>

@@ -7,13 +7,14 @@ import { useSearchParams } from "next/navigation";
 import { createTransaction } from "@lib/actions";
 import { CATEGORIES } from "@lib/consts/categories";
 import { Account } from "@lib/types";
-import { toast } from "sonner";
 import { showToast } from "@lib/utils";
 
 export default function CreateForm({ accounts }: { accounts: Account[] }) {
   const searchParams = useSearchParams();
   const type = searchParams.get("t") ?? "";
   const { input: text, toasts } = dict;
+  const timeZoneOffset = new Date().getTimezoneOffset() * 60000
+  const time = new Date(new Date().getTime() - timeZoneOffset).toISOString().slice(0, 16)
   return (
     <form
       action={async (formData) => {
@@ -73,10 +74,10 @@ export default function CreateForm({ accounts }: { accounts: Account[] }) {
           ></input>
           <input
             className="focus:border-palette-500 w-3/5 sm:w-2/5 h-12 rounded border border-palette-250 text-palette-100 placeholder:text-palette-250 bg-palette-400 flex justify-center px-2"
-            name="date"
-            type="date"
-            title="Date"
-            defaultValue={new Date().toISOString().substring(0, 10)}
+            name="datetime"
+            type="datetime-local"
+            title="Datetime"
+            defaultValue={time}
             required
           ></input>
         </section>
