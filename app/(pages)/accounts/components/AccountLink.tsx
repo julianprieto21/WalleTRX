@@ -9,9 +9,9 @@ import Link from "next/link";
 export default function AccountLink({ a }: { a: any }) {
   const { toasts } = dict;
   return (
-    <div className="relative h-24 w-40 rounded-lg p-2 shadow-md text-palette-100 hover:scale-105 transition bg-palette-300">
+    <div className="relative h-20 2xl:h-24 w-40 rounded-lg py-1 px-2 2xl:p-2 shadow-md text-palette-100 2xl:hover:scale-105 transition bg-palette-300">
       <Link href={`/accounts/${a.id}`} key={a.id}>
-        <p className="font-bold text-lg">{a.name}</p>
+        <p className="font-bold text-base 2xl:text-lg">{a.name}</p>
         <div
           className="w-4/5 h-0 border-t pb-1"
           style={{ borderColor: a.color }}
@@ -19,7 +19,7 @@ export default function AccountLink({ a }: { a: any }) {
         <p className="font-light text-md">{formatBalance(a.total / 100)}</p>
       </Link>
       <form
-        className="absolute right-1 bottom-0 z-10"
+        className="hidden 2xl:block absolute right-1 bottom-0 z-10"
         action={async () => {
           try {
             await deleteAccount(a.id);

@@ -18,20 +18,24 @@ body {
   flex: 1 1 0%;
   flex-direction: column;
   justify-content: flex-start;
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
   color: var(--text-dark-color);
-}
-
-@media (max-width: 1536px) {
-  .page {
-    display: none;
-  }
 }
 
 input:focus,
 input:active,
 select:focus {
   outline: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
 
 @supports selector(::-webkit-scrollbar) {

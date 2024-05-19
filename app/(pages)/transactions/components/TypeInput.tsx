@@ -33,7 +33,7 @@ export function TypeInput({ type }: { type?: string | null }) {
   ];
 
   return (
-    <fieldset className="select-none flex w-full xl:w-3/5 3xl:w-1/2 flex-row justify-evenly lg:justify-start sm:gap-4 lg:gap-8">
+    <fieldset className="select-none flex w-full 2xl:w-1/2 flex-row justify-evenly 2xl:justify-start gap-4 2xl:gap-8">
       {typeButtons.map((button, index) => (
         <div key={index} className="w-full">
           <input
@@ -46,10 +46,10 @@ export function TypeInput({ type }: { type?: string | null }) {
           ></input>
           <label
             htmlFor={button.id}
-            className={`w-full flex flex-col lg:flex-row lg:gap-2 justify-center items-center text-palette-250 ${button.color} cursor-pointer w-1/5 text-center p-2 lg:p-3 lg:text-lg rounded-lg border border-palette-250`}
+            className={`w-full flex flex-col 2xl:flex-row 2xl:gap-2 justify-center items-center text-palette-250 ${button.color} cursor-pointer w-1/5 text-center p-2 2xl:p-3 2xl:text-lg rounded-lg border border-palette-250`}
           >
             {button.icon}
-            <h1 className="hidden md:block">{button.name}</h1>
+            <h1 className="hidden 2xl:block">{button.name}</h1>
           </label>
         </div>
       ))}
