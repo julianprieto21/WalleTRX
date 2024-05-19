@@ -31,8 +31,8 @@ export default async function MainCard({ user }: { user: User }) {
     (await getBalance({ groupBy: "user", user: user })) ?? [];
   const balance = generalBalance.length > 0 ? generalBalance[0].total : 0;
   return (
-    <div className="shrink-0 rounded-lg h-96 w-[620px] mt-10 shadow-md bg-palette-300 px-6 py-5 relative">
-      <h3 className="text-palette-100 text-4xl">
+    <div className="shrink-0 rounded-lg h-96 w-full 2xl:w-[620px] mt-10 shadow-md bg-palette-300 px-6 py-5 relative">
+      <h3 className="text-palette-100 text-3xl 2xl:text-4xl">
         <p className="text-neutral-500 font-bold text-base">{balanceText}:</p>
         {formatBalance(balance / 100)}
       </h3>
@@ -40,7 +40,7 @@ export default async function MainCard({ user }: { user: User }) {
         <img
           alt=""
           className="absolute right-0 top-0 mr-6 my-5 size-11 rounded-full"
-          src="https://lh3.googleusercontent.com/a/ACg8ocL5BpUK7g2Z5kLC7Yqguxe2L8Esu1Foa1IK1dqgyVcyd2OwVXs=s96-c"
+          src={user.image_url}
         />
       </Link>
 
