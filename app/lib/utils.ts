@@ -1,26 +1,27 @@
 import { toast } from "sonner";
 import { dict } from "./dictionaries";
 
-interface DateProps {
-  date: Date;
-  locale?: string;
-  day?: "numeric" | "2-digit" | "undefined";
-  month?: "numeric" | "2-digit" | "long" | "short" | "narrow" | "undefined";
-  year?: "numeric" | "2-digit" | "undefined";
-}
-export const formatDate = ({
-  date,
-  locale = "es-AR",
-  day,
-  month,
-  year,
-}: DateProps) => {
-  const options: Intl.DateTimeFormatOptions = {
-    day: day === "undefined" ? undefined : "numeric",
-    month: month === "undefined" ? undefined : "short",
-    year: year === "undefined" ? undefined : "numeric",
+export const formatDate = (
+  date: Date,
+  options?: {
+    locale?: string;
+    day?: "numeric" | "2-digit" | undefined;
+    month?: "numeric" | "2-digit" | "long" | "short" | "narrow" | undefined;
+    year?: "numeric" | "2-digit" | undefined;
+    hour?: "numeric" | "2-digit" | undefined;
+    minute?: "numeric" | "2-digit" | undefined;
+  }
+) => {
+  const { locale, day, month, year, hour, minute } = options ?? {};
+  const config: Intl.DateTimeFormatOptions = {
+    day: day ?? "2-digit",
+    month: month ?? "short",
+    year: year ?? "numeric",
+    hour: hour ?? "2-digit",
+    minute: minute ?? "2-digit",
+    hour12: false,
   };
-  const formatter = new Intl.DateTimeFormat(locale, options);
+  const formatter = new Intl.DateTimeFormat(locale, config);
   return formatter.format(date);
 };
 

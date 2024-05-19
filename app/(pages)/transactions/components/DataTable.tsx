@@ -31,7 +31,7 @@ const DataRow = ({
         {formatBalance(trx.amount / 100)}
       </td>
       <td className="pl-6 py-4 text-palette-100/50">
-        {formatDate({ date: trx.created_at })}
+        {formatDate(trx.created_at)}
       </td>
       <td className="relative flex justify-between py-4">
         <button title="Options" onClick={() => setPopoverOpen(!popoverOpen)}>
