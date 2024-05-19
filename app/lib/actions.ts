@@ -25,9 +25,10 @@ export async function createTransaction(formData: FormData) {
       });
     const amountInCents =
       type === "income" ? round(amount * 100, 0) : round(-amount * 100, 0);
-      console.log('actions', created_at)
     await client.sql`INSERT INTO transactions (user_id, account_id, type, description, category, amount, created_at)
-                     VALUES (${user.id}, ${account}, ${type}, ${description.toLowerCase()}, ${category}, ${amountInCents}, ${created_at})`;
+                     VALUES (${
+                       user.id
+                     }, ${account}, ${type}, ${description.toLowerCase()}, ${category}, ${amountInCents}, ${created_at})`;
   } catch (err) {
     console.error(err);
   } finally {
