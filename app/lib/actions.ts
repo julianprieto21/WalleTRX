@@ -5,6 +5,8 @@ import { redirect } from "next/navigation";
 import { getUser } from "./db";
 import { User } from "./types";
 import { signOut } from "@auth";
+import { round } from "lodash";
+import { revalidatePath } from "next/cache";
 
 export async function createTransaction(formData: FormData) {
   const user = (await getUser()) as User;
@@ -21,7 +23,8 @@ export async function createTransaction(formData: FormData) {
         amount: formData.get("amount"),
         created_at: formData.get("date"),
       });
-    const amountInCents = type === "income" ? amount * 100 : -amount * 100;
+    const amountInCents =
+      type === "income" ? round(amount * 100, 0) : round(-amount * 100, 0);
     await client.sql`INSERT INTO transactions (user_id, account_id, type, description, category, amount, created_at)
                      VALUES (${user.id}, ${account}, ${type}, ${description}, ${category}, ${amountInCents}, ${created_at})`;
   } catch (err) {
@@ -68,7 +71,8 @@ export async function deleteTransaction(tid: string) {
     console.error(err);
   } finally {
     await client.end();
-    redirect("/");
+    revalidatePath("/transactions");
+    redirect("/transactions");
   }
 }
 
