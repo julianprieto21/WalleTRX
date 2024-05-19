@@ -1,4 +1,4 @@
-import { LogoutBtn } from "@(pages)/login/components/LogoutBtn";
+import { LogoutBtn } from "./components/LogoutBtn";
 import { auth } from "@auth";
 import { Session } from "next-auth";
 import ClearHistory from "./components/ClearHistoryBtn";
@@ -13,7 +13,7 @@ const LineH = () => (
 
 export default async function SettingsPage() {
   const { user } = (await auth()) as Session;
-  const { nav: text } = dict;
+  const { nav: text, settings } = dict;
   return (
     <main className="page px-4 sm:px-12 py-10 sm:pb-10 sm:pt-16">
       <Breadcrumbs
@@ -24,14 +24,14 @@ export default async function SettingsPage() {
       />
       <section className="mt-6 flex flex-col items-center">
         <h2 className="pl-2 font-medium text-palette-200 text-lg mb-2 w-3/5 text-left">
-          Información de Usuario
+          {settings.userInfo}
         </h2>
         <div className="flex flex-col items-start gap-2 w-3/5 p-3 border rounded-md border-palette-250">
           <UserInfo user={user} />
         </div>
         <LineH />
         <h2 className="pl-2 font-medium text-palette-200 text-lg mb-2 w-3/5 text-left">
-          Sesión
+          {settings.session}
         </h2>
         <div className="flex flex-col items-start gap-8 w-3/5 p-3 border rounded-md border-palette-250">
           <LogoutBtn />
@@ -39,7 +39,7 @@ export default async function SettingsPage() {
 
         <LineH />
         <h2 className="ml-2 font-medium text-palette-200 text-lg mb-2 w-3/5 text-left">
-          Danger Zone
+          {settings.dangerZone}
         </h2>
         <div className="flex flex-col items-start gap-8 w-3/5 p-3 border rounded-md border-red-500">
           <ClearHistory />

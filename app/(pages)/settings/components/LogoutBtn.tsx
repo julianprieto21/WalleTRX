@@ -1,16 +1,14 @@
 import { dict } from "@lib/dictionaries";
-import { LogOut } from "iconoir-react";
 import { signOut } from "@auth";
 
 export function LogoutBtn() {
-  const { auth } = dict;
+  const { logout } = dict.settings.options;
   return (
     <div className="flex w-full justify-between">
       <h2 className="text-sm font-semibold">
-        Cerrar Sesión
+        {logout.title}
         <p className="text-xs font-normal text-palette-200">
-          Se cerrará la sesión actual. La información es guardada
-          automaticamente.
+          {logout.description}
         </p>
       </h2>
       <form
@@ -25,7 +23,7 @@ export function LogoutBtn() {
           type="submit"
           className="size-full flex justify-center items-center"
         >
-          <p className="block sm:hidden lg:block">{auth.logout}</p>
+          <p className="block sm:hidden lg:block">{logout.title}</p>
         </button>
       </form>
     </div>

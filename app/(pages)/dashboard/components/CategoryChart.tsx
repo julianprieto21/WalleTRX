@@ -98,7 +98,7 @@ export default function CategoryChart({ data }: { data: any[] }) {
             className="text-sm font-medium text-palette-200  hover:text-palette-100 text-center inline-flex items-center "
             type="button"
           >
-            Todo
+            {dict.charts.selectors.all}
             <NavArrowDown />
           </button>
         </div>

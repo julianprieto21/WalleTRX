@@ -23,9 +23,9 @@ export default function AccountLink({ a }: { a: any }) {
         action={async () => {
           try {
             await deleteAccount(a.id);
-            showToast(toasts.successDeleteAccount, "success");
+            showToast(toasts.success.deleteAccount, "success");
           } catch (err) {
-            showToast(toasts.errorDeleteAccount, "error");
+            showToast(toasts.error.deleteAccount, "error");
             console.error(err);
           }
         }}

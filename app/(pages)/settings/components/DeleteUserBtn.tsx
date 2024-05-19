@@ -1,14 +1,16 @@
 "use client";
-import { clearHistory, deleteUser } from "@lib/actions";
+import { deleteUser } from "@lib/actions";
+import { dict } from "@lib/dictionaries";
 import { showToast } from "@lib/utils";
 
 export default function DeleteUser() {
+  const { deleteUser: text } = dict.settings.options;
   return (
     <div className="flex w-full justify-between">
       <h2 className="text-sm font-semibold">
-        Eliminar usuario
+        {text.title}
         <p className="text-xs font-normal text-palette-200">
-          Se eliminará TODO. Esta accion es irreversible.
+          {text.description}
         </p>
       </h2>
       <form
@@ -28,7 +30,7 @@ export default function DeleteUser() {
           type="submit"
           className="size-full text-center"
         >
-          Delete User
+          {text.button}
         </button>
       </form>
     </div>

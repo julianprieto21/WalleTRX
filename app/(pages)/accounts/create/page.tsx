@@ -5,7 +5,8 @@ import { getAccounts } from "@lib/db";
 import { Account } from "@lib/types";
 
 export default async function AccountCreatePage() {
-  const accounts = (await getAccounts()) as Account[];
+  // TODO: Hacer check de si ya existe una cuenta con el mismo nombre
+  // const accounts = (await getAccounts()) as Account[];
   const { nav: text, actions } = dict;
   return (
     <main className="page px-4 sm:px-12 py-10 sm:pb-10 sm:pt-16">

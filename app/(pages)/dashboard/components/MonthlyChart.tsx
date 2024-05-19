@@ -17,10 +17,10 @@ export default function MonthlyChart({ data }: { data: any[] }) {
     all: { offset: -0 },
   };
   const {
-    income: incomeText,
-    expense: expenseText,
+    transactions: transactionText,
     balance: balanceText,
     months,
+    charts,
   } = dict;
 
   const [balance, setBalance] = useState<number>(0);
@@ -56,12 +56,12 @@ export default function MonthlyChart({ data }: { data: any[] }) {
   const state = {
     series: [
       {
-        name: incomeText,
+        name: transactionText.income,
         color: "#31C48D",
         data: XaxisIncome,
       },
       {
-        name: expenseText,
+        name: transactionText.expense,
         color: "#F05252",
         data: XaxisExpense,
       },
@@ -173,7 +173,7 @@ export default function MonthlyChart({ data }: { data: any[] }) {
       <div className="grid grid-cols-2 py-3">
         <dl>
           <dt className="text-base font-normal text-palette-200 pb-1">
-            {incomeText}
+            {transactionText.income}
           </dt>
           <dd className="leading-none text-xl font-bold text-green-400 ">
             {formatBalance(income / 100)}
@@ -181,7 +181,7 @@ export default function MonthlyChart({ data }: { data: any[] }) {
         </dl>
         <dl>
           <dt className="text-base font-normal text-palette-200 pb-1">
-            {expenseText}
+            {transactionText.expense}
           </dt>
           <dd className="leading-none text-xl font-bold text-red-500">
             {formatBalance(expense / 100)}
@@ -203,7 +203,7 @@ export default function MonthlyChart({ data }: { data: any[] }) {
             className="text-sm font-medium text-palette-200  hover:text-palette-100 text-center inline-flex items-center "
             type="button"
           >
-            Todo
+            {charts.selectors.all}
             <NavArrowDown />
           </button>
         </div>

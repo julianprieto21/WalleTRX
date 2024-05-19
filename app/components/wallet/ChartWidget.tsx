@@ -1,5 +1,4 @@
 import { getBalance } from "@lib/db";
-import { dict } from "@lib/dictionaries";
 import { formatBalanceForChart } from "@lib/utils";
 import type { User } from "@lib/types";
 import { LineChart } from "./LineChart";

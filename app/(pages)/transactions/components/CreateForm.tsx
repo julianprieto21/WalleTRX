@@ -19,9 +19,9 @@ export default function CreateForm({ accounts }: { accounts: Account[] }) {
       action={async (formData) => {
         try {
           await createTransaction(formData);
-          showToast(toasts.successCreateTransaction, "success");
+          showToast(toasts.success.createTransaction, "success");
         } catch (err) {
-          showToast(toasts.errorCreateTransaction, "error");
+          showToast(toasts.error.createTransaction, "error");
           console.error(err);
         }
       }}

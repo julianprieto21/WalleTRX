@@ -8,6 +8,10 @@ export const dict = {
     accounts: "Cuentas",
     settings: "Ajustes",
     footer: "Aplicación creada por Julian Prieto",
+    notFound: {
+      title: "Not Found",
+      action: "Volver al Inicio",
+    },
   },
   actions: {
     create: "Crear",
@@ -25,9 +29,39 @@ export const dict = {
     date: "Fecha",
     month: "Mes",
   },
-  income: "Ingreso",
-  expense: "Gasto",
-  transfer: "Transfer",
+  transactions: {
+    income: "Ingreso",
+    expense: "Gasto",
+    transfer: "Transferencia",
+  },
+  settings: {
+    userInfo: "Información de Usuario",
+    session: "Sesión",
+    dangerZone: "Zona de Peligro",
+    options: {
+      clearHistory: {
+        button: "Eliminar historia",
+        title: "Eliminar todas las transacciones.",
+        description: "Se eliminaran todas las transacciones de esta cuenta.",
+      },
+      deleteUser: {
+        button: "Eliminar usuario",
+        title: "Eliminar usuario",
+        description: "Se eliminará TODO. Esta accion es irreversible.",
+      },
+      userInfo: {
+        name: "Nombre",
+        editName: "Editar nombre",
+        email: "Email",
+        editEmail: "Editar email",
+      },
+      logout: {
+        title: "Cerrar sesión",
+        description:
+          "Se cerrará la sesión actual. La información es guardada automaticamente.",
+      },
+    },
+  },
   input: {
     selector: {
       all: "Todo",
@@ -41,11 +75,10 @@ export const dict = {
     recurrent: "Recurrente",
     name: "Nombre",
   },
-  messages: {
-    noAccounts: "Aun no existen cuentas. Crea una en ",
-  },
+  messages: {},
   balance: "Balance",
-  mainTitle: "Hola",
+  hello: "Hola",
+  commingSoon: "Proximamente",
   buttons: {
     cancel: "Cancelar",
     confirm: "Confirmar",
@@ -53,23 +86,23 @@ export const dict = {
     createAcc: "Crear cuenta",
     searchTrx: "Buscar transacciones...",
   },
-  cards: {
-    accountSummary: "Resumen de cuentas",
-    monthChart: "Gráfico mensual",
-  },
   toasts: {
-    successCreateTransaction: "Transacción creada con exito!",
-    successEditTransaction: "Transaccion editada con exito!",
-    successDeleteTransaction: "Transaccion eliminada con exito!",
-    errorCreateTransaction: "Error al crear la transaccion.",
-    errorEditTransaction: "Error al editar la transaccion.",
-    errorDeleteTransaction: "Error al eliminar la transaccion.",
-    successCreateAccount: "Cuenta creada con exito!",
-    successEditAccount: "Cuenta editada con exito!",
-    successDeleteAccount: "Cuenta eliminada con exito!",
-    errorCreateAccount: "Error al crear la cuenta.",
-    errorEditAccount: "Error al editar la cuenta.",
-    errorDeleteAccount: "Error al eliminar la cuenta.",
+    success: {
+      createTransaction: "Transacción creada con éxito!",
+      editTransaction: "Transacción editada con éxito!",
+      deleteTransaction: "Transacción eliminada con éxito!",
+      createAccount: "Cuenta creada con éxito!",
+      editAccount: "Cuenta editada con éxito!",
+      deleteAccount: "Cuenta eliminada con éxito!",
+    },
+    error: {
+      createTransaction: "Error al crear la transacción.",
+      editTransaction: "Error al editar la transacción.",
+      deleteTransaction: "Error al eliminar la transacción.",
+      createAccount: "Error al crear la cuenta.",
+      editAccount: "Error al editar la cuenta.",
+      deleteAccount: "Error al eliminar la cuenta.",
+    },
   },
   months: {
     1: "Ene",
@@ -86,13 +119,30 @@ export const dict = {
     12: "Dic",
   } as Record<number, string>,
   charts: {
-    category: "Detalle de categorias",
+    lastFive: "Últimas 5 transacciones",
+    category: "Detalle de categorías",
     timeline: "Historial de balances",
     accounts: "Balance en cuentas",
+    selectors: {
+      all: "Todo",
+      last7Days: "Últimos 7 dias",
+      lastMonth: "Último mes",
+      last3Months: "Últimos 3 meses",
+      last6Months: "Últimos 6 meses",
+      lastYear: "Último año",
+    },
   },
   greetings: {
-    morning: "Buenos dias!",
-    afternoon: "Buenas tardes!",
-    evening: "Buenas noches!",
+    morning: "¡Buenos días!",
+    afternoon: "¡Buenas tardes!",
+    evening: "¡Buenas noches!",
+  },
+  table: {
+    description: "Descripción",
+    amount: "Monto",
+    date: "Fecha",
+    account: "Cuenta",
+    category: "Categoría",
+    option: "Opciones",
   },
 };

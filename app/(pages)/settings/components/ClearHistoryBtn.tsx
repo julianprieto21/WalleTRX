@@ -1,14 +1,16 @@
 "use client";
 import { clearHistory } from "@lib/actions";
+import { dict } from "@lib/dictionaries";
 import { showToast } from "@lib/utils";
 
 export default function ClearHistory() {
+  const { clearHistory: text } = dict.settings.options;
   return (
     <div className="flex w-full justify-between">
       <h2 className="text-sm font-semibold">
-        Eliminar todas las transacciones.
+        {text.title}
         <p className="text-xs font-normal text-palette-200">
-          Se eliminaran todas las transacciones de esta cuenta.
+          {text.description}
         </p>
       </h2>
       <form
@@ -28,7 +30,7 @@ export default function ClearHistory() {
           type="submit"
           className="size-full text-center"
         >
-          Clear History
+          {text.button}
         </button>
       </form>
     </div>

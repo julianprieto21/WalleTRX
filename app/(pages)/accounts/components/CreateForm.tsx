@@ -15,9 +15,9 @@ export default function CreateForm() {
       action={async (formData) => {
         try {
           await createAccount(formData);
-          showToast(toasts.successCreateAccount, "success");
+          showToast(toasts.success.createAccount, "success");
         } catch (err) {
-          showToast(toasts.errorCreateAccount, "error");
+          showToast(toasts.error.createAccount, "error");
           console.error(err);
         }
       }}

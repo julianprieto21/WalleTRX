@@ -1,18 +1,9 @@
 import NavLinks from "./NavLinks";
-import {
-  WalletSolid,
-  AppleWallet,
-  GraphUp,
-  Home,
-  Notes,
-  Reports,
-  Settings,
-} from "iconoir-react";
-import Link from "next/link";
+import { WalletSolid } from "iconoir-react";
 import { dict } from "@lib/dictionaries";
 
 export function SideNav() {
-  const { footer: footerText } = dict.nav;
+  const { nav } = dict;
   const title = dict.app.split("&");
   return (
     <aside className="relative hidden 2xl:flex w-1/6 flex-none flex-col items-center justify-center bg-palette-300 h-screen sm:pb-2 overflow-auto">
@@ -28,7 +19,7 @@ export function SideNav() {
       </div>
       <footer className="w-full hidden sm:flex flex-col justify-center items-center border-t border-palette-250">
         <h1 className="text-xs md:text-sm text-center font-light text-neutral-500 pt-2">
-          {footerText}
+          {nav.footer}
         </h1>
       </footer>
     </aside>

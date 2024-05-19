@@ -9,11 +9,14 @@ const ReactApexChart = dynamic(() => import("react-apexcharts"), {
 });
 
 export function BarChart({ data }: { data: any[] }) {
-  const { expense, income, balance } = dict;
+  const { transactions: transactionsText, balance } = dict;
   const series = data.map((item) => {
     const color = item.type == "income" ? "#31C48D" : "#F05252";
     return {
-      name: item.type == "income" ? income : expense,
+      name:
+        item.type == "income"
+          ? transactionsText.income
+          : transactionsText.expense,
       data: [Math.abs(parseInt(item.total))],
       color: color,
     };

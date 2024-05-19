@@ -24,9 +24,9 @@ export default function EditForm({
       action={async (formData) => {
         try {
           await editTransaction(transaction.id, formData);
-          showToast(toasts.successEditTransaction, "success");
+          showToast(toasts.success.editTransaction, "success");
         } catch (err) {
-          showToast(toasts.errorEditTransaction, "error");
+          showToast(toasts.error.editTransaction, "error");
           console.error(err);
         }
       }}

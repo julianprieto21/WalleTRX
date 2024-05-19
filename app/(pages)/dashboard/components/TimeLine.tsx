@@ -23,6 +23,7 @@ export default function TimeLine({ data }: { data: any[] }) {
   const [expenseSeries, setExpenseSeries] = useState<number[]>([]);
   const [labels, setLabels] = useState<string[]>([]);
   const [period, setPeriod] = useState<string>("last-week");
+  const { charts } = dict;
 
   useEffect(() => {
     const offset = periods[period].offset;
@@ -136,11 +137,11 @@ export default function TimeLine({ data }: { data: any[] }) {
             className="text-sm font-medium text-palette-200 hover:text-palette-100 text-center inline-flex items-center"
             type="button"
           >
-            Last 7 days
+            {charts.selectors.last7Days}
             <NavArrowDown />
           </button>
           <h5 className="text-xl font-bold leading-none text-palette-100 pe-1 pr-2">
-            {dict.charts.timeline}
+            {charts.timeline}
           </h5>
         </div>
       </div>

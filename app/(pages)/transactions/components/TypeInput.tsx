@@ -4,10 +4,11 @@ import { DataTransferBoth, Download, Upload } from "iconoir-react";
 import _ from "lodash";
 
 export function TypeInput({ type }: { type?: string | null }) {
+  const { transactions: text } = dict;
   const typeButtons = [
     {
       id: "income",
-      name: dict.income,
+      name: text.income,
       icon: <Download className="size-8" />,
       className: "peer/income hidden",
       color:
@@ -15,7 +16,7 @@ export function TypeInput({ type }: { type?: string | null }) {
     },
     {
       id: "expense",
-      name: dict.expense,
+      name: text.expense,
       icon: <Upload className="size-8" />,
       className: "peer/expense hidden",
       color:
@@ -23,7 +24,7 @@ export function TypeInput({ type }: { type?: string | null }) {
     },
     {
       id: "transfer",
-      name: dict.transfer,
+      name: text.transfer,
       icon: <DataTransferBoth className="size-8" />,
       className: "peer/transfer hidden",
       color:

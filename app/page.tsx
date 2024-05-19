@@ -9,7 +9,7 @@ import { WalletSolid } from "iconoir-react";
 import { getGreeting } from "@lib/utils";
 
 export default async function HomePage() {
-  const { mainTitle } = dict;
+  const { hello: helloText } = dict;
   const title = dict.app.split("&");
   const greeting = getGreeting();
   const user = await getUser();
@@ -18,7 +18,7 @@ export default async function HomePage() {
     <>
       <main className="page pt-12 pb-6 px-10">
         <h2 className="font-semibold text-5xl text-palette-100">
-          {mainTitle},{" "}
+          {helloText},{" "}
           <span className="text-palette-500">{user.name.split(" ")[0]}</span>!
         </h2>
         <div className="absolute right-10 top-10">
@@ -59,7 +59,7 @@ export default async function HomePage() {
           <strong className="font-semibold text-palette-500">{title[1]}</strong>
         </h1>
         <h2 className="font-semibold text-2xl text-palette-100 w-full text-left pl-4 mt-8">
-          {mainTitle},{" "}
+          {helloText},{" "}
           <span className="text-palette-500">{user.name.split(" ")[0]}</span>!
         </h2>
         <p className="px-4 text-palette-200 mt-2">

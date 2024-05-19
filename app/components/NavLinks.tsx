@@ -13,7 +13,7 @@ import {
 import { dict } from "@lib/dictionaries";
 
 export default function NavLinks() {
-  const { nav } = dict;
+  const { nav, commingSoon } = dict;
   const pathName = usePathname();
   const mainLinks = [
     { name: nav.home, href: "/", icon: Home },
@@ -58,7 +58,7 @@ export default function NavLinks() {
                     : "hidden"
                 }`}
               >
-                Proximamente
+                {commingSoon}
               </p>
             </h1>
           </Link>

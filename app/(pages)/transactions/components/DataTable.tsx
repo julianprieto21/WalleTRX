@@ -60,9 +60,9 @@ const DataRow = ({
             action={async () => {
               try {
                 await deleteTransaction(trx.id);
-                showToast(toasts.successDeleteTransaction, "success");
+                showToast(toasts.success.deleteTransaction, "success");
               } catch (err) {
-                showToast(toasts.errorDeleteTransaction, "error");
+                showToast(toasts.error.deleteTransaction, "error");
                 console.error(err);
               }
             }}
