@@ -149,7 +149,6 @@ export async function deleteUser() {
   const user = (await getUser()) as User;
   if (!user) return;
   const client = createClient();
-  await signOut();
   try {
     await client.connect();
     await client.sql`DELETE FROM users WHERE id=${user.id}`;
@@ -158,6 +157,7 @@ export async function deleteUser() {
   } catch (err) {
     console.error(err);
   } finally {
+    await signOut();
     await client.end();
   }
 }
