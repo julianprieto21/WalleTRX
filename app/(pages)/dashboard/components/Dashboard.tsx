@@ -8,7 +8,7 @@ import Loader from "@components/Loader";
 export function DashboardSkeleton() {
   return (
     <section className="size-full flex flex-row gap-10">
-      <div className="h-full grid place-content-center w-[524px] bg-palette-300 rounded-lg shadow p-4 md:p-6">
+      <div className="h-[90%] grid place-content-center w-[524px] bg-palette-300 rounded-lg shadow p-4 md:p-6">
         <Loader />
       </div>
       <div className="flex flex-col w-full gap-8">
