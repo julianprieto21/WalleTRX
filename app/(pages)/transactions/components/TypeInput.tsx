@@ -22,14 +22,14 @@ export function TypeInput({ type }: { type?: string | null }) {
       color:
         "peer-checked/expense:font-medium peer-checked/expense:text-expense peer-checked/expense:border-expense",
     },
-    {
-      id: "transfer",
-      name: text.transfer,
-      icon: <DataTransferBoth className="size-8" />,
-      className: "peer/transfer hidden",
-      color:
-        "peer-checked/transfer:font-medium peer-checked/transfer:text-transfer peer-checked/transfer:border-transfer",
-    },
+    // {
+    //   id: "transfer",
+    //   name: text.transfer,
+    //   icon: <DataTransferBoth className="size-8" />,
+    //   className: "peer/transfer hidden",
+    //   color:
+    //     "peer-checked/transfer:font-medium peer-checked/transfer:text-transfer peer-checked/transfer:border-transfer",
+    // },
   ];
 
   return (
