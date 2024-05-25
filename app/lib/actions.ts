@@ -7,6 +7,7 @@ import { User } from "./types";
 import { signOut } from "@auth";
 import { round } from "lodash";
 import { revalidatePath } from "next/cache";
+import { generateHash } from "./utils";
 
 export async function createTransaction(formData: FormData) {
   const user = (await getUser()) as User;
@@ -14,21 +15,51 @@ export async function createTransaction(formData: FormData) {
   const client = createClient();
   try {
     await client.connect();
-    const { type, description, account, category, amount, created_at } =
-      TransactionSchema.parse({
-        type: formData.get("type"),
-        description: formData.get("description"),
-        account: formData.get("account"),
-        category: formData.get("category"),
-        amount: formData.get("amount"),
-        created_at: formData.get("datetime"),
-      });
-    const amountInCents =
-      type === "income" ? round(amount * 100, 0) : round(-amount * 100, 0);
-    await client.sql`INSERT INTO transactions (user_id, account_id, type, description, category, amount, created_at)
+    const {
+      type,
+      description,
+      account,
+      account_2,
+      category,
+      amount,
+      created_at,
+    } = TransactionSchema.parse({
+      type: formData.get("type"),
+      description: formData.get("description"),
+      account: formData.get("account"),
+      account_2: formData.get("account_2"),
+      category: formData.get("category"),
+      amount: formData.get("amount"),
+      created_at: formData.get("datetime"),
+    });
+
+    if (type != "transfer") {
+      const amountInCents =
+        type === "income" ? round(amount * 100, 0) : round(-amount * 100, 0);
+      await client.sql`INSERT INTO transactions (user_id, account_id, type, description, category, amount, created_at)
                      VALUES (${
                        user.id
                      }, ${account}, ${type}, ${description.toLowerCase()}, ${category}, ${amountInCents}, ${created_at})`;
+    } else {
+      const amountInCents = round(amount * 100, 0);
+      if (!account_2) throw new Error("Account 2 is required");
+      if (account === account_2) throw new Error("Accounts cannot be the same");
+      const transferId = generateHash(
+        account,
+        account_2,
+        created_at,
+        description.toLocaleLowerCase(),
+        amountInCents.toString()
+      );
+      await client.sql`INSERT INTO transactions (user_id, account_id, type, description, category, amount, created_at, transfer_id)
+                     VALUES (${
+                       user.id
+                     }, ${account}, 'expense', ${description.toLowerCase()}, 'transfer', ${-amountInCents}, ${created_at}, ${transferId})`;
+      await client.sql`INSERT INTO transactions (user_id, account_id, type, description, category, amount, created_at, transfer_id)
+                     VALUES (${
+                       user.id
+                     }, ${account_2}, 'income', ${description.toLowerCase()}, 'transfer', ${amountInCents}, ${created_at}, ${transferId})`;
+    }
   } catch (err) {
     console.error(err);
   } finally {

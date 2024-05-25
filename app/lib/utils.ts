@@ -1,5 +1,6 @@
 import { toast } from "sonner";
 import { dict } from "./dictionaries";
+import { createHash } from "crypto";
 
 export const formatDate = (
   date: Date,
@@ -112,4 +113,10 @@ export function getGreeting() {
   } else {
     return greetings.evening;
   }
+}
+
+export function generateHash(...params: string[]) {
+  const hash = createHash("sha256");
+  hash.update(params.join(""));
+  return hash.digest("hex");
 }

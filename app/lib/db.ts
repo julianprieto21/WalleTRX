@@ -107,7 +107,7 @@ export async function getBalance({
     await client.connect();
     if (groupBy == "type") {
       data =
-        await client.sql`select type, sum(amount) total from transactions where user_id=${user.id} group by type`;
+        await client.sql`select type, sum(amount) total from transactions where user_id=${user.id} and category != 'transfer' group by type`;
     } else if (groupBy == "account") {
       data =
         await client.sql`select distinct a.*, case when t.total != 0 then t.total else 0 end total from accounts a left join (select account_id, sum(amount) total from transactions group by account_id) t
@@ -136,11 +136,11 @@ export async function getChartData(chardID: number) {
   const queries = [
     {
       id: 0,
-      query: `select EXTRACT(YEAR FROM created_at) as year, EXTRACT(MONTH FROM created_at) as month, sum(case when type='income' then amount else 0 end) income, sum(case when type='expense' then amount else 0 end) expense from transactions where user_id='${user.id}' group by EXTRACT(YEAR FROM created_at), EXTRACT(MONTH FROM created_at) order by EXTRACT(YEAR FROM created_at), EXTRACT(MONTH FROM created_at)`,
+      query: `select EXTRACT(YEAR FROM created_at) as year, EXTRACT(MONTH FROM created_at) as month, sum(case when type='income' then amount else 0 end) income, sum(case when type='expense' then amount else 0 end) expense from transactions where user_id='${user.id}' and category!='transfer' group by EXTRACT(YEAR FROM created_at), EXTRACT(MONTH FROM created_at) order by EXTRACT(YEAR FROM created_at), EXTRACT(MONTH FROM created_at)`,
     },
     {
       id: 1,
-      query: `select category, sum(amount) total from transactions where user_id='${user.id}' group by category`,
+      query: `select category, sum(amount) total from transactions where user_id='${user.id}' and category !='transfer' group by category`,
     },
     {
       id: 2,
