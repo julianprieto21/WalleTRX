@@ -33,7 +33,9 @@ export default function TimeLine({ data }: { data: any[] }) {
     setIncomeSeries(incomeSeries);
     const expenseSeries = formattedData.map((item) => Math.abs(item.expense));
     setExpenseSeries(expenseSeries);
-    setLabels(formattedData.map((item) => formatDate(item.date)));
+    setLabels(
+      formattedData.map((item) => formatDate(item.date, { locale: "es-AR" }))
+    );
   }, [data, period]);
   const state = {
     series: [
