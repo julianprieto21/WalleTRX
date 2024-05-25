@@ -2,83 +2,67 @@ import { Category } from "@lib/types";
 
 export const CATEGORIES: Category[] = [
   {
-    name: "Comidas/Bebidas",
-    id: "comidas-bebidas",
+    id: "food-drink",
     color: "#FF5733",
   },
   {
-    name: "Restaurante",
-    id: "restaurante",
+    id: "restaurant",
     color: "#C70039",
   },
   {
-    name: "Ajuste",
-    id: "ajuste",
+    id: "adjustment",
     color: "#900C3F",
   },
   {
-    name: "Tecnologia",
-    id: "tecnologia",
+    id: "technology",
     color: "#581845",
   },
   {
-    name: "Servicios",
-    id: "servicios",
+    id: "services",
     color: "#FFC300",
   },
   {
-    name: "Otros",
-    id: "otros",
+    id: "others",
     color: "#B2BABB",
   },
   {
-    name: "Entretenimiento",
-    id: "entretenimiento",
+    id: "entertainment",
     color: "#5DADE2",
   },
   {
-    name: "Ropa",
-    id: "ropa",
+    id: "clothing",
     color: "#F4D03F",
   },
   {
-    name: "Transporte",
-    id: "transporte",
+    id: "transportation",
     color: "#45B39D",
   },
   {
-    name: "Salud/Belleza",
-    id: "salud-belleza",
+    id: "health-beauty",
     color: "#EC7063",
   },
   {
-    name: "Educación",
-    id: "educacion",
+    id: "education",
     color: "#A569BD",
   },
   {
-    name: "Hogar",
-    id: "hogar",
+    id: "home",
     color: "#229954",
   },
   {
-    name: "Viajes",
-    id: "viajes",
+    id: "travel",
     color: "#85C1E9",
   },
   {
-    name: "Regalos",
-    id: "regalos",
+    id: "gifts",
     color: "#7DCEA0",
   },
   {
-    name: "Deportes",
-    id: "deportes",
+    id: "sports",
     color: "#F7DC6F",
   },
   {
-    name: "Supermercado",
-    id: "supermercado",
+    id: "grocery",
     color: "#FFA07A",
   },
 ];

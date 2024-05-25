@@ -25,7 +25,7 @@ const DataRow = ({
       </th>
       <td className="px-6 py-4 text-palette-100/50">{acc.name}</td>
       <td className="px-6 py-4 text-palette-100/50">
-        {_.upperFirst(trx.category)}
+        {dict.categories[trx.category]}
       </td>
       <td className="px-6 py-4 text-palette-100/50">
         {formatBalance(trx.amount / 100)}

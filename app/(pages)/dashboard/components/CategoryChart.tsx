@@ -31,7 +31,9 @@ export default function CategoryChart({ data }: { data: any[] }) {
     setSeries(
       formattedData.map((item) => {
         return {
-          x: CATEGORIES.find((cat) => item.category == cat.id)?.name!,
+          x: dict.categories[
+            CATEGORIES.find((cat) => item.category == cat.id)?.id!
+          ],
           y: Math.abs(item.total),
         };
       })
