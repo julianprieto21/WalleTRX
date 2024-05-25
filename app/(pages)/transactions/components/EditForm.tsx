@@ -7,6 +7,7 @@ import { Account, Transaction } from "@lib/types";
 import { editTransaction } from "@lib/actions";
 import { showToast } from "@lib/utils";
 import { CATEGORIES } from "@lib/consts/categories";
+import { Suspense } from "react";
 
 export default function EditForm({
   transaction,
@@ -16,8 +17,10 @@ export default function EditForm({
   accounts: Account[];
 }) {
   const type = transaction.type;
-  const timeZoneOffset = new Date().getTimezoneOffset() * 60000
-  const time = new Date(transaction.created_at.getTime() - timeZoneOffset).toISOString().slice(0,16)
+  const timeZoneOffset = new Date().getTimezoneOffset() * 60000;
+  const time = new Date(transaction.created_at.getTime() - timeZoneOffset)
+    .toISOString()
+    .slice(0, 16);
   const { input: text, toasts } = dict;
   return (
     <form
@@ -33,7 +36,21 @@ export default function EditForm({
       className="w-full bg-palette-300 rounded-lg shadow-md"
     >
       <main className="flex flex-col gap-6 px-2 py-4 md:gap-4 md:px-4 lg:gap-6">
-        <TypeInput type={type} />
+        {transaction.category === "transfer" ? (
+          <input
+            title="Tipo"
+            type="text"
+            name="type"
+            className="hidden"
+            readOnly
+            defaultValue={type}
+          ></input>
+        ) : (
+          <Suspense>
+            <TypeInput defaultType={type} />
+          </Suspense>
+        )}
+
         <input
           name="description"
           type="text"
@@ -49,13 +66,25 @@ export default function EditForm({
             id="account"
             selected={transaction.account_id}
           />
-          <SelectorInput
-            options={CATEGORIES}
-            placeHolder={text.selector.category}
-            id="category"
-            selected={transaction.category}
-          />
-          <div className="w-2/5 md:w-auto flex justify-center items-center gap-2 select-none">
+          {transaction.category !== "transfer" ? (
+            <SelectorInput
+              options={CATEGORIES}
+              placeHolder={text.selector.category}
+              id="category"
+              selected={transaction.category}
+            />
+          ) : (
+            <input
+              title="Categoria"
+              type="text"
+              name="category"
+              className="hidden"
+              defaultValue={transaction.category}
+              readOnly
+            ></input>
+          )}
+
+          {/* <div className="w-2/5 md:w-auto flex justify-center items-center gap-2 select-none">
             <input
               id="recurrent"
               title="Recurrent Payment"
@@ -68,7 +97,7 @@ export default function EditForm({
             >
               {text.recurrent}
             </label>
-          </div>
+          </div> */}
         </section>
         <section className="flex flex-row w-full lg:w-3/5 gap-2 items-center">
           <input
@@ -87,6 +116,14 @@ export default function EditForm({
             title="Datetime"
             defaultValue={time}
             required
+          ></input>
+          <input
+            title="Transfer Id"
+            className="hidden"
+            type="text"
+            name="transfer_id"
+            readOnly
+            defaultValue={transaction.transfer_id ?? ""}
           ></input>
         </section>
         <footer className="flex flex-row justify-between sm:justify-end gap-4 px-2">

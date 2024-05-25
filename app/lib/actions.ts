@@ -31,6 +31,7 @@ export async function createTransaction(formData: FormData) {
       category: formData.get("category"),
       amount: formData.get("amount"),
       created_at: formData.get("datetime"),
+      transfer_id: formData.get("transfer_id"),
     });
 
     if (type != "transfer") {
@@ -74,19 +75,36 @@ export async function editTransaction(tid: string, formData: FormData) {
   const client = createClient();
   try {
     await client.connect();
-    const { type, description, account, category, amount, created_at } =
-      TransactionSchema.parse({
-        type: formData.get("type"),
-        description: formData.get("description"),
-        account: formData.get("account"),
-        category: formData.get("category"),
-        amount: formData.get("amount"),
-        created_at: formData.get("datetime"),
-      });
+    const {
+      type,
+      description,
+      account,
+      category,
+      amount,
+      created_at,
+      transfer_id,
+    } = TransactionSchema.parse({
+      type: formData.get("type"),
+      description: formData.get("description"),
+      account: formData.get("account"),
+      account_2: null,
+      category: formData.get("category"),
+      amount: formData.get("amount"),
+      created_at: formData.get("datetime"),
+      transfer_id: formData.get("transfer_id"),
+    });
     const amountInCents = type === "income" ? amount * 100 : -amount * 100;
-    await client.sql`UPDATE transactions SET account_id = ${account}, type = ${type}, description = ${description}, 
-                     category = ${category}, amount = ${amountInCents}, created_at = ${created_at}
-                     WHERE id = ${tid}`;
+
+    if (category != "transfer") {
+      await client.sql`UPDATE transactions SET account_id = ${account}, type = ${type}, description = ${description}, 
+                       category = ${category}, amount = ${amountInCents}, created_at = ${created_at}
+                       WHERE id = ${tid}`;
+    } else {
+      await client.sql`UPDATE transactions SET account_id = ${account}, type = ${type}, description = ${description}, amount = ${amountInCents}, created_at = ${created_at}
+                       WHERE id = ${tid}`;
+      await client.sql`UPDATE transactions SET amount = ${-amountInCents}
+                       WHERE id != ${tid} and transfer_id = ${transfer_id}`;
+    }
   } catch (err) {
     console.error(err);
   } finally {

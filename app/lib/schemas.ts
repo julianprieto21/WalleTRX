@@ -8,6 +8,7 @@ export const TransactionSchema = z.object({
   category: z.string(),
   amount: z.string().transform((value) => parseFloat(value)),
   created_at: z.string(),
+  transfer_id: z.string(),
 });
 
 export const AccountSchema = z.object({

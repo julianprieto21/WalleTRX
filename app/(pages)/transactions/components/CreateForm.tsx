@@ -49,7 +49,7 @@ export default function CreateForm({ accounts }: { accounts: Account[] }) {
             placeHolder={text.selector.account}
             id="account"
           />
-          {type == "transfer" && (
+          {type == "transfer" ? (
             <>
               <DataTransferBoth className="rotate-90 size-8" />
               <SelectorInput
@@ -57,13 +57,23 @@ export default function CreateForm({ accounts }: { accounts: Account[] }) {
                 placeHolder={text.selector.account}
                 id="account_2"
               />
+              <input
+                title="Categoria"
+                type="text"
+                name="category"
+                className="hidden"
+                value="transfer"
+                readOnly
+              ></input>
             </>
+          ) : (
+            <SelectorInput
+              options={CATEGORIES}
+              placeHolder={text.selector.category}
+              id="category"
+            />
           )}
-          <SelectorInput
-            options={CATEGORIES}
-            placeHolder={text.selector.category}
-            id="category"
-          />
+
           {/* <div className="w-2/5 md:w-auto flex justify-center items-center gap-2 select-none">
             <input
               id="recurrent"
@@ -95,6 +105,14 @@ export default function CreateForm({ accounts }: { accounts: Account[] }) {
             title="Datetime"
             defaultValue={time}
             required
+          ></input>
+          <input
+            title="Transfer Id"
+            className="hidden"
+            type="text"
+            name="transfer_id"
+            readOnly
+            defaultValue=""
           ></input>
         </section>
         <footer className="flex flex-row justify-between sm:justify-end gap-4 px-2">
