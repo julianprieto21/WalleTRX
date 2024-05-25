@@ -141,8 +141,8 @@ export default function MonthlyChart({ data }: { data: any[] }) {
       },
       colors: ["#ffd100"],
       tooltip: {
-        shared: true,
-        intersect: false,
+        shared: false,
+        intersect: true,
         y: {
           formatter: (val: number) => formatBalance(val),
         },
