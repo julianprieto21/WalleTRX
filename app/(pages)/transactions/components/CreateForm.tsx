@@ -8,13 +8,17 @@ import { createTransaction } from "@lib/actions";
 import { CATEGORIES } from "@lib/consts/categories";
 import { Account } from "@lib/types";
 import { showToast } from "@lib/utils";
+import { DataTransferBoth } from "iconoir-react";
+import { Suspense } from "react";
 
 export default function CreateForm({ accounts }: { accounts: Account[] }) {
   const searchParams = useSearchParams();
   const type = searchParams.get("t") ?? "";
   const { input: text, toasts } = dict;
-  const timeZoneOffset = new Date().getTimezoneOffset() * 60000
-  const time = new Date(new Date().getTime() - timeZoneOffset).toISOString().slice(0, 16)
+  const timeZoneOffset = new Date().getTimezoneOffset() * 60000;
+  const time = new Date(new Date().getTime() - timeZoneOffset)
+    .toISOString()
+    .slice(0, 16);
   return (
     <form
       action={async (formData) => {
@@ -29,7 +33,9 @@ export default function CreateForm({ accounts }: { accounts: Account[] }) {
       className="w-full bg-palette-300 rounded-lg shadow-md"
     >
       <main className="flex flex-col gap-6 px-2 py-4 md:gap-4 md:px-4 lg:gap-6">
-        <TypeInput type={type} />
+        <Suspense>
+          <TypeInput defaultType={type} />
+        </Suspense>
         <input
           name="description"
           type="text"
@@ -43,12 +49,22 @@ export default function CreateForm({ accounts }: { accounts: Account[] }) {
             placeHolder={text.selector.account}
             id="account"
           />
+          {type == "transfer" && (
+            <>
+              <DataTransferBoth className="rotate-90 size-8" />
+              <SelectorInput
+                options={accounts}
+                placeHolder={text.selector.account}
+                id="account_2"
+              />
+            </>
+          )}
           <SelectorInput
             options={CATEGORIES}
             placeHolder={text.selector.category}
             id="category"
           />
-          <div className="w-2/5 md:w-auto flex justify-center items-center gap-2 select-none">
+          {/* <div className="w-2/5 md:w-auto flex justify-center items-center gap-2 select-none">
             <input
               id="recurrent"
               title="Recurrent Payment"
@@ -61,7 +77,7 @@ export default function CreateForm({ accounts }: { accounts: Account[] }) {
             >
               {text.recurrent}
             </label>
-          </div>
+          </div> */}
         </section>
         <section className="flex flex-row w-full lg:w-3/5 gap-2 items-center">
           <input

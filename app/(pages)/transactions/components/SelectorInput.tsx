@@ -17,7 +17,7 @@ export function SelectorInput({
       title="Selector"
       name={id}
       defaultValue={selected ?? placeHolder}
-      className="bg-palette-400 border border-palette-250 text-palette-100 rounded focus:border-palette-500 w-full p-2.5 "
+      className="bg-palette-400 border border-palette-250 text-palette-100 rounded focus:border-palette-500 w-56 p-2.5 "
     >
       <option disabled>{placeHolder}</option>
       {options.map((option, index) => (

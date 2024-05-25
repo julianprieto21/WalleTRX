@@ -16,9 +16,9 @@ const ActionLinks = () => {
       <Link href={"/transactions/create?t=income"}>
         <Download className="text-income text-4xl 2xl:text-3xl bg-palette-400 rounded-full hover:bg-income hover:text-palette-100 transition p-2" />
       </Link>
-      <button title="transfer" disabled className="cursor-not-allowed">
-        <DataTransferBoth className="text-transfer text-4xl 2xl:text-3xl rotate-90 bg-palette-400 rounded-full hover:bg-neutral-600 hover:text-neutral-400 transition p-2" />
-      </button>
+      <Link href={"/transactions/create?t=transfer"}>
+        <DataTransferBoth className="text-transfer text-4xl 2xl:text-3xl rotate-90 bg-palette-400 rounded-full hover:bg-transfer hover:text-palette-100 transition p-2" />
+      </Link>
     </>
   );
 };
