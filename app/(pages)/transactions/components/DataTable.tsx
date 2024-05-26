@@ -1,6 +1,6 @@
 "use client";
 import { Account, Transaction } from "@lib/types";
-import { formatBalance, formatDate, showToast } from "@lib/utils";
+import { formatBalance, formatDate, getLocalDate, showToast } from "@lib/utils";
 import _ from "lodash";
 import { useSearchParams } from "next/navigation";
 import { EditPencil, MoreVert, Trash } from "iconoir-react";
@@ -31,7 +31,7 @@ const DataRow = ({
         {formatBalance(trx.amount / 100)}
       </td>
       <td className="pl-6 py-4 text-palette-100/50">
-        {formatDate(trx.created_at, { locale: "es-AR" })}
+        {new Date(parseInt(trx.created_at)).toISOString()}
         {/* TODO: Dinamizar locale*/}
       </td>
       <td className="relative flex justify-between py-4">

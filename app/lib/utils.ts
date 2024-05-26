@@ -2,6 +2,11 @@ import { toast } from "sonner";
 import { dict } from "./dictionaries";
 import { createHash } from "crypto";
 
+export function getLocalDate(date: Date = new Date()) {
+  const localOffset = new Date().getTimezoneOffset() * 60000;
+  return new Date(date.getTime() - localOffset);
+}
+
 export const formatDate = (
   date: Date,
   options?: {

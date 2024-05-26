@@ -7,7 +7,7 @@ import { useSearchParams } from "next/navigation";
 import { createTransaction } from "@lib/actions";
 import { CATEGORIES } from "@lib/consts/categories";
 import { Account } from "@lib/types";
-import { showToast } from "@lib/utils";
+import { formatDate, getLocalDate, showToast } from "@lib/utils";
 import { DataTransferBoth } from "iconoir-react";
 import { Suspense } from "react";
 
@@ -15,10 +15,8 @@ export default function CreateForm({ accounts }: { accounts: Account[] }) {
   const searchParams = useSearchParams();
   const type = searchParams.get("t") ?? "";
   const { input: text, toasts } = dict;
-  const timeZoneOffset = new Date().getTimezoneOffset() * 60000;
-  const time = new Date(new Date().getTime() - timeZoneOffset)
-    .toISOString()
-    .slice(0, 16);
+  const datetime = getLocalDate().toISOString().slice(0, 16);
+
   return (
     <form
       action={async (formData) => {
@@ -103,7 +101,7 @@ export default function CreateForm({ accounts }: { accounts: Account[] }) {
             name="datetime"
             type="datetime-local"
             title="Datetime"
-            defaultValue={time}
+            defaultValue={datetime}
             required
           ></input>
           <input

@@ -17,8 +17,8 @@ export default function EditForm({
   accounts: Account[];
 }) {
   const type = transaction.type;
-  const timeZoneOffset = new Date().getTimezoneOffset() * 60000;
-  const time = new Date(transaction.created_at.getTime() - timeZoneOffset)
+  const clientOffset = new Date().getTimezoneOffset() * 60000;
+  const datetime = new Date(parseInt(transaction.created_at) - clientOffset)
     .toISOString()
     .slice(0, 16);
   const { input: text, toasts } = dict;
@@ -114,7 +114,7 @@ export default function EditForm({
             name="datetime"
             type="datetime-local"
             title="Datetime"
-            defaultValue={time}
+            defaultValue={datetime}
             required
           ></input>
           <input

@@ -19,7 +19,7 @@ export type Transaction = {
   type: "income" | "expense" | "transfer";
   amount: number;
   description: string;
-  created_at: Date;
+  created_at: string;
   category: string;
   transfer_id: string;
 };

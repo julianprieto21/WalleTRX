@@ -33,14 +33,14 @@ export async function createTransaction(formData: FormData) {
       created_at: formData.get("datetime"),
       transfer_id: formData.get("transfer_id"),
     });
-
+    const UTCTimestamp = new Date(created_at).getTime();
     if (type != "transfer") {
       const amountInCents =
         type === "income" ? round(amount * 100, 0) : round(-amount * 100, 0);
       await client.sql`INSERT INTO transactions (user_id, account_id, type, description, category, amount, created_at)
                      VALUES (${
                        user.id
-                     }, ${account}, ${type}, ${description.toLowerCase()}, ${category}, ${amountInCents}, ${created_at})`;
+                     }, ${account}, ${type}, ${description.toLowerCase()}, ${category}, ${amountInCents}, ${UTCTimestamp})`;
     } else {
       const amountInCents = round(amount * 100, 0);
       if (!account_2) throw new Error("Account 2 is required");
@@ -55,11 +55,11 @@ export async function createTransaction(formData: FormData) {
       await client.sql`INSERT INTO transactions (user_id, account_id, type, description, category, amount, created_at, transfer_id)
                      VALUES (${
                        user.id
-                     }, ${account}, 'expense', ${description.toLowerCase()}, 'transfer', ${-amountInCents}, ${created_at}, ${transferId})`;
+                     }, ${account}, 'expense', ${description.toLowerCase()}, 'transfer', ${-amountInCents}, ${UTCTimestamp}, ${transferId})`;
       await client.sql`INSERT INTO transactions (user_id, account_id, type, description, category, amount, created_at, transfer_id)
                      VALUES (${
                        user.id
-                     }, ${account_2}, 'income', ${description.toLowerCase()}, 'transfer', ${amountInCents}, ${created_at}, ${transferId})`;
+                     }, ${account_2}, 'income', ${description.toLowerCase()}, 'transfer', ${amountInCents}, ${UTCTimestamp}, ${transferId})`;
     }
   } catch (err) {
     console.error(err);
