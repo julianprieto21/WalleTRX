@@ -10,6 +10,6 @@ export async function ChartWidget({ user }: { user: User }) {
     month: string;
     total: string;
   }[];
-  const formattedBalaces = formatBalanceForChart(balaceByDate);
+  const formattedBalaces = formatBalanceForChart(balaceByDate ?? []);
   return <LineChart transactions={formattedBalaces} />;
 }
