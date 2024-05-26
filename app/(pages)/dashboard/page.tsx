@@ -14,7 +14,7 @@ export default async function DashboardPage() {
         ]}
       />
       <Suspense fallback={<DashboardSkeleton />}>
-        <Dashboard />
+        {/* <Dashboard /> */}
       </Suspense>
     </main>
   );

@@ -51,7 +51,7 @@ export function formatBalanceForChart(
   balanceByDate: {
     year: string;
     month: string;
-    total: string;
+    total: number;
   }[]
 ) {
   let balance;
@@ -63,7 +63,7 @@ export function formatBalanceForChart(
         parseInt(transaction.year) <= parseInt(date[0])
     );
     balance = transactionsOfDay.reduce(
-      (acc, transaction) => acc + parseInt(transaction.total),
+      (acc, transaction) => acc + transaction.total,
       0
     );
     return {
@@ -77,7 +77,7 @@ export function formatBalanceForChart(
 
 export function formatDataForTimeLine({ data }: { data: any[] }) {
   // creo un array con las fechas de data
-  const dates = data.map((item) => item.created_at);
+  const dates = data.map((item) => parseInt(item.created_at));
   // me quedo con la fecha menor y la fecha actual
   const minDate = Math.min(...dates);
   const maxDate = new Date().getTime();
@@ -89,7 +89,7 @@ export function formatDataForTimeLine({ data }: { data: any[] }) {
   // ahora le asigno a cada dia su income y expense correspondiente de data
   const formattedData = datesArray.map((date) => {
     const income = data
-      .filter((item) => item.created_at.toISOString() == date.toISOString())
+      .filter((item) => new Date(parseInt(item.created_at)).toISOString() == date.toISOString())
       .reduce((acc, item) => acc + Math.abs(item.income), 0);
     const expense = data
       .filter((item) => item.created_at.toISOString() == date.toISOString())

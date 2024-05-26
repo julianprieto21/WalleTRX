@@ -46,7 +46,7 @@ export default async function HomePage() {
             <div className="w-full h-72 bg-palette-300 rounded-lg shadow-md mt-8 grid place-content-center"></div>
           }
         >
-          {/* <ChartWidget user={user} /> */}
+          <ChartWidget user={user} />
         </Suspense>
       </div>
     </main>
