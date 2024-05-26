@@ -18,6 +18,7 @@ const DataRow = ({
 }) => {
   const [popoverOpen, setPopoverOpen] = useState(false);
   const { toasts } = dict;
+  const datetime = new Date(parseInt(trx.created_at))
   return (
     <tr key={trx.id} className="bg-palette-300 border-b border-palette-300">
       <th scope="row" className="px-6 py-4 text-palette-100 whitespace-nowrap">
@@ -31,7 +32,7 @@ const DataRow = ({
         {formatBalance(trx.amount / 100)}
       </td>
       <td className="pl-6 py-4 text-palette-100/50">
-        {new Date(parseInt(trx.created_at)).toISOString()}
+        {formatDate(datetime)}
         {/* TODO: Dinamizar locale*/}
       </td>
       <td className="relative flex justify-between py-4">

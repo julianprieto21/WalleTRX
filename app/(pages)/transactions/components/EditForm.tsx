@@ -5,7 +5,7 @@ import { TypeInput } from "./TypeInput";
 import { CancelBtn, SubmitBtn } from "./FormBtns";
 import { Account, Transaction } from "@lib/types";
 import { editTransaction } from "@lib/actions";
-import { showToast } from "@lib/utils";
+import { getLocalDate, showToast } from "@lib/utils";
 import { CATEGORIES } from "@lib/consts/categories";
 import { Suspense } from "react";
 
@@ -17,10 +17,7 @@ export default function EditForm({
   accounts: Account[];
 }) {
   const type = transaction.type;
-  const clientOffset = new Date().getTimezoneOffset() * 60000;
-  const datetime = new Date(parseInt(transaction.created_at) - clientOffset)
-    .toISOString()
-    .slice(0, 16);
+  const datetime = getLocalDate(new Date(parseInt(transaction.created_at))).toISOString().slice(0, 16);
   const { input: text, toasts } = dict;
   return (
     <form
