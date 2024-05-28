@@ -1,6 +1,7 @@
 "use client";
 import { dict } from "@lib/dictionaries";
-import { formatBalance } from "@lib/utils";
+import { Transaction } from "@lib/types";
+import { formatBalance, getYearMonth } from "@lib/utils";
 import { ApexOptions } from "apexcharts";
 import { NavArrowDown } from "iconoir-react";
 import dynamic from "next/dynamic";
@@ -9,7 +10,63 @@ const ReactApexChart = dynamic(() => import("react-apexcharts"), {
   ssr: false,
 });
 
-export default function MonthlyChart({ data }: { data: any[] }) {
+function formatData(transactions: Transaction[]) {
+  const data: {
+    year: number;
+    month: number;
+    income: number;
+    expense: number;
+  }[] = [];
+  transactions.map((trx) => {
+    const date = getYearMonth(parseInt(trx.created_at));
+    if (trx.transfer_id) return;
+    if (trx.type == "income") {
+      data.push({
+        year: date.year,
+        month: date.month,
+        income: trx.amount,
+        expense: 0,
+      });
+    } else {
+      data.push({
+        year: date.year,
+        month: date.month,
+        income: 0,
+        expense: trx.amount,
+      });
+    }
+  });
+  const groupedData: {
+    year: number;
+    month: number;
+    income: number;
+    expense: number;
+  }[] = [];
+  data.map((old) => {
+    const existing = groupedData.find(
+      (reg) => reg.month == old.month && reg.year == old.year
+    );
+    if (existing) {
+      existing.income += old.income;
+      existing.expense += old.expense;
+    } else {
+      groupedData.push({
+        year: old.year,
+        month: old.month,
+        income: old.income,
+        expense: old.expense,
+      });
+    }
+  });
+
+  return groupedData;
+}
+
+export default function MonthlyChart({
+  transactions,
+}: {
+  transactions: Transaction[];
+}) {
   const periods: { [key: string]: { offset: number } } = {
     "3-months": { offset: -3 },
     "6-months": { offset: -6 },
@@ -23,6 +80,9 @@ export default function MonthlyChart({ data }: { data: any[] }) {
     charts,
   } = dict;
 
+  const [data, setData] = useState<
+    { year: number; month: number; income: number; expense: number }[]
+  >(formatData(transactions));
   const [balance, setBalance] = useState<number>(0);
   const [income, setIncome] = useState<number>(0);
   const [expense, setExpense] = useState<number>(0);
@@ -34,22 +94,14 @@ export default function MonthlyChart({ data }: { data: any[] }) {
   useEffect(() => {
     const offset = periods[period].offset;
     const formattedData = data.slice(offset);
-    setIncome(
-      formattedData.reduce((acc, cur) => acc + parseInt(cur.income), 0)
-    );
-    setExpense(
-      formattedData.reduce((acc, cur) => acc + parseInt(cur.expense), 0)
-    );
+    setIncome(formattedData.reduce((acc, cur) => acc + cur.income, 0));
+    setExpense(formattedData.reduce((acc, cur) => acc + cur.expense, 0));
     setYaxis(formattedData.map((item) => months[item.month]));
-    setXaxisIncome(
-      formattedData.map((item) => Math.abs(parseInt(item.income) / 100))
-    );
-    setXaxisExpense(
-      formattedData.map((item) => Math.abs(parseInt(item.expense) / 100))
-    );
+    setXaxisIncome(formattedData.map((item) => Math.abs(item.income / 100)));
+    setXaxisExpense(formattedData.map((item) => Math.abs(item.expense / 100)));
     setBalance(
-      formattedData.reduce((acc, cur) => acc + parseInt(cur.income), 0) +
-        formattedData.reduce((acc, cur) => acc + parseInt(cur.expense), 0)
+      formattedData.reduce((acc, cur) => acc + cur.income, 0) +
+        formattedData.reduce((acc, cur) => acc + cur.expense, 0)
     );
   }, [data, period]);
 

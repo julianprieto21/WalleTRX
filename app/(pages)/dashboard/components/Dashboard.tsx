@@ -1,4 +1,4 @@
-import { getChartData } from "@lib/db";
+import { getChartData, getTransactions } from "@lib/db";
 import AccountChart from "./AccountChart";
 import CategoryChart from "./CategoryChart";
 import MonthlyChart from "./MonthlyChart";
@@ -29,19 +29,19 @@ export function DashboardSkeleton() {
 }
 
 export async function Dashboard() {
-  const monthlyChartData = await getChartData(0);
-  const categoryChartDate = await getChartData(1);
-  const timeLineData = await getChartData(2);
-  const accountChartData = await getChartData(3);
+  const transactions = await getTransactions();
+  // const categoryChartDate = await getChartData(1);
+  // const timeLineData = await getChartData(2);
+  // const accountChartData = await getChartData(3);
   return (
     <section className="size-full flex flex-row gap-10">
-      <MonthlyChart data={monthlyChartData} />
+      <MonthlyChart transactions={transactions} />
       <div className="flex flex-col w-full gap-8">
         <div className="w-full flex flex-row gap-10">
-          <CategoryChart data={categoryChartDate} />
-          <AccountChart data={accountChartData} />
+          {/* <CategoryChart data={categoryChartDate} /> */}
+          {/* <AccountChart data={accountChartData} /> */}
         </div>
-        <TimeLine data={timeLineData} />
+        {/* <TimeLine data={timeLineData} /> */}
       </div>
     </section>
   );

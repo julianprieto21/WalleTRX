@@ -31,6 +31,13 @@ export const formatDate = (
   return formatter.format(date);
 };
 
+export function getYearMonth(timestamp: number) {
+  return {
+    year: new Date(timestamp).getFullYear(),
+    month: new Date(timestamp).getMonth() + 1,
+  };
+}
+
 export function formatBalance(
   amount: number,
   signDisplay: "never" | "always" | "auto" = "auto",
@@ -89,7 +96,11 @@ export function formatDataForTimeLine({ data }: { data: any[] }) {
   // ahora le asigno a cada dia su income y expense correspondiente de data
   const formattedData = datesArray.map((date) => {
     const income = data
-      .filter((item) => new Date(parseInt(item.created_at)).toISOString() == date.toISOString())
+      .filter(
+        (item) =>
+          new Date(parseInt(item.created_at)).toISOString() ==
+          date.toISOString()
+      )
       .reduce((acc, item) => acc + Math.abs(item.income), 0);
     const expense = data
       .filter((item) => item.created_at.toISOString() == date.toISOString())

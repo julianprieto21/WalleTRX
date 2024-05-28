@@ -1,5 +1,5 @@
 import { auth } from "@auth";
-import { createClient, db } from "@vercel/postgres";
+import { createClient } from "@vercel/postgres";
 import { Session } from "next-auth";
 import type { Account, Transaction, User } from "@lib/types";
 
