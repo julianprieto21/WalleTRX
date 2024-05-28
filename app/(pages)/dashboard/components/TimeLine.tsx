@@ -1,6 +1,7 @@
 "use client";
 import { dict } from "@lib/dictionaries";
-import { formatBalance, formatDataForTimeLine, formatDate } from "@lib/utils";
+import { Transaction } from "@lib/types";
+import { formatBalance, formatDate, getDate } from "@lib/utils";
 import { ApexOptions } from "apexcharts";
 import { NavArrowDown } from "iconoir-react";
 import dynamic from "next/dynamic";
@@ -9,7 +10,76 @@ const ReactApexChart = dynamic(() => import("react-apexcharts"), {
   ssr: false,
 });
 
-export default function TimeLine({ data }: { data: any[] }) {
+function formatData(transactions: Transaction[]) {
+  const data: {
+    date: Date;
+    income: number;
+    expense: number;
+  }[] = [];
+  transactions.map((trx) => {
+    const date = getDate(parseInt(trx.created_at));
+    if (trx.transfer_id) return;
+    if (trx.type == "income") {
+      data.push({
+        date: date,
+        income: trx.amount,
+        expense: 0,
+      });
+    } else {
+      data.push({
+        date: date,
+        income: 0,
+        expense: trx.amount,
+      });
+    }
+  });
+  const groupedData: {
+    date: Date;
+    income: number;
+    expense: number;
+  }[] = [];
+  data.map((old) => {
+    const existing = groupedData.find(
+      (reg) => reg.date.getTime() == old.date.getTime()
+    );
+    if (existing) {
+      existing.income += old.income;
+      existing.expense += old.expense;
+    } else {
+      groupedData.push({
+        date: old.date,
+        income: old.income,
+        expense: old.expense,
+      });
+    }
+  });
+  const maxDate = Math.max(...data.map((item) => item.date.getTime()));
+  const minDate = Math.min(...data.map((item) => item.date.getTime()));
+  const dates = Array.from(
+    { length: (maxDate - minDate) / 86400000 + 1 },
+    (_, i) => new Date(minDate + i * 86400000)
+  );
+  const formattedData = dates.map((date) => {
+    const income = data
+      .filter((item) => item.date.getTime() == date.getTime())
+      .reduce((acc, item) => acc + Math.abs(item.income), 0);
+    const expense = data
+      .filter((item) => item.date.toISOString() == date.toISOString())
+      .reduce((acc, item) => acc + Math.abs(item.expense), 0);
+    return {
+      date: date,
+      income: income,
+      expense: expense,
+    };
+  });
+  return formattedData;
+}
+
+export default function TimeLine({
+  transactions,
+}: {
+  transactions: Transaction[];
+}) {
   const periods: { [key: string]: { offset: number } } = {
     "last-week": { offset: -7 },
     "last-month": { offset: -30 },
@@ -18,7 +88,10 @@ export default function TimeLine({ data }: { data: any[] }) {
     "12-months": { offset: -365 },
     all: { offset: 0 },
   };
-  let formattedData = formatDataForTimeLine({ data: data });
+
+  const [data, setData] = useState<
+    { date: Date; income: number; expense: number }[]
+  >(formatData(transactions));
   const [incomeSeries, setIncomeSeries] = useState<number[]>([]);
   const [expenseSeries, setExpenseSeries] = useState<number[]>([]);
   const [labels, setLabels] = useState<string[]>([]);
@@ -27,16 +100,17 @@ export default function TimeLine({ data }: { data: any[] }) {
 
   useEffect(() => {
     const offset = periods[period].offset;
-    formattedData = formattedData.slice(offset);
+    setData(data.slice(offset));
+  }, [period]);
 
-    const incomeSeries = formattedData.map((item) => Math.abs(item.income));
+  useEffect(() => {
+    const incomeSeries = data.map((item) => Math.abs(item.income));
     setIncomeSeries(incomeSeries);
-    const expenseSeries = formattedData.map((item) => Math.abs(item.expense));
+    const expenseSeries = data.map((item) => Math.abs(item.expense));
     setExpenseSeries(expenseSeries);
-    setLabels(
-      formattedData.map((item) => formatDate(item.date, { locale: "es-AR" }))
-    );
-  }, [data, period]);
+    setLabels(data.map((item) => formatDate(item.date, { locale: "es-AR" })));
+  }, [data]);
+
   const state = {
     series: [
       {

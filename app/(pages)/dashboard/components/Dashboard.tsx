@@ -41,7 +41,7 @@ export async function Dashboard() {
           {/* <CategoryChart data={categoryChartDate} /> */}
           {/* <AccountChart data={accountChartData} /> */}
         </div>
-        {/* <TimeLine data={timeLineData} /> */}
+        <TimeLine transactions={transactions} />
       </div>
     </section>
   );

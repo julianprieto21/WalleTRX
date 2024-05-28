@@ -38,6 +38,13 @@ export function getYearMonth(timestamp: number) {
   };
 }
 
+export function getDate(timestamp: number) {
+  const day = new Date(timestamp).getDate();
+  const month = new Date(timestamp).getMonth();
+  const year = new Date(timestamp).getFullYear();
+  return new Date(year, month, day);
+}
+
 export function formatBalance(
   amount: number,
   signDisplay: "never" | "always" | "auto" = "auto",
