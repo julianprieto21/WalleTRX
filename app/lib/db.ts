@@ -99,7 +99,7 @@ export async function getBalanceByAccounts() {
 
   try {
     await client.connect();
-    const {rows} = await client.sql<{id: string, name: string, color: string, total: number}>`select distinct a.id, a.name, a.color, case when t.total != 0 then t.total else 0 end total from accounts a left join (select account_id, sum(amount) total from transactions group by account_id) t
+    const {rows} = await client.sql<{id: string, name: string, color: string, total: string}>`select distinct a.id, a.name, a.color, case when t.total != 0 then t.total else 0 end total from accounts a left join (select account_id, sum(amount) total from transactions group by account_id) t
         on a.id = t.account_id
         where user_id=${user.id} and type='standard' order by total DESC`;
     return rows;
