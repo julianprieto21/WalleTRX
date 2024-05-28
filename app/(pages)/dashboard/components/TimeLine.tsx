@@ -53,7 +53,7 @@ function formatData(transactions: Transaction[]) {
       });
     }
   });
-  const maxDate = Math.max(...data.map((item) => item.date.getTime()));
+  const maxDate = new Date().getTime();//Math.max(...data.map((item) => item.date.getTime()));
   const minDate = Math.min(...data.map((item) => item.date.getTime()));
   const dates = Array.from(
     { length: (maxDate - minDate) / 86400000 + 1 },
