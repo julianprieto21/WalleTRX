@@ -2,7 +2,7 @@
 import { AccountSchema, TransactionSchema } from "./schemas";
 import { createClient } from "@vercel/postgres";
 import { redirect } from "next/navigation";
-import { getUser } from "./db";
+import { getTransaction, getUser } from "./db";
 import { User } from "./types";
 import { signOut } from "@auth";
 import { round } from "lodash";
@@ -115,9 +115,12 @@ export async function editTransaction(tid: string, formData: FormData) {
 
 export async function deleteTransaction(tid: string) {
   const client = createClient();
+  const transaction = await getTransaction({ tid });
+  if (!transaction) return;
   try {
     await client.connect();
-    await client.sql`DELETE FROM transactions WHERE id=${tid}`;
+    await client.sql`DELETE FROM transactions WHERE id=${transaction.id}`;
+    if (transaction.transfer_id) await client.sql`DELETE FROM transactions WHERE transfer_id=${transaction.transfer_id}`;
   } catch (err) {
     console.error(err);
   } finally {
