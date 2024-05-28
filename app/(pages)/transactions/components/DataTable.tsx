@@ -18,7 +18,7 @@ const DataRow = ({
 }) => {
   const [popoverOpen, setPopoverOpen] = useState(false);
   const { toasts } = dict;
-  const datetime = new Date(parseInt(trx.created_at))
+  const datetime = new Date(parseInt(trx.created_at));
   return (
     <tr key={trx.id} className="bg-palette-300 border-b border-palette-300">
       <th scope="row" className="px-6 py-4 text-palette-100 whitespace-nowrap">
@@ -31,10 +31,7 @@ const DataRow = ({
       <td className="px-6 py-4 text-palette-100/50">
         {formatBalance(trx.amount / 100)}
       </td>
-      <td className="pl-6 py-4 text-palette-100/50">
-        {formatDate(datetime)}
-        {/* TODO: Dinamizar locale*/}
-      </td>
+      <td className="pl-6 py-4 text-palette-100/50">{formatDate(datetime)}</td>
       <td className="relative flex justify-between py-4">
         <button title="Options" onClick={() => setPopoverOpen(!popoverOpen)}>
           <MoreVert

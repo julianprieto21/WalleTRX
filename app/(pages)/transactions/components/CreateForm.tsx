@@ -7,7 +7,7 @@ import { useSearchParams } from "next/navigation";
 import { createTransaction } from "@lib/actions";
 import { CATEGORIES } from "@lib/consts/categories";
 import { Account } from "@lib/types";
-import { formatDate, getLocalDate, showToast } from "@lib/utils";
+import { getLocalDate, showToast } from "@lib/utils";
 import { DataTransferBoth } from "iconoir-react";
 import { Suspense } from "react";
 
