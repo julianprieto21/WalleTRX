@@ -1,3 +1,5 @@
+import { last } from "lodash";
+
 export const dict = {
   app: "WALLE&TRX",
   nav: {
@@ -125,7 +127,7 @@ export const dict = {
     accounts: "Balance en cuentas",
     selectors: {
       all: "Todo",
-      last7Days: "Últimos 7 dias",
+      last7Days: "Última semana",
       lastMonth: "Último mes",
       last3Months: "Últimos 3 meses",
       last6Months: "Últimos 6 meses",

@@ -1,4 +1,8 @@
-import { getBalanceByAccounts, getBalanceByCategory, getTransactions } from "@lib/db";
+import {
+  getBalanceByAccounts,
+  getBalanceByCategory,
+  getTransactions,
+} from "@lib/db";
 import AccountChart from "./AccountChart";
 import CategoryChart from "./CategoryChart";
 import MonthlyChart from "./MonthlyChart";
@@ -37,7 +41,7 @@ export async function Dashboard() {
       <MonthlyChart transactions={transactions} />
       <div className="flex flex-col w-full gap-8">
         <div className="w-full flex flex-row gap-10">
-          <CategoryChart data={categoryBalance} />
+          <CategoryChart categoryData={categoryBalance} />
           <AccountChart data={accountsBalance} />
         </div>
         <TimeLine transactions={transactions} />

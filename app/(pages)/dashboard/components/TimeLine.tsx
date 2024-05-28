@@ -52,7 +52,7 @@ function formatData(transactions: Transaction[]) {
       });
     }
   });
-  const maxDate = new Date().getTime();//Math.max(...data.map((item) => item.date.getTime()));
+  const maxDate = new Date().getTime(); //Math.max(...data.map((item) => item.date.getTime()));
   const minDate = Math.min(...data.map((item) => item.date.getTime()));
   const dates = Array.from(
     { length: (maxDate - minDate) / 86400000 + 1 },
@@ -83,7 +83,7 @@ export default function TimeLine({
     "last-week": { offset: -7 },
     "last-month": { offset: -30 },
     "3-months": { offset: -90 },
-    "6-mothns": { offset: -180 },
+    "6-months": { offset: -180 },
     "12-months": { offset: -365 },
     all: { offset: 0 },
   };
@@ -91,6 +91,8 @@ export default function TimeLine({
   const [data, setData] = useState<
     { date: Date; income: number; expense: number }[]
   >(formatData(transactions));
+  const [usedData, setUsedData] =
+    useState<{ date: Date; income: number; expense: number }[]>(data);
   const [incomeSeries, setIncomeSeries] = useState<number[]>([]);
   const [expenseSeries, setExpenseSeries] = useState<number[]>([]);
   const [labels, setLabels] = useState<string[]>([]);
@@ -99,16 +101,18 @@ export default function TimeLine({
 
   useEffect(() => {
     const offset = periods[period].offset;
-    setData(data.slice(offset));
+    setUsedData(data.slice(offset));
   }, [period]);
 
   useEffect(() => {
-    const incomeSeries = data.map((item) => Math.abs(item.income));
+    const incomeSeries = usedData.map((item) => Math.abs(item.income));
     setIncomeSeries(incomeSeries);
-    const expenseSeries = data.map((item) => Math.abs(item.expense));
+    const expenseSeries = usedData.map((item) => Math.abs(item.expense));
     setExpenseSeries(expenseSeries);
-    setLabels(data.map((item) => formatDate(item.date, { locale: "es-AR" })));
-  }, [data]);
+    setLabels(
+      usedData.map((item) => formatDate(item.date, { locale: "es-AR" }))
+    );
+  }, [usedData]);
 
   const state = {
     series: [
@@ -205,16 +209,21 @@ export default function TimeLine({
       />
       <div className="grid grid-cols-1 items-center border-palette-250 border-t justify-between mt-2">
         <div className="flex justify-between items-center pt-5">
-          <button
-            id="dropdownDefaultButton"
-            data-dropdown-toggle="lastDaysdropdown"
-            data-dropdown-placement="bottom"
-            className="text-sm font-medium text-palette-200 hover:text-palette-100 text-center inline-flex items-center"
-            type="button"
+          <select
+            title="Dropdown"
+            id="dropdownDefault"
+            className="text-sm font-medium bg-palette-300 text-palette-200 hover:text-palette-100 text-center inline-flex items-center"
+            onChange={(e) => setPeriod(e.target.value)}
           >
-            {charts.selectors.last7Days}
-            <NavArrowDown />
-          </button>
+            <option defaultChecked value="last-week">
+              {charts.selectors.last7Days}
+            </option>
+            <option value="last-month">{charts.selectors.lastMonth}</option>
+            <option value="3-months">{charts.selectors.last3Months}</option>
+            <option value="6-months">{charts.selectors.last6Months}</option>
+            <option value="12-months">{charts.selectors.lastYear}</option>
+            <option value="all">{charts.selectors.all}</option>
+          </select>
           <h5 className="text-xl font-bold leading-none text-palette-100 pe-1 pr-2">
             {charts.timeline}
           </h5>

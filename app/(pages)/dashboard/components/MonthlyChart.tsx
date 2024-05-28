@@ -83,6 +83,10 @@ export default function MonthlyChart({
   const [data, setData] = useState<
     { year: number; month: number; income: number; expense: number }[]
   >(formatData(transactions));
+  const [usedData, setUsedData] =
+    useState<
+      { year: number; month: number; income: number; expense: number }[]
+    >(data);
   const [balance, setBalance] = useState<number>(0);
   const [income, setIncome] = useState<number>(0);
   const [expense, setExpense] = useState<number>(0);
@@ -93,17 +97,20 @@ export default function MonthlyChart({
 
   useEffect(() => {
     const offset = periods[period].offset;
-    const formattedData = data.slice(offset);
-    setIncome(formattedData.reduce((acc, cur) => acc + cur.income, 0));
-    setExpense(formattedData.reduce((acc, cur) => acc + cur.expense, 0));
-    setYaxis(formattedData.map((item) => months[item.month]));
-    setXaxisIncome(formattedData.map((item) => Math.abs(item.income / 100)));
-    setXaxisExpense(formattedData.map((item) => Math.abs(item.expense / 100)));
+    setUsedData(data.slice(offset));
+  }, [period]);
+
+  useEffect(() => {
+    setIncome(usedData.reduce((acc, cur) => acc + cur.income, 0));
+    setExpense(usedData.reduce((acc, cur) => acc + cur.expense, 0));
+    setYaxis(usedData.map((item) => months[item.month]));
+    setXaxisIncome(usedData.map((item) => Math.abs(item.income / 100)));
+    setXaxisExpense(usedData.map((item) => Math.abs(item.expense / 100)));
     setBalance(
-      formattedData.reduce((acc, cur) => acc + cur.income, 0) +
-        formattedData.reduce((acc, cur) => acc + cur.expense, 0)
+      usedData.reduce((acc, cur) => acc + cur.income, 0) +
+        usedData.reduce((acc, cur) => acc + cur.expense, 0)
     );
-  }, [data, period]);
+  }, [usedData]);
 
   const state = {
     series: [
@@ -251,13 +258,19 @@ export default function MonthlyChart({
 
       <div className="grid grid-cols-1 items-center border-palette-250 border-t justify-between">
         <div className="flex justify-between items-center pt-5">
-          <button
-            className="text-sm font-medium text-palette-200  hover:text-palette-100 text-center inline-flex items-center "
-            type="button"
+          <select
+            title="Dropdown"
+            id="dropdownDefault"
+            className="text-sm font-medium bg-palette-300 text-palette-200 hover:text-palette-100 text-center inline-flex items-center"
+            onChange={(e) => setPeriod(e.target.value)}
           >
-            {charts.selectors.all}
-            <NavArrowDown />
-          </button>
+            <option defaultChecked value="3-months">
+              {charts.selectors.last3Months}
+            </option>
+            <option value="6-months">{charts.selectors.last6Months}</option>
+            <option value="12-months">{charts.selectors.lastYear}</option>
+            <option value="all">{charts.selectors.all}</option>
+          </select>
         </div>
       </div>
     </div>
