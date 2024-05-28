@@ -1,4 +1,4 @@
-import { getBalanceByAccounts, getBalanceByCategory, getChartData, getTransactions } from "@lib/db";
+import { getBalanceByAccounts, getBalanceByCategory, getTransactions } from "@lib/db";
 import AccountChart from "./AccountChart";
 import CategoryChart from "./CategoryChart";
 import MonthlyChart from "./MonthlyChart";

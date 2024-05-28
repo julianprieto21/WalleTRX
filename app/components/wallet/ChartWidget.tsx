@@ -1,13 +1,10 @@
-import { getBalance } from "@lib/db";
+import { getBalanceByDate } from "@lib/db";
 import { formatBalanceForChart } from "@lib/utils";
 import type { User } from "@lib/types";
 import { LineChart } from "./LineChart";
 
 export async function ChartWidget({ user }: { user: User }) {
-  const transactions = (await getBalance({ groupBy: "date", user: user })) as {
-    timestamp: string;
-    amount: string;
-  }[];
+  const transactions = await getBalanceByDate()
 
   const formattedData: { year: string; month: string; amount: number }[] = [];
   transactions.map((trx) => {
@@ -18,7 +15,7 @@ export async function ChartWidget({ user }: { user: User }) {
     formattedData.push({
       year: year.toString(),
       month: month.toString(),
-      amount: parseInt(trx.amount),
+      amount: trx.amount,
     });
   });
   let grouppedData: { year: string; month: string; total: number }[] = [];

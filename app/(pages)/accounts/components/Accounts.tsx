@@ -1,12 +1,10 @@
-import { getBalance, getUser } from "@lib/db";
-import { User } from "@lib/types";
+import { getBalanceByAccounts } from "@lib/db";
 import { Plus } from "iconoir-react";
 import Link from "next/link";
 import AccountLink from "./AccountLink";
 
 export default async function Accounts() {
-  const user = (await getUser()) as User;
-  const data = await getBalance({ groupBy: "account", user: user });
+  const data = await getBalanceByAccounts()
   if (!data) return;
 
   return (

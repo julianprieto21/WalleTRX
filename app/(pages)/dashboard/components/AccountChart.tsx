@@ -1,23 +1,20 @@
 "use client";
-import { CATEGORIES } from "@lib/consts/categories";
-import { getChartData } from "@lib/db";
 import { dict } from "@lib/dictionaries";
 import { formatBalance } from "@lib/utils";
 import { ApexOptions } from "apexcharts";
-import { NavArrowDown } from "iconoir-react";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 const ReactApexChart = dynamic(() => import("react-apexcharts"), {
   ssr: false,
 });
 
-export default function AccountChart({ data }: { data: { name: string; color: string; total: string }[] }) {
+export default function AccountChart({ data }: { data: { name: string; color: string; total: number }[] }) {
   const [series, setSeries] = useState<number[]>([]);
   const [labels, setLabels] = useState<string[]>([]);
   const [colors, setColors] = useState<string[]>([]);
 
   useEffect(() => {
-    setSeries(data.map((item) => parseInt(item.total)));
+    setSeries(data.map((item) => item.total));
     setLabels(data.map((item) => item.name));
     setColors(data.map((item) => item.color));
   }, []);

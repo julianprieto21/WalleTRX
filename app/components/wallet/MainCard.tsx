@@ -1,7 +1,6 @@
 import { Upload, Download, DataTransferBoth } from "iconoir-react";
 import { BarChart } from "@components/wallet/BarChart";
-import { Suspense } from "react";
-import { getBalance } from "@lib/db";
+import { getBalanceByType, getBalanceByUser } from "@lib/db";
 import { User } from "@lib/types";
 import { formatBalance } from "@lib/utils";
 import Link from "next/link";
@@ -25,10 +24,8 @@ const ActionLinks = () => {
 
 export default async function MainCard({ user }: { user: User }) {
   const { balance: balanceText } = dict;
-  const barChartData =
-    (await getBalance({ groupBy: "type", user: user })) ?? [];
-  const generalBalance =
-    (await getBalance({ groupBy: "user", user: user })) ?? [];
+  const barChartData = await getBalanceByType()
+  const generalBalance = await getBalanceByUser();
   const balance = generalBalance.length > 0 ? generalBalance[0].total : 0;
   return (
     <div className="shrink-0 rounded-lg h-[85%] 2xl:h-96 w-full 2xl:w-[620px] mt-4 2xl:mt-10 shadow-md bg-palette-300 px-6 py-5 relative">

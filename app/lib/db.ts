@@ -99,7 +99,7 @@ export async function getBalanceByAccounts() {
 
   try {
     await client.connect();
-    const {rows} = await client.sql<{name: string, color: string, total: string}>`select distinct a.name, a.color, case when t.total != 0 then t.total else 0 end total from accounts a left join (select account_id, sum(amount) total from transactions group by account_id) t
+    const {rows} = await client.sql<{id: string, name: string, color: string, total: number}>`select distinct a.id, a.name, a.color, case when t.total != 0 then t.total else 0 end total from accounts a left join (select account_id, sum(amount) total from transactions group by account_id) t
         on a.id = t.account_id
         where user_id=${user.id} and type='standard' order by total DESC`;
     return rows;
@@ -126,76 +126,46 @@ export async function getBalanceByCategory() {
   }
 }
 
-// Eliminar funciones de debajo
-export async function getBalance({
-  groupBy,
-  user,
-}: {
-  groupBy: "type" | "account" | "user" | "date";
-  user: User;
-}) {
+export async function getBalanceByType() {
+  const user = (await getUser()) as User;
   const client = createClient();
-  let data;
   try {
     await client.connect();
-    if (groupBy == "type") {
-      data =
-        await client.sql`select type, sum(amount) total from transactions where user_id=${user.id} and category != 'transfer' group by type`;
-    } else if (groupBy == "account") {
-      data =
-        await client.sql`select distinct a.*, case when t.total != 0 then t.total else 0 end total from accounts a left join (select account_id, sum(amount) total from transactions group by account_id) t
-        on a.id = t.account_id
-        where user_id=${user.id} and type='standard' order by total DESC`;
-    } else if (groupBy == "user") {
-      data =
-        await client.sql`select user_id, sum(amount) total from transactions where user_id=${user.id} group by user_id`;
-    } else if (groupBy == "date") {
-      data =
-        await client.sql`select created_at as timestamp, amount from transactions where user_id = ${user.id} order by created_at ASC`;
-    } else {
-      data = { rows: [] };
-    }
-    return data.rows;
+    const {rows} = await client.sql<{type: string, total: number}>`select type, sum(amount) total from transactions where user_id=${user.id} and category !='transfer' group by type`
+    return rows;
   } catch (error) {
     console.error(error);
+    return []
   } finally {
     await client.end();
   }
 }
 
-export async function getChartData(chardID: number) {
-  if (chardID < 0 || typeof chardID != "number") return [];
+export async function getBalanceByDate() {
   const user = (await getUser()) as User;
-  const queries = [
-    {
-      id: 0,
-      query: `select EXTRACT(YEAR FROM created_at) as year, EXTRACT(MONTH FROM created_at) as month, sum(case when type='income' then amount else 0 end) income, sum(case when type='expense' then amount else 0 end) expense from transactions where user_id='${user.id}' and category!='transfer' group by EXTRACT(YEAR FROM created_at), EXTRACT(MONTH FROM created_at) order by EXTRACT(YEAR FROM created_at), EXTRACT(MONTH FROM created_at)`,
-    },
-    {
-      id: 1,
-      query: `select category, sum(amount) total from transactions where user_id='${user.id}' and category !='transfer' group by category`,
-    },
-    {
-      id: 2,
-      query: `select created_at, sum(case when type='income' then amount else 0 end) income, sum(case when type='expense' then amount else 0 end) expense from transactions where user_id='${user.id}' group by created_at order by created_at`,
-    },
-    {
-      id: 3,
-      query: `select a.name, a.color, sum(t.amount) total from transactions t join accounts a on t.account_id = a.id where t.user_id='${user.id}' group by a.name, a.color`,
-    },
-  ];
-
   const client = createClient();
-  const query = queries[chardID].query;
   try {
     await client.connect();
-    const data = await client.query({
-      text: `${query}`,
-    });
-    return data.rows ?? [];
+    const {rows} = await client.sql<{timestamp: string, amount: number}>`select created_at as timestamp, amount from transactions where user_id = ${user.id} and category !='transfer' order by created_at ASC`;
+    return rows;
   } catch (error) {
     console.error(error);
-    return [];
+    return []
+  } finally {
+    await client.end();
+  }
+}
+
+export async function getBalanceByUser() {
+  const user = (await getUser()) as User;
+  const client = createClient();
+  try {
+    await client.connect();
+    const {rows} = await client.sql<{user_id: string, total: number}>`select user_id, sum(amount) total from transactions where user_id=${user.id} group by user_id`;
+    return rows;
+  } catch (error) {
+    console.error(error);
+    return []
   } finally {
     await client.end();
   }
