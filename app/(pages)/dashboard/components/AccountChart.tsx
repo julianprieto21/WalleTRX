@@ -11,7 +11,7 @@ const ReactApexChart = dynamic(() => import("react-apexcharts"), {
   ssr: false,
 });
 
-export default function AccountChart({ data }: { data: any[] }) {
+export default function AccountChart({ data }: { data: { name: string; color: string; total: string }[] }) {
   const [series, setSeries] = useState<number[]>([]);
   const [labels, setLabels] = useState<string[]>([]);
   const [colors, setColors] = useState<string[]>([]);
@@ -87,18 +87,6 @@ export default function AccountChart({ data }: { data: any[] }) {
         height={327}
         width="100%"
       />
-
-      {/* <div className="grid grid-cols-1 items-center border-palette-250 border-t justify-between">
-        <div className="flex justify-between items-center pt-5">
-          <button
-            className="text-sm font-medium text-palette-200  hover:text-palette-100 text-center inline-flex items-center "
-            type="button"
-          >
-            Todo
-            <NavArrowDown />
-          </button>
-        </div>
-      </div> */}
     </div>
   );
 }

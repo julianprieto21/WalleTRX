@@ -93,6 +93,26 @@ export async function getTransaction({ tid }: { tid: string }) {
   }
 }
 
+export async function getBalanceByAccounts() {
+  const user = (await getUser()) as User;
+  const client = createClient();
+
+  try {
+    await client.connect();
+    const {rows} = await client.sql<{name: string, color: string, total: string}>`select distinct a.name, a.color, case when t.total != 0 then t.total else 0 end total from accounts a left join (select account_id, sum(amount) total from transactions group by account_id) t
+        on a.id = t.account_id
+        where user_id=${user.id} and type='standard' order by total DESC`;
+    return rows;
+  } catch (error) {
+    console.error(error);
+    return []
+  } finally {
+    await client.end();
+  }
+
+}
+
+// Eliminar funciones de debajo
 export async function getBalance({
   groupBy,
   user,
