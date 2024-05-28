@@ -109,7 +109,21 @@ export async function getBalanceByAccounts() {
   } finally {
     await client.end();
   }
+}
 
+export async function getBalanceByCategory() {
+  const user = (await getUser()) as User;
+  const client = createClient();
+  try {
+    await client.connect();
+    const {rows} = await client.sql<{category: string, total: number}>`select category, sum(amount) total from transactions where user_id=${user.id} and category !='transfer' group by category`
+    return rows;
+  } catch (error) {
+    console.error(error);
+    return []
+  } finally {
+    await client.end();
+  }
 }
 
 // Eliminar funciones de debajo
