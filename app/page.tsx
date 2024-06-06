@@ -7,11 +7,10 @@ import { dict } from "@lib/dictionaries";
 import Accounts from "@(pages)/accounts/components/Accounts";
 import { WalletSolid } from "iconoir-react";
 import { getGreeting } from "@lib/utils";
+import Greetings from "@components/Greetings";
 
 export default async function HomePage() {
   const { hello: helloText } = dict;
-  const title = dict.app.split("&");
-  const greeting = getGreeting();
   const user = await getUser();
   if (!user) return;
   return (
@@ -20,7 +19,8 @@ export default async function HomePage() {
         {helloText},{" "}
         <span className="text-palette-500">{user.name.split(" ")[0]}</span>!
       </h2>
-      <p className="text-palette-200 text-md mt-2">{greeting}</p>
+      <Greetings />
+
       <div className="mt-10 2xl:mt-0 h-32 2xl:h-auto p-2 2xl:absolute 2xl:right-10 2xl:top-10 overflow-x-scroll overflow-y-hidden no-scrollbar">
         <Accounts />
       </div>

@@ -126,9 +126,8 @@ export function showToast(message: string, type: "success" | "error") {
   toast[type](message);
 }
 
-export function getGreeting() {
+export function getGreeting(hour: number) {
   const { greetings } = dict;
-  const hour = new Date().getHours();
   if (hour < 12) {
     return greetings.morning;
   } else if (hour < 18) {
