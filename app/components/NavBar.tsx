@@ -9,13 +9,17 @@ export function SideNav() {
     <>
       <aside className="relative hidden 2xl:flex w-1/6 flex-none flex-col items-center justify-center bg-palette-300 h-screen pb-2 overflow-auto">
         <section className="w-full flex flex-col items-center text-neutral-200 bg-palette-300 py-3 border-b border-palette-250">
-          <WalletSolid className="size-36 text-palette-100" />
-          <h1 className="flex flex-row justify-center font-light text-5xl text-palette-100">
-            {title[0]}
-            <strong className="font-semibold text-palette-500">
-              {title[1]}
-            </strong>
-          </h1>
+          <a href="/" title="Home">
+            <WalletSolid className="size-36 text-palette-100" />
+          </a>
+          <a href="/" title="Home">
+            <h1 className="flex flex-row justify-center font-light text-5xl text-palette-100">
+              {title[0]}
+              <strong className="font-semibold text-palette-500">
+                {title[1]}
+              </strong>
+            </h1>
+          </a>
         </section>
         <div className="flex flex-col w-full h-[90%] justify-start gap-4 py-4">
           <NavLinks />
