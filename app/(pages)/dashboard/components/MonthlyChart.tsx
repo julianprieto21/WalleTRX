@@ -18,7 +18,7 @@ function formatData(transactions: Transaction[]) {
     expense: number;
   }[] = [];
   transactions.map((trx) => {
-    const date = getYearMonth(parseInt(trx.created_at));
+    const date = getYearMonth(trx.created_at);
     if (trx.transfer_id) return;
     if (trx.type == "income") {
       data.push({

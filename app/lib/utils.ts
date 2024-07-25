@@ -1,6 +1,8 @@
 import { toast } from "sonner";
 import { dict } from "./dictionaries";
 import { createHash } from "crypto";
+import { CRYPTOS } from "./consts/cryptos";
+import { round } from "lodash";
 
 export function getLocalDate(date: Date = new Date()) {
   const localOffset = new Date().getTimezoneOffset() * 60000;
@@ -31,14 +33,14 @@ export const formatDate = (
   return formatter.format(date);
 };
 
-export function getYearMonth(timestamp: number) {
+export function getYearMonth(timestamp: string) {
   return {
     year: new Date(timestamp).getFullYear(),
     month: new Date(timestamp).getMonth() + 1,
   };
 }
 
-export function getDate(timestamp: number) {
+export function getDate(timestamp: string) {
   const day = new Date(timestamp).getDate();
   const month = new Date(timestamp).getMonth();
   const year = new Date(timestamp).getFullYear();
@@ -89,6 +91,7 @@ export function formatBalanceForChart(
   return array;
 }
 
+// No se usa
 export function formatDataForTimeLine({ data }: { data: any[] }) {
   // creo un array con las fechas de data
   const dates = data.map((item) => parseInt(item.created_at));
@@ -104,9 +107,7 @@ export function formatDataForTimeLine({ data }: { data: any[] }) {
   const formattedData = datesArray.map((date) => {
     const income = data
       .filter(
-        (item) =>
-          new Date(parseInt(item.created_at)).toISOString() ==
-          date.toISOString()
+        (item) => new Date(item.created_at).toISOString() == date.toISOString()
       )
       .reduce((acc, item) => acc + Math.abs(item.income), 0);
     const expense = data
@@ -141,4 +142,17 @@ export function generateHash(...params: string[]) {
   const hash = createHash("sha256");
   hash.update(params.join(""));
   return hash.digest("hex");
+}
+
+export async function convert(amount: number, from: string, to: string) {
+  const fromId = CRYPTOS.find((item) => item.symbol === from)?.id;
+  const toId = CRYPTOS.find((item) => item.symbol === to)?.id;
+  const res = await fetch(
+    `https://api.coinlore.net/api/ticker/?id=${fromId},${toId}`
+  );
+  const rateData = await res.json();
+  const fromPrice = rateData[0].price_usd;
+  const toPrice = rateData[1].price_usd;
+  const amountConverted = (amount * fromPrice) / toPrice;
+  return round(amountConverted, 4);
 }

@@ -17,7 +17,7 @@ function formatData(transactions: Transaction[]) {
     expense: number;
   }[] = [];
   transactions.map((trx) => {
-    const date = getDate(parseInt(trx.created_at));
+    const date = getDate(trx.created_at);
     if (trx.category == "transfer") return;
     if (trx.type == "income") {
       data.push({

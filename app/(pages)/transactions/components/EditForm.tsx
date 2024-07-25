@@ -17,7 +17,9 @@ export default function EditForm({
   accounts: Account[];
 }) {
   const type = transaction.type;
-  const datetime = getLocalDate(new Date(parseInt(transaction.created_at))).toISOString().slice(0, 16);
+  const datetime = getLocalDate(new Date(transaction.created_at))
+    .toISOString()
+    .slice(0, 16);
   const { input: text, toasts } = dict;
   return (
     <form
