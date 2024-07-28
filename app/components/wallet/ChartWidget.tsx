@@ -8,7 +8,7 @@ export async function ChartWidget({ user }: { user: User }) {
 
   const formattedData: { year: string; month: string; amount: number }[] = [];
   transactions.map((trx) => {
-    const date = new Date(trx.timestamp).toISOString().slice(0, 10);
+    const date = new Date(parseInt(trx.timestamp)).toISOString().slice(0, 10);
     const newDate = new Date(date);
     const month = newDate.getMonth() + 1;
     const year = newDate.getFullYear();
