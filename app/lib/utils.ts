@@ -35,15 +35,15 @@ export const formatDate = (
 
 export function getYearMonth(timestamp: string) {
   return {
-    year: new Date(timestamp).getFullYear(),
-    month: new Date(timestamp).getMonth() + 1,
+    year: new Date(parseInt(timestamp)).getFullYear(),
+    month: new Date(parseInt(timestamp)).getMonth() + 1,
   };
 }
 
 export function getDate(timestamp: string) {
-  const day = new Date(timestamp).getDate();
-  const month = new Date(timestamp).getMonth();
-  const year = new Date(timestamp).getFullYear();
+  const day = new Date(parseInt(timestamp)).getDate();
+  const month = new Date(parseInt(timestamp)).getMonth();
+  const year = new Date(parseInt(timestamp)).getFullYear();
   return new Date(year, month, day);
 }
 

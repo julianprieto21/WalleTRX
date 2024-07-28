@@ -94,13 +94,14 @@ export async function editTransaction(tid: string, formData: FormData) {
       transfer_id: formData.get("transfer_id"),
     });
     const amountInCents = type === "income" ? amount * 100 : -amount * 100;
+    const UTCTimestamp = new Date(created_at).getTime();
 
     if (category != "transfer") {
       await client.sql`UPDATE transactions SET account_id = ${account}, type = ${type}, description = ${description}, 
-                       category = ${category}, amount = ${amountInCents}, created_at = ${created_at}
+                       category = ${category}, amount = ${amountInCents}, created_at = ${UTCTimestamp}
                        WHERE id = ${tid}`;
     } else {
-      await client.sql`UPDATE transactions SET account_id = ${account}, type = ${type}, description = ${description}, amount = ${amountInCents}, created_at = ${created_at}
+      await client.sql`UPDATE transactions SET account_id = ${account}, type = ${type}, description = ${description}, amount = ${amountInCents}, created_at = ${UTCTimestamp}
                        WHERE id = ${tid}`;
       await client.sql`UPDATE transactions SET amount = ${-amountInCents}
                        WHERE id != ${tid} and transfer_id = ${transfer_id}`;
@@ -120,7 +121,8 @@ export async function deleteTransaction(tid: string) {
   try {
     await client.connect();
     await client.sql`DELETE FROM transactions WHERE id=${transaction.id}`;
-    if (transaction.transfer_id) await client.sql`DELETE FROM transactions WHERE transfer_id=${transaction.transfer_id}`;
+    if (transaction.transfer_id)
+      await client.sql`DELETE FROM transactions WHERE transfer_id=${transaction.transfer_id}`;
   } catch (err) {
     console.error(err);
   } finally {

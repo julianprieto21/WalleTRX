@@ -18,7 +18,7 @@ const DataRow = ({
 }) => {
   const [popoverOpen, setPopoverOpen] = useState(false);
   const { toasts } = dict;
-  const datetime = new Date(trx.created_at);
+  const datetime = new Date(parseInt(trx.created_at));
   return (
     <tr key={trx.id} className="bg-palette-300 border-b border-palette-300">
       <th scope="row" className="px-6 py-4 text-palette-100 whitespace-nowrap">
