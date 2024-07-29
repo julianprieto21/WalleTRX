@@ -23,7 +23,6 @@ export default async function TransactionPage() {
         <CreateBtn id="transactions" text={buttons.createTrx} />
       </div>
 
-      <Filters />
       <Suspense fallback={<TableSkeleton />}>
         <Table />
       </Suspense>
