@@ -11,16 +11,54 @@ import {
   ArrowSeparateVertical,
 } from "iconoir-react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { use, useEffect, useMemo, useState } from "react";
 import { deleteTransaction } from "@lib/actions";
 import { dict } from "@lib/dictionaries";
+import { CATEGORIES } from "@lib/consts/categories";
 
-const FilterButton = () => {
-  return <FilterList className="cursor-pointer" />;
+const FilterButton = ({
+  setter,
+  options,
+}: {
+  setter: (arg0: string) => void;
+  options: { name: string; id: string }[];
+}) => {
+  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setter(event.target.value);
+  };
+
+  return (
+    <>
+      {/* <FilterList className="cursor-pointer" onClick={handleClick} /> */}
+      <select
+        title="selector"
+        className="bg-palette-400"
+        onChange={handleChange}
+      >
+        <option value="all">Todos</option>
+        {options.map((option) => (
+          <option key={option.id} value={option.id}>
+            {option.name}
+          </option>
+        ))}
+      </select>
+    </>
+  );
 };
 
-const OrderButton = () => {
-  return <ArrowSeparateVertical className="cursor-pointer" />;
+const OrderButton = ({
+  state,
+  setter,
+}: {
+  state: boolean | null;
+  setter: (arg0: boolean) => void;
+}) => {
+  return (
+    <ArrowSeparateVertical
+      className="cursor-pointer"
+      onClick={() => setter(!state)}
+    />
+  );
 };
 
 const DataRow = ({
@@ -107,14 +145,25 @@ export default function DataTable({
   transactions: Transaction[];
   accounts: Account[];
 }) {
-  const { table: text } = dict;
+  const { table: text, categories: categoriesText } = dict;
   const searchParams = useSearchParams();
   const params = new URLSearchParams(searchParams);
   const q = params.get("q");
 
-  const [filteredTransactions, setFilteredTransactions] = useState<
-    Transaction[]
-  >([]);
+  const [filteredTransactions, setFilteredTransactions] =
+    useState<Transaction[]>(transactions);
+
+  const [accountFilter, setAccountFilter] = useState<string | null>(null);
+  const [categoryFilter, setCategoryFilter] = useState<string | null>(null);
+
+  // FALSE: ascending, TRUE: descending, NULL: default order (by date)
+  const [amountOrder, setAmountOrder] = useState<boolean | null>(null);
+  const [dateOrder, setDateOrder] = useState<boolean | null>(null);
+
+  const categories = CATEGORIES.map((category) => ({
+    name: categoriesText[category.id],
+    id: category.id,
+  }));
 
   useEffect(() => {
     if (q) {
@@ -128,6 +177,62 @@ export default function DataTable({
     }
   }, [q]);
 
+  useEffect(() => {
+    if (accountFilter && accountFilter !== "all") {
+      setFilteredTransactions(
+        transactions.filter(
+          (transaction) => transaction.account_id == accountFilter
+        )
+      );
+    } else {
+      setFilteredTransactions(transactions);
+    }
+  }, [accountFilter]);
+
+  useEffect(() => {
+    if (categoryFilter && categoryFilter !== "all") {
+      setFilteredTransactions(
+        transactions.filter(
+          (transaction) => transaction.category == categoryFilter
+        )
+      );
+    } else {
+      setFilteredTransactions(transactions);
+    }
+  }, [categoryFilter]);
+
+  useEffect(() => {
+    if (!amountOrder) {
+      // ascending
+      setFilteredTransactions(
+        filteredTransactions.sort((a, b) => a.amount - b.amount)
+      );
+    } else {
+      // descending
+      setFilteredTransactions(
+        filteredTransactions.sort((a, b) => b.amount - a.amount)
+      );
+    }
+  }, [amountOrder]);
+
+  useEffect(() => {
+    if (!dateOrder) {
+      // ascending
+      setFilteredTransactions(
+        filteredTransactions.sort(
+          (a, b) => parseInt(a.created_at) - parseInt(b.created_at)
+        )
+      );
+    } else {
+      // descending
+      setFilteredTransactions(
+        filteredTransactions.sort(
+          (a, b) => parseInt(b.created_at) - parseInt(a.created_at)
+        )
+      );
+    }
+  }, [dateOrder]);
+
   return (
     <>
       <thead className="sticky top-0 z-10 text-sm text-palette-500 font-light uppercase bg-palette-400">
@@ -136,27 +241,27 @@ export default function DataTable({
             {text.description}
           </th>
           <th scope="col" className="px-6 py-3">
-            <div className="flex justify-between">
+            <div className="flex justify-between relative">
               {text.account}
-              <FilterButton />
+              <FilterButton setter={setAccountFilter} options={accounts} />
             </div>
           </th>
           <th scope="col" className="px-6 py-3">
-            <div className="flex justify-between">
+            <div className="flex justify-between relative">
               {text.category}
-              <FilterButton />
+              <FilterButton setter={setCategoryFilter} options={categories} />
             </div>
           </th>
           <th scope="col" className="px-6 py-3">
             <div className="flex justify-between">
               {text.amount}
-              <OrderButton />
+              <OrderButton state={amountOrder} setter={setAmountOrder} />
             </div>
           </th>
           <th scope="col" className="px-6 py-3">
             <div className="flex justify-between">
               {text.date}
-              <OrderButton />
+              <OrderButton state={dateOrder} setter={setDateOrder} />
             </div>
           </th>
           <th scope="col" className="pr-2 py-3"></th>
