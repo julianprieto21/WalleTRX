@@ -24,11 +24,11 @@ const ActionLinks = () => {
 
 export default async function MainCard({ user }: { user: User }) {
   const { balance: balanceText } = dict;
-  const barChartData = await getBalanceByType()
+  const barChartData = await getBalanceByType();
   const generalBalance = await getBalanceByUser();
   const balance = generalBalance.length > 0 ? generalBalance[0].total : 0;
   return (
-    <div className="shrink-0 rounded-lg h-[85%] 2xl:h-96 w-full 2xl:w-[620px] mt-4 2xl:mt-10 shadow-md bg-palette-300 px-6 py-5 relative">
+    <div className="shrink-0 rounded-lg h-[85%] 2xl:h-80 w-full 2xl:w-[620px] shadow-md bg-palette-300 px-6 py-5 relative">
       <h3 className="text-palette-100 text-3xl 2xl:text-4xl">
         <p className="text-neutral-500 font-bold text-base">{balanceText}:</p>
         {formatBalance(balance / 100)}

@@ -8,7 +8,11 @@ const ReactApexChart = dynamic(() => import("react-apexcharts"), {
   ssr: false,
 });
 
-export default function AccountChart({ data }: { data: { name: string; color: string; total: string }[] }) {
+export default function AccountChart({
+  data,
+}: {
+  data: { name: string; color: string; total: string }[];
+}) {
   const [series, setSeries] = useState<number[]>([]);
   const [labels, setLabels] = useState<string[]>([]);
   const [colors, setColors] = useState<string[]>([]);

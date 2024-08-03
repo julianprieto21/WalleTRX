@@ -10,7 +10,7 @@ export default async function Last5transactions() {
   const transactions = await getTransactions();
   const last5 = transactions.slice(0, 5);
   return (
-    <div className="hidden 2xl:flex flex-col rounded-lg h-96 w-full mt-10 shadow-md bg-palette-300 px-6 py-5 relative">
+    <div className="hidden 2xl:flex flex-col rounded-lg h-80 w-full shadow-md bg-palette-300 px-6 py-5 relative">
       <Link
         href={"/transactions"}
         title="Go to transactions"
