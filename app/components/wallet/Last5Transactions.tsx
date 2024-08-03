@@ -10,13 +10,13 @@ export default async function Last5transactions() {
   const transactions = await getTransactions();
   const last5 = transactions.slice(0, 5);
   return (
-    <div className="hidden 2xl:flex flex-col rounded-lg h-80 w-full shadow-md bg-palette-300 px-6 py-5 relative">
+    <div className="2xl:flex flex-col rounded-lg h-80 w-full shadow-md bg-palette-300 px-6 py-5 relative">
       <Link
         href={"/transactions"}
         title="Go to transactions"
         className="absolute text-palette-250 hover:text-palette-100 transition left-2 top-2"
       >
-        <ArrowUpLeft className="size-4" />
+        <ArrowUpLeft className="size-8 2xl:size-4" />
       </Link>
       <h2 className="text-right w-full text-palette-100 text-xl font-medium">
         {charts.lastFive}
@@ -25,9 +25,9 @@ export default async function Last5transactions() {
         {last5.map((trx) => (
           <li
             key={trx.id}
-            className="flex flex-row items-end border-b border-palette-250 justify-between px-2 py-1 h-full"
+            className="flex flex-row items-end border-b border-palette-250 justify-between px-2 py-1 h-12 2xl:h-full"
           >
-            <p className="text-md font-semibold ">
+            <p className="text-md font-semibold truncate w-44 2xl:w-full">
               {_.capitalize(trx.description)}
             </p>
             <p>{formatBalance(trx.amount / 100)}</p>
