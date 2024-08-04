@@ -38,7 +38,7 @@ export default function Converter() {
 
   return (
     <form className="flex flex-row gap-6 items-center justify-center">
-      <div className="relative h-12 bg-palette-300 text-palette-200 w-80 rounded-lg flex flex-row justify-between">
+      <div className="relative h-12 bg-palette-300 text-palette-200 rounded-lg flex flex-row justify-between">
         <input
           required
           title="Amount converting"
@@ -95,7 +95,7 @@ export default function Converter() {
       <div className="bg-palette-300 text-palette-200 size-12 grid place-content-center rounded-lg">
         <DataTransferBoth className="rotate-90 size-7" />
       </div>
-      <div className="relative h-12 bg-palette-300 text-palette-200 w-800 rounded-lg flex flex-row justify-between">
+      <div className="relative h-12 bg-palette-300 text-palette-200 rounded-lg flex flex-row justify-between">
         <select
           name="toCurrency"
           title="ToCurrency"
