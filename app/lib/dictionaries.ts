@@ -6,6 +6,7 @@ export const dict = {
     home: "Inicio",
     transactions: "Transacciones",
     investments: "Inversiones",
+    market: "Mercado",
     dashboard: "Reporte",
     accounts: "Cuentas",
     settings: "Ajustes",
