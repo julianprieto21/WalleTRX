@@ -17,7 +17,9 @@ export default function investmentsPage() {
       />
       <section className="w-full flex flex-row items-end justify-between overflow-auto gap-12">
         <article className="w-full h-full flex flex-col justify-start gap-10">
-          <InvestmentSwitcher />
+          <Suspense>
+            <InvestmentSwitcher />
+          </Suspense>
           <div className="shrink-0 rounded-lg h-80 w-full shadow-md bg-palette-300 px-6 py-5"></div>
           <div className="shrink-0 rounded-lg h-64 w-full shadow-md bg-palette-300 px-6 py-5"></div>
         </article>
