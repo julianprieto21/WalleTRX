@@ -82,6 +82,10 @@ export const dict = {
   balance: "Balance",
   hello: "Hola",
   commingSoon: "Proximamente",
+  switcher: {
+    crypto: "Criptomonedas",
+    stocks: "Acciones",
+  },
   buttons: {
     cancel: "Cancelar",
     confirm: "Confirmar",
