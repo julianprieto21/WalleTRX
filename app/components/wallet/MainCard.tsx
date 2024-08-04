@@ -1,5 +1,5 @@
 import { Upload, Download, DataTransferBoth } from "iconoir-react";
-import { BarChart } from "@components/wallet/BarChart";
+import { RadialBarChart } from "@components/wallet/RadialBarChart";
 import { getBalanceByType, getBalanceByUser } from "@lib/db";
 import { User } from "@lib/types";
 import { formatBalance } from "@lib/utils";
@@ -24,7 +24,7 @@ const ActionLinks = () => {
 
 export default async function MainCard({ user }: { user: User }) {
   const { balance: balanceText } = dict;
-  const barChartData = await getBalanceByType();
+  const radialBarChartData = await getBalanceByType();
   const generalBalance = await getBalanceByUser();
   const balance = generalBalance.length > 0 ? generalBalance[0].total : 0;
   return (
@@ -42,7 +42,7 @@ export default async function MainCard({ user }: { user: User }) {
       </Link>
 
       <div className="h-auto w-60 2xl:w-80 absolute bottom-0 left-1 2xl:left-2">
-        <BarChart data={barChartData} />
+        <RadialBarChart data={radialBarChartData} />
       </div>
 
       <div className="absolute bottom-0 right-0 flex flex-col gap-3 pr-6 pb-5">

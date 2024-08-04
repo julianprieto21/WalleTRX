@@ -99,13 +99,18 @@ export async function getBalanceByAccounts() {
 
   try {
     await client.connect();
-    const {rows} = await client.sql<{id: string, name: string, color: string, total: string}>`select distinct a.id, a.name, a.color, case when t.total != 0 then t.total else 0 end total from accounts a left join (select account_id, sum(amount) total from transactions group by account_id) t
+    const { rows } = await client.sql<{
+      id: string;
+      name: string;
+      color: string;
+      total: string;
+    }>`select distinct a.id, a.name, a.color, case when t.total != 0 then t.total else 0 end total from accounts a left join (select account_id, sum(amount) total from transactions group by account_id) t
         on a.id = t.account_id
         where user_id=${user.id} and type='standard' order by total DESC`;
     return rows;
   } catch (error) {
     console.error(error);
-    return []
+    return [];
   } finally {
     await client.end();
   }
@@ -116,11 +121,14 @@ export async function getBalanceByCategory() {
   const client = createClient();
   try {
     await client.connect();
-    const {rows} = await client.sql<{category: string, total: number}>`select category, sum(amount) total from transactions where user_id=${user.id} and category !='transfer' group by category`
+    const { rows } = await client.sql<{
+      category: string;
+      total: number;
+    }>`select category, sum(amount) total from transactions where user_id=${user.id} and category !='transfer' group by category`;
     return rows;
   } catch (error) {
     console.error(error);
-    return []
+    return [];
   } finally {
     await client.end();
   }
@@ -129,13 +137,27 @@ export async function getBalanceByCategory() {
 export async function getBalanceByType() {
   const user = (await getUser()) as User;
   const client = createClient();
+  const startDate = new Date(
+    new Date().getFullYear(),
+    new Date().getMonth(),
+    1
+  ).getTime();
+  // ultimo dia del mes
+  const endDate = new Date(
+    new Date().getFullYear(),
+    new Date().getMonth() + 1,
+    0
+  ).getTime();
   try {
     await client.connect();
-    const {rows} = await client.sql<{type: string, total: number}>`select type, sum(amount) total from transactions where user_id=${user.id} and category !='transfer' group by type`
+    const { rows } = await client.sql<{
+      type: string;
+      total: number;
+    }>`select type, sum(amount) total from transactions where user_id=${user.id} and category !='transfer' and created_at >= ${startDate} and created_at <= ${endDate} group by type`;
     return rows;
   } catch (error) {
     console.error(error);
-    return []
+    return [];
   } finally {
     await client.end();
   }
@@ -146,11 +168,14 @@ export async function getBalanceByDate() {
   const client = createClient();
   try {
     await client.connect();
-    const {rows} = await client.sql<{timestamp: string, amount: number}>`select created_at as timestamp, amount from transactions where user_id = ${user.id} and category !='transfer' order by created_at ASC`;
+    const { rows } = await client.sql<{
+      timestamp: string;
+      amount: number;
+    }>`select created_at as timestamp, amount from transactions where user_id = ${user.id} and category !='transfer' order by created_at ASC`;
     return rows;
   } catch (error) {
     console.error(error);
-    return []
+    return [];
   } finally {
     await client.end();
   }
@@ -161,11 +186,14 @@ export async function getBalanceByUser() {
   const client = createClient();
   try {
     await client.connect();
-    const {rows} = await client.sql<{user_id: string, total: number}>`select user_id, sum(amount) total from transactions where user_id=${user.id} group by user_id`;
+    const { rows } = await client.sql<{
+      user_id: string;
+      total: number;
+    }>`select user_id, sum(amount) total from transactions where user_id=${user.id} group by user_id`;
     return rows;
   } catch (error) {
     console.error(error);
-    return []
+    return [];
   } finally {
     await client.end();
   }

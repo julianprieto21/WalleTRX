@@ -7,11 +7,12 @@ const ReactApexChart = dynamic(() => import("react-apexcharts"), {
   ssr: false,
 });
 
-export function BarChart({ data }: { data: any[] }) {
+export function RadialBarChart({ data }: { data: any[] }) {
+  const actualMonth = new Date().getMonth() + 1;
+  const actualMonthText = dict.months[actualMonth];
   const amount = data.map((item) => {
     return Math.abs(parseInt(item.total));
   });
-
   const state = {
     options: {
       legend: {
@@ -55,7 +56,10 @@ export function BarChart({ data }: { data: any[] }) {
     },
   };
   return (
-    <div className="w-full">
+    <div className="w-full relative">
+      <p className="absolute -left-4 bottom-6 w-[300px] text-center font-semibold text-3xl text-neutral-500">
+        {actualMonthText}
+      </p>
       <ReactApexChart
         options={state.options}
         series={[amount[1] / 100, amount[0] / 100]}
