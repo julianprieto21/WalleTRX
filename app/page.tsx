@@ -12,7 +12,7 @@ export default async function HomePage() {
   const user = await getUser();
   if (!user) return;
   return (
-    <main className="page pt-8 2xl:pt-12 pb-6 px-4 2xl:px-10 gap-6 2xl:gap-10">
+    <main className="page pt-8 2xl:pt-12 pb-6 px-4 2xl:px-10 gap-6 2xl:gap-10 no-scrollbar">
       <div className="mt-4">
         <span className="font-semibold text-5xl text-palette-100">
           {helloText},{" "}
@@ -21,7 +21,7 @@ export default async function HomePage() {
         <Greetings />
       </div>
 
-      <div className="shrink-0 mt-4 2xl:mt-0 h-auto 2xl:h-auto p-2 2xl:absolute 2xl:right-10 2xl:top-10 overflow-x-scroll">
+      <div className="shrink-0 mt-4 2xl:mt-0 h-auto 2xl:h-auto py-2 2xl:absolute 2xl:right-10 2xl:top-10 overflow-x-scroll no-scrollbar">
         <Accounts />
       </div>
       <div className="w-full 2xl:h-auto flex flex-col items-center 2xl:flex-row gap-10 2xl:gap-8">
