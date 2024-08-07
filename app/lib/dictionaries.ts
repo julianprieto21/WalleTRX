@@ -10,6 +10,7 @@ export const dict = {
     dashboard: "Reporte",
     accounts: "Cuentas",
     settings: "Ajustes",
+    installments: "Pagos Recurrentes",
     footer: "Aplicación creada por Julian Prieto",
     notFound: {
       title: "Not Found",
@@ -154,6 +155,7 @@ export const dict = {
   },
   categories: {
     "food-drink": "Comidas/Bebidas",
+    salary: "Sueldo",
     restaurant: "Restaurante",
     adjustment: "Ajuste",
     technology: "Tecnología",

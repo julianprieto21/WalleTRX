@@ -6,6 +6,10 @@ export const CATEGORIES: Category[] = [
     color: "#FF5733",
   },
   {
+    id: "salary",
+    color: "#FF5733",
+  },
+  {
     id: "restaurant",
     color: "#C70039",
   },
