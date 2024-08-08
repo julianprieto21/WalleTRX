@@ -39,7 +39,7 @@ export async function CryptoTable() {
   const res = await fetch("https://api.coinlore.net/api/tickers/");
   const { data, info } = await res.json();
   return (
-    <table className="w-full text-sm text-left text-palette-100">
+    <table className="w-full text-sm text-left text-palette-100  border-x border-palette-300">
       <thead className="sticky top-0 z-10 text-sm text-palette-500 font-light uppercase bg-palette-400">
         <tr>
           <th scope="col" className="px-6 py-3">
@@ -57,20 +57,14 @@ export async function CryptoTable() {
           <th scope="col" className="px-6 py-3">
             Volume
           </th>
-          <th scope="col" className="px-6 py-3">
-            Rank
-          </th>
         </tr>
       </thead>
-      <tbody>
+      <tbody className="rounded-lg overflow-hidden bg-palette-400">
         {data.map((item: any) => {
           const color =
             item.percent_change_24h > 0 ? "text-green-400" : "text-red-400";
           return (
-            <tr
-              key={item.id}
-              className="bg-palette-300 border-b border-palette-300"
-            >
+            <tr key={item.id}>
               <th className="px-6 py-4 text-palette-100/50 flex gap-2">
                 <img
                   title="Cryptocurrency"
@@ -91,7 +85,6 @@ export async function CryptoTable() {
               <td className="px-6 py-4 text-palette-100/50">
                 {formatBalance(item.volume24a, "auto", "USD", "compact")}
               </td>
-              <td className="px-6 py-4 text-palette-100/50">{item.rank}</td>
             </tr>
           );
         })}
