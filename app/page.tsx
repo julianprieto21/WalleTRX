@@ -25,14 +25,14 @@ export default async function HomePage() {
       <div className="shrink-0 mt-4 2xl:mt-0 h-auto 2xl:h-auto py-2 2xl:absolute 2xl:right-10 2xl:top-10 overflow-x-scroll no-scrollbar">
         <Accounts />
       </div>
-      <section className="grid grid-cols-2 grid-rows-2 gap-10 size-full mt-4">
-        <div className="rounded-lg shadow-md bg-palette-300 px-6 py-5">
+      <section className="grid grid-cols-5 grid-rows-2 gap-10 size-full mt-4">
+        <div className="rounded-lg shadow-md bg-palette-300 px-6 py-5 col-span-2">
           <MainCard user={user} />
         </div>
-        <div className="rounded-lg shadow-md bg-palette-300 px-6 py-5">
+        <div className="rounded-lg shadow-md bg-palette-300 px-6 py-5 col-span-3 col-start-3">
           <Last5transactions />
         </div>
-        <div className="col-span-2 rounded-lg shadow-md bg-palette-300 px-6 py-5">
+        <div className="col-span-5 row-start-2 rounded-lg shadow-md bg-palette-300 px-6 py-5">
           <LineChart transactions={transactions} />
         </div>
       </section>

@@ -11,29 +11,6 @@ import { formatBalance } from "@lib/utils";
 import Link from "next/link";
 import { dict } from "@lib/dictionaries";
 
-const ActionLinks = () => {
-  return (
-    <>
-      <div className="flex flex-col gap-3">
-        <Link href={"/transactions/create?t=expense"}>
-          <Upload className="text-expense text-4xl 2xl:text-3xl bg-palette-400 rounded-full hover:bg-expense hover:text-palette-100 transition p-2" />
-        </Link>
-        <Link href={"/transactions/create?t=income"}>
-          <Download className="text-income text-4xl 2xl:text-3xl bg-palette-400 rounded-full hover:bg-income hover:text-palette-100 transition p-2" />
-        </Link>
-        <Link href={"/transactions/create?t=transfer"}>
-          <DataTransferBoth className="text-transfer text-4xl 2xl:text-3xl rotate-90 bg-palette-400 rounded-full hover:bg-transfer hover:text-palette-100 transition p-2" />
-        </Link>
-      </div>
-      <div className="flex flex-col gap-3 justify-end">
-        <Link href={"/installments"}>
-          <MultiplePagesPlus className="text-blue-600 text-4xl 2xl:text-3xl rotate-90 bg-palette-400 rounded-full hover:bg-blue-600 hover:text-palette-100 transition p-2" />
-        </Link>
-      </div>
-    </>
-  );
-};
-
 export default async function MainCard({ user }: { user: User }) {
   const { balance: balanceText } = dict;
   const radialBarChartData = await getBalanceByType();
@@ -57,8 +34,25 @@ export default async function MainCard({ user }: { user: User }) {
         <RadialBarChart data={radialBarChartData} />
       </div>
 
-      <div className="absolute bottom-0 right-0 flex flex-row-reverse gap-3">
-        <ActionLinks />
+      <div className="absolute bottom-0 right-0 grid grid-cols-2 grid-rows-3 gap-3">
+        <Link href={"/transactions/create?t=expense"} className="col-start-2">
+          <Upload className="text-expense text-4xl 2xl:text-3xl bg-palette-400 rounded-full hover:bg-expense hover:text-palette-100 transition p-2" />
+        </Link>
+        <Link
+          href={"/transactions/create?t=income"}
+          className="col-start-2 row-start-2"
+        >
+          <Download className="text-income text-4xl 2xl:text-3xl bg-palette-400 rounded-full hover:bg-income hover:text-palette-100 transition p-2" />
+        </Link>
+        <Link
+          href={"/transactions/create?t=transfer"}
+          className="col-start-2 row-start-3"
+        >
+          <DataTransferBoth className="text-transfer text-4xl 2xl:text-3xl rotate-90 bg-palette-400 rounded-full hover:bg-transfer hover:text-palette-100 transition p-2" />
+        </Link>
+        <Link href={"/installments"} className="col-start-1 row-start-3">
+          <MultiplePagesPlus className="text-blue-600 text-4xl 2xl:text-3xl rotate-90 bg-palette-400 rounded-full hover:bg-blue-600 hover:text-palette-100 transition p-2" />
+        </Link>
       </div>
     </div>
   );
