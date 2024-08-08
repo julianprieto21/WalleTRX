@@ -62,7 +62,7 @@ export function RadialBarChart({ data }: { data: any[] }) {
       </p>
       <ReactApexChart
         options={state.options}
-        series={[amount[1] / 100, amount[0] / 100]}
+        series={[amount[1] ?? 0 / 100, amount[0] ?? 0 / 100]}
         type="donut"
         width={300}
         height={400}
