@@ -1,4 +1,9 @@
-import { Upload, Download, DataTransferBoth } from "iconoir-react";
+import {
+  Upload,
+  Download,
+  DataTransferBoth,
+  MultiplePagesPlus,
+} from "iconoir-react";
 import { RadialBarChart } from "@components/wallet/RadialBarChart";
 import { getBalanceByType, getBalanceByUser } from "@lib/db";
 import { User } from "@lib/types";
@@ -9,15 +14,22 @@ import { dict } from "@lib/dictionaries";
 const ActionLinks = () => {
   return (
     <>
-      <Link href={"/transactions/create?t=expense"}>
-        <Upload className="text-expense text-4xl 2xl:text-3xl bg-palette-400 rounded-full hover:bg-expense hover:text-palette-100 transition p-2" />
-      </Link>
-      <Link href={"/transactions/create?t=income"}>
-        <Download className="text-income text-4xl 2xl:text-3xl bg-palette-400 rounded-full hover:bg-income hover:text-palette-100 transition p-2" />
-      </Link>
-      <Link href={"/transactions/create?t=transfer"}>
-        <DataTransferBoth className="text-transfer text-4xl 2xl:text-3xl rotate-90 bg-palette-400 rounded-full hover:bg-transfer hover:text-palette-100 transition p-2" />
-      </Link>
+      <div className="flex flex-col gap-3">
+        <Link href={"/transactions/create?t=expense"}>
+          <Upload className="text-expense text-4xl 2xl:text-3xl bg-palette-400 rounded-full hover:bg-expense hover:text-palette-100 transition p-2" />
+        </Link>
+        <Link href={"/transactions/create?t=income"}>
+          <Download className="text-income text-4xl 2xl:text-3xl bg-palette-400 rounded-full hover:bg-income hover:text-palette-100 transition p-2" />
+        </Link>
+        <Link href={"/transactions/create?t=transfer"}>
+          <DataTransferBoth className="text-transfer text-4xl 2xl:text-3xl rotate-90 bg-palette-400 rounded-full hover:bg-transfer hover:text-palette-100 transition p-2" />
+        </Link>
+      </div>
+      <div className="flex flex-col gap-3 justify-end">
+        <Link href={"/installments"}>
+          <MultiplePagesPlus className="text-blue-600 text-4xl 2xl:text-3xl rotate-90 bg-palette-400 rounded-full hover:bg-blue-600 hover:text-palette-100 transition p-2" />
+        </Link>
+      </div>
     </>
   );
 };
@@ -28,7 +40,7 @@ export default async function MainCard({ user }: { user: User }) {
   const generalBalance = await getBalanceByUser();
   const balance = generalBalance.length > 0 ? generalBalance[0].total : 0;
   return (
-    <div className="shrink-0 rounded-lg h-80 2xl:h-80 w-full 2xl:w-[620px] shadow-md bg-palette-300 px-6 py-5 relative">
+    <div className="relative size-full">
       <h3 className="text-palette-100 text-3xl 2xl:text-4xl">
         <p className="text-neutral-500 font-bold text-base">{balanceText}:</p>
         {formatBalance(balance / 100)}
@@ -36,7 +48,7 @@ export default async function MainCard({ user }: { user: User }) {
       <Link href={"/settings"}>
         <img
           alt=""
-          className="absolute right-0 top-2 mr-6 my-5 size-14 2xl:size-11 rounded-full"
+          className="absolute right-0 top-0 size-14 2xl:size-11 rounded-full"
           src={user.image_url}
         />
       </Link>
@@ -45,7 +57,7 @@ export default async function MainCard({ user }: { user: User }) {
         <RadialBarChart data={radialBarChartData} />
       </div>
 
-      <div className="absolute bottom-0 right-0 flex flex-col gap-3 pr-6 pb-5">
+      <div className="absolute bottom-0 right-0 flex flex-row-reverse gap-3">
         <ActionLinks />
       </div>
     </div>

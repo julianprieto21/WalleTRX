@@ -10,11 +10,11 @@ export default async function Last5transactions() {
   const transactions = await getTransactions();
   const last5 = transactions.slice(0, 5);
   return (
-    <div className="2xl:flex flex-col rounded-lg h-80 w-full shadow-md bg-palette-300 px-6 py-5 relative">
+    <div className="2xl:flex flex-col size-full relative">
       <Link
         href={"/transactions"}
         title="Go to transactions"
-        className="absolute text-palette-250 hover:text-palette-100 transition left-2 top-2"
+        className="absolute text-palette-250 hover:text-palette-100 transition left-0 top-0"
       >
         <ArrowUpLeft className="size-8 2xl:size-4" />
       </Link>
