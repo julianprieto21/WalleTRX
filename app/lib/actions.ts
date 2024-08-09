@@ -1,5 +1,5 @@
 "use server";
-import { AccountSchema, TransactionSchema } from "./schemas";
+import { AccountSchema, InstallmentSchema, TransactionSchema } from "./schemas";
 import { createClient } from "@vercel/postgres";
 import { redirect } from "next/navigation";
 import { getTransaction, getUser } from "./db";
@@ -182,6 +182,7 @@ export async function deleteAccount(aid: string) {
     await client.connect();
     await client.sql`DELETE FROM accounts WHERE id=${aid}`;
     await client.sql`DELETE FROM transactions WHERE account_id=${aid}`;
+    await client.sql`DELETE FROM installments WHERE account_id=${aid}`;
   } catch (err) {
     console.error(err);
   } finally {
@@ -197,6 +198,7 @@ export async function clearHistory() {
   try {
     await client.connect();
     await client.sql`DELETE FROM transactions WHERE user_id=${user.id}`;
+    await client.sql`DELETE FROM installments WHERE user_id=${user.id}`;
   } catch (err) {
     console.error(err);
   } finally {
@@ -214,10 +216,91 @@ export async function deleteUser() {
     await client.sql`DELETE FROM users WHERE id=${user.id}`;
     await client.sql`DELETE FROM transactions WHERE user_id=${user.id}`;
     await client.sql`DELETE FROM accounts WHERE user_id=${user.id}`;
+    await client.sql`DELETE FROM installments WHERE user_id=${user.id}`;
   } catch (err) {
     console.error(err);
   } finally {
     await signOut();
     await client.end();
+  }
+}
+
+export async function createInstallment(formData: FormData) {
+  const user = (await getUser()) as User;
+  if (!user) return;
+  const client = createClient();
+  try {
+    await client.connect();
+    const { type, name, account, category, amount, quantity, period } =
+      InstallmentSchema.parse({
+        type: formData.get("type"),
+        name: formData.get("name"),
+        account: formData.get("account"),
+        category: formData.get("category"),
+        amount: formData.get("amount"),
+        quantity: formData.get("quantity"),
+        period: formData.get("period"),
+      });
+    const amountInCents = round(amount * 100, 0);
+    await client.sql`INSERT INTO installments (user_id, account_id, type, name, category, amount, quantity, quantity_paid, period, finished)
+                     VALUES (${
+                       user.id
+                     }, ${account}, ${type}, ${name.toLowerCase()}, ${category}, ${amountInCents}, ${quantity}, ${0}, ${period}, ${false})`;
+  } catch (err) {
+    console.error(err);
+  } finally {
+    await client.end();
+    revalidatePath("/installments");
+  }
+}
+
+export async function editInstallment(iid: string, formData: FormData) {}
+
+export async function deleteInstallment(iid: string) {
+  const client = createClient();
+  try {
+    await client.connect();
+    await client.sql`DELETE FROM installments WHERE id=${iid}`;
+  } catch (err) {
+    console.error(err);
+  } finally {
+    await client.end();
+    revalidatePath("/installments");
+  }
+}
+
+export async function addPayment(installment: any) {
+  const user = (await getUser()) as User;
+  if (!user) return;
+  const client = createClient();
+  try {
+    await client.connect();
+    const {
+      id,
+      user_id,
+      account_id,
+      type,
+      name,
+      category,
+      amount,
+      quantity,
+      quantity_paid,
+    } = installment;
+    const description = quantity
+      ? `${name.toLowerCase()} - ${quantity_paid + 1}/${quantity}`
+      : name.toLowerCase();
+    const UTCTimestamp = new Date().getTime();
+    const realAmount = type === "income" ? amount : -amount;
+    await client.sql`INSERT INTO transactions (user_id, account_id, type, description, category, amount, created_at, installment_id)
+                     VALUES (${user_id}, ${account_id}, ${type}, ${description}, ${category}, ${realAmount}, ${UTCTimestamp}, ${id})`;
+    await client.sql`UPDATE installments SET quantity_paid = ${
+      quantity_paid + 1
+    }, finished = ${quantity_paid + 1 == quantity}
+                     WHERE id = ${id}`;
+  } catch (err) {
+    console.error(err);
+  } finally {
+    await client.end();
+    revalidatePath("/installments");
   }
 }

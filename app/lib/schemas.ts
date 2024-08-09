@@ -17,3 +17,13 @@ export const AccountSchema = z.object({
   type: z.string(),
   color: z.string(),
 });
+
+export const InstallmentSchema = z.object({
+  type: z.enum(["income", "expense"]),
+  name: z.string(),
+  account: z.string(),
+  category: z.string(),
+  amount: z.string().transform((value) => parseFloat(value)),
+  quantity: z.string().transform((value) => parseInt(value)),
+  period: z.string(),
+});
