@@ -2,6 +2,7 @@
 import { dict } from "@lib/dictionaries";
 import _ from "lodash";
 import dynamic from "next/dynamic";
+import { parse } from "path";
 import React from "react";
 const ReactApexChart = dynamic(() => import("react-apexcharts"), {
   ssr: false,
@@ -10,9 +11,10 @@ const ReactApexChart = dynamic(() => import("react-apexcharts"), {
 export function RadialBarChart({ data }: { data: any[] }) {
   const actualMonth = new Date().getMonth() + 1;
   const actualMonthText = dict.months[actualMonth];
-  const amount = data.map((item) => {
-    return Math.abs(parseInt(item.total));
-  });
+  let income = data.filter((item) => item.type === "income")[0]?.total ?? "0";
+  let expense = data.filter((item) => item.type === "expense")[0]?.total ?? "0";
+  income = Math.abs(parseInt(income));
+  expense = Math.abs(parseInt(expense));
   const state = {
     options: {
       legend: {
@@ -62,7 +64,7 @@ export function RadialBarChart({ data }: { data: any[] }) {
       </p>
       <ReactApexChart
         options={state.options}
-        series={[amount[1] ?? 0 / 100, amount[0] ?? 0 / 100]}
+        series={[income / 100, expense / 100]}
         type="donut"
         width={300}
         height={400}
