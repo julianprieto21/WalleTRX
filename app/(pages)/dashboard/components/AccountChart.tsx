@@ -52,7 +52,7 @@ export default function AccountChart({
       },
       labels: labels,
       dataLabels: {
-        enabled: true,
+        enabled: false,
       },
       legend: {
         position: "bottom",
@@ -72,22 +72,20 @@ export default function AccountChart({
     } as ApexOptions,
   };
   return (
-    <div className="max-w-sm w-full h-fit bg-palette-300 rounded-lg shadow p-4 md:p-6">
-      <div className="flex justify-between mb-3">
-        <div className="flex justify-center items-center">
-          <h5 className="text-xl font-bold leading-none text-palette-100 pe-1">
-            {dict.charts.accounts}
-          </h5>
-        </div>
-      </div>
+    <div className="size-full">
+      <h2 className="text-palette-500 text-2xl w-full font-bold">
+        {dict.charts.accounts}
+      </h2>
 
-      <ReactApexChart
-        options={state.options}
-        series={state.series}
-        type="donut"
-        height={327}
-        width="100%"
-      />
+      <div className="2xl:h-[250px] mt-6">
+        <ReactApexChart
+          options={state.options}
+          series={state.series}
+          type="donut"
+          height="100%"
+          width="100%"
+        />
+      </div>
     </div>
   );
 }

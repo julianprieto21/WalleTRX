@@ -90,25 +90,23 @@ export default function CategoryChart({
     } as ApexOptions,
   };
   return (
-    <div className="w-full h-fit bg-palette-300 rounded-lg shadow p-4 md:p-6">
-      <div className="flex justify-between mb-3">
-        <div className="flex justify-center items-center">
-          <h5 className="text-xl font-bold leading-none text-palette-100 pe-1">
-            {charts.category}
-          </h5>
-        </div>
+    <div className="size-full">
+      <h2 className="text-palette-500 text-2xl w-full font-bold">
+        {charts.category}
+      </h2>
+
+      <div className="2xl:h-[240px]">
+        <ReactApexChart
+          options={state.options}
+          series={state.series}
+          type="treemap"
+          height="100%"
+          width="100%"
+        />
       </div>
 
-      <ReactApexChart
-        options={state.options}
-        series={state.series}
-        type="treemap"
-        height={240}
-        width="100%"
-      />
-
       <div className="grid grid-cols-1 items-center border-palette-250 border-t justify-between">
-        <div className="flex justify-between items-center pt-5">
+        <div className="flex justify-between items-center pt-2">
           <select
             title="Dropdown"
             id="dropdownDefault"

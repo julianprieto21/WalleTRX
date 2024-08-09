@@ -200,15 +200,18 @@ export default function TimeLine({
     } as ApexOptions,
   };
   return (
-    <div className="w-full bg-palette-300 rounded-lg shadow p-4 md:p-6 md:pt-2">
-      <ReactApexChart
-        options={state.options}
-        series={state.series}
-        type="area"
-        height={253}
-        width="100%"
-      />
-      <div className="grid grid-cols-1 items-center border-palette-250 border-t justify-between mt-2">
+    <div className="size-full">
+      <div className="2xl:h-[250px]">
+        <ReactApexChart
+          options={state.options}
+          series={state.series}
+          type="area"
+          height="100%"
+          width="100%"
+        />
+      </div>
+
+      <div className="grid grid-cols-1 items-center border-palette-250 border-t justify-between">
         <div className="flex justify-between items-center pt-5">
           <select
             title="Dropdown"
@@ -225,9 +228,9 @@ export default function TimeLine({
             <option value="12-months">{charts.selectors.lastYear}</option>
             <option value="all">{charts.selectors.all}</option>
           </select>
-          <h5 className="text-xl font-bold leading-none text-palette-100 pe-1 pr-2">
+          <h2 className="text-palette-500 text-2xl font-bold">
             {charts.timeline}
-          </h5>
+          </h2>
         </div>
       </div>
     </div>

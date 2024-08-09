@@ -94,6 +94,8 @@ export default function MonthlyChart({
   const [XaxisIncome, setXaxisIncome] = useState<number[]>([]);
   const [XaxisExpense, setXaxisExpense] = useState<number[]>([]);
   const [period, setPeriod] = useState<string>("all");
+  const actualMonth = new Date().getMonth() + 1;
+  const actualMonthName = months[actualMonth];
 
   useEffect(() => {
     const offset = periods[period].offset;
@@ -101,8 +103,16 @@ export default function MonthlyChart({
   }, [period]);
 
   useEffect(() => {
-    setIncome(usedData.reduce((acc, cur) => acc + cur.income, 0));
-    setExpense(usedData.reduce((acc, cur) => acc + cur.expense, 0));
+    setIncome(
+      usedData
+        .filter((item) => item.month == actualMonth)
+        .reduce((acc, cur) => acc + cur.income, 0)
+    );
+    setExpense(
+      usedData
+        .filter((item) => item.month == actualMonth)
+        .reduce((acc, cur) => acc + cur.expense, 0)
+    );
     setYaxis(usedData.map((item) => months[item.month]));
     setXaxisIncome(usedData.map((item) => Math.abs(item.income / 100)));
     setXaxisExpense(usedData.map((item) => Math.abs(item.expense / 100)));
@@ -217,13 +227,13 @@ export default function MonthlyChart({
   };
 
   return (
-    <div className="max-w-sm w-full bg-palette-300 rounded-lg shadow p-4 md:p-6 h-fit">
+    <div className="size-full">
       <div className="flex justify-between border-palette-250 border-b pb-3">
         <dl>
           <dt className="text-base font-normal text-palette-200 pb-1">
             {balanceText}
           </dt>
-          <dd className="leading-none text-3xl font-bold text-palette-100">
+          <dd className="leading-none text-3xl font-bold text-palette-500">
             {formatBalance(balance / 100)}
           </dd>
         </dl>
@@ -232,7 +242,7 @@ export default function MonthlyChart({
       <div className="grid grid-cols-2 py-3">
         <dl>
           <dt className="text-base font-normal text-palette-200 pb-1">
-            {transactionText.income}
+            {transactionText.income} - {actualMonthName}
           </dt>
           <dd className="leading-none text-xl font-bold text-green-400 ">
             {formatBalance(income / 100)}
@@ -240,7 +250,7 @@ export default function MonthlyChart({
         </dl>
         <dl>
           <dt className="text-base font-normal text-palette-200 pb-1">
-            {transactionText.expense}
+            {transactionText.expense} - {actualMonthName}
           </dt>
           <dd className="leading-none text-xl font-bold text-red-500">
             {formatBalance(expense / 100)}
@@ -248,13 +258,15 @@ export default function MonthlyChart({
         </dl>
       </div>
 
-      <ReactApexChart
-        options={state.options}
-        series={state.series}
-        type="bar"
-        height={510}
-        width="100%"
-      />
+      <div className="2xl:h-[500px]">
+        <ReactApexChart
+          options={state.options}
+          series={state.series}
+          type="bar"
+          width="100%"
+          height="100%"
+        />
+      </div>
 
       <div className="grid grid-cols-1 items-center border-palette-250 border-t justify-between">
         <div className="flex justify-between items-center pt-5">
