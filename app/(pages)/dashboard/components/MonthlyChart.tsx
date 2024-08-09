@@ -3,7 +3,6 @@ import { dict } from "@lib/dictionaries";
 import { Transaction } from "@lib/types";
 import { formatBalance, getYearMonth } from "@lib/utils";
 import { ApexOptions } from "apexcharts";
-import { NavArrowDown } from "iconoir-react";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 const ReactApexChart = dynamic(() => import("react-apexcharts"), {
@@ -58,6 +57,7 @@ function formatData(transactions: Transaction[]) {
       });
     }
   });
+  // agrupar ascendentemente por mes
 
   return groupedData;
 }
@@ -68,10 +68,10 @@ export default function MonthlyChart({
   transactions: Transaction[];
 }) {
   const periods: { [key: string]: { offset: number } } = {
-    "3-months": { offset: -3 },
-    "6-months": { offset: -6 },
-    "12-months": { offset: -12 },
-    all: { offset: -0 },
+    "3-months": { offset: 3 },
+    "6-months": { offset: 6 },
+    "12-months": { offset: 12 },
+    all: { offset: 0 },
   };
   const {
     transactions: transactionText,
@@ -93,13 +93,21 @@ export default function MonthlyChart({
   const [Yaxis, setYaxis] = useState<string[]>([]);
   const [XaxisIncome, setXaxisIncome] = useState<number[]>([]);
   const [XaxisExpense, setXaxisExpense] = useState<number[]>([]);
-  const [period, setPeriod] = useState<string>("all");
+  const [period, setPeriod] = useState<string>("3-months");
   const actualMonth = new Date().getMonth() + 1;
   const actualMonthName = months[actualMonth];
 
   useEffect(() => {
+    setBalance(
+      data.reduce((acc, cur) => acc + cur.income, 0) +
+        data.reduce((acc, cur) => acc + cur.expense, 0)
+    );
+  }, [data]);
+
+  useEffect(() => {
     const offset = periods[period].offset;
-    setUsedData(data.slice(offset));
+    if (offset == 0) setUsedData(data);
+    else setUsedData(data.slice(0, offset));
   }, [period]);
 
   useEffect(() => {
@@ -116,10 +124,6 @@ export default function MonthlyChart({
     setYaxis(usedData.map((item) => months[item.month]));
     setXaxisIncome(usedData.map((item) => Math.abs(item.income / 100)));
     setXaxisExpense(usedData.map((item) => Math.abs(item.expense / 100)));
-    setBalance(
-      usedData.reduce((acc, cur) => acc + cur.income, 0) +
-        usedData.reduce((acc, cur) => acc + cur.expense, 0)
-    );
   }, [usedData]);
 
   const state = {

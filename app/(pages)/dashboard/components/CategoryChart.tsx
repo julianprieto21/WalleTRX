@@ -1,6 +1,7 @@
 "use client";
 import { CATEGORIES } from "@lib/consts/categories";
 import { dict } from "@lib/dictionaries";
+import { Transaction } from "@lib/types";
 import { formatBalance } from "@lib/utils";
 import { ApexOptions } from "apexcharts";
 import { NavArrowDown } from "iconoir-react";
@@ -10,6 +11,27 @@ import { useEffect, useState } from "react";
 const ReactApexChart = dynamic(() => import("react-apexcharts"), {
   ssr: false,
 });
+
+function formatData(transactions: Transaction[]) {
+  // agrupar montos por categoría
+  const data: {
+    category: string;
+    total: number;
+  }[] = [];
+  transactions.map((trx) => {
+    if (trx.category == "transfer") return;
+    if (data.find((item) => item.category == trx.category)) {
+      data.find((item) => item.category == trx.category)!.total += trx.amount;
+    } else {
+      data.push({
+        category: trx.category,
+        total: trx.amount,
+      });
+    }
+  });
+  console.log(data);
+  // return data;
+}
 
 export default function CategoryChart({
   categoryData,
@@ -113,13 +135,13 @@ export default function CategoryChart({
             className="text-sm font-medium bg-palette-300 text-palette-200 hover:text-palette-100 text-center inline-flex items-center"
             onChange={(e) => setPeriod(e.target.value)}
           >
-            {/* <option value="last-month">{charts.selectors.lastMonth}</option>
-            <option value="3-months">{charts.selectors.last3Months}</option>
+            <option value="last-month">{charts.selectors.lastMonth}</option>
+            {/* <option value="3-months">{charts.selectors.last3Months}</option>
             <option value="6-months">{charts.selectors.last6Months}</option>
-            <option value="12-months">{charts.selectors.lastYear}</option> */}
+            <option value="12-months">{charts.selectors.lastYear}</option>
             <option defaultChecked value="all">
               {charts.selectors.all}
-            </option>
+            </option> */}
           </select>
         </div>
       </div>

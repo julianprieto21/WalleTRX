@@ -119,12 +119,23 @@ export async function getBalanceByAccounts() {
 export async function getBalanceByCategory() {
   const user = (await getUser()) as User;
   const client = createClient();
+  const startDate = new Date(
+    new Date().getFullYear(),
+    new Date().getMonth(),
+    1
+  ).getTime();
+  // ultimo dia del mes
+  const endDate = new Date(
+    new Date().getFullYear(),
+    new Date().getMonth() + 1,
+    0
+  ).getTime();
   try {
     await client.connect();
     const { rows } = await client.sql<{
       category: string;
       total: number;
-    }>`select category, sum(amount) total from transactions where user_id=${user.id} and category !='transfer' group by category`;
+    }>`select category, sum(amount) total from transactions where user_id=${user.id} and category !='transfer' and created_at >= ${startDate} and created_at <= ${endDate} group by category`;
     return rows;
   } catch (error) {
     console.error(error);

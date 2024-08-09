@@ -10,7 +10,7 @@ const ReactApexChart = dynamic(() => import("react-apexcharts"), {
   ssr: false,
 });
 
-function formatData(transactions: Transaction[]) {
+export function formatData(transactions: Transaction[]) {
   const data: {
     date: Date;
     income: number;
