@@ -1,5 +1,3 @@
-import { last } from "lodash";
-
 export const dict = {
   app: "WALLE&TRX",
   nav: {
@@ -24,7 +22,7 @@ export const dict = {
   },
   auth: {
     login: "Iniciar sesión",
-    secondaryLogin: "Log with social accounts",
+    secondaryLogin: "Iniciar sesión con cuentas externas",
     logout: "Cerrar sesión",
   },
   filters: {
@@ -83,6 +81,9 @@ export const dict = {
   balance: "Balance",
   hello: "Hola",
   commingSoon: "Proximamente",
+  createInstallment: "Crear pago recurrente",
+  activesInstallments: "Pagos activos",
+  installmentsOf: "Pagos de",
   switcher: {
     crypto: "Criptomonedas",
     stocks: "Acciones",
@@ -102,6 +103,7 @@ export const dict = {
       createAccount: "Cuenta creada con éxito!",
       editAccount: "Cuenta editada con éxito!",
       deleteAccount: "Cuenta eliminada con éxito!",
+      createInstallment: "Pago recurrente creado con éxito!",
     },
     error: {
       createTransaction: "Error al crear la transacción.",
@@ -110,6 +112,7 @@ export const dict = {
       createAccount: "Error al crear la cuenta.",
       editAccount: "Error al editar la cuenta.",
       deleteAccount: "Error al eliminar la cuenta.",
+      createInstallment: "Error al crear el pago recurrente.",
     },
   },
   months: {
@@ -172,5 +175,11 @@ export const dict = {
     sports: "Deportes",
     grocery: "Supermercado",
     transfer: "Transferencia",
+  } as Record<string, string>,
+  periods: {
+    daily: "Diario",
+    weekly: "Semanal",
+    monthly: "Mensual",
+    yearly: "Anual",
   } as Record<string, string>,
 };

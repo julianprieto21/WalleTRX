@@ -3,6 +3,7 @@ import { dict } from "./dictionaries";
 import { createHash } from "crypto";
 import { CRYPTOS } from "./consts/cryptos";
 import { round } from "lodash";
+import { getInstallments, getTransactions } from "./db";
 
 export function getLocalDate(date: Date = new Date()) {
   const localOffset = new Date().getTimezoneOffset() * 60000;
@@ -155,4 +156,52 @@ export async function convert(amount: number, from: string, to: string) {
   const toPrice = rateData[1].price_usd;
   const amountConverted = (amount * fromPrice) / toPrice;
   return round(amountConverted, 4);
+}
+
+export async function isPendingInstallments() {
+  const installments = (await getInstallments()).filter(
+    (item) => item.finished == false
+  );
+  const installmentsTransactions = (await getTransactions()).filter(
+    (transaction) => transaction.installment_id !== null
+  );
+  const actualDay = new Date().getDate();
+  const actualMonth = new Date().getMonth();
+  const actualYear = new Date().getFullYear();
+  let pendings = 0;
+  for (const installment of installments) {
+    const transactionsOfInstallment = installmentsTransactions.filter(
+      (transaction) => transaction.installment_id === installment.id
+    );
+    if (installment.period == "monthly") {
+      if (
+        !transactionsOfInstallment.some((item) => {
+          return new Date(parseInt(item.created_at)).getMonth() == actualMonth;
+        })
+      ) {
+        pendings++;
+      }
+    }
+    if (installment.period == "daily") {
+      if (
+        !transactionsOfInstallment.some((item) => {
+          return new Date(parseInt(item.created_at)).getDate() == actualDay;
+        })
+      ) {
+        pendings++;
+      }
+    }
+    if (installment.period == "yearly") {
+      if (
+        !transactionsOfInstallment.some((item) => {
+          return (
+            new Date(parseInt(item.created_at)).getFullYear() == actualYear
+          );
+        })
+      ) {
+        pendings++;
+      }
+    }
+  }
+  return pendings > 0;
 }

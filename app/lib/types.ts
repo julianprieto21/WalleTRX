@@ -22,6 +22,7 @@ export type Transaction = {
   created_at: string;
   category: string;
   transfer_id: string;
+  installment_id: string;
 };
 export type Category = {
   id: string;

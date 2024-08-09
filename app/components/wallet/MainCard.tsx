@@ -7,7 +7,7 @@ import {
 import { RadialBarChart } from "@components/wallet/RadialBarChart";
 import { getBalanceByType, getBalanceByUser } from "@lib/db";
 import { User } from "@lib/types";
-import { formatBalance } from "@lib/utils";
+import { formatBalance, isPendingInstallments } from "@lib/utils";
 import Link from "next/link";
 import { dict } from "@lib/dictionaries";
 
@@ -16,6 +16,7 @@ export default async function MainCard({ user }: { user: User }) {
   const radialBarChartData = await getBalanceByType();
   const generalBalance = await getBalanceByUser();
   const balance = generalBalance.length > 0 ? generalBalance[0].total : 0;
+  const pendingInstallments = await isPendingInstallments();
   return (
     <div className="relative size-full">
       <h3 className="text-palette-100 text-3xl 2xl:text-4xl">
@@ -50,7 +51,15 @@ export default async function MainCard({ user }: { user: User }) {
         >
           <DataTransferBoth className="text-transfer text-4xl 2xl:text-3xl rotate-90 bg-palette-400 rounded-full hover:bg-transfer hover:text-palette-100 transition p-2" />
         </Link>
-        <Link href={"/installments"} className="col-start-1 row-start-3">
+        <Link
+          href={"/installments"}
+          className="col-start-1 row-start-3 relative"
+        >
+          <span
+            className={`${
+              pendingInstallments ? "" : "hidden"
+            } rounded-full size-2 bg-palette-500 absolute z-10 right-0.5 top-0.5`}
+          ></span>
           <MultiplePagesPlus className="text-blue-600 text-4xl 2xl:text-3xl rotate-90 bg-palette-400 rounded-full hover:bg-blue-600 hover:text-palette-100 transition p-2" />
         </Link>
       </div>

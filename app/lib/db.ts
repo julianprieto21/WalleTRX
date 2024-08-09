@@ -198,3 +198,27 @@ export async function getBalanceByUser() {
     await client.end();
   }
 }
+
+export async function getInstallments() {
+  const user = (await getUser()) as User;
+  const client = createClient();
+  try {
+    await client.connect();
+    const { rows } = await client.sql<{
+      id: string;
+      name: string;
+      account_id: string;
+      category: string;
+      amount: number;
+      quantity: number;
+      period: string;
+      finished: boolean;
+    }>`select * from installments where user_id=${user.id}`;
+    return rows;
+  } catch (error) {
+    console.error(error);
+    return [];
+  } finally {
+    await client.end();
+  }
+}
