@@ -31,7 +31,7 @@ const mainLinks = [
     href: "/dashboard",
     icon: Reports,
   },
-  { name: nav.accounts, href: "/accounts", icon: AppleWallet },
+  { name: nav.accounts, href: "/accounts", icon: AppleWallet, disabled: true },
   { name: nav.settings, href: "/settings", icon: Settings },
 ];
 

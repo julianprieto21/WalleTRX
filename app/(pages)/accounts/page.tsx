@@ -1,11 +1,11 @@
 import Breadcrumbs from "@components/Breadcrumbs";
-import { CreateBtn } from "@components/CreateBtn";
 import { dict } from "@lib/dictionaries";
-import { Suspense } from "react";
 import Accounts from "./components/Accounts";
+import { getBalanceByAccounts } from "@lib/db";
 
-export default function AccountsPage() {
+export default async function AccountsPage() {
   const { nav } = dict;
+  const data = await getBalanceByAccounts();
   return (
     <main className="page px-4 sm:px-12 py-10 sm:pb-10 sm:pt-16">
       <Breadcrumbs
@@ -15,9 +15,7 @@ export default function AccountsPage() {
         ]}
       />
       <section className="flex flex-col w-full mt-2">
-        <Suspense>
-          <Accounts />
-        </Suspense>
+        <Accounts balanceByAccounts={data} />
       </section>
     </main>
   );
