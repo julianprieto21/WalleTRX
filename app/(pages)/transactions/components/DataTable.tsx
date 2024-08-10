@@ -108,7 +108,9 @@ const DataRow = ({
             href={`/transactions/edit/${trx.id}`}
             title="Edit transaction"
             onClick={() => setPopoverOpen(false)}
-            className="text-palette-300 hover:text-palette-200 transition"
+            className={`${
+              trx.category == "transfer" ? "hidden" : ""
+            } text-palette-300 hover:text-palette-200 transition`}
           >
             <EditPencil />
           </Link>

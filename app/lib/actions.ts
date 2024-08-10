@@ -2,7 +2,7 @@
 import { AccountSchema, InstallmentSchema, TransactionSchema } from "./schemas";
 import { createClient } from "@vercel/postgres";
 import { redirect } from "next/navigation";
-import { getTransaction, getUser } from "./db";
+import { getAccounts, getTransaction, getUser } from "./db";
 import { User } from "./types";
 import { signOut } from "@auth";
 import { round } from "lodash";
@@ -25,7 +25,7 @@ export async function createTransaction(formData: FormData) {
       created_at,
     } = TransactionSchema.parse({
       type: formData.get("type"),
-      description: formData.get("description"),
+      description: formData.get("description") ?? "",
       account: formData.get("account"),
       account_2: formData.get("account_2"),
       category: formData.get("category"),
@@ -38,10 +38,11 @@ export async function createTransaction(formData: FormData) {
       const amountInCents =
         type === "income" ? round(amount * 100, 0) : round(-amount * 100, 0);
       await client.sql`INSERT INTO transactions (user_id, account_id, type, description, category, amount, created_at)
-                     VALUES (${
-                       user.id
-                     }, ${account}, ${type}, ${description.toLowerCase()}, ${category}, ${amountInCents}, ${UTCTimestamp})`;
+      VALUES (${
+        user.id
+      }, ${account}, ${type}, ${description.toLowerCase()}, ${category}, ${amountInCents}, ${UTCTimestamp})`;
     } else {
+      const accounts = await getAccounts();
       const amountInCents = round(amount * 100, 0);
       if (!account_2) throw new Error("Account 2 is required");
       if (account === account_2) throw new Error("Accounts cannot be the same");
@@ -52,14 +53,17 @@ export async function createTransaction(formData: FormData) {
         description.toLocaleLowerCase(),
         amountInCents.toString()
       );
+      const acc1Name = accounts.find((a) => a.id === account)?.name;
+      const acc2Name = accounts.find((a) => a.id === account_2)?.name;
+
       await client.sql`INSERT INTO transactions (user_id, account_id, type, description, category, amount, created_at, transfer_id)
-                     VALUES (${
-                       user.id
-                     }, ${account}, 'expense', ${description.toLowerCase()}, 'transfer', ${-amountInCents}, ${UTCTimestamp}, ${transferId})`;
+                     VALUES (${user.id}, ${account}, 'expense', ${
+        acc1Name + " => " + acc2Name
+      }, 'transfer', ${-amountInCents}, ${UTCTimestamp}, ${transferId})`;
       await client.sql`INSERT INTO transactions (user_id, account_id, type, description, category, amount, created_at, transfer_id)
-                     VALUES (${
-                       user.id
-                     }, ${account_2}, 'income', ${description.toLowerCase()}, 'transfer', ${amountInCents}, ${UTCTimestamp}, ${transferId})`;
+                     VALUES (${user.id}, ${account_2}, 'income', ${
+        acc1Name + " => " + acc2Name
+      }, 'transfer', ${amountInCents}, ${UTCTimestamp}, ${transferId})`;
     }
   } catch (err) {
     console.error(err);

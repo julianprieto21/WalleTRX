@@ -38,8 +38,9 @@ export default function CreateForm({ accounts }: { accounts: Account[] }) {
           name="description"
           type="text"
           placeholder={text.description}
-          className="focus:border-palette-500 text-left h-12 rounded pl-2 border border-palette-250 bg-palette-400 text-palette-100 placeholder:text-palette-250"
-          required
+          className="disabled:cursor-not-allowed focus:border-palette-500 text-left h-12 rounded pl-2 border border-palette-250 bg-palette-400 text-palette-100 placeholder:text-palette-250"
+          required={type != "transfer"}
+          disabled={type == "transfer"}
         ></input>
         <section className="flex flex-col w-full lg:w-4/5 md:flex-row gap-2 md:gap-6 justify-center md:justify-start items-center">
           <SelectorInput
