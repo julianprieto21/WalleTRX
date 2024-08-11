@@ -9,7 +9,7 @@ import Link from "next/link";
 function AccountLink({ acc }: { acc: any }) {
   const { toasts } = dict;
   return (
-    <main className="group relative h-20 2xl:h-24 w-40 rounded-lg py-1 px-2 2xl:p-2 shadow-md text-palette-100 bg-palette-300">
+    <main className="group  relative h-20 2xl:h-24 w-40 rounded-lg py-1 px-2 2xl:p-2 shadow-md text-palette-100 bg-palette-300">
       <Link href={`#`} key={acc.id}>
         <div className="w-full flex flex-row justify-between items-center gap-2">
           <p className="font-bold text-base 2xl:text-lg truncate">{acc.name}</p>

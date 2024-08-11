@@ -24,7 +24,9 @@ export default async function HomePage() {
           </span>
           <Greetings />
         </div>
-        <Accounts balanceByAccounts={balanceByAccounts} />
+        <div className="overflow-x-auto w-full 2xl:w-auto no-scrollbar">
+          <Accounts balanceByAccounts={balanceByAccounts} />
+        </div>
       </section>
 
       <section className="flex flex-col gap-8 2xl:grid 2xl:grid-cols-5 2xl:grid-rows-2 2xl:gap-10 2xl:size-full">
