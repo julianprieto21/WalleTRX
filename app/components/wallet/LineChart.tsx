@@ -83,7 +83,7 @@ export function LineChart({
       yaxis: {
         show: true,
         forceNiceScale: true,
-
+        min: 0,
         labels: {
           formatter: (val: number) =>
             formatBalance(val, "auto", "ARS", "compact"),
