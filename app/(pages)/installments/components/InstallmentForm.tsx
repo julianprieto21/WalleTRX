@@ -89,7 +89,7 @@ export default function InstallmentForm({ accounts }: { accounts: Account[] }) {
         ></input>
       </fieldset>
 
-      <fieldset className="flex w-4/6 flex-row gap-6 justify-start items-center mt-4">
+      <fieldset className="flex w-full flex-col gap-2 justify-center items-center mt-4 2xl:flex-row 2xl:justify-start 2xl:w-4/6 2xl:gap-6">
         <SelectorInput
           options={accounts}
           placeHolder={text.selector.account}
@@ -107,7 +107,7 @@ export default function InstallmentForm({ accounts }: { accounts: Account[] }) {
           id="period"
         />
       </fieldset>
-      <fieldset className="flex w-3/6 flex-row gap-6 justify-start items-center mt-4">
+      <fieldset className="flex w-full flex-row gap-6 justify-start items-center mt-4 2xl:w-3/6">
         <input
           className="focus:border-palette-500 w-full pl-2 h-12 rounded border border-palette-250 text-palette-100 placeholder:text-palette-250 bg-palette-400 text-center"
           name="amount"
@@ -132,7 +132,7 @@ export default function InstallmentForm({ accounts }: { accounts: Account[] }) {
           })}
         </select>
       </fieldset>
-      <footer className="flex flex-row justify-between sm:justify-end gap-4 px-2 mt-4">
+      <footer className="flex flex-row justify-end gap-4 px-2 mt-4">
         <SubmitBtn />
       </footer>
     </form>
