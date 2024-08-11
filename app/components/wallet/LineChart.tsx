@@ -85,7 +85,8 @@ export function LineChart({
         forceNiceScale: true,
 
         labels: {
-          formatter: (val: number) => formatBalance(val),
+          formatter: (val: number) =>
+            formatBalance(val, "auto", "ARS", "compact"),
         },
       },
       theme: {
@@ -100,12 +101,14 @@ export function LineChart({
     },
   };
   return (
-    <ReactApexChart
-      options={state.options}
-      series={state.series}
-      type="line"
-      width="100%"
-      height="100%"
-    />
+    <div className="h-72">
+      <ReactApexChart
+        options={state.options}
+        series={state.series}
+        type="line"
+        width="100%"
+        height="100%"
+      />
+    </div>
   );
 }

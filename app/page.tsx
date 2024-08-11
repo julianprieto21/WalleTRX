@@ -15,7 +15,7 @@ export default async function HomePage() {
   if (!user) return;
   return (
     <main className="page pt-8 2xl:pt-12 pb-6 px-4 2xl:px-10 gap-6 2xl:gap-10 no-scrollbar">
-      <section className="flex flex-row justify-between items-center w-full">
+      <section className="flex flex-col gap-6 justify-between items-start w-full 2xl:items-center 2xl:flex-row 2xl:gap-0">
         <div className="mt-4">
           <span className="font-semibold text-5xl text-palette-100">
             {helloText}
@@ -27,14 +27,14 @@ export default async function HomePage() {
         <Accounts balanceByAccounts={balanceByAccounts} />
       </section>
 
-      <section className="grid grid-cols-5 grid-rows-2 gap-10 size-full">
-        <div className="rounded-lg shadow-md bg-palette-300 px-6 py-5 col-span-2">
+      <section className="flex flex-col gap-8 2xl:grid 2xl:grid-cols-5 2xl:grid-rows-2 2xl:gap-10 2xl:size-full">
+        <div className="rounded-lg shadow-md bg-palette-300 h-80 px-4 py-5 2xl:col-span-2 2xl:h-auto 2xl:px-6">
           <MainCard user={user} />
         </div>
-        <div className="rounded-lg shadow-md bg-palette-300 px-6 py-5 col-span-3 col-start-3">
+        <div className="rounded-lg shadow-md bg-palette-300 h-80 px-4 py-5 2xl:col-span-3 2xl:col-start-3 2xl:h-auto 2xl:px-6">
           <Last5transactions />
         </div>
-        <div className="col-span-5 row-start-2 rounded-lg shadow-md bg-palette-300 px-6 py-5">
+        <div className="rounded-lg shadow-md bg-palette-300 px-2 py-5 2xl:col-span-5 2xl:row-start-2 2xl:h-auto 2xl:px-6">
           <LineChart transactions={transactions} />
         </div>
       </section>

@@ -31,7 +31,7 @@ export default async function MainCard({ user }: { user: User }) {
         />
       </Link>
 
-      <div className="h-auto w-60 2xl:w-80 absolute bottom-0 left-1 2xl:left-2">
+      <div className="h-auto w-60 2xl:w-80 absolute bottom-0 -left-4 2xl:left-0 2xl:-bottom-6">
         <RadialBarChart data={radialBarChartData} />
       </div>
 

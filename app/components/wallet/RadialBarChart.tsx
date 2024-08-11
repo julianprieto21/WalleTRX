@@ -32,7 +32,7 @@ export function RadialBarChart({ data }: { data: any[] }) {
       },
       chart: {
         offsetX: -15,
-        offsetY: 115,
+        offsetY: 135,
         background: "transparent",
         zoom: {
           enabled: false,
@@ -58,17 +58,19 @@ export function RadialBarChart({ data }: { data: any[] }) {
     },
   };
   return (
-    <div className="w-full relative">
-      <p className="absolute -left-4 bottom-6 w-[300px] text-center font-semibold text-3xl text-neutral-500">
-        {actualMonthText}
-      </p>
-      <ReactApexChart
-        options={state.options}
-        series={[income / 100, expense / 100]}
-        type="donut"
-        width={300}
-        height={400}
-      />
+    <div className="w-full">
+      <div className="size-[250px] 2xl:h-[300px] 2xl:w-[300px] relative">
+        <ReactApexChart
+          options={state.options}
+          series={[income / 100, expense / 100]}
+          type="donut"
+          width="100%"
+          height="100%"
+        />
+        <p className="absolute bottom-0 2xl:bottom-6 left-0 w-[222px] 2xl:w-[272px] text-center font-semibold text-3xl text-neutral-500">
+          {actualMonthText}
+        </p>
+      </div>
     </div>
   );
 }
