@@ -14,7 +14,7 @@ export default function DeleteUser() {
         </p>
       </h2>
       <form
-        className="transition rounded-md h-10 w-32 flex flex-row border border-palette-250 hover:border-palette-300 bg-palette-300 text-red-500 font-medium text-md hover:bg-red-500 hover:text-palette-100 sm:justify-center lg:justify-start"
+        className="transition rounded-md w-32 flex flex-row border border-palette-250 hover:border-palette-300 bg-palette-300 text-red-500 font-medium text-md hover:bg-red-500 hover:text-palette-100 sm:justify-center lg:justify-start 2xl:h-10"
         action={async () => {
           try {
             await deleteUser();

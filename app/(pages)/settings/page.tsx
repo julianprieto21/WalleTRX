@@ -23,25 +23,25 @@ export default async function SettingsPage() {
         ]}
       />
       <section className="mt-6 flex flex-col items-center">
-        <h2 className="pl-2 font-medium text-palette-200 text-lg mb-2 w-3/5 text-left">
+        <h2 className="pl-2 font-medium text-palette-200 text-lg mb-2 w-full text-left 2xl:w-3/5">
           {settings.userInfo}
         </h2>
-        <div className="flex flex-col items-start gap-2 w-3/5 p-3 border rounded-md border-palette-250">
+        <div className="flex flex-col items-start gap-2 w-full p-3 border rounded-md border-palette-250 2xl:w-3/5">
           <UserInfo user={user} />
         </div>
         <LineH />
-        <h2 className="pl-2 font-medium text-palette-200 text-lg mb-2 w-3/5 text-left">
+        <h2 className="pl-2 font-medium text-palette-200 text-lg mb-2 w-full text-left 2xl:w-3/5">
           {settings.session}
         </h2>
-        <div className="flex flex-col items-start gap-8 w-3/5 p-3 border rounded-md border-palette-250">
+        <div className="flex flex-col items-start gap-8 w-full p-3 border rounded-md border-palette-250 2xl:w-3/5">
           <LogoutBtn />
         </div>
 
         <LineH />
-        <h2 className="ml-2 font-medium text-palette-200 text-lg mb-2 w-3/5 text-left">
+        <h2 className="ml-2 font-medium text-palette-200 text-lg mb-2 w-full text-left 2xl:w-3/5">
           {settings.dangerZone}
         </h2>
-        <div className="flex flex-col items-start gap-8 w-3/5 p-3 border rounded-md border-red-500">
+        <div className="flex flex-col items-start gap-8 w-full p-3 border rounded-md border-red-500 2xl:w-3/5">
           <ClearHistory />
           <DeleteUser />
         </div>
