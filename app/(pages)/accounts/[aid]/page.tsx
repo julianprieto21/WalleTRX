@@ -2,11 +2,16 @@ import Breadcrumbs from "@components/Breadcrumbs";
 import { getAccount } from "@lib/db";
 import { dict } from "@lib/dictionaries";
 import { Account } from "@lib/types";
+import { Metadata } from "next";
 
 type Props = {
   params: {
     aid: string;
   };
+};
+
+export const metadata: Metadata = {
+  title: "Memphis | " + dict.nav.accounts,
 };
 
 export default async function AccountPage({ params }: Props) {

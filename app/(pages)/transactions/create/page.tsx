@@ -4,6 +4,11 @@ import Breadcrumbs from "@components/Breadcrumbs";
 import { getAccounts } from "@lib/db";
 import { Account } from "@lib/types";
 import Calculator from "@components/Calculator";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Memphis | " + dict.actions.create + " " + dict.nav.transactions,
+};
 
 export default async function TransactionCreatePage() {
   const accounts = (await getAccounts()) as Account[];

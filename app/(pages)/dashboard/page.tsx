@@ -10,6 +10,11 @@ import {
 import AccountChart from "./components/AccountChart";
 import CategoryChart from "./components/CategoryChart";
 import TimeLine from "./components/TimeLine";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Memphis | " + dict.nav.dashboard,
+};
 
 export default async function DashboardPage() {
   const { nav: text } = dict;

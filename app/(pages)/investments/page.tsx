@@ -4,6 +4,11 @@ import Converter from "./components/Converter";
 import { CryptoTable, CryptoTableSkeleton } from "./components/CryptoTable";
 import { Suspense } from "react";
 import InvestmentSwitcher from "./components/InvestmentSwitcher";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Memphis | " + dict.nav.investments,
+};
 
 export default function investmentsPage() {
   const { nav: text } = dict;

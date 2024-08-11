@@ -6,6 +6,11 @@ import { dict } from "@lib/dictionaries";
 import Accounts from "@(pages)/accounts/components/Accounts";
 import Greetings from "@components/Greetings";
 import { LineChart } from "@components/wallet/LineChart";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Memphis | " + dict.nav.home,
+};
 
 export default async function HomePage() {
   const { hello: helloText } = dict;

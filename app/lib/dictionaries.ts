@@ -1,5 +1,4 @@
 export const dict = {
-  app: "WALLE&TRX",
   nav: {
     home: "Inicio",
     transactions: "Transacciones",

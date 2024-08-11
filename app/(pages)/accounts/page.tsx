@@ -2,6 +2,11 @@ import Breadcrumbs from "@components/Breadcrumbs";
 import { dict } from "@lib/dictionaries";
 import Accounts from "./components/Accounts";
 import { getBalanceByAccounts } from "@lib/db";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Memphis | " + dict.nav.accounts,
+};
 
 export default async function AccountsPage() {
   const { nav } = dict;

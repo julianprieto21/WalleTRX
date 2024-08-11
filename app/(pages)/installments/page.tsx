@@ -4,7 +4,12 @@ import InstallmentForm from "./components/InstallmentForm";
 import { getAccounts, getInstallments, getTransactions } from "@lib/db";
 import { Account } from "@lib/types";
 import InstallmentsList from "./components/InstallmentsList";
+import { Metadata } from "next";
 // import SeriesChart from "./components/SeriesChart";
+
+export const metadata: Metadata = {
+  title: "Memphis | " + dict.nav.installments,
+};
 
 export default async function TransactionFeePage() {
   const accounts = (await getAccounts()) as Account[];

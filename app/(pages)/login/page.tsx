@@ -1,4 +1,10 @@
+import { dict } from "@lib/dictionaries";
 import LoginForm from "@login/components/LoginForm";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Memphis | " + dict.auth.login,
+};
 
 export default function LoginPage() {
   return (

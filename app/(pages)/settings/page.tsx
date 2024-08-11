@@ -6,10 +6,15 @@ import DeleteUser from "./components/DeleteUserBtn";
 import UserInfo from "./components/UserInfo";
 import Breadcrumbs from "@components/Breadcrumbs";
 import { dict } from "@lib/dictionaries";
+import { Metadata } from "next";
 
 const LineH = () => (
   <div className="w-4/5 h-0 border-t border-palette-300 my-4"></div>
 );
+
+export const metadata: Metadata = {
+  title: "Memphis | " + dict.nav.settings,
+};
 
 export default async function SettingsPage() {
   const { user } = (await auth()) as Session;

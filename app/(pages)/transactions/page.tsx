@@ -5,6 +5,11 @@ import { Table, TableSkeleton } from "./components/Table";
 import Filters from "./components/Filters";
 import { Suspense } from "react";
 import { CreateBtn } from "@components/CreateBtn";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Memphis | " + dict.nav.transactions,
+};
 
 export default async function TransactionPage() {
   const { nav: text, buttons } = dict;

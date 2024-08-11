@@ -3,11 +3,16 @@ import Breadcrumbs from "@components/Breadcrumbs";
 import { dict } from "@lib/dictionaries";
 import { Account, Transaction } from "@lib/types";
 import { getAccounts, getTransaction } from "@lib/db";
+import { Metadata } from "next";
 
 type Props = {
   params: {
     tid: string;
   };
+};
+
+export const metadata: Metadata = {
+  title: "Memphis | " + dict.actions.edit + " " + dict.nav.transactions,
 };
 
 export default async function TransactionEditPage({ params }: Props) {

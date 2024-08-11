@@ -3,6 +3,11 @@ import CreateForm from "../components/CreateForm";
 import Breadcrumbs from "@components/Breadcrumbs";
 import { getAccounts } from "@lib/db";
 import { Account } from "@lib/types";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Memphis | " + dict.actions.create + " " + dict.nav.accounts,
+};
 
 export default async function AccountCreatePage() {
   // TODO: Hacer check de si ya existe una cuenta con el mismo nombre
