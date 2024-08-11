@@ -20,6 +20,7 @@ export default function CreateForm({ accounts }: { accounts: Account[] }) {
   return (
     <form
       action={async (formData) => {
+        if (!type) return;
         try {
           await createTransaction(formData);
           showToast(toasts.success.createTransaction, "success");

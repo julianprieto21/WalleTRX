@@ -84,6 +84,7 @@ export const dict = {
   createInstallment: "Crear pago recurrente",
   activesInstallments: "Pagos activos",
   installmentsOf: "Pagos de",
+  calculator: "Calculadora",
   switcher: {
     crypto: "Criptomonedas",
     stocks: "Acciones",

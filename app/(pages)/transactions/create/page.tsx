@@ -3,6 +3,7 @@ import CreateForm from "../components/CreateForm";
 import Breadcrumbs from "@components/Breadcrumbs";
 import { getAccounts } from "@lib/db";
 import { Account } from "@lib/types";
+import Calculator from "@components/Calculator";
 
 export default async function TransactionCreatePage() {
   const accounts = (await getAccounts()) as Account[];
@@ -20,7 +21,10 @@ export default async function TransactionCreatePage() {
           },
         ]}
       />
-      <CreateForm accounts={accounts} />
+      <section className="flex flex-col 2xl:flex-row gap-8 mt-6">
+        <CreateForm accounts={accounts} />
+        <Calculator />
+      </section>
     </main>
   );
 }
