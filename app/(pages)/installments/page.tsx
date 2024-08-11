@@ -20,13 +20,13 @@ export default async function TransactionFeePage() {
         ]}
       />
       <section className="flex flex-col gap-8 2xl:grid 2xl:grid-cols-3 2xl:grid-rows-2 2xl:gap-10 2xl:size-full mt-6">
-        <div className="row-span-2 rounded-lg shadow-md bg-palette-300 px-4 py-5 2xl:px-6">
+        <div className="card row-span-2">
           <InstallmentsList
             installments={installments}
             transactions={transactions}
           />
         </div>
-        <div className="col-span-2 rounded-lg shadow-md bg-palette-300 px-4 py-5 2xl:px-6">
+        <div className="card col-span-2">
           <InstallmentForm accounts={accounts} />
         </div>
         {/* <div className="col-span-2 col-start-2 row-start-2 rounded-lg shadow-md bg-palette-300 px-6 py-5">

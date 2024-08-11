@@ -29,9 +29,9 @@ export default function CreateForm({ accounts }: { accounts: Account[] }) {
           console.error(err);
         }
       }}
-      className="w-full bg-palette-300 rounded-lg shadow-md"
+      className="card w-full"
     >
-      <main className="flex flex-col gap-6 px-2 py-4 md:gap-4 md:px-4 lg:gap-6">
+      <main className="flex flex-col gap-6">
         <Suspense>
           <TypeInput defaultType={type} />
         </Suspense>

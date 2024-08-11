@@ -21,7 +21,7 @@ export default function Calculator() {
   };
 
   return (
-    <main className="bg-palette-300 rounded-lg shadow-md w-full h-96 p-4 flex flex-col 2xl:h-auto 2xl:w-[440px]">
+    <main className="card w-full h-96 flex flex-col 2xl:h-auto 2xl:w-[440px]">
       <h1 className="title">{dict.calculator}</h1>
       <input
         type="text"

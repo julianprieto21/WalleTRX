@@ -24,6 +24,37 @@ body {
   height: 100dvh;
 }
 
+.title {
+  --tw-text-opacity: 1;
+  color: rgb(255 209 0 / var(--tw-text-opacity));
+  font-size: 1.5rem;
+  line-height: 2rem;
+  width: 100%;
+  font-weight: 700;
+}
+
+.card {
+  border-radius: 0.5rem;
+  --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color),
+    0 2px 4px -2px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+    var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  --tw-bg-opacity: 1;
+  background-color: rgb(42 41 39 / var(--tw-bg-opacity));
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+}
+
+@media (min-width: 1536px) {
+  .card {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
 input:focus,
 input:active,
 select:focus {

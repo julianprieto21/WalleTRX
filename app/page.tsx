@@ -28,13 +28,13 @@ export default async function HomePage() {
       </section>
 
       <section className="flex flex-col gap-8 2xl:grid 2xl:grid-cols-5 2xl:grid-rows-2 2xl:gap-10 2xl:size-full">
-        <div className="rounded-lg shadow-md bg-palette-300 h-80 px-4 py-5 2xl:col-span-2 2xl:h-auto 2xl:px-6">
+        <div className="card h-80 2xl:col-span-2 2xl:h-auto">
           <MainCard user={user} />
         </div>
-        <div className="rounded-lg shadow-md bg-palette-300 h-80 px-4 py-5 2xl:col-span-3 2xl:col-start-3 2xl:h-auto 2xl:px-6">
+        <div className="card h-80 2xl:col-span-3 2xl:col-start-3 2xl:h-auto">
           <Last5transactions />
         </div>
-        <div className="rounded-lg shadow-md bg-palette-300 px-2 py-5 2xl:col-span-5 2xl:row-start-2 2xl:h-auto 2xl:px-6">
+        <div className="card 2xl:col-span-5 2xl:row-start-2 2xl:h-auto">
           <LineChart transactions={transactions} />
         </div>
       </section>

@@ -25,16 +25,16 @@ export default async function DashboardPage() {
         ]}
       />
       <section className="grid grid-cols-7 grid-rows-2 gap-8 size-full mt-6">
-        <div className="col-span-2 row-span-2 rounded-lg shadow-md bg-palette-300 px-6 py-5">
+        <div className="card col-span-2 row-span-2">
           <MonthlyChart transactions={transactions} />
         </div>
-        <div className="col-span-3 col-start-3 rounded-lg shadow-md bg-palette-300 px-6 py-5">
+        <div className="card col-span-3 col-start-3">
           <CategoryChart categoryData={categoryBalance} />
         </div>
-        <div className="col-span-2 col-start-6 rounded-lg shadow-md bg-palette-300 px-6 py-5">
+        <div className="card col-span-2 col-start-6">
           <AccountChart data={accountsBalance} />
         </div>
-        <div className="col-span-5 col-start-3 row-start-2 rounded-lg shadow-md bg-palette-300 px-6 py-5">
+        <div className="card col-span-5 col-start-3 row-start-2">
           <TimeLine transactions={transactions} />
         </div>
       </section>
