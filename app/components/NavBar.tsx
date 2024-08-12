@@ -7,9 +7,9 @@ export function SideNav() {
   return (
     <>
       <aside className="relative hidden 2xl:flex w-1/6 flex-none flex-col items-center justify-center bg-palette-300 h-screen pb-2 overflow-auto">
-        <section className="w-full flex flex-col items-center text-neutral-200 bg-palette-300 py-3 border-b border-palette-250">
+        <section className="w-full flex flex-col items-center text-neutral-200 bg-palette-300 border-b border-palette-250">
           <Link href="/" title="Home">
-            <img src="/title.png" alt="Memphis Wallet" className="px-2" />
+            <img src="/title.png" alt="Memphis Logo" className="" />
           </Link>
         </section>
         <div className="flex flex-col w-full h-[90%] justify-start gap-4 py-4">
