@@ -5,7 +5,7 @@ import { SideNav } from "@components/NavBar";
 import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
-  title: "Memphis Wallet",
+  title: "Memphis",
   description:
     "Aplicación web para llevar un seguimiento de las finanzas personales. Creada por Julián Prieto.",
   icons: {

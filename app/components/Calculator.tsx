@@ -17,7 +17,11 @@ export default function Calculator() {
   };
   const handleResult = () => {
     const result = eval(value);
-    setValue(round(result, 2).toString());
+    if (result === Infinity || result === -Infinity || isNaN(result)) {
+      setValue("");
+    } else {
+      setValue(round(result, 2).toString());
+    }
   };
 
   return (
@@ -80,18 +84,18 @@ export default function Calculator() {
           <span className="text-xl">*</span>
         </button>
         <button
-          className={`${className} text-palette-500 border-palette-500`}
+          className={`${className} text-palette-500`}
           onClick={handleResult}
         >
           <span className="text-xl">=</span>
         </button>
-        <button className={className}>
+        <button className={className} onClick={() => setValue(value + ".")}>
           <span className="text-xl">.</span>
         </button>
-        <button className={className}>
+        <button className={className} onClick={() => setValue(value + "0")}>
           <span className="text-xl">0</span>
         </button>
-        <button className={className}>
+        <button className={className} onClick={() => setValue(value + "/")}>
           <span className="text-xl">/</span>
         </button>
       </section>
