@@ -22,9 +22,9 @@ export default function investmentsPage() {
       />
       <section className="grid grid-cols-5 grid-rows-1 gap-10 mt-6 size-full overflow-auto">
         <div className="col-span-2 flex flex-col justify-start gap-8">
-          <Suspense>
+          {/* <Suspense>
             <InvestmentSwitcher />
-          </Suspense>
+          </Suspense> */}
           <div className="card shrink-0 grow w-full"></div>
           <div className="card shrink-0 grow w-full"></div>
         </div>
