@@ -12,8 +12,8 @@ export default async function Last5transactions() {
   return (
     <div className="2xl:flex flex-col size-full relative">
       <Link
+        title="Ir a Transacciones"
         href={"/transactions"}
-        title="Go to transactions"
         className="absolute text-palette-250 hover:text-palette-100 transition left-0 top-0"
       >
         <ArrowUpLeft className="size-8 2xl:size-4" />

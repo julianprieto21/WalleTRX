@@ -4,6 +4,7 @@ import Link from "next/link";
 export function CreateBtn({ id, text }: { id: string; text: string }) {
   return (
     <Link
+      title="Crear transacción"
       href={`/${id}/create`}
       className="rounded-lg relative md:w-[16rem] flex items-center bg-income group"
     >

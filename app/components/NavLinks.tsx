@@ -43,6 +43,7 @@ export function NavLinks() {
         const LinkIcon = link.icon;
         return (
           <Link
+            title={`Ir a ${link.name}`}
             key={link.name}
             href={link.href}
             className={`flex h-12 items-center gap-3 text-palette-100 text-md hover> font-normal hover:bg-palette-250 hover:text-palette-500 flex-none justify-start p-2 px-3 

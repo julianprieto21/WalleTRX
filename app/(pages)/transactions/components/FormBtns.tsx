@@ -8,7 +8,7 @@ const { buttons } = dict;
 export function SubmitBtn() {
   return (
     <button
-      title="Submit"
+      title="Confirmar"
       type="submit"
       className="group transition rounded-full sm:shadow-sm sm:border border-palette-250 hover:border-income text-palette-250 hover:bg-income flex justify-center items-center hover:text-palette-100 p-1 sm:px-2"
     >
@@ -23,6 +23,7 @@ export function SubmitBtn() {
 export function CancelBtn() {
   return (
     <Link
+      title="Cancelar"
       href={"/"}
       className="group transition rounded-full sm:shadow-sm sm:border border-palette-250 hover:border-expense text-palette-250 hover:bg-expense flex justify-center items-center hover:text-palette-100 p-1 sm:px-2"
     >

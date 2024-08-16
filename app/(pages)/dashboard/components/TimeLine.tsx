@@ -214,8 +214,7 @@ export default function TimeLine({
       <div className="grid grid-cols-1 items-center border-palette-250 border-t justify-between">
         <div className="flex justify-between items-center pt-5">
           <select
-            title="Dropdown"
-            id="dropdownDefault"
+            title="Elegir período"
             className="text-sm font-medium bg-palette-300 text-palette-200 hover:text-palette-100 text-center inline-flex items-center"
             onChange={(e) => setPeriod(e.target.value)}
           >

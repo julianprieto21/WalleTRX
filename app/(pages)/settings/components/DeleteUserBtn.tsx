@@ -26,7 +26,7 @@ export default function DeleteUser() {
         }}
       >
         <button
-          title="Delete user"
+          title="Eliminar usuario"
           type="submit"
           className="size-full text-center"
         >

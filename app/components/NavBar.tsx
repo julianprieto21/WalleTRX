@@ -8,7 +8,7 @@ export function SideNav() {
     <>
       <aside className="relative hidden 2xl:flex w-1/6 flex-none flex-col items-center justify-center bg-palette-300 h-screen pb-2 overflow-auto">
         <section className="w-full flex flex-col items-center text-neutral-200 bg-palette-300 border-b border-palette-250">
-          <Link href="/" title="Home">
+          <Link title="Ir a Inicio" href="/">
             <img src="/title.png" alt="Memphis Logo" className="" />
           </Link>
         </section>

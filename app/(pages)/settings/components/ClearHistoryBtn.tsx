@@ -26,7 +26,7 @@ export default function ClearHistory() {
         }}
       >
         <button
-          title="Clear history"
+          title="Limpiar historial"
           type="submit"
           className="size-full text-center"
         >

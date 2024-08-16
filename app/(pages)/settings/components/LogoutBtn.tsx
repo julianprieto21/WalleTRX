@@ -19,7 +19,7 @@ export function LogoutBtn() {
         }}
       >
         <button
-          title="Logout"
+          title="Cerrar sesión"
           type="submit"
           className="size-full flex justify-center items-center"
         >

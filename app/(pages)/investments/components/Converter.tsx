@@ -41,7 +41,7 @@ export default function Converter() {
       <div className="relative h-12 bg-palette-300 text-palette-200 rounded-lg flex flex-row justify-between">
         <input
           required
-          title="Amount converting"
+          title="Monto a convertir"
           type="number"
           value={amountToConvert}
           onChange={(e) => handleChangeToConvert(e)}
@@ -60,7 +60,7 @@ export default function Converter() {
         </div> */}
         <select
           name="fromCurrency"
-          title="FromCurrency"
+          title="Moneda de origen"
           className="peer text-transparent cursor-pointer border-l border-palette-250 w-28 h-12 bg-transparent z-10"
           onChange={(e) => setFromCurrency(e.target.value)}
         >
@@ -83,7 +83,6 @@ export default function Converter() {
           className="absolute text-lg flex flex-row items-center right-0 top-1/2 -translate-y-1/2 gap-2 p-3 h-full w-28 rounded-e-lg peer-hover:bg-palette-250"
         >
           <img
-            title="From currency"
             alt="To currency"
             className="w-5 h-5"
             src={`https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@1a63530be6e374711a8554f31b17e4cb92c25fa5/128/color/${fromCurrency.toLowerCase()}.png`}
@@ -98,7 +97,7 @@ export default function Converter() {
       <div className="relative h-12 bg-palette-300 text-palette-200 rounded-lg flex flex-row justify-between">
         <select
           name="toCurrency"
-          title="ToCurrency"
+          title="Moneda de destino"
           className="peer text-transparent cursor-pointer border-r border-palette-250 w-28 h-12 bg-transparent z-10"
           onChange={(e) => setToCurrency(e.target.value)}
         >
@@ -122,7 +121,6 @@ export default function Converter() {
         >
           {toCurrency}
           <img
-            title="To currency"
             alt="To currency"
             className="w-5 h-5"
             src={`https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@1a63530be6e374711a8554f31b17e4cb92c25fa5/128/color/${toCurrency.toLowerCase()}.png`}
@@ -132,7 +130,7 @@ export default function Converter() {
 
         <input
           required
-          title="Amount converted"
+          title="Monto convertido"
           type="number"
           value={amountConverted}
           onChange={(e) => handleChangeConverted(e)}

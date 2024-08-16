@@ -89,6 +89,7 @@ export default function InstallmentsList({
 
                 <div className="flex flex-row gap-2 items-center h-full w-24">
                   <button
+                    title="Pagar"
                     disabled={alreadyPaid}
                     onClick={async () => {
                       await addPayment(installment);
@@ -104,11 +105,15 @@ export default function InstallmentsList({
                     <span className="sr-only">.</span>
                   </button>
                   <div className="flex flex-col gap-1 w-1/3 h-full">
-                    <button className="grid place-content-center w-full h-full border rounded-md border-palette-300 bg-palette-400 text-palette-250 hover:border-palette-500 hover:text-palette-500">
+                    <button
+                      title="Editar"
+                      className="grid place-content-center w-full h-full border rounded-md border-palette-300 bg-palette-400 text-palette-250 hover:border-palette-500 hover:text-palette-500"
+                    >
                       <EditPencil className="size-4" />
                       <span className="sr-only">.</span>
                     </button>
                     <button
+                      title="Eliminar"
                       onClick={() => deleteInstallment(installment.id)}
                       className="grid place-content-center w-full h-full border rounded-md border-palette-300 bg-palette-400 text-palette-250 hover:border-red-600 hover:text-red-600"
                     >

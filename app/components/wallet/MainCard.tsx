@@ -23,7 +23,7 @@ export default async function MainCard({ user }: { user: User }) {
         <p className="text-neutral-500 font-bold text-base">{balanceText}:</p>
         {formatBalance(balance / 100)}
       </h3>
-      <Link href={"/settings"}>
+      <Link title="Ir a Ajustes" href={"/settings"}>
         <img
           alt=""
           className="absolute right-0 top-0 size-14 2xl:size-11 rounded-full"
@@ -36,22 +36,29 @@ export default async function MainCard({ user }: { user: User }) {
       </div>
 
       <div className="absolute bottom-0 right-0 grid grid-cols-2 grid-rows-3 gap-3">
-        <Link href={"/transactions/create?t=expense"} className="col-start-2">
+        <Link
+          title="Crear gasto"
+          href={"/transactions/create?t=expense"}
+          className="col-start-2"
+        >
           <Upload className="text-expense text-4xl 2xl:text-3xl bg-palette-400 rounded-full hover:bg-expense hover:text-palette-100 transition p-2" />
         </Link>
         <Link
+          title="Crear ingreso"
           href={"/transactions/create?t=income"}
           className="col-start-2 row-start-2"
         >
           <Download className="text-income text-4xl 2xl:text-3xl bg-palette-400 rounded-full hover:bg-income hover:text-palette-100 transition p-2" />
         </Link>
         <Link
+          title="Crear transferencia"
           href={"/transactions/create?t=transfer"}
           className="col-start-2 row-start-3"
         >
           <DataTransferBoth className="text-transfer text-4xl 2xl:text-3xl rotate-90 bg-palette-400 rounded-full hover:bg-transfer hover:text-palette-100 transition p-2" />
         </Link>
         <Link
+          title="Ver cuotas"
           href={"/installments"}
           className="col-start-1 row-start-3 relative"
         >

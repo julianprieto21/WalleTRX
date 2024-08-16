@@ -17,7 +17,7 @@ export default function UserInfo({ user }: { user: User | undefined }) {
           <p className="text-sm font-normal text-palette-200">{user.name}</p>
         </h2>
         <button
-          title="Logout"
+          title="Editar nombre"
           type="submit"
           className="transition rounded-md h-10 w-32 flex flex-row border border-palette-250 hover:border-palette-300 bg-palette-300 text-palette-200 font-medium text-md hover:bg-palette-500 hover:text-palette-300 justify-center items-center"
         >
@@ -30,7 +30,7 @@ export default function UserInfo({ user }: { user: User | undefined }) {
           <p className="text-sm font-normal text-palette-200">{user.email}</p>
         </h2>
         <button
-          title="Logout"
+          title="Editar email"
           type="submit"
           className="transition rounded-md h-10 w-32 flex flex-row border border-palette-250 hover:border-palette-300 bg-palette-300 text-palette-200 font-medium text-md hover:bg-palette-500 hover:text-palette-300 justify-center items-center"
         >
