@@ -38,9 +38,7 @@ export async function createTransaction(formData: FormData) {
       const amountInCents =
         type === "income" ? round(amount * 100, 0) : round(-amount * 100, 0);
       await client.sql`INSERT INTO transactions (user_id, account_id, type, description, category, amount, created_at)
-      VALUES (${
-        user.id
-      }, ${account}, ${type}, ${description.toLowerCase()}, ${category}, ${amountInCents}, ${UTCTimestamp})`;
+      VALUES (${user.id}, ${account}, ${type}, ${description}, ${category}, ${amountInCents}, ${UTCTimestamp})`;
     } else {
       const accounts = await getAccounts();
       const amountInCents = round(amount * 100, 0);
@@ -249,7 +247,7 @@ export async function createInstallment(formData: FormData) {
     await client.sql`INSERT INTO installments (user_id, account_id, type, name, category, amount, quantity, quantity_paid, period, finished)
                      VALUES (${
                        user.id
-                     }, ${account}, ${type}, ${name.toLowerCase()}, ${category}, ${amountInCents}, ${quantity}, ${0}, ${period}, ${false})`;
+                     }, ${account}, ${type}, ${name}, ${category}, ${amountInCents}, ${quantity}, ${0}, ${period}, ${false})`;
   } catch (err) {
     console.error(err);
   } finally {
@@ -291,8 +289,8 @@ export async function addPayment(installment: any) {
       quantity_paid,
     } = installment;
     const description = quantity
-      ? `${name.toLowerCase()} - ${quantity_paid + 1}/${quantity}`
-      : name.toLowerCase();
+      ? `${name} - ${quantity_paid + 1}/${quantity}`
+      : name;
     const UTCTimestamp = new Date().getTime();
     const realAmount = type === "income" ? amount : -amount;
     await client.sql`INSERT INTO transactions (user_id, account_id, type, description, category, amount, created_at, installment_id)
