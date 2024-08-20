@@ -2,7 +2,6 @@ import { dict } from "@lib/dictionaries";
 import Breadcrumbs from "@components/Breadcrumbs";
 import Search from "@components/Search";
 import { Table, TableSkeleton } from "./components/Table";
-import Filters from "./components/Filters";
 import { Suspense } from "react";
 import { CreateBtn } from "@components/CreateBtn";
 import { Metadata } from "next";
