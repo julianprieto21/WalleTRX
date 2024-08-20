@@ -1,17 +1,13 @@
 "use client";
 import { dict } from "@lib/dictionaries";
-import { formatBalance, formatBalanceForChart } from "@lib/utils";
+import { formatBalance } from "@lib/utils";
 import dynamic from "next/dynamic";
 import React from "react";
 const ReactApexChart = dynamic(() => import("react-apexcharts"), {
   ssr: false,
 });
 
-export function LineChart({
-  transactions,
-}: {
-  transactions: { timestamp: string; amount: number }[];
-}) {
+function formatData(transactions: { timestamp: string; amount: number }[]) {
   const formattedData: { year: string; month: string; amount: number }[] = [];
   transactions.map((trx) => {
     const date = new Date(parseInt(trx.timestamp)).toISOString().slice(0, 10);
@@ -39,19 +35,54 @@ export function LineChart({
       });
     }
   });
-
-  const data = formatBalanceForChart(grouppedData ?? []);
-
-  const datesList = data.map(
-    (transaction) =>
-      dict.months[parseInt(transaction.month)] + "-" + transaction.year.slice(2)
+  let balance;
+  const transactionDates = grouppedData
+    .map((item) => [item.year, item.month])
+    .slice(-12);
+  const array = transactionDates.map((date) => {
+    const transactionsOfDay = grouppedData.filter(
+      (transaction) =>
+        parseInt(transaction.month) <= parseInt(date[1]) &&
+        parseInt(transaction.year) <= parseInt(date[0])
+    );
+    balance = transactionsOfDay.reduce(
+      (acc, transaction) => acc + transaction.total,
+      0
+    );
+    return {
+      year: date[0],
+      month: date[1],
+      total: balance,
+    };
+  });
+  const balanceList = array.map((transaction) => transaction.total / 100);
+  const dates = Array.from(
+    { length: 12 },
+    (_, i) => new Date(new Date().getTime() - i * 30 * 24 * 60 * 60 * 1000)
   );
-  const balanceList = data.map((transaction) => transaction.total / 100);
+  const labels = dates.map((date) => {
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear().toString();
+    return dict.months[month] + "-" + year.slice(2);
+  });
+  const balanceListFilled = balanceList
+    .reverse()
+    .concat(Array(12 - balanceList.length).fill(0));
+
+  return [labels.reverse(), balanceListFilled.reverse()];
+}
+
+export function LineChart({
+  transactions,
+}: {
+  transactions: { timestamp: string; amount: number }[];
+}) {
+  const [labels, values] = formatData(transactions);
   const state = {
     series: [
       {
         name: dict.balance,
-        data: balanceList,
+        data: values as number[],
       },
     ],
     options: {
@@ -75,7 +106,7 @@ export function LineChart({
         width: 2,
       },
       xaxis: {
-        categories: datesList,
+        categories: labels,
         labels: {
           show: true,
         },

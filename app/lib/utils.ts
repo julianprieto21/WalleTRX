@@ -64,66 +64,6 @@ export function formatBalance(
   return formatter.format(amount);
 }
 
-export function formatBalanceForChart(
-  balanceByDate: {
-    year: string;
-    month: string;
-    total: number;
-  }[]
-) {
-  let balance;
-  const dates = balanceByDate.map((item) => [item.year, item.month]).slice(-12);
-  const array = dates.map((date) => {
-    const transactionsOfDay = balanceByDate.filter(
-      (transaction) =>
-        parseInt(transaction.month) <= parseInt(date[1]) &&
-        parseInt(transaction.year) <= parseInt(date[0])
-    );
-    balance = transactionsOfDay.reduce(
-      (acc, transaction) => acc + transaction.total,
-      0
-    );
-    return {
-      year: date[0],
-      month: date[1],
-      total: balance,
-    };
-  });
-  return array;
-}
-
-// No se usa
-export function formatDataForTimeLine({ data }: { data: any[] }) {
-  // creo un array con las fechas de data
-  const dates = data.map((item) => parseInt(item.created_at));
-  // me quedo con la fecha menor y la fecha actual
-  const minDate = Math.min(...dates);
-  const maxDate = new Date().getTime();
-  // creo un nuevo array de fechas que vaya desde minDate hasta maxDate
-  const datesArray = Array.from(
-    { length: (maxDate - minDate) / 86400000 + 1 },
-    (_, i) => new Date(minDate + i * 86400000)
-  );
-  // ahora le asigno a cada dia su income y expense correspondiente de data
-  const formattedData = datesArray.map((date) => {
-    const income = data
-      .filter(
-        (item) => new Date(item.created_at).toISOString() == date.toISOString()
-      )
-      .reduce((acc, item) => acc + Math.abs(item.income), 0);
-    const expense = data
-      .filter((item) => item.created_at.toISOString() == date.toISOString())
-      .reduce((acc, item) => acc + Math.abs(item.expense), 0);
-    return {
-      date: date,
-      income: income,
-      expense: expense,
-    };
-  });
-
-  return formattedData;
-}
-
 export function showToast(message: string, type: "success" | "error") {
   toast[type](message);
 }
