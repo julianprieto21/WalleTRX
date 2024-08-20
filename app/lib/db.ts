@@ -135,7 +135,7 @@ export async function getBalanceByCategory() {
     const { rows } = await client.sql<{
       category: string;
       total: number;
-    }>`select category, sum(amount) total from transactions where user_id=${user.id} and category !='transfer' and created_at >= ${startDate} and created_at <= ${endDate} group by category`;
+    }>`select category, sum(amount) total from transactions where user_id=${user.id} and (category !='transfer' and category != 'initial-balance') and created_at >= ${startDate} and created_at <= ${endDate} group by category`;
     return rows;
   } catch (error) {
     console.error(error);

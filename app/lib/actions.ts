@@ -140,14 +140,25 @@ export async function createAccount(formData: FormData) {
   const client = createClient();
   try {
     await client.connect();
-    const { name, type, currency, color } = AccountSchema.parse({
+    const { name, type, currency, color, amount } = AccountSchema.parse({
       name: formData.get("name"),
       type: formData.get("type"),
       currency: formData.get("currency"),
       color: formData.get("color"),
+      amount: formData.get("amount"),
     });
     await client.sql`INSERT INTO accounts (user_id, name, type, currency, color)
                      VALUES (${user.id}, ${name}, ${type}, ${currency}, ${color})`;
+    if (amount) {
+      const { rows } =
+        await client.sql`SELECT id FROM accounts WHERE user_id = ${user.id} AND name = ${name}`;
+      const account = rows[0];
+      const amountInCents = round(amount * 100, 0);
+      const UTCTimestamp = new Date().getTime();
+      const initialType = amount > 0 ? "income" : "expense";
+      await client.sql`INSERT INTO transactions (user_id, account_id, type, description, category, amount, created_at)
+      VALUES (${user.id}, ${account.id}, ${initialType}, '-', 'initial-balance', ${amountInCents}, ${UTCTimestamp})`;
+    }
   } catch (err) {
     console.error(err);
   } finally {

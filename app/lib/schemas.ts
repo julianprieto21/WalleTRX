@@ -16,6 +16,10 @@ export const AccountSchema = z.object({
   currency: z.string(),
   type: z.string(),
   color: z.string(),
+  amount: z.union([
+    z.string().transform((value) => parseFloat(value)),
+    z.null(),
+  ]),
 });
 
 export const InstallmentSchema = z.object({

@@ -8,7 +8,9 @@ import { dict } from "@lib/dictionaries";
 export default async function Last5transactions() {
   const { charts } = dict;
   const transactions = await getTransactions();
-  const last5 = transactions.slice(0, 5);
+  const last5 = transactions
+    .filter((trx) => trx.category != "initial-balance")
+    .slice(0, 5);
   return (
     <div className="2xl:flex flex-col size-full relative">
       <Link

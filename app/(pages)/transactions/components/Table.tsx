@@ -51,7 +51,12 @@ export async function Table() {
   return (
     <div className="mt-8 size-full overflow-auto">
       <table className="w-full text-sm text-left text-palette-100">
-        <DataTable transactions={transactions} accounts={accounts} />
+        <DataTable
+          transactions={transactions.filter(
+            (trx) => trx.category != "initial-balance"
+          )}
+          accounts={accounts}
+        />
       </table>
     </div>
   );

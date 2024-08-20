@@ -72,6 +72,7 @@ export const dict = {
       type: "Seleccionar tipo",
     },
     amount: "Monto",
+    initialAmount: "Monto inicial",
     description: "Descripción",
     recurrent: "Recurrente",
     name: "Nombre",
